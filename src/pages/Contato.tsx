@@ -1,0 +1,288 @@
+import { useState, type FormEvent } from 'react'
+import { Mail, MapPin, Clock, MessageCircle, Send, CheckCircle2, Instagram, Linkedin } from 'lucide-react'
+import { SEO } from '@/components/SEO'
+import { Reveal } from '@/components/Reveal'
+import { site, whatsappLink, mailtoLink } from '@/data/site'
+
+interface FormState {
+  nome: string
+  empresa: string
+  email: string
+  telefone: string
+  mensagem: string
+}
+
+const initial: FormState = { nome: '', empresa: '', email: '', telefone: '', mensagem: '' }
+
+export default function Contato() {
+  const [form, setForm] = useState<FormState>(initial)
+  const [sent, setSent] = useState(false)
+
+  function update(field: keyof FormState, value: string) {
+    setForm((f) => ({ ...f, [field]: value }))
+  }
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    // ========================================================================
+    //  TODO: plugue aqui o envio real do formulário. Opções:
+    //   • Formspree:   fetch('https://formspree.io/f/SEU_ID', { method:'POST',
+    //                    headers:{'Content-Type':'application/json'},
+    //                    body: JSON.stringify(form) })
+    //   • EmailJS, ou um endpoint próprio (API / serverless).
+    //  Por enquanto, apenas registramos no console e mostramos a confirmação.
+    // ========================================================================
+    console.log('Formulário de contato enviado:', form)
+
+    setSent(true)
+    setForm(initial)
+  }
+
+  const inputClass =
+    'w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-800 placeholder:text-ink-300 transition-colors focus:border-brand-400'
+
+  return (
+    <>
+      <SEO
+        title="Contato — Nexxus"
+        description="Fale com a Nexxus e solicite um diagnóstico comercial gratuito. WhatsApp, e-mail e formulário."
+        path="/contato"
+      />
+
+      <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute -left-24 -top-10 h-72 w-72 rounded-full bg-brand-100/60 blur-3xl" />
+        <div className="container-nx py-16 sm:py-20">
+          <Reveal>
+            <div className="max-w-2xl">
+              <span className="eyebrow">Contato</span>
+              <h1 className="heading mt-5 text-balance text-4xl leading-tight sm:text-5xl">
+                Vamos crescer <span className="text-gradient">juntos</span>?
+              </h1>
+              <p className="mt-5 text-lg leading-relaxed text-ink-500">
+                Conte um pouco sobre a sua operação. Em uma conversa, mostramos onde está o gargalo e
+                o potencial real de escala do seu comercial. {site.responseTime}.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-12 grid gap-8 lg:grid-cols-5">
+            {/* Informações de contato */}
+            <Reveal className="lg:col-span-2">
+              <div className="flex flex-col gap-4">
+                <a
+                  href={whatsappLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card card-hover flex items-center gap-4 p-5"
+                >
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#25D366]/10 text-[#25D366]">
+                    <MessageCircle className="h-6 w-6" />
+                  </span>
+                  <span>
+                    <span className="block font-display font-bold text-ink-900">WhatsApp</span>
+                    <span className="text-sm text-ink-500">Resposta rápida no comercial</span>
+                  </span>
+                </a>
+
+                <a href={mailtoLink} className="card card-hover flex items-center gap-4 p-5">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-500">
+                    <Mail className="h-6 w-6" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block font-display font-bold text-ink-900">E-mail</span>
+                    <span className="block truncate text-sm text-ink-500">{site.email}</span>
+                  </span>
+                </a>
+
+                <div className="card flex items-start gap-4 p-5">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-500">
+                    <MapPin className="h-6 w-6" />
+                  </span>
+                  <span>
+                    <span className="block font-display font-bold text-ink-900">Escritório</span>
+                    <span className="text-sm text-ink-500">
+                      {site.address.building}
+                      <br />
+                      {site.address.reference} — {site.address.city}/{site.address.state}
+                    </span>
+                  </span>
+                </div>
+
+                <div className="card flex items-center gap-4 p-5">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-500">
+                    <Clock className="h-6 w-6" />
+                  </span>
+                  <span>
+                    <span className="block font-display font-bold text-ink-900">Telefone</span>
+                    <span className="text-sm text-ink-500">{site.phoneDisplay}</span>
+                  </span>
+                </div>
+
+                <div className="flex gap-3 pt-1">
+                  <a
+                    href={site.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-ink-100 bg-white text-ink-600 transition-colors hover:border-brand-200 hover:text-brand-600"
+                  >
+                    <Instagram className="h-5 w-5" />
+                  </a>
+                  <a
+                    href={site.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-ink-100 bg-white text-ink-600 transition-colors hover:border-brand-200 hover:text-brand-600"
+                  >
+                    <Linkedin className="h-5 w-5" />
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Formulário */}
+            <Reveal className="lg:col-span-3" delay={0.1}>
+              <div className="card p-6 sm:p-8">
+                {sent ? (
+                  <div className="flex flex-col items-center justify-center py-12 text-center">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-50 text-brand-500">
+                      <CheckCircle2 className="h-8 w-8" />
+                    </span>
+                    <h2 className="heading mt-5 text-2xl">Mensagem registrada!</h2>
+                    <p className="mt-2 max-w-sm text-ink-500">
+                      Obrigado pelo contato. Retornaremos em breve. Se preferir falar agora, chame no
+                      WhatsApp.
+                    </p>
+                    <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                      <a
+                        href={whatsappLink()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-600"
+                      >
+                        <MessageCircle className="h-5 w-5" /> Falar no WhatsApp
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => setSent(false)}
+                        className="inline-flex items-center justify-center gap-2 rounded-full border border-ink-200 px-6 py-3 text-sm font-semibold text-ink-700 transition-colors hover:border-brand-300 hover:text-brand-600"
+                      >
+                        Enviar outra mensagem
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
+                    <div className="sm:col-span-1">
+                      <label htmlFor="nome" className="mb-1.5 block text-sm font-medium text-ink-700">
+                        Nome <span className="text-brand-500">*</span>
+                      </label>
+                      <input
+                        id="nome"
+                        type="text"
+                        required
+                        autoComplete="name"
+                        value={form.nome}
+                        onChange={(e) => update('nome', e.target.value)}
+                        className={inputClass}
+                        placeholder="Seu nome"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-1">
+                      <label
+                        htmlFor="empresa"
+                        className="mb-1.5 block text-sm font-medium text-ink-700"
+                      >
+                        Empresa
+                      </label>
+                      <input
+                        id="empresa"
+                        type="text"
+                        autoComplete="organization"
+                        value={form.empresa}
+                        onChange={(e) => update('empresa', e.target.value)}
+                        className={inputClass}
+                        placeholder="Nome da empresa"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-1">
+                      <label
+                        htmlFor="email"
+                        className="mb-1.5 block text-sm font-medium text-ink-700"
+                      >
+                        E-mail <span className="text-brand-500">*</span>
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        required
+                        autoComplete="email"
+                        value={form.email}
+                        onChange={(e) => update('email', e.target.value)}
+                        className={inputClass}
+                        placeholder="voce@empresa.com"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-1">
+                      <label
+                        htmlFor="telefone"
+                        className="mb-1.5 block text-sm font-medium text-ink-700"
+                      >
+                        Telefone / WhatsApp
+                      </label>
+                      <input
+                        id="telefone"
+                        type="tel"
+                        autoComplete="tel"
+                        value={form.telefone}
+                        onChange={(e) => update('telefone', e.target.value)}
+                        className={inputClass}
+                        placeholder="(11) 99999-9999"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label
+                        htmlFor="mensagem"
+                        className="mb-1.5 block text-sm font-medium text-ink-700"
+                      >
+                        Mensagem <span className="text-brand-500">*</span>
+                      </label>
+                      <textarea
+                        id="mensagem"
+                        required
+                        rows={5}
+                        value={form.mensagem}
+                        onChange={(e) => update('mensagem', e.target.value)}
+                        className={`${inputClass} resize-none`}
+                        placeholder="Conte um pouco sobre a sua operação comercial e o que você busca."
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <button
+                        type="submit"
+                        className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600 sm:w-auto"
+                      >
+                        Enviar mensagem
+                        <Send className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </button>
+                      <p className="mt-3 text-xs text-ink-400">
+                        Ao enviar, você concorda em ser contatado pela equipe da Nexxus.
+                      </p>
+                    </div>
+                  </form>
+                )}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}

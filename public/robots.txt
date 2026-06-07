@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Atualize com o domínio final quando publicar:
+# Sitemap: https://www.nexxus.com.br/sitemap.xml
