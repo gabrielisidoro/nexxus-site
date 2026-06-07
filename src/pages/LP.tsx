@@ -666,7 +666,7 @@ export default function LP() {
             {/* Video — right, compact */}
             <motion.div variants={scaleIn} style={{flex:'0 0 auto', width:'clamp(220px,38%,320px)'}}>
               <div style={{borderRadius:12, overflow:'hidden', border:`1px solid rgba(${BR},${BG},${BB},.14)`, boxShadow:`0 6px 24px rgba(0,0,0,.45)`}}>
-                <video src="/fachada-rua.mp4" autoPlay muted loop playsInline
+                <video src={`${import.meta.env.BASE_URL}fachada-rua.mp4`} autoPlay muted loop playsInline
                   style={{width:'100%', display:'block'}}/>
               </div>
             </motion.div>
