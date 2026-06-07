@@ -10,6 +10,7 @@ import BlogPost from './pages/BlogPost'
 import Contato from './pages/Contato'
 import NotFound from './pages/NotFound'
 import LP from './pages/LP'
+import Obrigado from './pages/Obrigado'
 
 function SiteLayout() {
   return (
@@ -35,5 +36,6 @@ function SiteLayout() {
 export default function App() {
   const { pathname } = useLocation()
   if (pathname === '/lp') return <LP />
+  if (pathname === '/obrigado') return <Obrigado />
   return <SiteLayout />
 }

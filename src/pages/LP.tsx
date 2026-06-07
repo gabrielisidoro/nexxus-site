@@ -1,6 +1,7 @@
 import {
   useEffect, useRef, useState, type FormEvent,
 } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue,
 } from 'framer-motion'
@@ -376,8 +377,8 @@ const BG_PANEL = '#0c1220'
 
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function LP() {
+  const navigate = useNavigate()
   const [form, setForm] = useState({ nome:'', empresa:'', email:'', whatsapp:'', faturamento:'', mensagem:'' })
-  const [sent, setSent] = useState(false)
   const [angle, setAngle] = useState(0)
   const [statOn, setStatOn] = useState(false)
   const [activePhoto, setActivePhoto] = useState(0)
@@ -401,7 +402,7 @@ export default function LP() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     console.log('LP lead:', form)
-    setSent(true)
+    navigate('/obrigado')
   }
 
   const inputStyle: React.CSSProperties = {

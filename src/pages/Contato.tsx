@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
-import { Mail, MapPin, Send, CheckCircle2, Instagram, Linkedin } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { Mail, MapPin, Send, Instagram, Linkedin } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 import { Reveal } from '@/components/Reveal'
 import { site, mailtoLink } from '@/data/site'
@@ -32,8 +33,8 @@ const faixasFaturamento = [
 ]
 
 export default function Contato() {
+  const navigate = useNavigate()
   const [form, setForm] = useState<FormState>(initial)
-  const [sent, setSent] = useState(false)
 
   function update(field: keyof FormState, value: string) {
     setForm((f) => ({ ...f, [field]: value }))
@@ -51,9 +52,7 @@ export default function Contato() {
     //  Por enquanto, apenas registramos no console e mostramos a confirmação.
     // ========================================================================
     console.log('Formulário de contato enviado:', form)
-
-    setSent(true)
-    setForm(initial)
+    navigate('/obrigado')
   }
 
   const inputClass =
@@ -137,27 +136,6 @@ export default function Contato() {
             {/* Formulário */}
             <Reveal className="lg:col-span-3" delay={0.1}>
               <div className="card p-6 sm:p-8">
-                {sent ? (
-                  <div className="flex flex-col items-center justify-center py-12 text-center">
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-50 text-brand-500">
-                      <CheckCircle2 className="h-8 w-8" />
-                    </span>
-                    <h2 className="heading mt-5 text-2xl">Mensagem registrada!</h2>
-                    <p className="mt-2 max-w-sm text-ink-500">
-                      Obrigado pelo contato. Nossa equipe vai analisar as informações e retornar em
-                      breve.
-                    </p>
-                    <div className="mt-6">
-                      <button
-                        type="button"
-                        onClick={() => setSent(false)}
-                        className="inline-flex items-center justify-center gap-2 rounded-full border border-ink-200 px-6 py-3 text-sm font-semibold text-ink-700 transition-colors hover:border-brand-300 hover:text-brand-600"
-                      >
-                        Enviar outra mensagem
-                      </button>
-                    </div>
-                  </div>
-                ) : (
                   <form onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
                     <div className="sm:col-span-1">
                       <label htmlFor="nome" className="mb-1.5 block text-sm font-medium text-ink-700">
@@ -267,7 +245,6 @@ export default function Contato() {
                       </p>
                     </div>
                   </form>
-                )}
               </div>
             </Reveal>
           </div>
