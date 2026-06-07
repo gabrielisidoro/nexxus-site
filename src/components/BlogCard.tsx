@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight, Clock } from 'lucide-react'
 import type { Post } from '@/data/posts'
 import { formatDate } from '@/data/posts'
-import { MediaPlaceholder } from './MediaPlaceholder'
+import { PostCover } from './PostCover'
 import { cn } from '@/lib/cn'
 
 interface BlogCardProps {
@@ -18,13 +18,7 @@ export function BlogCard({ post, className }: BlogCardProps) {
     >
       <div className="relative overflow-hidden">
         <div className="transition-transform duration-500 group-hover:scale-[1.04]">
-          <MediaPlaceholder
-            src={post.cover}
-            label={`capa: ${post.title}`}
-            ratio="wide"
-            rounded="rounded-none"
-            alt={post.title}
-          />
+          <PostCover post={post} ratio="wide" />
         </div>
         <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-brand-600 shadow-sm backdrop-blur">
           {post.category}

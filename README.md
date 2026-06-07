@@ -49,9 +49,19 @@ Pronto — listagem, ordenação por data e página individual funcionam automat
 
 ---
 
-## 🖼️ Onde trocar as fotos e o vídeo do escritório
+## 🖼️ Fotos e vídeo do escritório
 
-Os espaços reservados para imagens/vídeo (marcados com **"Substituir"** no site) usam dois componentes centralizados:
+As **fotos e o vídeo reais do escritório já estão integrados** ao site (hero, "Quem somos", página Sobre e cards de estrutura). Os arquivos ficam otimizados em **WebP** em `src/assets/escritorio/` e são importados por `src/assets/escritorio/index.ts`.
+
+**Para trocar uma foto/vídeo:** substitua o arquivo correspondente em `src/assets/escritorio/` mantendo o mesmo nome. Para adicionar imagens novas, coloque os arquivos `.jpg`/`.png` nessa pasta e rode:
+
+```bash
+npm run optimize:images   # converte para .webp otimizado e remove o original
+```
+
+Depois, importe o novo arquivo em `src/assets/escritorio/index.ts` e use onde quiser.
+
+> Os componentes `MediaPlaceholder` e `VideoPlaceholder` continuam disponíveis: se você remover um `src`, eles voltam a mostrar um bloco de marca marcado **"Substituir"** — útil para novos espaços.
 
 - **`MediaPlaceholder`** — fotos. Assim que você passar a prop `src`, ele mostra a imagem real (com lazy loading).
 - **`VideoPlaceholder`** — vídeo. Passe a prop `src` com o `.mp4` e ele renderiza o vídeo.

@@ -5,8 +5,10 @@ import { SectionHeading } from '@/components/SectionHeading'
 import { MediaPlaceholder } from '@/components/MediaPlaceholder'
 import { VideoPlaceholder } from '@/components/VideoPlaceholder'
 import { CTASection } from '@/components/CTASection'
+import { TeamAvatar } from '@/components/TeamAvatar'
 import { values, team } from '@/data/team'
 import { site } from '@/data/site'
+import { office } from '@/assets/escritorio'
 
 const infra = [
   {
@@ -15,6 +17,7 @@ const infra = [
     description:
       'Recepção e corredores com design moderno, iluminação em LED e alto padrão de acabamento.',
     label: 'foto do ambiente corporativo',
+    img: office.corredor,
   },
   {
     icon: Presentation,
@@ -22,6 +25,7 @@ const infra = [
     description:
       'Salas privativas equipadas com telas e infraestrutura completa para reuniões e planejamento estratégico.',
     label: 'foto da sala de mentoria',
+    img: office.salaReuniao,
   },
   {
     icon: Video,
@@ -29,6 +33,7 @@ const infra = [
     description:
       'Sala de gravação profissional com câmera, iluminação avançada e cenário, pronta para a sua operação.',
     label: 'foto do estúdio',
+    img: office.estudio,
   },
 ]
 
@@ -45,21 +50,34 @@ export default function Sobre() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute -right-24 -top-10 h-72 w-72 rounded-full bg-brand-100/60 blur-3xl" />
         <div className="container-nx py-16 sm:py-20">
-          <Reveal>
-            <div className="max-w-3xl">
-              <span className="eyebrow">Sobre a Nexxus</span>
-              <h1 className="heading mt-5 text-balance text-4xl leading-tight sm:text-5xl">
-                Construímos máquinas comerciais que crescem com{' '}
-                <span className="text-gradient">método</span>, não com sorte.
-              </h1>
-              <p className="mt-6 text-lg leading-relaxed text-ink-500">
-                A Nexxus nasceu para resolver uma dor comum a empresas de todos os tamanhos: vender
-                de forma consistente sem depender de improviso, de indicação ou do esforço heroico de
-                uma única pessoa. Em vez de alocar um vendedor e torcer, desenhamos a engenharia
-                completa da operação — e colocamos o time certo para executá-la.
-              </p>
-            </div>
-          </Reveal>
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <Reveal>
+              <div>
+                <span className="eyebrow">Sobre a Nexxus</span>
+                <h1 className="heading mt-5 text-balance text-4xl leading-tight sm:text-5xl">
+                  Construímos máquinas comerciais que crescem com{' '}
+                  <span className="text-gradient">método</span>, não com sorte.
+                </h1>
+                <p className="mt-6 text-lg leading-relaxed text-ink-500">
+                  A Nexxus nasceu para resolver uma dor comum a empresas de todos os tamanhos:
+                  vender de forma consistente sem depender de improviso, de indicação ou do esforço
+                  heroico de uma única pessoa. Em vez de alocar um vendedor e torcer, desenhamos a
+                  engenharia completa da operação — e colocamos o time certo para executá-la.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="overflow-hidden rounded-[2rem] shadow-soft ring-1 ring-ink-100">
+                <MediaPlaceholder
+                  src={office.equipeOperacao}
+                  alt="Equipe Nexxus em operação no escritório"
+                  label="foto da equipe"
+                  ratio="wide"
+                  rounded="rounded-[2rem]"
+                />
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -99,25 +117,26 @@ export default function Sobre() {
           />
         </Reveal>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-12">
-          {/* Foto/imagem do prédio */}
-          <Reveal className="lg:col-span-7">
-            <MediaPlaceholder
-              label="foto do edifício / fachada do escritório"
-              ratio="wide"
-              className="h-full"
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          {/* Vídeo da fachada / operação (vertical) */}
+          <Reveal>
+            <VideoPlaceholder
+              src={office.fachadaVideo}
+              label="vídeo da fachada do escritório"
+              ratioClass="aspect-[3/4]"
             />
           </Reveal>
 
-          {/* Vídeo da fachada */}
-          <Reveal className="lg:col-span-5" delay={0.1}>
+          {/* Skyline + endereço */}
+          <Reveal delay={0.1}>
             <div className="flex h-full flex-col gap-6">
-              <VideoPlaceholder
-                label="vídeo da fachada do escritório"
-                ratioClass="aspect-video"
-                className="w-full"
+              <MediaPlaceholder
+                src={office.varandaSkyline}
+                alt="Skyline de São Paulo visto do escritório da Nexxus"
+                label="foto da vista do escritório"
+                ratio="wide"
               />
-              <div className="rounded-3xl border border-ink-100 bg-white p-6 shadow-card">
+              <div className="flex-1 rounded-3xl border border-ink-100 bg-white p-6 shadow-card">
                 <div className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand-500" />
                   <div>
@@ -159,7 +178,13 @@ export default function Sobre() {
             {infra.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.1}>
                 <div className="card h-full overflow-hidden">
-                  <MediaPlaceholder label={item.label} ratio="wide" rounded="rounded-none" />
+                  <MediaPlaceholder
+                    src={item.img}
+                    alt={item.title}
+                    label={item.label}
+                    ratio="portrait"
+                    rounded="rounded-none"
+                  />
                   <div className="p-6">
                     <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-500">
                       <item.icon className="h-5 w-5" />
@@ -208,28 +233,29 @@ export default function Sobre() {
           <SectionHeading
             eyebrow="Time"
             title="Quem está em campo com você"
-            subtitle="Especialistas que vivem vendas todos os dias. (Adicione novos integrantes em src/data/team.ts.)"
+            subtitle="Especialistas que vivem vendas todos os dias."
           />
         </Reveal>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {team.map((member, i) => (
-            <Reveal key={member.name + i} delay={i * 0.08}>
-              <div className="card h-full overflow-hidden text-center">
-                <MediaPlaceholder
-                  src={member.photo}
-                  label={`foto de ${member.name}`}
-                  ratio="square"
-                  rounded="rounded-none"
-                  alt={member.name}
-                />
-                <div className="p-5">
-                  <h3 className="font-display font-bold text-ink-900">{member.name}</h3>
-                  <p className="text-sm font-medium text-brand-600">{member.role}</p>
+          {team.map((member, i) => {
+            const isPlaceholder = member.name.trim().startsWith('[')
+            return (
+              <Reveal key={member.name + i} delay={i * 0.08}>
+                <div className="card h-full p-6 text-center">
+                  <div className="mx-auto h-20 w-20 overflow-hidden rounded-full ring-4 ring-brand-50">
+                    <TeamAvatar name={member.name} photo={member.photo} />
+                  </div>
+                  <h3 className="mt-4 font-display font-bold text-ink-900">
+                    {isPlaceholder ? member.role : member.name}
+                  </h3>
+                  <p className="text-sm font-medium text-brand-600">
+                    {isPlaceholder ? 'Integrante — nome a definir' : member.role}
+                  </p>
                   <p className="mt-2 text-sm leading-relaxed text-ink-500">{member.bio}</p>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            )
+          })}
         </div>
       </section>
 

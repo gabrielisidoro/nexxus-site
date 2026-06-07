@@ -13,6 +13,7 @@ import { BlogCard } from '@/components/BlogCard'
 import { MediaPlaceholder } from '@/components/MediaPlaceholder'
 import { CTASection } from '@/components/CTASection'
 import { iconMap } from '@/components/iconMap'
+import { office } from '@/assets/escritorio'
 import { services } from '@/data/services'
 import { differentials, resultStats } from '@/data/metodo'
 import { recentPosts } from '@/data/posts'
@@ -80,8 +81,10 @@ export default function Home() {
             <div className="relative">
               <div className="overflow-hidden rounded-[2rem] shadow-soft ring-1 ring-ink-100">
                 <MediaPlaceholder
-                  label="foto/vídeo do escritório (vertical ou horizontal)"
-                  ratio="wide"
+                  src={office.equipeOperacao}
+                  alt="Equipe Nexxus em operação no escritório em São Paulo"
+                  label="foto do escritório"
+                  ratio="portrait"
                   rounded="rounded-[2rem]"
                 />
               </div>
@@ -118,7 +121,12 @@ export default function Home() {
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal className="order-2 lg:order-1">
             <div className="relative">
-              <MediaPlaceholder label="foto da equipe / escritório" ratio="wide" />
+              <MediaPlaceholder
+                src={office.varandaSofa}
+                alt="Vista do escritório da Nexxus para o skyline de São Paulo"
+                label="foto do escritório"
+                ratio="wide"
+              />
             </div>
           </Reveal>
           <Reveal className="order-1 lg:order-2" delay={0.1}>

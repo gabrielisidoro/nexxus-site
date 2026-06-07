@@ -3,7 +3,7 @@ import { ArrowLeft, Clock, ArrowRight } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 import { BlogCard } from '@/components/BlogCard'
 import { CTASection } from '@/components/CTASection'
-import { MediaPlaceholder } from '@/components/MediaPlaceholder'
+import { PostCover } from '@/components/PostCover'
 import { getPost, relatedPosts, formatDate, type PostBlock } from '@/data/posts'
 
 function Block({ block }: { block: PostBlock }) {
@@ -85,12 +85,7 @@ export default function BlogPost() {
 
         {/* Capa */}
         <div className="mx-auto mt-10 max-w-4xl">
-          <MediaPlaceholder
-            src={post.cover}
-            label={`capa da matéria: ${post.title}`}
-            ratio="wide"
-            alt={post.title}
-          />
+          <PostCover post={post} ratio="wide" rounded="rounded-3xl" />
         </div>
 
         {/* Conteúdo */}
