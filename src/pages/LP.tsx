@@ -502,7 +502,7 @@ export default function LP() {
       </motion.div>
 
       {/* ════ PAIN ════ */}
-      <section style={{background:BG_DARK, padding:'clamp(4rem,8vw,7rem) 1.5rem'}}>
+      <section style={{background:'#f4f7ff', color:'#0f172a', padding:'clamp(4rem,8vw,7rem) 1.5rem'}}>
         <div style={{maxWidth:1100, margin:'0 auto'}}>
           <motion.div initial="hidden" whileInView="show" viewport={{once:true, amount:.3}} variants={fadeUp}
             style={{textAlign:'center', marginBottom:'3.5rem'}}>
@@ -512,7 +512,7 @@ export default function LP() {
             <h2 style={{fontFamily:'Poppins,sans-serif', fontWeight:900, fontSize:'clamp(1.9rem,4.5vw,3.2rem)', lineHeight:1.1}}>
               Você ainda opera <span style={{color:'#ef4444'}}>assim</span>?
             </h2>
-            <p style={{marginTop:'1rem', color:'rgba(255,255,255,.5)', fontSize:'1.05rem', maxWidth:500, margin:'1rem auto 0'}}>
+            <p style={{marginTop:'1rem', color:'#64748b', fontSize:'1.05rem', maxWidth:500, margin:'1rem auto 0'}}>
               Se identificar com 2 ou mais cenários abaixo, o diagnóstico da Nexxus é pra você.
             </p>
           </motion.div>
@@ -521,20 +521,20 @@ export default function LP() {
             style={{display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))', gap:'1.2rem'}}>
             {PAINS.map(p=>(
               <motion.div key={p.text} variants={scaleIn}
-                whileHover={{ scale:1.03, borderColor:'rgba(239,68,68,.45)', boxShadow:'0 0 28px rgba(239,68,68,.14), 0 8px 32px rgba(0,0,0,.35)', background:'#100c12' }}
+                whileHover={{ scale:1.03, borderColor:'rgba(239,68,68,.4)', boxShadow:'0 0 20px rgba(239,68,68,.1), 0 8px 24px rgba(0,0,0,.1)', background:'#fff5f5' }}
                 whileTap={{ scale:.98 }}
-                style={{ background:BG_PANEL, border:'1px solid rgba(239,68,68,.12)', borderRadius:20, padding:'1.5rem 1.8rem', display:'flex', alignItems:'center', gap:16, cursor:'default', transition:'background .2s' }}>
+                style={{ background:'#fff', border:'1px solid rgba(239,68,68,.15)', borderRadius:20, padding:'1.5rem 1.8rem', display:'flex', alignItems:'center', gap:16, cursor:'default', transition:'background .2s', boxShadow:'0 2px 12px rgba(0,0,0,.06)' }}>
                 <motion.span whileHover={{ scale:1.2, rotate:[-5,5,0] }} transition={{ duration:.3 }}
                   style={{fontSize:'2rem', flexShrink:0}}>{p.emoji}</motion.span>
-                <span style={{fontSize:'.95rem', color:'rgba(255,255,255,.8)', lineHeight:1.45}}>{p.text}</span>
+                <span style={{fontSize:'.95rem', color:'#334155', lineHeight:1.45}}>{p.text}</span>
               </motion.div>
             ))}
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{once:true, amount:.5}} variants={fadeUp}
             style={{textAlign:'center', marginTop:'3rem'}}>
-            <p style={{color:'rgba(255,255,255,.6)', fontSize:'1rem', marginBottom:'1.4rem'}}>
-              A Nexxus elimina <strong style={{color:'#fff'}}>todos</strong> esses problemas. Com método, não com sorte.
+            <p style={{color:'#475569', fontSize:'1rem', marginBottom:'1.4rem'}}>
+              A Nexxus elimina <strong style={{color:'#0f172a'}}>todos</strong> esses problemas. Com método, não com sorte.
             </p>
             <motion.button onClick={scrollToForm}
               whileHover={{ scale:1.05, boxShadow:`0 0 24px rgba(${BR},${BG},${BB},.35)` }} whileTap={{ scale:.97 }}
@@ -585,7 +585,7 @@ export default function LP() {
           { src: office.varandaSkyline,label: 'Varanda' },
         ]
         return (
-          <section style={{background:BG_DARK, padding:'clamp(3rem,6vw,5rem) 1.5rem'}}>
+          <section style={{background:'#eef2ff', color:'#0f172a', padding:'clamp(3rem,6vw,5rem) 1.5rem'}}>
             <div style={{maxWidth:820, margin:'0 auto'}}>
               <motion.div initial="hidden" whileInView="show" viewport={{once:true, amount:.3}} variants={fadeUp}
                 style={{textAlign:'center', marginBottom:'2rem'}}>
@@ -599,7 +599,7 @@ export default function LP() {
 
               <motion.div initial="hidden" whileInView="show" viewport={{once:true, amount:.2}} variants={scaleIn}>
                 {/* Main image */}
-                <div style={{borderRadius:16, overflow:'hidden', position:'relative', aspectRatio:'16/9', background:BG_PANEL}}>
+                <div style={{borderRadius:16, overflow:'hidden', position:'relative', aspectRatio:'16/9', background:'#cbd5e1'}}>
                   <AnimatePresence mode="wait">
                     <motion.img
                       key={activePhoto}
@@ -666,7 +666,7 @@ export default function LP() {
             {/* Video — right, compact */}
             <motion.div variants={scaleIn} style={{flex:'0 0 auto', width:'clamp(220px,38%,320px)'}}>
               <div style={{borderRadius:12, overflow:'hidden', border:`1px solid rgba(${BR},${BG},${BB},.14)`, boxShadow:`0 6px 24px rgba(0,0,0,.45)`}}>
-                <video src={`${import.meta.env.BASE_URL}fachada-rua.mp4`} autoPlay muted loop playsInline
+                <video src={office.fachadaVideo} autoPlay muted loop playsInline
                   style={{width:'100%', display:'block'}}/>
               </div>
             </motion.div>
@@ -676,7 +676,7 @@ export default function LP() {
       </section>
 
       {/* ════ STEPS ════ */}
-      <section style={{background:BG_HERO, padding:'clamp(4rem,8vw,7rem) 1.5rem'}}>
+      <section style={{background:'#f4f7ff', color:'#0f172a', padding:'clamp(4rem,8vw,7rem) 1.5rem'}}>
         <div style={{maxWidth:900, margin:'0 auto'}}>
           <motion.div initial="hidden" whileInView="show" viewport={{once:true, amount:.3}} variants={fadeUp}
             style={{textAlign:'center', marginBottom:'3.5rem'}}>
@@ -699,11 +699,11 @@ export default function LP() {
                     style={{ flexShrink:0, width:56, height:56, borderRadius:'50%', background:BG_PANEL, border:`2px solid ${BLUE}`, display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'Poppins,sans-serif', fontWeight:900, fontSize:'1.1rem', color:BLUE, boxShadow:`0 0 16px rgba(${BR},${BG},${BB},.3)`, position:'relative', zIndex:1 }}>
                     {i+1}
                   </motion.div>
-                  <motion.div whileHover={{ scale:1.01, borderColor:`rgba(${BR},${BG},${BB},.3)`, boxShadow:`0 4px 24px rgba(0,0,0,.3)` }}
-                    style={{ background:BG_PANEL, border:`1px solid rgba(${BR},${BG},${BB},.12)`, borderRadius:18, padding:'1.2rem 1.5rem', flex:1 }}>
+                  <motion.div whileHover={{ scale:1.01, borderColor:`rgba(${BR},${BG},${BB},.3)`, boxShadow:`0 4px 20px rgba(0,0,0,.1)` }}
+                    style={{ background:'#fff', border:`1px solid rgba(${BR},${BG},${BB},.12)`, borderRadius:18, padding:'1.2rem 1.5rem', flex:1, boxShadow:'0 2px 12px rgba(0,0,0,.06)' }}>
                     <span style={{fontSize:'.72rem', fontWeight:700, letterSpacing:'.12em', color:BLUE}}>{s.day}</span>
-                    <h3 style={{fontFamily:'Poppins,sans-serif', fontWeight:800, fontSize:'1.1rem', margin:'.3rem 0 .5rem'}}>{s.title}</h3>
-                    <p style={{color:'rgba(255,255,255,.55)', fontSize:'.9rem', lineHeight:1.55, margin:0}}>{s.body}</p>
+                    <h3 style={{fontFamily:'Poppins,sans-serif', fontWeight:800, fontSize:'1.1rem', margin:'.3rem 0 .5rem', color:'#0f172a'}}>{s.title}</h3>
+                    <p style={{color:'#64748b', fontSize:'.9rem', lineHeight:1.55, margin:0}}>{s.body}</p>
                   </motion.div>
                 </motion.div>
               ))}
