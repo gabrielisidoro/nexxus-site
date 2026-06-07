@@ -32,20 +32,31 @@ export default function Home() {
 
       {/* ===================== HERO ===================== */}
       <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-grid-ink opacity-[0.5] [background-size:30px_30px] [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]" />
-        <div className="pointer-events-none absolute -left-32 top-0 h-80 w-80 rounded-full bg-brand-200/40 blur-3xl" />
-        <div className="pointer-events-none absolute -right-20 top-40 h-72 w-72 rounded-full bg-brand-100/60 blur-3xl" />
+        {/* Vídeo de fundo */}
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/hero-bg.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden="true"
+        />
+        {/* Overlay escuro para legibilidade do texto */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-ink-950/88 via-ink-950/75 to-ink-950/55" />
+        {/* Grade sutil */}
+        <div className="pointer-events-none absolute inset-0 bg-grid-ink opacity-[0.06] [background-size:30px_30px]" />
 
-        <div className="container-nx grid items-center gap-12 py-16 lg:grid-cols-2 lg:gap-8 lg:py-24">
+        <div className="relative container-nx grid items-center gap-12 py-16 lg:grid-cols-2 lg:gap-8 lg:py-24">
           <Reveal>
             <div>
               <span className="eyebrow">Estruturação Comercial Completa</span>
-              <h1 className="heading mt-5 text-balance text-4xl leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
-                Pare de vender no <span className="text-red-500">improviso</span>.
+              <h1 className="heading mt-5 text-balance text-4xl leading-[1.08] text-white sm:text-5xl lg:text-[3.4rem]">
+                Pare de vender no <span className="text-red-400">improviso</span>.
                 <br />
                 Escale com <span className="text-gradient">método</span>.
               </h1>
-              <p className="mt-6 max-w-xl text-balance text-lg leading-relaxed text-ink-500">
+              <p className="mt-6 max-w-xl text-balance text-lg leading-relaxed text-white/70">
                 A Nexxus estrutura e opera o comercial da sua empresa com método, dados e um time
                 pronto. Terceirização, mentoria e estruturação de vendas, para você crescer com
                 previsibilidade, sem montar tudo sozinho.
@@ -56,29 +67,29 @@ export default function Home() {
                   Solicitar diagnóstico gratuito
                   <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
-                <Button to="/servicos" variant="outline" size="lg">
+                <Button to="/servicos" variant="white" size="lg">
                   Conhecer os serviços
                 </Button>
               </div>
 
-              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-500">
+              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/60">
                 <li className="inline-flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-brand-500" /> Operação no ar em 20 dias
+                  <CheckCircle2 className="h-4 w-4 text-brand-400" /> Operação no ar em 20 dias
                 </li>
                 <li className="inline-flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-brand-500" /> Estrutura física em São Paulo
+                  <MapPin className="h-4 w-4 text-brand-400" /> Estrutura física em São Paulo
                 </li>
                 <li className="inline-flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-brand-500" /> {site.responseTime}
+                  <Clock className="h-4 w-4 text-brand-400" /> {site.responseTime}
                 </li>
               </ul>
             </div>
           </Reveal>
 
-          {/* Visual do hero — espaço para foto do escritório + cards flutuantes */}
+          {/* Visual do hero */}
           <Reveal delay={0.15}>
             <div className="relative">
-              <div className="overflow-hidden rounded-[2rem] shadow-soft ring-1 ring-ink-100">
+              <div className="overflow-hidden rounded-[2rem] shadow-soft ring-1 ring-white/10">
                 <MediaPlaceholder
                   src={office.equipeOperacao}
                   alt="Equipe Nexxus em operação no escritório em São Paulo"
@@ -89,7 +100,7 @@ export default function Home() {
               </div>
 
               {/* Card flutuante: previsibilidade */}
-              <div className="absolute -left-4 bottom-6 hidden rounded-2xl border border-ink-100 bg-white/95 p-4 shadow-glow backdrop-blur sm:block">
+              <div className="absolute -left-4 bottom-6 hidden rounded-2xl border border-white/10 bg-white/95 p-4 shadow-glow backdrop-blur sm:block">
                 <p className="text-xs font-medium text-ink-400">Cadência D1-D12</p>
                 <p className="mt-1 font-display text-2xl font-bold text-ink-900">
                   <Counter value={80} suffix="%" />
@@ -98,7 +109,7 @@ export default function Home() {
               </div>
 
               {/* Card flutuante: squad */}
-              <div className="absolute -right-3 -top-4 hidden rounded-2xl border border-ink-100 bg-white/95 p-4 shadow-glow backdrop-blur sm:block">
+              <div className="absolute -right-3 -top-4 hidden rounded-2xl border border-white/10 bg-white/95 p-4 shadow-glow backdrop-blur sm:block">
                 <p className="text-xs font-medium text-ink-400">Squad dedicada</p>
                 <p className="mt-1 font-display text-2xl font-bold text-brand-600">SDR · Hunter · Closer</p>
               </div>
@@ -107,8 +118,8 @@ export default function Home() {
         </div>
 
         {/* Faixa de ferramentas/parceiros */}
-        <div className="container-nx pb-10">
-          <p className="mb-5 text-center text-xs font-semibold uppercase tracking-[0.18em] text-ink-400">
+        <div className="relative container-nx pb-10">
+          <p className="mb-5 text-center text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
             Método e tecnologia que sustentam a operação
           </p>
           <ToolsMarquee />
