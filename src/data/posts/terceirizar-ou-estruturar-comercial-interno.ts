@@ -8,7 +8,7 @@ export const post: Post = {
   date: '2026-05-26',
   readingMinutes: 7,
   category: 'Estratégia',
-  cover: null,
+  cover: '/blog/cover-terceirizar-ou-estruturar.webp',
   content: [
     {
       type: 'p',

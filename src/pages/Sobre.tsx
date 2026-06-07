@@ -5,8 +5,7 @@ import { SectionHeading } from '@/components/SectionHeading'
 import { MediaPlaceholder } from '@/components/MediaPlaceholder'
 import { VideoPlaceholder } from '@/components/VideoPlaceholder'
 import { CTASection } from '@/components/CTASection'
-import { TeamAvatar } from '@/components/TeamAvatar'
-import { values, team } from '@/data/team'
+import { values } from '@/data/team'
 import { site } from '@/data/site'
 import { office } from '@/assets/escritorio'
 
@@ -224,38 +223,6 @@ export default function Sobre() {
               </div>
             </Reveal>
           ))}
-        </div>
-      </section>
-
-      {/* Equipe */}
-      <section className="container-nx pb-16 sm:pb-24">
-        <Reveal>
-          <SectionHeading
-            eyebrow="Time"
-            title="Quem está em campo com você"
-            subtitle="Especialistas que vivem vendas todos os dias."
-          />
-        </Reveal>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {team.map((member, i) => {
-            const isPlaceholder = member.name.trim().startsWith('[')
-            return (
-              <Reveal key={member.name + i} delay={i * 0.08}>
-                <div className="card h-full p-6 text-center">
-                  <div className="mx-auto h-20 w-20 overflow-hidden rounded-full ring-4 ring-brand-50">
-                    <TeamAvatar name={member.name} photo={member.photo} />
-                  </div>
-                  <h3 className="mt-4 font-display font-bold text-ink-900">
-                    {isPlaceholder ? member.role : member.name}
-                  </h3>
-                  <p className="text-sm font-medium text-brand-600">
-                    {isPlaceholder ? 'Integrante a definir' : member.role}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-500">{member.bio}</p>
-                </div>
-              </Reveal>
-            )
-          })}
         </div>
       </section>
 

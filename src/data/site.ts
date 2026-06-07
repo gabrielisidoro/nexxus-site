@@ -27,7 +27,7 @@ export const site = {
 
   // ----- Redes sociais (preencha as URLs reais) ------------------------------
   social: {
-    instagram: 'https://instagram.com/', // [INSERIR] @nexxus
+    instagram: 'https://www.instagram.com/nexxus.inc/',
     linkedin: 'https://linkedin.com/company/', // [INSERIR]
     youtube: '', // opcional
   },

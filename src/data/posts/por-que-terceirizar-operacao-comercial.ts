@@ -8,7 +8,7 @@ export const post: Post = {
   date: '2026-05-12',
   readingMinutes: 6,
   category: 'Terceirização',
-  cover: null,
+  cover: '/blog/cover-terceirizacao.webp',
   content: [
     {
       type: 'p',

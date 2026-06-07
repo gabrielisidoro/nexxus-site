@@ -8,7 +8,7 @@ export const post: Post = {
   date: '2026-06-02',
   readingMinutes: 7,
   category: 'Mercado B2B',
-  cover: null,
+  cover: '/blog/cover-tendencias-b2b.webp',
   content: [
     {
       type: 'p',

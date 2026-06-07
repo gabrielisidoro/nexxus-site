@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Mail, MapPin, Clock, Send, CheckCircle2, Instagram, Linkedin } from 'lucide-react'
+import { Mail, MapPin, Send, CheckCircle2, Instagram, Linkedin } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 import { Reveal } from '@/components/Reveal'
 import { site, mailtoLink } from '@/data/site'
@@ -8,7 +8,6 @@ interface FormState {
   nome: string
   empresa: string
   email: string
-  telefone: string
   faturamento: string
   mensagem: string
 }
@@ -17,7 +16,6 @@ const initial: FormState = {
   nome: '',
   empresa: '',
   email: '',
-  telefone: '',
   faturamento: '',
   mensagem: '',
 }
@@ -110,16 +108,6 @@ export default function Contato() {
                       <br />
                       {site.address.reference}, {site.address.city}/{site.address.state}
                     </span>
-                  </span>
-                </div>
-
-                <div className="card flex items-center gap-4 p-5">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-500">
-                    <Clock className="h-6 w-6" />
-                  </span>
-                  <span>
-                    <span className="block font-display font-bold text-ink-900">Telefone</span>
-                    <span className="text-sm text-ink-500">{site.phoneDisplay}</span>
                   </span>
                 </div>
 
@@ -221,24 +209,6 @@ export default function Contato() {
                         onChange={(e) => update('email', e.target.value)}
                         className={inputClass}
                         placeholder="voce@empresa.com"
-                      />
-                    </div>
-
-                    <div className="sm:col-span-1">
-                      <label
-                        htmlFor="telefone"
-                        className="mb-1.5 block text-sm font-medium text-ink-700"
-                      >
-                        Telefone
-                      </label>
-                      <input
-                        id="telefone"
-                        type="tel"
-                        autoComplete="tel"
-                        value={form.telefone}
-                        onChange={(e) => update('telefone', e.target.value)}
-                        className={inputClass}
-                        placeholder="(11) 99999-9999"
                       />
                     </div>
 
