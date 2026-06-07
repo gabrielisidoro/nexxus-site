@@ -46,7 +46,7 @@ export function Header() {
       )}
     >
       <div className="container-nx flex h-16 items-center justify-between lg:h-20">
-        <Link to="/" aria-label="Nexxus — início" className="relative z-10">
+        <Link to="/" aria-label="Nexxus - início" className="relative z-10">
           <Logo className="h-7 sm:h-8" />
         </Link>
 

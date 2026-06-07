@@ -8,7 +8,7 @@ export default function Blog() {
   return (
     <>
       <SEO
-        title="Blog — Nexxus"
+        title="Blog | Nexxus"
         description="Ideias práticas sobre vendas, estrutura comercial, terceirização e crescimento previsível. O blog da Nexxus."
         path="/blog"
       />

@@ -62,7 +62,7 @@ export default function Sobre() {
                   A Nexxus nasceu para resolver uma dor comum a empresas de todos os tamanhos:
                   vender de forma consistente sem depender de improviso, de indicação ou do esforço
                   heroico de uma única pessoa. Em vez de alocar um vendedor e torcer, desenhamos a
-                  engenharia completa da operação — e colocamos o time certo para executá-la.
+                  engenharia completa da operação, e colocamos o time certo para executá-la.
                 </p>
               </div>
             </Reveal>
@@ -89,8 +89,8 @@ export default function Sobre() {
               <h2 className="font-display text-xl font-bold text-ink-900">Nosso propósito</h2>
               <p className="mt-3 leading-relaxed text-ink-500">
                 Tirar o dono do operacional e dar a ele previsibilidade. Acreditamos que toda empresa
-                merece uma operação comercial estruturada — com arquitetura, processo, cadência e
-                gestão orientada a dados — independentemente de ter ou não um time interno hoje.
+                merece uma operação comercial estruturada, com arquitetura, processo, cadência e
+                gestão orientada a dados, independentemente de ter ou não um time interno hoje.
               </p>
             </div>
           </Reveal>
@@ -99,7 +99,7 @@ export default function Sobre() {
               <h2 className="font-display text-xl font-bold text-ink-900">Como trabalhamos</h2>
               <p className="mt-3 leading-relaxed text-ink-500">
                 Arquitetura antes de pessoas. Primeiro entendemos e desenhamos toda a sua arquitetura
-                comercial — ICP, oferta, canal e funil. Só depois construímos e treinamos o time para
+                comercial: ICP, oferta, canal e funil. Só depois construímos e treinamos o time para
                 executar e escalar, com acompanhamento próximo do início ao fim.
               </p>
             </div>
@@ -249,7 +249,7 @@ export default function Sobre() {
                     {isPlaceholder ? member.role : member.name}
                   </h3>
                   <p className="text-sm font-medium text-brand-600">
-                    {isPlaceholder ? 'Integrante — nome a definir' : member.role}
+                    {isPlaceholder ? 'Integrante a definir' : member.role}
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-ink-500">{member.bio}</p>
                 </div>

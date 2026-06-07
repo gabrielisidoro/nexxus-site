@@ -32,7 +32,7 @@ export const services: Service[] = [
     icon: 'Rocket',
     name: 'Terceirização Comercial',
     short: 'Sua operação de vendas inteira, pronta para rodar.',
-    tagline: 'A operação comercial completa, do seu lado — sem você montar nada.',
+    tagline: 'A operação comercial completa, do seu lado, sem você montar nada.',
     summary:
       'Assumimos a operação de vendas da sua empresa com uma squad de especialistas dedicada, método validado, ferramentas configuradas e gestão data-driven. Você foca no seu negócio; nós entregamos previsibilidade e escala.',
     forWhom: [
@@ -50,7 +50,7 @@ export const services: Service[] = [
       {
         title: 'CRM e cadência configurados',
         description:
-          'Funil estruturado, automações e a cadência D1–D12 rodando — 80% das vendas acontecem entre o 5º e o 12º contato.',
+          'Funil estruturado, automações e a cadência D1-D12 rodando. 80% das vendas acontecem entre o 5º e o 12º contato.',
       },
       {
         title: 'Playbook comercial sob medida',
@@ -60,7 +60,7 @@ export const services: Service[] = [
       {
         title: 'Gestão por dados e acompanhamento',
         description:
-          'KPIs, dashboards e reuniões de cadência. Grupo de WhatsApp dedicado, reunião operacional semanal e relatório estratégico.',
+          'KPIs, dashboards e reuniões de cadência, com reunião operacional semanal e relatório estratégico.',
       },
     ],
     howItWorks: [
@@ -90,10 +90,10 @@ export const services: Service[] = [
     slug: 'mentoria-comercial',
     icon: 'GraduationCap',
     name: 'Mentoria Comercial',
-    short: 'Seu time vendendo com método — com a gente do seu lado.',
+    short: 'Seu time vendendo com método, com a gente do seu lado.',
     tagline: 'Profissionalize seu time interno com quem vive vendas todo dia.',
     summary:
-      'Para quem quer manter o time dentro de casa, mas com método de verdade. Treinamos, implantamos processo e acompanhamos de perto até a sua equipe vender com consistência — sem depender de improviso.',
+      'Para quem quer manter o time dentro de casa, mas com método de verdade. Treinamos, implantamos processo e acompanhamos de perto até a sua equipe vender com consistência, sem depender de improviso.',
     forWhom: [
       'Empresas que já têm (ou querem manter) um time comercial interno',
       'Líderes que precisam de método, cadência e gestão para destravar o time',
@@ -109,7 +109,7 @@ export const services: Service[] = [
       {
         title: 'Treinamento prático de vendas',
         description:
-          'SPIN Selling, ancoragem de valor, armas de fechamento e a cadência de prospecção — aplicados ao seu produto.',
+          'SPIN Selling, ancoragem de valor, armas de fechamento e a cadência de prospecção, aplicados ao seu produto.',
       },
       {
         title: 'Implantação de CRM e rituais',
@@ -152,7 +152,7 @@ export const services: Service[] = [
     short: 'Montamos a máquina; seu time opera.',
     tagline: 'A arquitetura comercial completa para você escalar com método.',
     summary:
-      'Desenhamos e implantamos toda a engenharia da sua operação de vendas — ICP, oferta, funil, ferramentas, papéis e indicadores — para sua empresa parar de vender no improviso e passar a vender com método.',
+      'Desenhamos e implantamos toda a engenharia da sua operação de vendas: ICP, oferta, funil, ferramentas, papéis e indicadores, para sua empresa parar de vender no improviso e passar a vender com método.',
     forWhom: [
       'Empresas que querem profissionalizar o próprio comercial de ponta a ponta',
       'Negócios sem ICP claro, sem funil padronizado e com CRM bagunçado',
@@ -163,12 +163,12 @@ export const services: Service[] = [
       {
         title: 'Arquitetura comercial',
         description:
-          'Definição de ICP, oferta, canal e posicionamento — a base que sustenta toda a operação, antes das pessoas.',
+          'Definição de ICP, oferta, canal e posicionamento: a base que sustenta toda a operação, antes das pessoas.',
       },
       {
         title: 'Funil, CRM e cadência',
         description:
-          'Etapas, indicadores, automações e a cadência D1–D12 implantadas para previsibilidade real do funil.',
+          'Etapas, indicadores, automações e a cadência D1-D12 implantadas para previsibilidade real do funil.',
       },
       {
         title: 'Playbook e papéis definidos',
@@ -178,7 +178,7 @@ export const services: Service[] = [
       {
         title: 'KPIs e gestão data-driven',
         description:
-          'Dashboards e métricas claras para decisões baseadas em dados reais — não em achismo.',
+          'Dashboards e métricas claras para decisões baseadas em dados reais, não em achismo.',
       },
     ],
     howItWorks: [

@@ -1,7 +1,7 @@
-import { ArrowRight, MessageCircle } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Button } from './Button'
 import { Reveal } from './Reveal'
-import { whatsappLink, site } from '@/data/site'
+import { site } from '@/data/site'
 
 interface CTASectionProps {
   title?: string
@@ -26,14 +26,10 @@ export function CTASection({
             <h2 className="heading text-balance text-3xl text-white sm:text-4xl">{title}</h2>
             <p className="mx-auto mt-4 max-w-xl text-balance text-lg text-white/70">{subtitle}</p>
 
-            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div className="mt-9 flex justify-center">
               <Button to="/contato" variant="white" size="lg">
                 Solicitar diagnóstico gratuito
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </Button>
-              <Button href={whatsappLink()} variant="ghost" size="lg" className="text-white hover:bg-white/10">
-                <MessageCircle className="h-5 w-5" />
-                Falar no WhatsApp
               </Button>
             </div>
 

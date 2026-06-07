@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Mail, MapPin, Instagram, Linkedin, MessageCircle } from 'lucide-react'
+import { Mail, MapPin, Instagram, Linkedin } from 'lucide-react'
 import { Logo } from './Logo'
-import { site, navLinks, mailtoLink, whatsappLink } from '@/data/site'
+import { site, navLinks, mailtoLink } from '@/data/site'
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -11,7 +11,7 @@ export function Footer() {
       <div className="container-nx grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         {/* Marca */}
         <div className="lg:col-span-5">
-          <Link to="/" aria-label="Nexxus — início">
+          <Link to="/" aria-label="Nexxus - início">
             <Logo variant="white" className="h-8" />
           </Link>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/60">
@@ -69,17 +69,6 @@ export function Footer() {
               >
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
                 <span className="break-all">{site.email}</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href={whatsappLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-3 text-white/60 transition-colors hover:text-white"
-              >
-                <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
-                <span>WhatsApp</span>
               </a>
             </li>
             <li className="flex items-start gap-3 text-white/60">

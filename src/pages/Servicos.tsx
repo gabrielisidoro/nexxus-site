@@ -14,7 +14,7 @@ export default function Servicos() {
   return (
     <>
       <SEO
-        title="Serviços — Nexxus"
+        title="Serviços | Nexxus"
         description="Terceirização comercial, mentoria e estruturação comercial interna. Conheça as três frentes da Nexxus e o Método dos 6 pilares."
         path="/servicos"
       />
@@ -31,7 +31,7 @@ export default function Servicos() {
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-ink-500">
                 Seja assumindo o seu comercial por completo, treinando o seu time ou montando a
-                estrutura do zero — entregamos método, dados e governança em cada frente.
+                estrutura do zero: entregamos método, dados e governança em cada frente.
               </p>
             </div>
           </Reveal>

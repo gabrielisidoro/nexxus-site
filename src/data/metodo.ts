@@ -23,7 +23,7 @@ export const pillars: {
     n: '01',
     icon: 'Compass',
     title: 'Arquitetura Comercial',
-    description: 'ICP, oferta, canal e posicionamento — definidos antes das pessoas.',
+    description: 'ICP, oferta, canal e posicionamento, definidos antes das pessoas.',
   },
   {
     n: '02',
@@ -34,14 +34,14 @@ export const pillars: {
   {
     n: '03',
     icon: 'Repeat',
-    title: 'Cadência D1–D12',
+    title: 'Cadência D1-D12',
     description: 'Follow-up estruturado: 80% das vendas acontecem entre o 5º e o 12º contato.',
   },
   {
     n: '04',
     icon: 'Users',
     title: 'Time Especializado',
-    description: 'SDR, Hunter, Closer e Social Seller — cada um no papel certo.',
+    description: 'SDR, Hunter, Closer e Social Seller, cada um no papel certo.',
   },
   {
     n: '05',
@@ -157,7 +157,7 @@ export const differentials: { icon: ServiceIcon; title: string; description: str
     icon: 'Target',
     title: 'Arquitetura antes de pessoas',
     description:
-      'Não alocamos um SDR e torcemos. Primeiro desenhamos toda a engenharia comercial — depois colocamos o time certo.',
+      'Não alocamos um SDR e torcemos. Primeiro desenhamos toda a engenharia comercial, depois colocamos o time certo.',
   },
   {
     icon: 'LineChart',

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, MessageCircle, MapPin, Clock, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, MapPin, Clock, CheckCircle2 } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 import { Button } from '@/components/Button'
 import { Reveal } from '@/components/Reveal'
@@ -17,7 +17,7 @@ import { office } from '@/assets/escritorio'
 import { services } from '@/data/services'
 import { differentials, resultStats } from '@/data/metodo'
 import { recentPosts } from '@/data/posts'
-import { whatsappLink, site } from '@/data/site'
+import { site } from '@/data/site'
 
 export default function Home() {
   const posts = recentPosts(3)
@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Nexxus — Estruturação e Terceirização Comercial"
+        title="Nexxus | Estruturação e Terceirização Comercial"
         description={site.description}
         path="/"
       />
@@ -47,7 +47,7 @@ export default function Home() {
               </h1>
               <p className="mt-6 max-w-xl text-balance text-lg leading-relaxed text-ink-500">
                 A Nexxus estrutura e opera o comercial da sua empresa com método, dados e um time
-                pronto. Terceirização, mentoria e estruturação de vendas — para você crescer com
+                pronto. Terceirização, mentoria e estruturação de vendas, para você crescer com
                 previsibilidade, sem montar tudo sozinho.
               </p>
 
@@ -56,9 +56,8 @@ export default function Home() {
                   Solicitar diagnóstico gratuito
                   <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
-                <Button href={whatsappLink()} variant="outline" size="lg">
-                  <MessageCircle className="h-5 w-5" />
-                  Falar no WhatsApp
+                <Button to="/servicos" variant="outline" size="lg">
+                  Conhecer os serviços
                 </Button>
               </div>
 
@@ -91,7 +90,7 @@ export default function Home() {
 
               {/* Card flutuante: previsibilidade */}
               <div className="absolute -left-4 bottom-6 hidden rounded-2xl border border-ink-100 bg-white/95 p-4 shadow-glow backdrop-blur sm:block">
-                <p className="text-xs font-medium text-ink-400">Cadência D1–D12</p>
+                <p className="text-xs font-medium text-ink-400">Cadência D1-D12</p>
                 <p className="mt-1 font-display text-2xl font-bold text-ink-900">
                   <Counter value={80} suffix="%" />
                 </p>
@@ -137,7 +136,7 @@ export default function Home() {
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-ink-500">
                 Antes de colocar gente em campo, desenhamos toda a arquitetura comercial do seu
-                negócio — ICP, oferta, canal e funil. Só depois construímos o time certo, com
+                negócio: ICP, oferta, canal e funil. Só depois construímos o time certo, com
                 metodologia, dados e governança. É assim que transformamos vendas em uma máquina
                 previsível.
               </p>
@@ -158,7 +157,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="O que fazemos"
             title={<>Três formas de destravar o seu comercial</>}
-            subtitle="Da operação inteira terceirizada à estruturação do seu próprio time — você escolhe o nível de envolvimento."
+            subtitle="Da operação inteira terceirizada à estruturação do seu próprio time: você escolhe o nível de envolvimento."
           />
         </Reveal>
         <div className="mt-12 grid gap-6 md:grid-cols-3">

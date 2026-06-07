@@ -42,7 +42,7 @@ export const values: { title: string; description: string }[] = [
   {
     title: 'Método antes de improviso',
     description:
-      'Tudo começa pela arquitetura comercial. Estrutura vence talento solto — sempre.',
+      'Tudo começa pela arquitetura comercial. Estrutura vence talento solto, sempre.',
   },
   {
     title: 'Dados acima de achismo',

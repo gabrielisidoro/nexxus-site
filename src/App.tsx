@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
-import { WhatsAppFloat } from './components/WhatsAppFloat'
 import { ScrollToTop } from './components/ScrollToTop'
 import Home from './pages/Home'
 import Sobre from './pages/Sobre'
@@ -28,7 +27,6 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
-      <WhatsAppFloat />
     </div>
   )
 }

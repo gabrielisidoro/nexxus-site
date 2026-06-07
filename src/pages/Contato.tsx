@@ -1,18 +1,37 @@
 import { useState, type FormEvent } from 'react'
-import { Mail, MapPin, Clock, MessageCircle, Send, CheckCircle2, Instagram, Linkedin } from 'lucide-react'
+import { Mail, MapPin, Clock, Send, CheckCircle2, Instagram, Linkedin } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 import { Reveal } from '@/components/Reveal'
-import { site, whatsappLink, mailtoLink } from '@/data/site'
+import { site, mailtoLink } from '@/data/site'
 
 interface FormState {
   nome: string
   empresa: string
   email: string
   telefone: string
+  faturamento: string
   mensagem: string
 }
 
-const initial: FormState = { nome: '', empresa: '', email: '', telefone: '', mensagem: '' }
+const initial: FormState = {
+  nome: '',
+  empresa: '',
+  email: '',
+  telefone: '',
+  faturamento: '',
+  mensagem: '',
+}
+
+const faixasFaturamento = [
+  'Até R$ 50 mil',
+  'R$ 51 mil a R$ 99 mil',
+  'R$ 100 mil a R$ 199 mil',
+  'R$ 200 mil a R$ 299 mil',
+  'R$ 300 mil a R$ 500 mil',
+  'R$ 500 mil a R$ 1 milhão',
+  'Mais de R$ 1 milhão',
+  'Mais de R$ 5 milhões',
+]
 
 export default function Contato() {
   const [form, setForm] = useState<FormState>(initial)
@@ -45,8 +64,8 @@ export default function Contato() {
   return (
     <>
       <SEO
-        title="Contato — Nexxus"
-        description="Fale com a Nexxus e solicite um diagnóstico comercial gratuito. WhatsApp, e-mail e formulário."
+        title="Contato | Nexxus"
+        description="Fale com a Nexxus e solicite um diagnóstico comercial gratuito pelo formulário."
         path="/contato"
       />
 
@@ -70,21 +89,6 @@ export default function Contato() {
             {/* Informações de contato */}
             <Reveal className="lg:col-span-2">
               <div className="flex flex-col gap-4">
-                <a
-                  href={whatsappLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="card card-hover flex items-center gap-4 p-5"
-                >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#25D366]/10 text-[#25D366]">
-                    <MessageCircle className="h-6 w-6" />
-                  </span>
-                  <span>
-                    <span className="block font-display font-bold text-ink-900">WhatsApp</span>
-                    <span className="text-sm text-ink-500">Resposta rápida no comercial</span>
-                  </span>
-                </a>
-
                 <a href={mailtoLink} className="card card-hover flex items-center gap-4 p-5">
                   <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-500">
                     <Mail className="h-6 w-6" />
@@ -104,7 +108,7 @@ export default function Contato() {
                     <span className="text-sm text-ink-500">
                       {site.address.building}
                       <br />
-                      {site.address.reference} — {site.address.city}/{site.address.state}
+                      {site.address.reference}, {site.address.city}/{site.address.state}
                     </span>
                   </span>
                 </div>
@@ -152,18 +156,10 @@ export default function Contato() {
                     </span>
                     <h2 className="heading mt-5 text-2xl">Mensagem registrada!</h2>
                     <p className="mt-2 max-w-sm text-ink-500">
-                      Obrigado pelo contato. Retornaremos em breve. Se preferir falar agora, chame no
-                      WhatsApp.
+                      Obrigado pelo contato. Nossa equipe vai analisar as informações e retornar em
+                      breve.
                     </p>
-                    <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                      <a
-                        href={whatsappLink()}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-600"
-                      >
-                        <MessageCircle className="h-5 w-5" /> Falar no WhatsApp
-                      </a>
+                    <div className="mt-6">
                       <button
                         type="button"
                         onClick={() => setSent(false)}
@@ -233,7 +229,7 @@ export default function Contato() {
                         htmlFor="telefone"
                         className="mb-1.5 block text-sm font-medium text-ink-700"
                       >
-                        Telefone / WhatsApp
+                        Telefone
                       </label>
                       <input
                         id="telefone"
@@ -244,6 +240,30 @@ export default function Contato() {
                         className={inputClass}
                         placeholder="(11) 99999-9999"
                       />
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label
+                        htmlFor="faturamento"
+                        className="mb-1.5 block text-sm font-medium text-ink-700"
+                      >
+                        Faturamento mensal
+                      </label>
+                      <select
+                        id="faturamento"
+                        value={form.faturamento}
+                        onChange={(e) => update('faturamento', e.target.value)}
+                        className={`${inputClass} cursor-pointer`}
+                      >
+                        <option value="" disabled>
+                          Selecione uma faixa
+                        </option>
+                        {faixasFaturamento.map((faixa) => (
+                          <option key={faixa} value={faixa}>
+                            {faixa}
+                          </option>
+                        ))}
+                      </select>
                     </div>
 
                     <div className="sm:col-span-2">
