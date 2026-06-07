@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue,
 } from 'framer-motion'
-import { CheckCircle2, Send, ArrowDown, ChevronRight, Bot, X, CornerDownLeft } from 'lucide-react'
+import { Send, ArrowDown, ChevronRight, Bot, X, CornerDownLeft } from 'lucide-react'
 import logo from '@/assets/logo-nexxus.png'
 import { office } from '@/assets/escritorio'
 
@@ -771,33 +771,7 @@ export default function LP() {
           <motion.div initial={{opacity:0, scale:.94}} whileInView={{opacity:1, scale:1}} viewport={{once:true, amount:.2}} transition={{duration:.7, ease:EASE}}
             style={{ position:'relative', borderRadius:28, padding:3, background:`conic-gradient(from ${angle}deg, rgba(${BR},${BG},${BB},.85), rgba(${BR},${BG},${BB},.1), rgba(${BR},${BG},${BB},.85))` }}>
             <div style={{background:BG_PANEL, borderRadius:26, padding:'clamp(2rem,5vw,2.8rem)'}}>
-              <AnimatePresence mode="wait">
-                {sent ? (
-                  <motion.div key="success"
-                    initial={{opacity:0, y:24}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-24}} transition={{duration:.5, ease:EASE}}
-                    style={{textAlign:'center', padding:'3rem 1rem'}}>
-                    <motion.div initial={{scale:0}} animate={{scale:1}} transition={{type:'spring', damping:14, stiffness:200, delay:.15}}
-                      style={{display:'flex', justifyContent:'center', marginBottom:'1.5rem'}}>
-                      <div style={{width:72, height:72, borderRadius:'50%', background:`rgba(${BR},${BG},${BB},.15)`, border:`2px solid ${BLUE}`, display:'flex', alignItems:'center', justifyContent:'center'}}>
-                        <CheckCircle2 size={36} style={{color:BLUE}}/>
-                      </div>
-                    </motion.div>
-                    <motion.h3 initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.3}}
-                      style={{fontFamily:'Poppins,sans-serif', fontWeight:800, fontSize:'1.6rem', marginBottom:'.8rem'}}>
-                      Lead recebido!
-                    </motion.h3>
-                    <motion.p initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.4}}
-                      style={{color:'rgba(255,255,255,.6)', fontSize:'1rem', lineHeight:1.6, maxWidth:380, margin:'0 auto'}}>
-                      Nossa equipe vai analisar sua operação e retornar em até 12 horas com um diagnóstico personalizado.
-                    </motion.p>
-                    <motion.button initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.5}}
-                      onClick={() => setSent(false)}
-                      style={{marginTop:'2rem', background:'transparent', border:'1px solid rgba(255,255,255,.2)', color:'rgba(255,255,255,.7)', borderRadius:999, padding:'.6rem 1.6rem', fontSize:'.85rem', cursor:'pointer'}}>
-                      Enviar outra mensagem
-                    </motion.button>
-                  </motion.div>
-                ) : (
-                  <motion.form key="form" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0, y:16}} transition={{duration:.4}}
+              <motion.form initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.4}}
                     onSubmit={handleSubmit}
                     style={{display:'grid', gap:'1.1rem', gridTemplateColumns:'repeat(2,1fr)'}}>
 
@@ -861,8 +835,6 @@ export default function LP() {
                       </p>
                     </div>
                   </motion.form>
-                )}
-              </AnimatePresence>
             </div>
           </motion.div>
 
