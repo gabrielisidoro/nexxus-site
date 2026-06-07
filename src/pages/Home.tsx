@@ -12,6 +12,7 @@ import { Counter } from '@/components/Counter'
 import { BlogCard } from '@/components/BlogCard'
 import { MediaPlaceholder } from '@/components/MediaPlaceholder'
 import { CTASection } from '@/components/CTASection'
+import { HeroCanvas } from '@/components/HeroCanvas'
 import { iconMap } from '@/components/iconMap'
 import { office } from '@/assets/escritorio'
 import { services } from '@/data/services'
@@ -31,21 +32,11 @@ export default function Home() {
       />
 
       {/* ===================== HERO ===================== */}
-      <section className="relative overflow-hidden">
-        {/* Vídeo de fundo */}
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src="/hero-bg.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          aria-hidden="true"
-        />
-        {/* Overlay escuro para legibilidade do texto */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-ink-950/88 via-ink-950/75 to-ink-950/55" />
-        {/* Grade sutil */}
-        <div className="pointer-events-none absolute inset-0 bg-grid-ink opacity-[0.06] [background-size:30px_30px]" />
+      <section className="relative overflow-hidden bg-ink-950">
+        {/* Fundo interativo: rede de partículas com mouse */}
+        <HeroCanvas />
+        {/* Vinheta lateral esquerda para legibilidade do texto */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink-950/70 via-ink-950/30 to-transparent" />
 
         <div className="relative container-nx grid items-center gap-12 py-16 lg:grid-cols-2 lg:gap-8 lg:py-24">
           <Reveal>

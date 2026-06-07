@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { ScrollToTop } from './components/ScrollToTop'
@@ -9,8 +9,9 @@ import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Contato from './pages/Contato'
 import NotFound from './pages/NotFound'
+import LP from './pages/LP'
 
-export default function App() {
+function SiteLayout() {
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
@@ -29,4 +30,10 @@ export default function App() {
       <Footer />
     </div>
   )
+}
+
+export default function App() {
+  const { pathname } = useLocation()
+  if (pathname === '/lp') return <LP />
+  return <SiteLayout />
 }
