@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 
-# Atualize com o domínio final quando publicar:
-# Sitemap: https://www.nexxus.com.br/sitemap.xml
+# Bloquear rotas que não devem ser indexadas
+Disallow: /obrigado
+Disallow: /lp
+
+Sitemap: https://nexxusagencia.com.br/sitemap.xml

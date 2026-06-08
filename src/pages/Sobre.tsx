@@ -1,5 +1,6 @@
 import { Building2, Presentation, Video, MapPin, CheckCircle2 } from 'lucide-react'
 import { SEO } from '@/components/SEO'
+import { organizationSchema, breadcrumbSchema, pageKeywords } from '@/data/seo'
 import { Reveal } from '@/components/Reveal'
 import { SectionHeading } from '@/components/SectionHeading'
 import { MediaPlaceholder } from '@/components/MediaPlaceholder'
@@ -40,9 +41,17 @@ export default function Sobre() {
   return (
     <>
       <SEO
-        title="Sobre a Nexxus"
-        description="Conheça a Nexxus: método, dados e governança para estruturar e operar o comercial da sua empresa. Estrutura física em São Paulo, com salas de mentoria e estúdio."
+        title="Sobre a Nexxus | Empresa de Terceirização Comercial em São Paulo"
+        description="Conheça a Nexxus — empresa especializada em terceirização comercial e estruturação de vendas B2B, com sede no Edifício Capital Corporate Office em São Paulo. Método próprio, time dedicado e governança por dados."
+        keywords={pageKeywords.sobre}
         path="/sobre"
+        schema={[
+          organizationSchema,
+          breadcrumbSchema([
+            { name: 'Início', url: 'https://nexxusagencia.com.br' },
+            { name: 'Sobre', url: 'https://nexxusagencia.com.br/sobre' },
+          ]),
+        ]}
       />
 
       {/* Intro */}

@@ -1,5 +1,6 @@
 import { ArrowRight, Check, Users } from 'lucide-react'
 import { SEO } from '@/components/SEO'
+import { terceirizacaoServiceSchema, estruturacaoServiceSchema, mentoriaServiceSchema, breadcrumbSchema, pageKeywords } from '@/data/seo'
 import { Button } from '@/components/Button'
 import { Reveal } from '@/components/Reveal'
 import { SectionHeading } from '@/components/SectionHeading'
@@ -14,9 +15,19 @@ export default function Servicos() {
   return (
     <>
       <SEO
-        title="Serviços | Nexxus"
-        description="Terceirização comercial, mentoria e estruturação comercial interna. Conheça as três frentes da Nexxus e o Método dos 6 pilares."
+        title="Terceirização Comercial, Mentoria e Estruturação de Vendas | Nexxus"
+        description="Terceirize seu comercial com squad SDR, Hunter e Closer em 20 dias. Ou estruture o time interno com ICP, playbook e CRM. Conheça as 3 frentes da Nexxus para vendas B2B com previsibilidade."
+        keywords={pageKeywords.servicos}
         path="/servicos"
+        schema={[
+          terceirizacaoServiceSchema,
+          estruturacaoServiceSchema,
+          mentoriaServiceSchema,
+          breadcrumbSchema([
+            { name: 'Início', url: 'https://nexxusagencia.com.br' },
+            { name: 'Serviços', url: 'https://nexxusagencia.com.br/servicos' },
+          ]),
+        ]}
       />
 
       {/* Intro */}

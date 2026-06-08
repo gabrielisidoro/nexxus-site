@@ -4,11 +4,14 @@ import { Mail, MapPin, Send, Instagram, Linkedin } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 import { Reveal } from '@/components/Reveal'
 import { site, mailtoLink } from '@/data/site'
+import { submitLead, applyCountryCode } from '@/lib/submitLead'
+import { breadcrumbSchema, pageKeywords } from '@/data/seo'
 
 interface FormState {
   nome: string
   empresa: string
   email: string
+  whatsapp: string
   faturamento: string
   mensagem: string
 }
@@ -17,6 +20,7 @@ const initial: FormState = {
   nome: '',
   empresa: '',
   email: '',
+  whatsapp: '',
   faturamento: '',
   mensagem: '',
 }
@@ -40,18 +44,9 @@ export default function Contato() {
     setForm((f) => ({ ...f, [field]: value }))
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-
-    // ========================================================================
-    //  TODO: plugue aqui o envio real do formulário. Opções:
-    //   • Formspree:   fetch('https://formspree.io/f/SEU_ID', { method:'POST',
-    //                    headers:{'Content-Type':'application/json'},
-    //                    body: JSON.stringify(form) })
-    //   • EmailJS, ou um endpoint próprio (API / serverless).
-    //  Por enquanto, apenas registramos no console e mostramos a confirmação.
-    // ========================================================================
-    console.log('Formulário de contato enviado:', form)
+    await submitLead({ ...form, origem: 'site' })
     navigate('/obrigado')
   }
 
@@ -61,9 +56,14 @@ export default function Contato() {
   return (
     <>
       <SEO
-        title="Contato | Nexxus"
-        description="Fale com a Nexxus e solicite um diagnóstico comercial gratuito pelo formulário."
+        title="Diagnóstico Comercial Gratuito | Fale com a Nexxus"
+        description="Solicite seu diagnóstico comercial gratuito. Em até 12 horas nossa equipe analisa sua operação de vendas e apresenta um plano real — sem custo e sem compromisso."
+        keywords={pageKeywords.contato}
         path="/contato"
+        schema={[breadcrumbSchema([
+          { name: 'Início', url: 'https://nexxusagencia.com.br' },
+          { name: 'Contato', url: 'https://nexxusagencia.com.br/contato' },
+        ])]}
       />
 
       <section className="relative overflow-hidden">
@@ -187,6 +187,26 @@ export default function Contato() {
                         onChange={(e) => update('email', e.target.value)}
                         className={inputClass}
                         placeholder="voce@empresa.com"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-1">
+                      <label
+                        htmlFor="whatsapp"
+                        className="mb-1.5 block text-sm font-medium text-ink-700"
+                      >
+                        WhatsApp <span className="text-brand-500">*</span>
+                      </label>
+                      <input
+                        id="whatsapp"
+                        type="tel"
+                        required
+                        autoComplete="tel"
+                        value={form.whatsapp}
+                        onChange={(e) => update('whatsapp', e.target.value)}
+                        onBlur={(e) => update('whatsapp', applyCountryCode(e.target.value))}
+                        className={inputClass}
+                        placeholder="(11) 99999-9999"
                       />
                     </div>
 

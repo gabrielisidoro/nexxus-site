@@ -1,13 +1,16 @@
-import {
+﻿import {
   useEffect, useRef, useState, type FormEvent,
 } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue,
 } from 'framer-motion'
-import { Send, ArrowDown, ChevronRight, Bot, X, CornerDownLeft } from 'lucide-react'
+import { Send, ArrowDown, ChevronRight, Bot, X, CornerDownLeft, Rocket } from 'lucide-react'
 import logo from '@/assets/logo-nexxus.png'
 import { office } from '@/assets/escritorio'
+import { submitLead, applyCountryCode } from '@/lib/submitLead'
+import { pillars, inferno, ceu } from '@/data/metodo'
+import { iconMap } from '@/components/iconMap'
 
 // ─── Brand ───────────────────────────────────────────────────────────────────
 const BR = 23, BG = 94, BB = 255
@@ -283,56 +286,6 @@ function useCounter(target: number, on: boolean) {
   return n
 }
 
-// ─── Particle canvas ──────────────────────────────────────────────────────────
-function ParticleCanvas() {
-  const cvs = useRef<HTMLCanvasElement>(null)
-  const mouse = useRef({ x: -9999, y: -9999 })
-  useEffect(() => {
-    const canvas = cvs.current!; const ctx = canvas.getContext('2d')!
-    let cw = 0, ch = 0, raf = 0
-    interface D { x:number; y:number; vx:number; vy:number; r:number; ph:number }
-    let dots: D[] = []
-    const resize = () => {
-      const dpr = devicePixelRatio||1
-      cw = canvas.offsetWidth; ch = canvas.offsetHeight
-      canvas.width = cw*dpr; canvas.height = ch*dpr
-      ctx.setTransform(dpr,0,0,dpr,0,0)
-      const n = Math.max(45, Math.floor((cw*ch)/15000))
-      dots = Array.from({length:n},()=>({ x:Math.random()*cw, y:Math.random()*ch, vx:(Math.random()-.5)*.32, vy:(Math.random()-.5)*.32, r:Math.random()*1.3+.4, ph:Math.random()*Math.PI*2 }))
-    }
-    resize(); window.addEventListener('resize',resize)
-    let t = 0
-    const frame = () => {
-      t+=.006; ctx.clearRect(0,0,cw,ch)
-      const mx=mouse.current.x, my=mouse.current.y, hm=mx>-500
-      if(hm){const g=ctx.createRadialGradient(mx,my,0,mx,my,300); g.addColorStop(0,`rgba(${BR},${BG},${BB},.13)`); g.addColorStop(1,`rgba(${BR},${BG},${BB},0)`); ctx.fillStyle=g; ctx.fillRect(0,0,cw,ch)}
-      for(const d of dots){
-        d.x+=d.vx; d.y+=d.vy
-        if(d.x<=0||d.x>=cw){d.vx*=-1; d.x=Math.max(0,Math.min(cw,d.x))}
-        if(d.y<=0||d.y>=ch){d.vy*=-1; d.y=Math.max(0,Math.min(ch,d.y))}
-        if(hm){const dx=mx-d.x,dy=my-d.y,d2=dx*dx+dy*dy; if(d2<160*160){const f=(1-Math.sqrt(d2)/160)*.016; d.x+=dx*f; d.y+=dy*f}}
-      }
-      for(let i=0;i<dots.length;i++) for(let j=i+1;j<dots.length;j++){
-        const dx=dots[i].x-dots[j].x,dy=dots[i].y-dots[j].y,d2=dx*dx+dy*dy
-        if(d2>120*120)continue
-        const t01=1-Math.sqrt(d2)/120
-        ctx.beginPath(); ctx.moveTo(dots[i].x,dots[i].y); ctx.lineTo(dots[j].x,dots[j].y)
-        ctx.strokeStyle=`rgba(${BR},${BG},${BB},${t01*.18})`; ctx.lineWidth=t01*.9; ctx.stroke()
-      }
-      for(const d of dots){
-        ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2)
-        ctx.fillStyle=`rgba(${BR},${BG},${BB},${.22+Math.sin(t+d.ph)*.08})`; ctx.fill()
-      }
-      raf=requestAnimationFrame(frame)
-    }
-    frame()
-    const mv=(e:MouseEvent)=>{const r=canvas.getBoundingClientRect(); mouse.current={x:e.clientX-r.left,y:e.clientY-r.top}}
-    const lv=()=>{mouse.current={x:-9999,y:-9999}}
-    canvas.addEventListener('mousemove',mv); canvas.addEventListener('mouseleave',lv)
-    return()=>{cancelAnimationFrame(raf); window.removeEventListener('resize',resize); canvas.removeEventListener('mousemove',mv); canvas.removeEventListener('mouseleave',lv)}
-  },[])
-  return <canvas ref={cvs} style={{position:'absolute',inset:0,width:'100%',height:'100%',display:'block'}}/>
-}
 
 // ─── Spring cursor orb ────────────────────────────────────────────────────────
 function CursorOrb() {
@@ -382,6 +335,8 @@ export default function LP() {
   const [angle, setAngle] = useState(0)
   const [statOn, setStatOn] = useState(false)
   const [activePhoto, setActivePhoto] = useState(0)
+  const [infernoMode, setInfernoMode] = useState<'inferno'|'ceu'>('ceu')
+  const [activeMandalaPillar, setActiveMandalaPillar] = useState(0)
 
   const { scrollYProgress } = useScroll()
   const progressScaleX = useSpring(scrollYProgress, { damping: 30, stiffness: 200 })
@@ -389,8 +344,8 @@ export default function LP() {
   const heroGlowY = useTransform(scrollY, [0, 600], [0, -80])
   const svcGlowY  = useTransform(scrollY, [400, 1200], [0, -40])
 
-  const line1 = useScramble('PARE DE VENDER', 300)
-  const line2 = useScramble('NO IMPROVISO.', 900)
+  const line1 = useScramble('CHEGA DE CONTRATAR', 300)
+  const line2 = useScramble('VENDEDOR E TORCER.', 900)
 
   useEffect(() => {
     let raf = 0
@@ -399,9 +354,9 @@ export default function LP() {
     return () => cancelAnimationFrame(raf)
   }, [])
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    console.log('LP lead:', form)
+    await submitLead({ ...form, origem: 'lp' })
     navigate('/obrigado')
   }
 
@@ -425,13 +380,25 @@ export default function LP() {
 
       {/* ════ HERO ════ */}
       <section style={{position:'relative', minHeight:'100vh', display:'flex', flexDirection:'column', background:BG_HERO, overflow:'hidden'}}>
-        <ParticleCanvas />
-        <motion.div style={{ y:heroGlowY, position:'absolute', inset:0, background:`radial-gradient(ellipse 70% 60% at 60% 50%, rgba(${BR},${BG},${BB},.13), transparent 70%)`, pointerEvents:'none' }}/>
-        <motion.div animate={{ opacity:[.4,.7,.4], scale:[1,1.1,1] }} transition={{ duration:6, repeat:Infinity, ease:'easeInOut' }}
-          style={{ position:'absolute', top:'30%', left:'55%', width:'40vw', height:'40vw', borderRadius:'50%', background:`radial-gradient(circle, rgba(${BR},${BG},${BB},.08), transparent 65%)`, pointerEvents:'none', transform:'translate(-50%,-50%)' }}/>
+        {/* Vídeo de fundo */}
+        <video autoPlay muted loop playsInline src={office.heroBg}
+          style={{position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', display:'block'}}/>
+        {/* Overlay escuro para legibilidade do texto */}
+        <div style={{position:'absolute', inset:0, background:'rgba(6,10,22,0.72)', pointerEvents:'none'}}/>
+        <motion.div style={{ y:heroGlowY, position:'absolute', inset:0, background:`radial-gradient(ellipse 70% 60% at 50% 55%, rgba(${BR},${BG},${BB},.18), transparent 70%)`, pointerEvents:'none' }}/>
+        <motion.div animate={{ opacity:[.4,.75,.4], scale:[1,1.1,1] }} transition={{ duration:6, repeat:Infinity, ease:'easeInOut' }}
+          style={{ position:'absolute', top:'30%', left:'50%', width:'50vw', height:'50vw', borderRadius:'50%', background:`radial-gradient(circle, rgba(${BR},${BG},${BB},.1), transparent 65%)`, pointerEvents:'none', transform:'translate(-50%,-50%)' }}/>
+
+        {/* Barra qualificadora — topo */}
+        <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ duration:.8 }}
+          style={{ position:'relative', zIndex:10, borderBottom:`1px solid rgba(${BR},${BG},${BB},.1)`, padding:'.45rem 1rem', textAlign:'center', background:'rgba(6,10,22,.45)', backdropFilter:'blur(8px)' }}>
+          <span style={{ fontSize:'.66rem', fontWeight:700, letterSpacing:'.15em', color:'rgba(255,255,255,.38)', textTransform:'uppercase' }}>
+            EXCLUSIVO PARA EMPRESAS B2B · DIAGNÓSTICO{' '}<span style={{ color:BLUE }}>100% GRATUITO</span>{' '}SEM COMPROMISSO
+          </span>
+        </motion.div>
 
         <motion.nav initial={{ opacity:0, y:-20 }} animate={{ opacity:1, y:0 }} transition={{ duration:.6, ease:EASE }}
-          style={{position:'relative', zIndex:10, padding:'1.5rem 2rem', display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+          style={{position:'relative', zIndex:10, padding:'1.2rem 2rem', display:'flex', alignItems:'center', justifyContent:'space-between'}}>
           <img src={logo} alt="Nexxus" style={{height:30, width:'auto', filter:'brightness(0) invert(1)'}}/>
           <motion.button onClick={scrollToForm}
             whileHover={{ scale:1.05, boxShadow:`0 0 30px rgba(${BR},${BG},${BB},.6)` }} whileTap={{ scale:.97 }}
@@ -440,52 +407,97 @@ export default function LP() {
           </motion.button>
         </motion.nav>
 
-        <div style={{flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:'2rem 1.5rem', position:'relative', zIndex:10}}>
-          <motion.div initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ delay:.2, duration:.6, ease:EASE }}
-            style={{ display:'inline-flex', alignItems:'center', gap:8, borderRadius:999, border:`1px solid rgba(${BR},${BG},${BB},.35)`, padding:'.35rem 1rem', fontSize:'.7rem', fontWeight:700, letterSpacing:'.16em', color:BLUE, marginBottom:'2rem', background:`rgba(${BR},${BG},${BB},.08)` }}>
-            ESTRUTURAÇÃO COMERCIAL COMPLETA
-          </motion.div>
+        {/* ── Conteúdo central do Hero ── */}
+        <div style={{flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:'2rem 1.5rem 1rem', position:'relative', zIndex:10}}>
 
-          <motion.h1 initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.35, duration:.5 }}
-            style={{ fontFamily:'Poppins,sans-serif', fontWeight:900, lineHeight:1.05, letterSpacing:'-.02em', fontSize:'clamp(2.4rem,7vw,5.5rem)', marginBottom:'.2em' }}>
-            <span style={{display:'block', color:'#fff'}}>{line1}</span>
-            <span style={{ display:'block', background:`linear-gradient(135deg,${BLUE},rgba(${BR},${BG},${BB},.65))`, WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>{line2}</span>
-            <span style={{display:'block', color:'#fff'}}>ESCALE COM MÉTODO.</span>
-          </motion.h1>
-
-          <motion.p initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:.7, duration:.7, ease:EASE }}
-            style={{ maxWidth:560, fontSize:'clamp(1rem,2.5vw,1.2rem)', color:'rgba(255,255,255,.62)', lineHeight:1.65, marginTop:'1.8rem', marginBottom:'2.8rem' }}>
-            A Nexxus monta e opera o comercial da sua empresa com squad SDR, Hunter e Closer,
-            com método, dados e governança. <strong style={{color:'rgba(255,255,255,.9)'}}>Operação no ar em 20 dias.</strong>
+          {/* Qualificador de público-alvo */}
+          <motion.p initial={{ opacity:0, y:-8 }} animate={{ opacity:1, y:0 }} transition={{ delay:.12, duration:.5, ease:EASE }}
+            style={{ fontSize:'.68rem', fontWeight:700, letterSpacing:'.16em', color:'rgba(255,255,255,.62)', marginBottom:'1.4rem', textTransform:'uppercase', textShadow:'0 1px 8px rgba(0,0,0,.8)' }}>
+            Para empresas B2B com faturamento acima de R$ 100 mil/mês
           </motion.p>
 
+          {/* Badge pulsante */}
+          <motion.div initial={{ opacity:0, scale:.9 }} animate={{ opacity:1, scale:1 }} transition={{ delay:.2, duration:.5, ease:EASE }}
+            style={{ display:'inline-flex', alignItems:'center', gap:8, borderRadius:999, border:`1px solid rgba(${BR},${BG},${BB},.35)`, padding:'.38rem 1.1rem', fontSize:'.7rem', fontWeight:700, letterSpacing:'.14em', color:BLUE, marginBottom:'1.8rem', background:`rgba(${BR},${BG},${BB},.08)`, backdropFilter:'blur(8px)' }}>
+            <motion.span animate={{ opacity:[1,0.2,1] }} transition={{ duration:1.4, repeat:Infinity }} style={{ width:7, height:7, borderRadius:'50%', background:BLUE, display:'inline-block', boxShadow:`0 0 8px ${BLUE}` }}/>
+            DIAGNÓSTICO GRATUITO DISPONÍVEL
+          </motion.div>
+
+          {/* Headline 3 linhas */}
+          <motion.h1 initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }} transition={{ delay:.3, duration:.7, ease:EASE }}
+            style={{ fontFamily:'Poppins,sans-serif', fontWeight:900, lineHeight:1.05, letterSpacing:'-.025em', fontSize:'clamp(2.2rem,6.5vw,5rem)', marginBottom:0 }}>
+            <span style={{ display:'block', color:'#fff' }}>{line1}</span>
+            <span style={{ display:'block', background:`linear-gradient(135deg,${BLUE} 30%,rgba(${BR},${BG},${BB},.55))`, WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>{line2}</span>
+            <span style={{ display:'block', color:'rgba(255,255,255,.92)', fontSize:'.55em', fontWeight:600, letterSpacing:'-.01em', marginTop:'.45em', lineHeight:1.3 }}>
+              Monte um comercial que funciona enquanto você lidera.
+            </span>
+          </motion.h1>
+
+          {/* Subtexto */}
+          <motion.p initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:.62, duration:.7, ease:EASE }}
+            style={{ maxWidth:560, fontSize:'clamp(.95rem,2.2vw,1.1rem)', color:'rgba(255,255,255,.78)', lineHeight:1.75, marginTop:'1.8rem', marginBottom:'2rem', textShadow:'0 2px 14px rgba(0,0,0,.9)' }}>
+            Cansado de contratar vendedor CLT ou PJ que some nos primeiros meses? A Nexxus monta e opera sua equipe completa: SDR, Hunter e Closer, com método, dados e governança.{' '}
+            <strong style={{ color:'rgba(255,255,255,.85)' }}>Operação no ar em 20 dias.</strong>
+          </motion.p>
+
+          {/* Prova social — logos de clientes */}
+          <motion.div initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ delay:.78, duration:.6, ease:EASE }}
+            style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, marginBottom:'2.2rem' }}>
+            {/* Logo tiles */}
+            <div style={{ display:'flex', alignItems:'center', gap:10, flexWrap:'wrap', justifyContent:'center' }}>
+              {[
+                { src:'/logos/v4.webp', alt:'V4 Company' },
+                { src:'/logos/berry.png', alt:'Berry Consultoria' },
+                { src:'/logos/loovi.png', alt:'LOOVI' },
+                { src:'/logos/vitta.jpg', alt:'Vitta Residencial' },
+              ].map(({ src, alt }) => (
+                <div key={alt} style={{ height:40, width:72, borderRadius:10, background:'rgba(255,255,255,.92)', display:'flex', alignItems:'center', justifyContent:'center', padding:'6px 10px', overflow:'hidden', backdropFilter:'blur(4px)' }}>
+                  <img src={src} alt={alt} style={{ maxHeight:'100%', maxWidth:'100%', objectFit:'contain', display:'block' }}/>
+                </div>
+              ))}
+            </div>
+            {/* Contador */}
+            <div style={{ display:'flex', alignItems:'center', gap:7 }}>
+              <motion.span animate={{ opacity:[1,.3,1] }} transition={{ duration:1.8, repeat:Infinity }}
+                style={{ width:7, height:7, borderRadius:'50%', background:'#22c55e', display:'inline-block', boxShadow:'0 0 8px rgba(34,197,94,.8)', flexShrink:0 }}/>
+              <span style={{ fontSize:'.82rem', fontWeight:700, color:'rgba(255,255,255,.92)', textShadow:'0 1px 8px rgba(0,0,0,.7)' }}>
+                mais de 600 empresas confiaram na Nexxus
+              </span>
+            </div>
+          </motion.div>
+
+          {/* CTA principal + link secundário */}
           <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:.9, duration:.6, ease:EASE }}
-            style={{display:'flex', gap:16, flexWrap:'wrap', justifyContent:'center'}}>
+            style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:16 }}>
             <motion.button onClick={scrollToForm}
-              whileHover={{ scale:1.04, boxShadow:`0 0 40px rgba(${BR},${BG},${BB},.65), 0 8px 32px rgba(0,0,0,.4)` }} whileTap={{ scale:.97 }}
-              animate={{ boxShadow:[`0 0 20px rgba(${BR},${BG},${BB},.3)`,`0 0 36px rgba(${BR},${BG},${BB},.55)`,`0 0 20px rgba(${BR},${BG},${BB},.3)`] }}
+              whileHover={{ scale:1.04, boxShadow:`0 0 50px rgba(${BR},${BG},${BB},.7), 0 12px 40px rgba(0,0,0,.5)` }}
+              whileTap={{ scale:.97 }}
+              animate={{ boxShadow:[`0 0 20px rgba(${BR},${BG},${BB},.35)`, `0 0 40px rgba(${BR},${BG},${BB},.6)`, `0 0 20px rgba(${BR},${BG},${BB},.35)`] }}
               transition={{ boxShadow:{ duration:2.5, repeat:Infinity, ease:'easeInOut' } }}
-              style={{ display:'flex', alignItems:'center', gap:8, background:BLUE, color:'#fff', border:'none', borderRadius:999, padding:'1rem 2.2rem', fontSize:'1rem', fontWeight:700, cursor:'pointer' }}>
-              Solicitar diagnóstico gratuito <ChevronRight size={18}/>
+              style={{ display:'flex', alignItems:'center', gap:10, background:BLUE, color:'#fff', border:'none', borderRadius:999, padding:'1.1rem 2.8rem', fontSize:'1.05rem', fontWeight:800, cursor:'pointer', letterSpacing:'.025em' }}>
+              → QUERO MEU DIAGNÓSTICO GRATUITO
             </motion.button>
             <motion.button onClick={scrollToForm}
-              whileHover={{ scale:1.03, background:'rgba(255,255,255,.1)' }} whileTap={{ scale:.97 }}
-              style={{ display:'flex', alignItems:'center', gap:8, background:'rgba(255,255,255,.06)', color:'#fff', border:'1px solid rgba(255,255,255,.15)', borderRadius:999, padding:'1rem 2rem', fontSize:'1rem', fontWeight:600, cursor:'pointer', backdropFilter:'blur(8px)' }}>
-              Ver como funciona
+              whileHover={{ color:'rgba(255,255,255,.7)' }}
+              whileTap={{ scale:.97 }}
+              style={{ display:'flex', alignItems:'center', gap:6, background:'none', border:'none', color:'rgba(255,255,255,.52)', cursor:'pointer', fontSize:'.83rem', fontWeight:500, fontFamily:'inherit' }}>
+              Ver como funciona <ArrowDown size={13}/>
             </motion.button>
           </motion.div>
 
+          {/* Trust badges */}
           <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:1.1, duration:.8 }}
-            style={{display:'flex', gap:24, marginTop:'3rem', flexWrap:'wrap', justifyContent:'center'}}>
-            {['✓ Operação em 20 dias','✓ Diagnóstico gratuito','✓ Sem compromisso'].map(t=>(
-              <span key={t} style={{fontSize:'.78rem', color:'rgba(255,255,255,.42)', letterSpacing:'.04em'}}>{t}</span>
+            style={{ display:'flex', gap:24, marginTop:'2.2rem', flexWrap:'wrap', justifyContent:'center' }}>
+            {['✓ Sem fidelidade','✓ Diagnóstico gratuito','✓ Operação em 20 dias'].map(t=>(
+              <span key={t} style={{ fontSize:'.75rem', color:'rgba(255,255,255,.52)', letterSpacing:'.05em' }}>{t}</span>
             ))}
           </motion.div>
         </div>
 
+        {/* Seta de scroll */}
         <motion.div animate={{ y:[0, 9, 0] }} transition={{ duration:2.2, repeat:Infinity, ease:'easeInOut' }}
-          style={{position:'relative', zIndex:10, display:'flex', justifyContent:'center', paddingBottom:'2.5rem'}}>
-          <ArrowDown size={22} style={{color:`rgba(${BR},${BG},${BB},.6)`}}/>
+          style={{ position:'relative', zIndex:10, display:'flex', justifyContent:'center', paddingBottom:'2.5rem' }}>
+          <ArrowDown size={22} style={{ color:`rgba(${BR},${BG},${BB},.6)` }}/>
         </motion.div>
       </section>
 
@@ -722,6 +734,270 @@ export default function LP() {
         </div>
       </section>
 
+      {/* ════ ONDE ESTÁ SUA OPERAÇÃO HOJE ════ */}
+      <section style={{background:BG_DARK, padding:'clamp(4rem,8vw,6rem) 1.5rem', position:'relative', overflow:'hidden'}}>
+        <div style={{position:'absolute', inset:0, backgroundImage:`linear-gradient(rgba(${BR},${BG},${BB},.04) 1px,transparent 1px),linear-gradient(90deg,rgba(${BR},${BG},${BB},.04) 1px,transparent 1px)`, backgroundSize:'60px 60px', pointerEvents:'none'}}/>
+        <div style={{maxWidth:760, margin:'0 auto', position:'relative'}}>
+          <motion.div initial="hidden" whileInView="show" viewport={{once:true, amount:.25}} variants={stagger(.1)}>
+            <motion.div variants={fadeUp} style={{textAlign:'center', marginBottom:'2.5rem'}}>
+              <div style={{display:'inline-block', fontSize:'.7rem', fontWeight:700, letterSpacing:'.16em', color:BLUE, border:`1px solid rgba(${BR},${BG},${BB},.35)`, borderRadius:999, padding:'.35rem 1rem', marginBottom:'1.2rem', background:`rgba(${BR},${BG},${BB},.08)`}}>
+                O ANTES E O DEPOIS
+              </div>
+              <h2 style={{fontFamily:'Poppins,sans-serif', fontWeight:900, fontSize:'clamp(1.9rem,4vw,2.8rem)', lineHeight:1.08, marginBottom:'.8rem'}}>
+                Onde está a sua operação <span style={{color:BLUE}}>hoje?</span>
+              </h2>
+              <p style={{color:'rgba(255,255,255,.5)', fontSize:'1rem', lineHeight:1.6, maxWidth:460, margin:'0 auto'}}>
+                A diferença entre crescer no susto e crescer com método. Compare os dois cenários.
+              </p>
+            </motion.div>
+
+            {/* Toggle */}
+            <motion.div variants={fadeUp} style={{display:'flex', justifyContent:'center', marginBottom:'2rem'}}>
+              <div style={{display:'inline-flex', background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.1)', borderRadius:999, padding:5}}>
+                <button type="button" onClick={()=>setInfernoMode('inferno')}
+                  style={{display:'flex', alignItems:'center', gap:7, padding:'.7rem 1.5rem', borderRadius:999, border:'none', cursor:'pointer', fontSize:'.9rem', fontWeight:700, fontFamily:'inherit', transition:'all .25s',
+                    background: infernoMode==='inferno' ? '#ef4444' : 'transparent',
+                    color: infernoMode==='inferno' ? '#fff' : 'rgba(255,255,255,.5)'}}>
+                  🔥 No improviso
+                </button>
+                <button type="button" onClick={()=>setInfernoMode('ceu')}
+                  style={{display:'flex', alignItems:'center', gap:7, padding:'.7rem 1.5rem', borderRadius:999, border:'none', cursor:'pointer', fontSize:'.9rem', fontWeight:700, fontFamily:'inherit', transition:'all .25s',
+                    background: infernoMode==='ceu' ? BLUE : 'transparent',
+                    color: infernoMode==='ceu' ? '#fff' : 'rgba(255,255,255,.5)'}}>
+                  ✨ Com a Nexxus
+                </button>
+              </div>
+            </motion.div>
+
+            <AnimatePresence mode="wait">
+              <motion.div key={infernoMode}
+                initial={{opacity:0,y:12}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-12}}
+                transition={{duration:.3, ease:'easeOut'}}
+                style={{borderRadius:24, padding:'clamp(1.5rem,4vw,2.5rem)',
+                  border: infernoMode==='ceu' ? `1px solid rgba(${BR},${BG},${BB},.25)` : '1px solid rgba(239,68,68,.25)',
+                  background: infernoMode==='ceu' ? `rgba(${BR},${BG},${BB},.07)` : 'rgba(239,68,68,.06)',
+                }}>
+                <div style={{display:'flex', alignItems:'center', gap:12, marginBottom:'1.5rem'}}>
+                  <div style={{width:44, height:44, borderRadius:12, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.25rem',
+                    background: infernoMode==='ceu' ? BLUE : '#ef4444'}}>
+                    {infernoMode==='ceu' ? '✨' : '🔥'}
+                  </div>
+                  <div>
+                    <p style={{fontSize:'.68rem', fontWeight:700, letterSpacing:'.14em', margin:0,
+                      color: infernoMode==='ceu' ? BLUE : '#f87171'}}>
+                      {infernoMode==='ceu' ? 'OPERAÇÃO ESTRUTURADA' : 'COMERCIAL NO IMPROVISO'}
+                    </p>
+                    <p style={{fontFamily:'Poppins,sans-serif', fontWeight:700, fontSize:'1rem', color:'#fff', margin:'3px 0 0', lineHeight:1.3}}>
+                      {infernoMode==='ceu' ? 'Vender com método, dados e escala' : 'Vender sem previsibilidade nem controle'}
+                    </p>
+                  </div>
+                </div>
+                <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))', gap:'.75rem'}}>
+                  {(infernoMode==='ceu' ? ceu : inferno).map((text,i)=>(
+                    <div key={i} style={{display:'flex', alignItems:'flex-start', gap:10}}>
+                      <span style={{marginTop:3, width:19, height:19, borderRadius:'50%', flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'.65rem', fontWeight:900, color:'#fff',
+                        background: infernoMode==='ceu' ? BLUE : '#ef4444'}}>
+                        {infernoMode==='ceu' ? '✓' : '✕'}
+                      </span>
+                      <span style={{fontSize:'.875rem', color:'rgba(255,255,255,.68)', lineHeight:1.55}}>{text}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ════ A MANDALA DOS 6 PILARES ════ */}
+      <section style={{background:'#f4f7ff', color:'#0f172a', padding:'clamp(4rem,8vw,6rem) 1.5rem'}}>
+        <div style={{maxWidth:1020, margin:'0 auto'}}>
+          <motion.div initial="hidden" whileInView="show" viewport={{once:true, amount:.25}} variants={fadeUp}
+            style={{textAlign:'center', marginBottom:'3rem'}}>
+            <div style={{display:'inline-block', fontSize:'.7rem', fontWeight:700, letterSpacing:'.16em', color:BLUE, border:`1px solid rgba(${BR},${BG},${BB},.35)`, borderRadius:999, padding:'.35rem 1rem', marginBottom:'1.2rem', background:`rgba(${BR},${BG},${BB},.08)`}}>
+              METODOLOGIA
+            </div>
+            <h2 style={{fontFamily:'Poppins,sans-serif', fontWeight:900, fontSize:'clamp(1.9rem,4vw,2.8rem)', lineHeight:1.08}}>
+              A Mandala dos <span style={{color:BLUE}}>6 pilares</span>
+            </h2>
+            <p style={{color:'#64748b', fontSize:'1rem', lineHeight:1.6, maxWidth:500, margin:'.8rem auto 0'}}>
+              O ecossistema interligado que sustenta operações comerciais de alto desempenho. Passe o mouse ou toque em cada pilar.
+            </p>
+          </motion.div>
+
+          <div style={{display:'flex', gap:'3rem', alignItems:'center', flexWrap:'wrap', justifyContent:'center'}}>
+            {/* Circular mandala */}
+            <motion.div initial={{opacity:0,scale:.88}} whileInView={{opacity:1,scale:1}} viewport={{once:true, amount:.3}} transition={{duration:.7, ease:EASE}}
+              style={{position:'relative', width:360, height:360, flexShrink:0}}>
+              <div style={{position:'absolute', inset:0, borderRadius:'50%', border:`1px dashed rgba(${BR},${BG},${BB},.22)`}}/>
+              <div style={{position:'absolute', inset:'15%', borderRadius:'50%', border:`1px solid rgba(${BR},${BG},${BB},.1)`}}/>
+              {/* Hub */}
+              {(()=>{
+                const cur = pillars[activeMandalaPillar]
+                const HubIcon = iconMap[cur.icon]
+                return (
+                  <div style={{position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)', width:'46%', aspectRatio:'1/1', borderRadius:'50%', background:`linear-gradient(135deg,${BLUE},rgba(${BR},${BG},${BB},.7))`, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:'1rem', boxShadow:`0 0 40px rgba(${BR},${BG},${BB},.35)`}}>
+                    {HubIcon && <HubIcon style={{color:'#fff', width:28, height:28}}/>}
+                    <span style={{display:'block', fontSize:'.52rem', fontWeight:700, letterSpacing:'.18em', color:'rgba(255,255,255,.65)', marginTop:5}}>PILAR {cur.n}</span>
+                    <span style={{display:'block', fontFamily:'Poppins,sans-serif', fontWeight:800, fontSize:'.8rem', color:'#fff', lineHeight:1.2, marginTop:2}}>{cur.title}</span>
+                  </div>
+                )
+              })()}
+              {/* Nodes */}
+              {pillars.map((p,i)=>{
+                const ang = ((-90+i*60)*Math.PI)/180
+                const r = 41
+                const x = 50 + r*Math.cos(ang)
+                const y = 50 + r*Math.sin(ang)
+                const NodeIcon = iconMap[p.icon]
+                const isActive = i===activeMandalaPillar
+                return (
+                  <motion.button key={p.n} type="button"
+                    onMouseEnter={()=>setActiveMandalaPillar(i)}
+                    onClick={()=>setActiveMandalaPillar(i)}
+                    animate={{scale: isActive ? 1.12 : 1}}
+                    transition={{duration:.25}}
+                    style={{position:'absolute', left:`calc(${x}% - 30px)`, top:`calc(${y}% - 30px)`, width:60, height:60, borderRadius:14, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', background:'#fff',
+                      border: isActive ? `2px solid ${BLUE}` : '2px solid rgba(0,0,0,.08)',
+                      color: isActive ? BLUE : '#94a3b8',
+                      boxShadow: isActive ? `0 0 24px rgba(${BR},${BG},${BB},.35)` : '0 2px 12px rgba(0,0,0,.07)',
+                    }}>
+                    {NodeIcon && <NodeIcon style={{width:22, height:22}}/>}
+                  </motion.button>
+                )
+              })}
+            </motion.div>
+
+            {/* Interactive list */}
+            <motion.div initial="hidden" whileInView="show" viewport={{once:true, amount:.2}} variants={stagger(.08)}
+              style={{flex:'1 1 300px', display:'flex', flexDirection:'column', gap:'.7rem', minWidth:280}}>
+              {pillars.map((p,i)=>{
+                const ListIcon = iconMap[p.icon]
+                const isActive = i===activeMandalaPillar
+                return (
+                  <motion.button key={p.n} type="button" variants={fadeUp}
+                    onClick={()=>setActiveMandalaPillar(i)}
+                    onMouseEnter={()=>setActiveMandalaPillar(i)}
+                    style={{display:'flex', alignItems:'flex-start', gap:14, borderRadius:18, padding:'1rem 1.2rem', cursor:'pointer', textAlign:'left', fontFamily:'inherit', transition:'all .25s',
+                      background: isActive ? `rgba(${BR},${BG},${BB},.06)` : '#fff',
+                      border: isActive ? `1.5px solid rgba(${BR},${BG},${BB},.3)` : '1.5px solid rgba(0,0,0,.07)',
+                      boxShadow: isActive ? '0 4px 20px rgba(0,0,0,.08)' : '0 2px 8px rgba(0,0,0,.04)',
+                    }}>
+                    <span style={{width:40, height:40, borderRadius:10, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', transition:'all .25s',
+                      background: isActive ? BLUE : '#f1f5f9',
+                      color: isActive ? '#fff' : '#64748b',
+                    }}>
+                      {ListIcon && <ListIcon style={{width:18, height:18}}/>}
+                    </span>
+                    <span style={{display:'flex', flexDirection:'column'}}>
+                      <span style={{display:'flex', alignItems:'center', gap:8}}>
+                        <span style={{fontSize:'.7rem', fontWeight:800, color:BLUE}}>{p.n}</span>
+                        <span style={{fontFamily:'Poppins,sans-serif', fontWeight:700, fontSize:'.92rem', color:'#0f172a'}}>{p.title}</span>
+                      </span>
+                      <span style={{fontSize:'.82rem', color:'#64748b', lineHeight:1.5, marginTop:2}}>{p.description}</span>
+                    </span>
+                  </motion.button>
+                )
+              })}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════ TERCEIRIZAÇÃO COMERCIAL ════ */}
+      <section style={{background:BG_HERO, color:'#fff', padding:'clamp(4rem,8vw,6rem) 1.5rem', position:'relative', overflow:'hidden'}}>
+        <motion.div animate={{opacity:[.4,.7,.4], scale:[1,1.1,1]}} transition={{duration:7, repeat:Infinity, ease:'easeInOut'}}
+          style={{position:'absolute', top:'-20%', right:'-10%', width:'50%', paddingTop:'50%', borderRadius:'50%', background:`radial-gradient(circle,rgba(${BR},${BG},${BB},.07),transparent 70%)`, pointerEvents:'none'}}/>
+        <div style={{maxWidth:1100, margin:'0 auto', position:'relative'}}>
+          <motion.div initial="hidden" whileInView="show" viewport={{once:true, amount:.15}} variants={stagger(.1)}
+            style={{display:'flex', gap:'clamp(2rem,5vw,4rem)', flexWrap:'wrap', alignItems:'flex-start'}}>
+
+            {/* Coluna esquerda */}
+            <motion.div variants={slideLeft} style={{flex:'1 1 280px', minWidth:260, maxWidth:420}}>
+              <div style={{width:52, height:52, borderRadius:14, background:BLUE, display:'flex', alignItems:'center', justifyContent:'center', boxShadow:`0 0 24px rgba(${BR},${BG},${BB},.4)`, marginBottom:'1.2rem'}}>
+                <Rocket style={{width:26, height:26, color:'#fff'}}/>
+              </div>
+              <div style={{fontSize:'.68rem', fontWeight:700, letterSpacing:'.14em', color:BLUE, marginBottom:'.6rem'}}>
+                SERVIÇO MAIS PROCURADO
+              </div>
+              <h2 style={{fontFamily:'Poppins,sans-serif', fontWeight:900, fontSize:'clamp(1.7rem,3.5vw,2.4rem)', lineHeight:1.1, marginBottom:'.7rem'}}>
+                Terceirização<br/>Comercial
+              </h2>
+              <p style={{color:BLUE, fontWeight:700, fontSize:'1rem', lineHeight:1.4, marginBottom:'1rem'}}>
+                A operação comercial completa, do seu lado, sem você montar nada.
+              </p>
+              <p style={{color:'rgba(255,255,255,.55)', fontSize:'.9rem', lineHeight:1.65, marginBottom:'1.6rem'}}>
+                Assumimos a operação de vendas da sua empresa com uma squad de especialistas dedicada, método validado, ferramentas configuradas e gestão data-driven. Você foca no seu negócio; nós entregamos previsibilidade e escala.
+              </p>
+
+              {/* Para quem é */}
+              <div style={{background:'rgba(255,255,255,.04)', border:'1px solid rgba(255,255,255,.1)', borderRadius:16, padding:'1.2rem 1.4rem', marginBottom:'1.6rem'}}>
+                <p style={{fontSize:'.78rem', fontWeight:700, color:'rgba(255,255,255,.45)', letterSpacing:'.08em', marginBottom:'.9rem', margin:'0 0 .9rem'}}>
+                  👥 PARA QUEM É
+                </p>
+                <ul style={{listStyle:'none', margin:0, padding:0, display:'flex', flexDirection:'column', gap:'.65rem'}}>
+                  {['Empresas que querem vender mais sem montar time do zero','Donos presos no operacional, apagando incêndio e cobrando follow-up','Negócios que precisam de previsibilidade e escalar rápido com método','Quem cansou de depender de indicação, sorte ou esforço individual'].map((item,i)=>(
+                    <li key={i} style={{display:'flex', alignItems:'flex-start', gap:10}}>
+                      <span style={{width:18, height:18, borderRadius:'50%', background:BLUE, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:2, fontSize:'.6rem', fontWeight:900, color:'#fff'}}>✓</span>
+                      <span style={{fontSize:'.85rem', color:'rgba(255,255,255,.65)', lineHeight:1.5}}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <motion.button onClick={scrollToForm}
+                whileHover={{scale:1.04, boxShadow:`0 0 32px rgba(${BR},${BG},${BB},.6)`}} whileTap={{scale:.97}}
+                style={{display:'inline-flex', alignItems:'center', gap:8, background:BLUE, color:'#fff', border:'none', borderRadius:999, padding:'.95rem 2rem', fontSize:'1rem', fontWeight:700, cursor:'pointer', fontFamily:'inherit', boxShadow:`0 0 24px rgba(${BR},${BG},${BB},.35)`}}>
+                Quero esse serviço <ChevronRight size={18}/>
+              </motion.button>
+            </motion.div>
+
+            {/* Coluna direita */}
+            <motion.div variants={fadeUp} style={{flex:'1 1 320px', minWidth:280}}>
+              <p style={{fontSize:'.72rem', fontWeight:700, letterSpacing:'.14em', color:'rgba(255,255,255,.4)', marginBottom:'1rem'}}>O QUE ENTREGAMOS</p>
+              <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(210px,1fr))', gap:'.8rem', marginBottom:'2rem'}}>
+                {[
+                  {title:'Squad multidisciplinar dedicada', body:'SDR, Hunter, Closer e Social Seller atuando cada um no papel certo, com Head Comercial e Sales Ops na gestão.'},
+                  {title:'CRM e cadência configurados', body:'Funil estruturado, automações e a cadência D1-D12 rodando. 80% das vendas acontecem entre o 5º e o 12º contato.'},
+                  {title:'Playbook comercial sob medida', body:'Processo, qualificação, matriz de objeções e metas documentados para padronizar o atendimento de alta conversão.'},
+                  {title:'Gestão por dados e acompanhamento', body:'KPIs, dashboards e reuniões de cadência, com reunião operacional semanal e relatório estratégico.'},
+                ].map((d,i)=>(
+                  <motion.div key={i} whileHover={{borderColor:`rgba(${BR},${BG},${BB},.35)`, y:-2}}
+                    style={{background:'rgba(255,255,255,.04)', border:'1px solid rgba(255,255,255,.08)', borderRadius:16, padding:'1.1rem 1.2rem', transition:'border-color .25s'}}>
+                    <p style={{fontFamily:'Poppins,sans-serif', fontWeight:700, fontSize:'.88rem', color:'#fff', marginBottom:'.4rem', margin:'0 0 .4rem'}}>{d.title}</p>
+                    <p style={{fontSize:'.8rem', color:'rgba(255,255,255,.5)', lineHeight:1.55, margin:0}}>{d.body}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              <p style={{fontSize:'.72rem', fontWeight:700, letterSpacing:'.14em', color:'rgba(255,255,255,.4)', marginBottom:'1rem'}}>COMO FUNCIONA</p>
+              <div style={{display:'flex', flexDirection:'column', gap:'.8rem', marginBottom:'1.5rem'}}>
+                {[
+                  {n:'01', title:'Diagnóstico e arquitetura', body:'Análise profunda do funil, mercado e produto. Desenhamos a arquitetura comercial (ICP, oferta, canal) antes das pessoas.'},
+                  {n:'02', title:'Setup em até 20 dias', body:'Seleção e imersão do time, configuração de ferramentas e planejamento. Em 20 dias a operação está rodando.'},
+                  {n:'03', title:'Operação ativa e gestão', body:'Time em campo gerando reuniões e fechamentos, com gestão semanal e otimização contínua da máquina.'},
+                ].map((s,i)=>(
+                  <div key={i} style={{display:'flex', gap:14, alignItems:'flex-start'}}>
+                    <div style={{width:34, height:34, borderRadius:'50%', background:`rgba(${BR},${BG},${BB},.15)`, border:`1.5px solid rgba(${BR},${BG},${BB},.4)`, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, fontFamily:'Poppins,sans-serif', fontWeight:900, fontSize:'.75rem', color:BLUE}}>{s.n}</div>
+                    <div>
+                      <p style={{fontFamily:'Poppins,sans-serif', fontWeight:700, fontSize:'.88rem', color:'#fff', margin:'4px 0 3px'}}>{s.title}</p>
+                      <p style={{fontSize:'.8rem', color:'rgba(255,255,255,.5)', lineHeight:1.55, margin:0}}>{s.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{padding:'1rem 1.3rem', background:`rgba(${BR},${BG},${BB},.1)`, border:`1px solid rgba(${BR},${BG},${BB},.25)`, borderRadius:14}}>
+                <span style={{fontWeight:700, color:BLUE, fontSize:'.85rem'}}>Resultado: </span>
+                <span style={{fontSize:'.85rem', color:'rgba(255,255,255,.65)', lineHeight:1.55}}>
+                  Uma operação comercial previsível, com time pronto, processo claro e o dono livre do operacional do dia a dia.
+                </span>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ════ STATS ════ */}
       <motion.section onViewportEnter={() => setStatOn(true)} viewport={{ once:true, amount:.3 }}
         style={{background:BG_DARK, padding:'clamp(4rem,8vw,6rem) 1.5rem', position:'relative', overflow:'hidden'}}>
@@ -802,7 +1078,8 @@ export default function LP() {
                       </label>
                       <input required type="tel" autoComplete="tel" placeholder="(11) 99999-9999"
                         value={form.whatsapp} onChange={e=>setForm(f=>({...f,whatsapp:e.target.value}))}
-                        style={inputStyle} onFocus={onFocus} onBlur={onBlur}/>
+                        style={inputStyle} onFocus={onFocus}
+                        onBlur={e=>{ onBlur(e); setForm(f=>({...f,whatsapp:applyCountryCode(e.target.value)})) }}/>
                     </div>
 
                     <div style={{gridColumn:'1/-1'}}>
@@ -830,7 +1107,7 @@ export default function LP() {
                         Solicitar diagnóstico gratuito
                         <Send size={17}/>
                       </motion.button>
-                      <p style={{marginTop:'.8rem', textAlign:'center', fontSize:'.75rem', color:'rgba(255,255,255,.28)'}}>
+                      <p style={{marginTop:'.8rem', textAlign:'center', fontSize:'.75rem', color:'rgba(255,255,255,.52)'}}>
                         Ao enviar, você concorda em ser contatado pela Nexxus. Resposta em até 12h.
                       </p>
                     </div>
@@ -856,7 +1133,7 @@ export default function LP() {
           © {new Date().getFullYear()} Nexxus. Estruturação Comercial. São Paulo/SP — Edifício Capital Corporate Office, ao lado do Shopping Morumbi.
         </p>
         <a href="https://www.instagram.com/nexxus.inc/" target="_blank" rel="noopener noreferrer"
-          style={{fontSize:'.75rem', color:'rgba(255,255,255,.28)', textDecoration:'none'}}>@nexxus.inc</a>
+          style={{fontSize:'.75rem', color:'rgba(255,255,255,.52)', textDecoration:'none'}}>@nexxus.inc</a>
       </footer>
 
       <style>{`

@@ -9,7 +9,7 @@ export const site = {
   tagline: 'Estruturação Comercial Completa',
   description:
     'A Nexxus estrutura e opera o comercial da sua empresa com método, dados e um time pronto: terceirização comercial, mentoria e estruturação de vendas.',
-  url: 'https://www.nexxus.com.br', // [INSERIR] domínio final quando publicar
+  url: 'https://nexxusagencia.com.br',
 
   // ----- Contato (dado real já preenchido; demais são placeholders) ----------
   email: 'nexxus.nxmarketing@gmail.com',

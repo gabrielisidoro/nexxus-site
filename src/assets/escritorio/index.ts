@@ -11,6 +11,7 @@ import estudio from './estudio.webp'
 import varandaSkyline from './varanda-skyline.webp'
 import varandaSofa from './varanda-sofa.webp'
 import fachadaVideo from './fachada.mp4'
+import heroBg from './hero-bg.mp4'
 
 export const office = {
   equipeOperacao,
@@ -20,4 +21,5 @@ export const office = {
   varandaSkyline,
   varandaSofa,
   fachadaVideo,
+  heroBg,
 }
