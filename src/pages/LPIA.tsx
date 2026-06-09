@@ -12,7 +12,7 @@ import {
   Instagram, Mail, Phone,
 } from 'lucide-react'
 import logo from '@/assets/logo-nexxus.png'
-import { submitLead, applyCountryCode } from '@/lib/submitLead'
+import { submitLead, validateLead, applyCountryCode } from '@/lib/submitLead'
 
 // ─── Brand ───────────────────────────────────────────────────────────────────
 const OR = 255, OG = 96, OB = 0
@@ -555,6 +555,7 @@ function Footer() {
 export default function LPIA() {
   const navigate = useNavigate()
   const [form, setForm] = useState({ nome:'', empresa:'', email:'', whatsapp:'', faturamento:'', mensagem:'' })
+  const [formError, setFormError] = useState<string | null>(null)
   const [angle, setAngle] = useState(0)
   const [activeFaq, setActiveFaq] = useState<number|null>(null)
 
@@ -572,7 +573,14 @@ export default function LPIA() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    await submitLead({ ...form, origem:'lp-ia' })
+    setFormError(null)
+    const data = { ...form, origem: 'lp-ia' as const }
+    const emptyField = validateLead(data)
+    if (emptyField) {
+      setFormError('Por favor, preencha todos os campos obrigatórios corretamente.')
+      return
+    }
+    await submitLead(data)
     navigate('/obrigado')
   }
 
@@ -1145,6 +1153,11 @@ export default function LPIA() {
                 </div>
 
                 <div style={{ gridColumn:'1/-1' }}>
+                  {formError && (
+                    <div style={{ marginBottom:'.8rem', background:'rgba(239,68,68,.12)', border:'1px solid rgba(239,68,68,.4)', borderRadius:10, padding:'.65rem 1rem', fontSize:'.82rem', color:'#fca5a5', textAlign:'center' }}>
+                      ⚠️ {formError}
+                    </div>
+                  )}
                   <motion.button type="submit"
                     whileHover={{ scale:1.03, boxShadow:`0 0 40px rgba(${OR},${OG},${OB},.65),0 8px 32px rgba(0,0,0,.4)` }} whileTap={{ scale:.97 }}
                     style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:10, width:'100%', background:ORANGE, color:'#fff', border:'none', borderRadius:999, padding:'1.1rem 2rem', fontSize:'1rem', fontWeight:700, cursor:'pointer', letterSpacing:'.04em', boxShadow:`0 0 28px rgba(${OR},${OG},${OB},.4)` }}>

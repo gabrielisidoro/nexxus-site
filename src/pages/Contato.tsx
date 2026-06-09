@@ -4,7 +4,7 @@ import { Mail, MapPin, Send, Instagram, Linkedin } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 import { Reveal } from '@/components/Reveal'
 import { site, mailtoLink } from '@/data/site'
-import { submitLead, applyCountryCode } from '@/lib/submitLead'
+import { submitLead, validateLead, applyCountryCode } from '@/lib/submitLead'
 import { breadcrumbSchema, pageKeywords } from '@/data/seo'
 
 interface FormState {
@@ -39,6 +39,7 @@ const faixasFaturamento = [
 export default function Contato() {
   const navigate = useNavigate()
   const [form, setForm] = useState<FormState>(initial)
+  const [formError, setFormError] = useState<string | null>(null)
 
   function update(field: keyof FormState, value: string) {
     setForm((f) => ({ ...f, [field]: value }))
@@ -46,7 +47,14 @@ export default function Contato() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    await submitLead({ ...form, origem: 'site' })
+    setFormError(null)
+    const data = { ...form, origem: 'site' as const }
+    const emptyField = validateLead(data)
+    if (emptyField) {
+      setFormError('Por favor, preencha todos os campos obrigatórios corretamente.')
+      return
+    }
+    await submitLead(data)
     navigate('/obrigado')
   }
 
@@ -158,11 +166,12 @@ export default function Contato() {
                         htmlFor="empresa"
                         className="mb-1.5 block text-sm font-medium text-ink-700"
                       >
-                        Empresa
+                        Empresa <span className="text-brand-500">*</span>
                       </label>
                       <input
                         id="empresa"
                         type="text"
+                        required
                         autoComplete="organization"
                         value={form.empresa}
                         onChange={(e) => update('empresa', e.target.value)}
@@ -215,10 +224,11 @@ export default function Contato() {
                         htmlFor="faturamento"
                         className="mb-1.5 block text-sm font-medium text-ink-700"
                       >
-                        Faturamento mensal
+                        Faturamento mensal <span className="text-brand-500">*</span>
                       </label>
                       <select
                         id="faturamento"
+                        required
                         value={form.faturamento}
                         onChange={(e) => update('faturamento', e.target.value)}
                         className={`${inputClass} cursor-pointer`}
@@ -253,6 +263,11 @@ export default function Contato() {
                     </div>
 
                     <div className="sm:col-span-2">
+                      {formError && (
+                        <p className="mb-3 rounded-lg border border-red-300 bg-red-50 px-4 py-2.5 text-sm text-red-600">
+                          ⚠️ {formError}
+                        </p>
+                      )}
                       <button
                         type="submit"
                         className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-600 sm:w-auto"

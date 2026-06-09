@@ -8,7 +8,7 @@ import {
 import { Send, ArrowDown, ChevronRight, Bot, X, CornerDownLeft, Rocket } from 'lucide-react'
 import logo from '@/assets/logo-nexxus.png'
 import { office } from '@/assets/escritorio'
-import { submitLead, applyCountryCode } from '@/lib/submitLead'
+import { submitLead, validateLead, applyCountryCode } from '@/lib/submitLead'
 import { pillars, inferno, ceu } from '@/data/metodo'
 import { iconMap } from '@/components/iconMap'
 
@@ -252,8 +252,10 @@ function AIChat() {
 // ─── Scramble hook ────────────────────────────────────────────────────────────
 const SC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@$%&'
 function useScramble(target: string, delay = 500) {
-  const [txt, setTxt] = useState('')
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+  const [txt, setTxt] = useState(isMobile ? target : '')
   useEffect(() => {
+    if (isMobile) { setTxt(target); return }
     let iter = 0; const max = target.length * 4
     const tid = setTimeout(() => {
       const iid = setInterval(() => {
@@ -332,6 +334,7 @@ const BG_PANEL = '#0c1220'
 export default function LP() {
   const navigate = useNavigate()
   const [form, setForm] = useState({ nome:'', empresa:'', email:'', whatsapp:'', faturamento:'', mensagem:'' })
+  const [formError, setFormError] = useState<string | null>(null)
   const [angle, setAngle] = useState(0)
   const [statOn, setStatOn] = useState(false)
   const [activePhoto, setActivePhoto] = useState(0)
@@ -356,7 +359,14 @@ export default function LP() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    await submitLead({ ...form, origem: 'lp' })
+    setFormError(null)
+    const data = { ...form, origem: 'lp' as const }
+    const emptyField = validateLead(data)
+    if (emptyField) {
+      setFormError('Por favor, preencha todos os campos obrigatórios corretamente.')
+      return
+    }
+    await submitLead(data)
     navigate('/obrigado')
   }
 
@@ -1059,8 +1069,8 @@ export default function LP() {
                     </div>
 
                     <div style={{gridColumn:'2/3'}}>
-                      <label style={{display:'block', fontSize:'.78rem', fontWeight:600, color:'rgba(255,255,255,.65)', marginBottom:6, letterSpacing:'.04em'}}>EMPRESA</label>
-                      <input type="text" autoComplete="organization" placeholder="Nome da empresa"
+                      <label style={{display:'block', fontSize:'.78rem', fontWeight:600, color:'rgba(255,255,255,.65)', marginBottom:6, letterSpacing:'.04em'}}>EMPRESA <span style={{color:BLUE}}>*</span></label>
+                      <input required type="text" autoComplete="organization" placeholder="Nome da empresa"
                         value={form.empresa} onChange={e=>setForm(f=>({...f,empresa:e.target.value}))}
                         style={inputStyle} onFocus={onFocus} onBlur={onBlur}/>
                     </div>
@@ -1083,8 +1093,8 @@ export default function LP() {
                     </div>
 
                     <div style={{gridColumn:'1/-1'}}>
-                      <label style={{display:'block', fontSize:'.78rem', fontWeight:600, color:'rgba(255,255,255,.65)', marginBottom:6, letterSpacing:'.04em'}}>FATURAMENTO MENSAL</label>
-                      <select value={form.faturamento} onChange={e=>setForm(f=>({...f,faturamento:e.target.value}))}
+                      <label style={{display:'block', fontSize:'.78rem', fontWeight:600, color:'rgba(255,255,255,.65)', marginBottom:6, letterSpacing:'.04em'}}>FATURAMENTO MENSAL <span style={{color:BLUE}}>*</span></label>
+                      <select required value={form.faturamento} onChange={e=>setForm(f=>({...f,faturamento:e.target.value}))}
                         style={{...inputStyle, cursor:'pointer', appearance:'none', background:'#0c1220', color:form.faturamento?'#fff':'rgba(255,255,255,.35)'}}
                         onFocus={onFocus} onBlur={onBlur}>
                         <option value="" disabled>Selecione uma faixa</option>
@@ -1101,6 +1111,11 @@ export default function LP() {
                     </div>
 
                     <div style={{gridColumn:'1/-1'}}>
+                      {formError && (
+                        <div style={{ marginBottom:'.8rem', background:'rgba(239,68,68,.12)', border:'1px solid rgba(239,68,68,.4)', borderRadius:10, padding:'.65rem 1rem', fontSize:'.82rem', color:'#fca5a5', textAlign:'center' }}>
+                          ⚠️ {formError}
+                        </div>
+                      )}
                       <motion.button type="submit"
                         whileHover={{ scale:1.03, boxShadow:`0 0 40px rgba(${BR},${BG},${BB},.65), 0 8px 32px rgba(0,0,0,.4)` }} whileTap={{ scale:.97 }}
                         style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:10, width:'100%', background:BLUE, color:'#fff', border:'none', borderRadius:999, padding:'1.1rem 2rem', fontSize:'1rem', fontWeight:700, cursor:'pointer', letterSpacing:'.04em', boxShadow:`0 0 28px rgba(${BR},${BG},${BB},.45)` }}>
