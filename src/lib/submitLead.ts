@@ -4,7 +4,7 @@
 const WEB3FORMS_KEY = '869f6a4b-5cb5-4695-bd83-0cb4a6542b19'
 
 // PASSO 2 — Após criar o cenário no Make.com, cole a URL do webhook:
-export const MAKE_WEBHOOK_URL = '' // ex: 'https://hook.us1.make.com/abc123...'
+export const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/tqs3y787fgzy1u17xcyivb9sd4eynhou'
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface LeadData {
@@ -14,7 +14,8 @@ export interface LeadData {
   whatsapp: string
   faturamento: string
   mensagem: string
-  origem: 'lp' | 'site'
+  origem: 'lp' | 'lp-ia' | 'site'
+  pagina?: string
 }
 
 export async function submitLead(data: LeadData): Promise<void> {
@@ -49,6 +50,7 @@ export async function submitLead(data: LeadData): Promise<void> {
         faturamento: data.faturamento,
         mensagem: data.mensagem,
         origem: data.origem,
+        pagina: data.pagina ?? window.location.href,
         timestamp: new Date().toISOString(),
       }),
     }).catch(() => {})
