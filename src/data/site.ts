@@ -12,7 +12,7 @@ export const site = {
   url: 'https://nexxusagencia.com.br',
 
   // ----- Contato (dado real já preenchido; demais são placeholders) ----------
-  email: 'nexxus.nxmarketing@gmail.com',
+  email: 'admin@nexxusagencia.com.br',
   phoneDisplay: '[INSERIR TELEFONE]', // ex.: (11) 99999-9999
   responseTime: 'Resposta garantida em até 12 horas',
 

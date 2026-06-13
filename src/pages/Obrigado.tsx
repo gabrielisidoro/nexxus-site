@@ -1,7 +1,12 @@
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Instagram, Clock, CheckCircle2, ArrowRight } from 'lucide-react'
 import logo from '@/assets/logo-nexxus.png'
 import { site } from '@/data/site'
+
+declare global {
+  interface Window { dataLayer: Record<string, unknown>[] }
+}
 
 const BR = 23, BG = 94, BB = 255
 const BLUE = `rgb(${BR},${BG},${BB})`
@@ -14,6 +19,11 @@ const fadeUp = {
 const stagger = (d = 0.1) => ({ hidden: {}, show: { transition: { staggerChildren: d } } })
 
 export default function Obrigado() {
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push({ event: 'lead_convertido' })
+  }, [])
+
   return (
     <div style={{ fontFamily: 'Inter,system-ui,sans-serif', overflowX: 'hidden' }}>
 

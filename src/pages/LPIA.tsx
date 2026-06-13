@@ -153,6 +153,7 @@ function StickyNav({ onCta }: { onCta: () => void }) {
     <AnimatePresence>
       {visible && (
         <motion.header
+          className="lpia-sticky-nav"
           initial={{ y: -80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -80, opacity: 0 }}
@@ -167,15 +168,17 @@ function StickyNav({ onCta }: { onCta: () => void }) {
           }}>
           <img src={logo} alt="Nexxus" style={{ height: 26, filter: 'brightness(0) invert(1)' }}/>
           <nav style={{ display: 'flex', alignItems: 'center', gap: 'clamp(.8rem,2.5vw,2.2rem)' }}>
-            {NAV_LINKS.map(l => (
-              <a key={l.label} href={l.href}
-                style={{ fontSize: '.82rem', fontWeight: 600, color: 'rgba(255,255,255,.62)', textDecoration: 'none', letterSpacing: '.03em', transition: 'color .2s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,.62)')}>
-                {l.label}
-              </a>
-            ))}
-            <motion.button onClick={onCta}
+            <div className="lpia-nav-links" style={{ display:'flex', alignItems:'center', gap:'clamp(.8rem,2.5vw,2.2rem)' }}>
+              {NAV_LINKS.map(l => (
+                <a key={l.label} href={l.href}
+                  style={{ fontSize: '.82rem', fontWeight: 600, color: 'rgba(255,255,255,.62)', textDecoration: 'none', letterSpacing: '.03em', transition: 'color .2s' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,.62)')}>
+                  {l.label}
+                </a>
+              ))}
+            </div>
+            <motion.button className="lpia-sticky-btn" onClick={onCta}
               whileHover={{ scale: 1.04 }} whileTap={{ scale: .97 }}
               style={{ background: ORANGE, color: '#fff', border: 'none', borderRadius: 999, padding: '.5rem 1.2rem', fontSize: '.82rem', fontWeight: 800, cursor: 'pointer', letterSpacing: '.03em', boxShadow: `0 0 18px rgba(${OR},${OG},${OB},.4)` }}>
               Quero Implementar IA
@@ -246,6 +249,7 @@ function VoiceCloneSection() {
         </motion.div>
 
         <motion.div initial="hidden" whileInView="show" viewport={{ once:true, amount:.2 }} variants={stagger(.15)}
+          className="lpia-voice-cards"
           style={{ display:'flex', gap:'clamp(1rem,3vw,2.5rem)', alignItems:'center', justifyContent:'center', flexWrap:'wrap' }}>
 
           {/* Sua voz */}
@@ -273,7 +277,7 @@ function VoiceCloneSection() {
           </motion.div>
 
           {/* Center */}
-          <motion.div variants={scaleIn} style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:8 }}>
+          <motion.div variants={scaleIn} className="lpia-voice-center" style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:8 }}>
             <motion.div animate={{ rotate:360 }} transition={{ duration:8, repeat:Infinity, ease:'linear' }}
               style={{ width:72, height:72, borderRadius:18, background:`linear-gradient(135deg,${ORANGE},#b45309)`, display:'flex', alignItems:'center', justifyContent:'center', boxShadow:`0 0 40px rgba(${OR},${OG},${OB},.35)`, flexShrink:0 }}>
               <img src={logo} alt="Nexxus" style={{ height:28, filter:'brightness(0) invert(1)' }}/>
@@ -467,7 +471,7 @@ function Footer() {
                 onMouseLeave={e=>(e.currentTarget.style.borderColor='rgba(255,255,255,.1)', e.currentTarget.style.color='rgba(255,255,255,.55)')}>
                 <Instagram size={16}/>
               </a>
-              <a href="mailto:contato@nexxusagencia.com.br"
+              <a href="mailto:admin@nexxusagencia.com.br"
                 style={{ width:38, height:38, borderRadius:'50%', background:'rgba(255,255,255,.07)', border:'1px solid rgba(255,255,255,.1)', display:'flex', alignItems:'center', justifyContent:'center', color:'rgba(255,255,255,.55)', textDecoration:'none', transition:'all .2s' }}
                 onMouseEnter={e=>(e.currentTarget.style.borderColor=ORANGE, e.currentTarget.style.color=ORANGE)}
                 onMouseLeave={e=>(e.currentTarget.style.borderColor='rgba(255,255,255,.1)', e.currentTarget.style.color='rgba(255,255,255,.55)')}>
@@ -514,7 +518,7 @@ function Footer() {
                 <Mail size={15} style={{ color:ORANGE, marginTop:2, flexShrink:0 }}/>
                 <div>
                   <div style={{ fontSize:'.72rem', color:'rgba(255,255,255,.3)', marginBottom:2 }}>E-mail</div>
-                  <a href="mailto:contato@nexxusagencia.com.br" style={{ fontSize:'.85rem', color:'rgba(255,255,255,.65)', textDecoration:'none' }}>contato@nexxusagencia.com.br</a>
+                  <a href="mailto:admin@nexxusagencia.com.br" style={{ fontSize:'.85rem', color:'rgba(255,255,255,.65)', textDecoration:'none' }}>admin@nexxusagencia.com.br</a>
                 </div>
               </li>
               <li style={{ display:'flex', alignItems:'flex-start', gap:10 }}>
@@ -607,12 +611,13 @@ export default function LPIA() {
         {/* Hero background video */}
         <div style={{ position:'absolute', inset:0, zIndex:0, overflow:'hidden' }}>
           <video
+            className="lpia-hero-video"
             autoPlay muted loop playsInline
             style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center top', display:'block' }}>
             <source src="/hero-ia.mp4" type="video/mp4"/>
           </video>
           {/* Dark gradient overlay — keeps left side dark for text, lets right side breathe */}
-          <div style={{ position:'absolute', inset:0, background:'linear-gradient(105deg, rgba(10,10,10,.95) 0%, rgba(10,10,10,.85) 38%, rgba(10,10,10,.5) 65%, rgba(10,10,10,.28) 100%)' }}/>
+          <div className="lpia-hero-overlay" style={{ position:'absolute', inset:0, background:'linear-gradient(105deg, rgba(10,10,10,.95) 0%, rgba(10,10,10,.85) 38%, rgba(10,10,10,.5) 65%, rgba(10,10,10,.28) 100%)' }}/>
           {/* Subtle orange glow */}
           <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse 60% 70% at 68% 50%, rgba(255,96,0,.08), transparent 60%)' }}/>
         </div>
@@ -662,21 +667,24 @@ export default function LPIA() {
 
           {/* Partner badges */}
           <motion.div initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ delay:.7, duration:.6, ease:EASE }}
+            className="lpia-partner-badges"
             style={{ display:'flex', alignItems:'center', gap:'clamp(.8rem,2vw,2rem)', marginBottom:'2rem', flexWrap:'wrap', justifyContent:'center' }}>
             <span style={{ fontSize:'.65rem', fontWeight:700, letterSpacing:'.12em', color:'rgba(255,255,255,.3)', textTransform:'uppercase', whiteSpace:'nowrap' }}>Tecnologia parceira</span>
-            <div style={{ background:'#fff', borderRadius:10, padding:'.5rem .8rem', boxShadow:'0 2px 12px rgba(0,0,0,.3)', display:'flex', alignItems:'center' }}><GooglePartnerLogo/></div>
-            <div style={{ background:'#fff', borderRadius:10, padding:'.5rem .8rem', boxShadow:'0 2px 12px rgba(0,0,0,.3)', display:'flex', alignItems:'center' }}><MetaLogo/></div>
-            <div style={{ background:'#fff', borderRadius:10, padding:'.5rem .8rem', boxShadow:'0 2px 12px rgba(0,0,0,.3)', display:'flex', alignItems:'center' }}><OpenAILogo/></div>
+            <div className="lpia-partner-logos" style={{ display:'contents' }}>
+              <div style={{ background:'#fff', borderRadius:10, padding:'.5rem .8rem', boxShadow:'0 2px 12px rgba(0,0,0,.3)', display:'flex', alignItems:'center' }}><GooglePartnerLogo/></div>
+              <div style={{ background:'#fff', borderRadius:10, padding:'.5rem .8rem', boxShadow:'0 2px 12px rgba(0,0,0,.3)', display:'flex', alignItems:'center' }}><MetaLogo/></div>
+              <div style={{ background:'#fff', borderRadius:10, padding:'.5rem .8rem', boxShadow:'0 2px 12px rgba(0,0,0,.3)', display:'flex', alignItems:'center' }}><OpenAILogo/></div>
+            </div>
           </motion.div>
 
           {/* CTAs */}
           <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:.82, duration:.6, ease:EASE }}
             style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:14 }}>
-            <motion.button onClick={scrollToForm}
+            <motion.button className="lpia-hero-cta" onClick={scrollToForm}
               whileHover={{ scale:1.04, boxShadow:`0 0 50px rgba(${OR},${OG},${OB},.7),0 12px 40px rgba(0,0,0,.5)` }} whileTap={{ scale:.97 }}
               animate={{ boxShadow:[`0 0 20px rgba(${OR},${OG},${OB},.35)`,`0 0 40px rgba(${OR},${OG},${OB},.6)`,`0 0 20px rgba(${OR},${OG},${OB},.35)`] }}
               transition={{ boxShadow:{ duration:2.5, repeat:Infinity, ease:'easeInOut' } }}
-              style={{ display:'flex', alignItems:'center', gap:10, background:ORANGE, color:'#fff', border:'none', borderRadius:999, padding:'1.1rem 2.8rem', fontSize:'1.05rem', fontWeight:800, cursor:'pointer', letterSpacing:'.025em' }}>
+              style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:10, background:ORANGE, color:'#fff', border:'none', borderRadius:999, padding:'1.1rem 2.8rem', fontSize:'1.05rem', fontWeight:800, cursor:'pointer', letterSpacing:'.025em' }}>
               QUERO IMPLEMENTAR IA NO MEU COMERCIAL
             </motion.button>
             <motion.button onClick={scrollToForm} whileHover={{ color:'rgba(255,255,255,.7)' }} whileTap={{ scale:.97 }}
@@ -831,7 +839,7 @@ export default function LPIA() {
               </div>
             </motion.div>
 
-            <motion.div variants={scaleIn} style={{ flex:'0 0 auto', width:'clamp(240px,42%,360px)' }}>
+            <motion.div variants={scaleIn} className="lpia-wa-video" style={{ flex:'0 0 auto', width:'clamp(240px,42%,360px)' }}>
               <motion.div whileHover={{ scale:1.02 }}
                 style={{ borderRadius:24, overflow:'hidden', border:`1px solid rgba(${OR},${OG},${OB},.2)`, boxShadow:`0 12px 48px rgba(0,0,0,.55)` }}>
                 <div style={{ background:'#075e54', padding:'.65rem 1rem', display:'flex', alignItems:'center', gap:10 }}>
@@ -1103,7 +1111,7 @@ export default function LPIA() {
           <motion.div initial={{ opacity:0, scale:.94 }} whileInView={{ opacity:1, scale:1 }} viewport={{ once:true, amount:.2 }} transition={{ duration:.7, ease:EASE }}
             style={{ position:'relative', borderRadius:28, padding:3, background:`conic-gradient(from ${angle}deg,rgba(${OR},${OG},${OB},.85),rgba(${OR},${OG},${OB},.1),rgba(${OR},${OG},${OB},.85))` }}>
             <div style={{ background:BG_PANEL, borderRadius:26, padding:'clamp(2rem,5vw,2.8rem)' }}>
-              <form onSubmit={handleSubmit} style={{ display:'grid', gap:'1.1rem', gridTemplateColumns:'repeat(2,1fr)' }}>
+              <form onSubmit={handleSubmit} className="lpia-form-grid" style={{ display:'grid', gap:'1.1rem', gridTemplateColumns:'repeat(2,1fr)' }}>
 
                 <div style={{ gridColumn:'1/2' }}>
                   <label style={{ display:'block', fontSize:'.78rem', fontWeight:600, color:'rgba(255,255,255,.6)', marginBottom:6, letterSpacing:'.04em' }}>NOME <span style={{ color:ORANGE }}>*</span></label>
@@ -1188,6 +1196,85 @@ export default function LPIA() {
       <style>{`
         input::placeholder, textarea::placeholder { color: rgba(255,255,255,.25); }
         select option { background: #1a1a1a; color: #fff; }
+
+        /* ── Mobile ─────────────────────────────────────────────────────── */
+        @media (max-width: 767px) {
+
+          /* Sticky nav: padding compacto, oculta links, botão menor */
+          .lpia-sticky-nav { padding: .55rem 1rem !important; }
+          .lpia-nav-links  { display: none !important; }
+          .lpia-sticky-btn {
+            font-size: .78rem !important;
+            padding: .45rem .9rem !important;
+            letter-spacing: 0 !important;
+            white-space: nowrap !important;
+          }
+
+          /* Hero vídeo: centraliza melhor no retrato mobile */
+          .lpia-hero-video {
+            object-position: center center !important;
+          }
+
+          /* Hero overlay mobile: escurece topo/base (onde fica o texto),
+             abre no meio para o vídeo aparecer */
+          .lpia-hero-overlay {
+            background: linear-gradient(
+              180deg,
+              rgba(10,10,10,.92) 0%,
+              rgba(10,10,10,.72) 28%,
+              rgba(10,10,10,.52) 55%,
+              rgba(10,10,10,.78) 100%
+            ) !important;
+          }
+
+          /* Hero CTA principal: ocupa largura total */
+          .lpia-hero-cta {
+            width: 100% !important;
+            font-size: .87rem !important;
+            padding: .95rem 1.2rem !important;
+            letter-spacing: .02em !important;
+          }
+
+          /* Partner badges no hero: label em cima, logos em linha única abaixo */
+          .lpia-partner-badges {
+            flex-direction: column !important;
+            gap: .65rem !important;
+            align-items: center !important;
+          }
+          .lpia-partner-logos {
+            display: flex !important;
+            gap: .5rem !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+          .lpia-partner-logos > div { padding: .35rem .55rem !important; }
+          .lpia-partner-logos img   { height: 26px !important; }
+
+          /* Demo WhatsApp: vídeo ocupa largura total da coluna */
+          .lpia-wa-video {
+            width: 100% !important;
+            max-width: 320px !important;
+            flex: none !important;
+            align-self: center !important;
+            margin: 0 auto !important;
+          }
+
+          /* Voz clonada: empilha os dois cards, esconde seta/logo central */
+          .lpia-voice-cards {
+            flex-direction: column !important;
+            gap: 1.4rem !important;
+          }
+          .lpia-voice-cards > * {
+            flex: none !important;
+            width: 100% !important;
+            max-width: 340px !important;
+          }
+          .lpia-voice-center { display: none !important; }
+
+          /* Formulário: 1 coluna */
+          .lpia-form-grid { grid-template-columns: 1fr !important; }
+          .lpia-form-grid > div { grid-column: 1 / -1 !important; }
+        }
       `}</style>
     </div>
   )

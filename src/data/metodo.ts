@@ -185,8 +185,8 @@ export const differentials: { icon: ServiceIcon; title: string; description: str
  * -------------------------------------------------------------------------- */
 export const resultStats: { value: number; suffix?: string; prefix?: string; label: string; placeholder?: boolean }[] =
   [
-    { value: 30, prefix: '+', label: 'Empresas estruturadas', placeholder: true }, // [INSERIR NÚMERO]
-    { value: 40, suffix: '%', label: 'Aumento médio em vendas', placeholder: true }, // [INSERIR NÚMERO]
+    { value: 600, prefix: '+', label: 'Empresas estruturadas' },
+    { value: 60, suffix: '%', label: 'Aumento médio em vendas' },
     { value: 20, label: 'Dias para colocar a operação no ar' },
     { value: 12, suffix: 'h', label: 'Para responder o seu contato' },
   ]

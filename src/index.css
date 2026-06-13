@@ -55,6 +55,11 @@
   }
 }
 
+@keyframes orb-breathe {
+  0%, 100% { transform: scale(1) translate(0px, 0px); opacity: 1; }
+  50%       { transform: scale(1.12) translate(18px, -18px); opacity: 0.75; }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
