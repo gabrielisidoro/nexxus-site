@@ -14,7 +14,7 @@ export interface LeadData {
   whatsapp: string
   faturamento: string
   mensagem: string
-  origem: 'lp' | 'lp-ia' | 'site'
+  origem: 'lp' | 'lp-ia' | 'lp-ebook' | 'site'
   pagina?: string
 }
 

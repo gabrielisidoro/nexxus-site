@@ -11,7 +11,9 @@ import Contato from './pages/Contato'
 import NotFound from './pages/NotFound'
 import LP from './pages/LP'
 import LPIA from './pages/LPIA'
+import LPEbook from './pages/LPEbook'
 import Obrigado from './pages/Obrigado'
+import EbookObrigado from './pages/EbookObrigado'
 import Links from './pages/Links'
 
 function SiteLayout() {
@@ -39,7 +41,9 @@ export default function App() {
   const { pathname } = useLocation()
   if (pathname === '/lp') return <LP />
   if (pathname === '/lp-ia') return <LPIA />
+  if (pathname === '/ebook') return <LPEbook />
   if (pathname === '/obrigado') return <Obrigado />
+  if (pathname === '/ebook-obrigado') return <EbookObrigado />
   if (pathname === '/links') return <Links />
   return <SiteLayout />
 }
