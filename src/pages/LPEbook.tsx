@@ -25,9 +25,15 @@ const fadeUp = {
 const stagger = (d = 0.1) => ({ hidden: {}, show: { transition: { staggerChildren: d } } })
 
 const FAIXAS = [
-  'Até R$ 100 mil/mês', 'R$ 100 mil a R$ 199 mil/mês',
-  'R$ 200 mil a R$ 299 mil/mês', 'R$ 300 mil a R$ 500 mil/mês',
-  'R$ 500 mil a R$ 1 milhão/mês', 'Mais de R$ 1 milhão/mês',
+  'R$ 0 a R$ 50 mil/mês',
+  'R$ 51 mil a R$ 100 mil/mês',
+  'R$ 101 mil a R$ 200 mil/mês',
+  'R$ 201 mil a R$ 300 mil/mês',
+  'R$ 301 mil a R$ 500 mil/mês',
+  'R$ 501 mil a R$ 1 milhão/mês',
+  'R$ 1 milhão a R$ 2 milhões/mês',
+  'R$ 2 milhões a R$ 3 milhões/mês',
+  'Mais de R$ 3 milhões/mês',
 ]
 
 const HERO_BULLETS = [
@@ -61,8 +67,8 @@ export default function LPEbook() {
     e.preventDefault()
     setFormError(null)
     const data = { ...form, origem: 'lp-ebook' as const }
-    if (validateLead(data)) {
-      setFormError('Por favor, preencha todos os campos para receber o ebook.')
+    if (validateLead(data) || !data.faturamento.trim()) {
+      setFormError('Por favor, preencha todos os campos obrigatórios para receber o ebook.')
       return
     }
     setSending(true)
@@ -84,8 +90,8 @@ export default function LPEbook() {
     borderRadius: 12, padding: '.85rem 1rem', fontSize: '.95rem', color: INK,
     outline: 'none', boxSizing: 'border-box', transition: 'border-color .2s', fontFamily: 'inherit',
   }
-  const onFocus = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => (e.target.style.borderColor = BLUE)
-  const onBlur  = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => (e.target.style.borderColor = '#e4e8f1')
+  const onFocus = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => (e.target.style.borderColor = BLUE)
+  const onBlur  = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => (e.target.style.borderColor = '#e4e8f1')
 
   return (
     <div style={{ fontFamily: 'Inter,system-ui,sans-serif', overflowX: 'hidden', background: '#fff', color: INK }}>
@@ -126,8 +132,8 @@ export default function LPEbook() {
             </motion.ul>
 
             {/* cover mockup */}
-            <motion.div variants={fadeUp} style={{ marginTop: '2.2rem', display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
-              <img src="/ebook-capa.png" alt="Capa do ebook Nexxus" style={{ width: 150, borderRadius: 8, boxShadow: '0 20px 50px rgba(0,0,0,.5)', transform: 'perspective(900px) rotateY(-14deg)' }} />
+            <motion.div variants={fadeUp} style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', gap: '.6rem' }}>
+              <img src="/ebook-mockup.png" alt="Capa do ebook Nexxus" style={{ width: 200, display: 'block', marginLeft: '-10px', filter: 'drop-shadow(0 22px 38px rgba(0,0,0,.45))' }} />
               <div>
                 <div style={{ fontWeight: 800, fontSize: '1.05rem' }}>Guia prático Nexxus</div>
                 <div style={{ fontSize: '.85rem', color: 'rgba(255,255,255,.5)', marginTop: 4, lineHeight: 1.5 }}>22 páginas, direto ao ponto,<br />com gráficos e exemplos reais.</div>
@@ -149,21 +155,23 @@ export default function LPEbook() {
             </p>
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '.8rem' }}>
-              <input style={inputStyle} placeholder="Seu nome" value={form.nome}
+              <input style={inputStyle} required placeholder="Seu nome*" value={form.nome}
                 onChange={e => setForm(f => ({ ...f, nome: e.target.value }))} onFocus={onFocus} onBlur={onBlur} />
-              <input style={inputStyle} placeholder="Nome da empresa" value={form.empresa}
+              <input style={inputStyle} required placeholder="Nome da empresa*" value={form.empresa}
                 onChange={e => setForm(f => ({ ...f, empresa: e.target.value }))} onFocus={onFocus} onBlur={onBlur} />
-              <input style={inputStyle} type="email" placeholder="Seu melhor e-mail" value={form.email}
+              <input style={inputStyle} required type="email" placeholder="Seu melhor e-mail*" value={form.email}
                 onChange={e => setForm(f => ({ ...f, email: e.target.value }))} onFocus={onFocus} onBlur={onBlur} />
-              <input style={inputStyle} placeholder="WhatsApp (com DDD)" value={form.whatsapp}
+              <input style={inputStyle} required placeholder="WhatsApp com DDD*" value={form.whatsapp}
                 onChange={e => setForm(f => ({ ...f, whatsapp: e.target.value }))} onFocus={onFocus}
                 onBlur={e => { onBlur(e); setForm(f => ({ ...f, whatsapp: applyCountryCode(e.target.value) })) }} />
-              <select value={form.faturamento} onChange={e => setForm(f => ({ ...f, faturamento: e.target.value }))}
+              <select required value={form.faturamento} onChange={e => setForm(f => ({ ...f, faturamento: e.target.value }))}
                 onFocus={onFocus} onBlur={onBlur}
                 style={{ ...inputStyle, cursor: 'pointer', color: form.faturamento ? INK : '#9aa0ab' }}>
-                <option value="" disabled>Faturamento mensal</option>
+                <option value="" disabled>Faturamento mensal*</option>
                 {FAIXAS.map(f => <option key={f} value={f} style={{ color: INK }}>{f}</option>)}
               </select>
+              <textarea style={{ ...inputStyle, resize: 'vertical', minHeight: 64 }} placeholder="Mensagem (opcional)" value={form.mensagem}
+                onChange={e => setForm(f => ({ ...f, mensagem: e.target.value }))} onFocus={onFocus} onBlur={onBlur} />
 
               {formError && <p style={{ color: '#e0564b', fontSize: '.82rem', margin: 0 }}>{formError}</p>}
 
