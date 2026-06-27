@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do Improviso ao Previsível — Estruture seu comercial | Usual Digital</title>
+<meta name="description" content="O passo a passo, com planilhas, scripts e CRM prontos, para montar um comercial previsível. Ebook + kit completo por um valor simbólico.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Do Improviso ao Previsível — Usual Digital">
+<meta property="og:description" content="Pare de vender no improviso. Monte uma operação comercial previsível com método, scripts, planilhas e CRM prontos.">
+<style>
+@font-face{font-family:'Montserrat';src:url('/diagnostico/Montserrat.ttf') format('truetype');font-weight:100 900;font-display:swap}
+:root{
+  --or:#fb5a2d; --or-deep:#e8430f; --or-soft:#fff1ea; --or-soft2:#ffe7da;
+  --ink:#2e2e33; --inks:#1c1c20; --mut:#8c8c93;
+  --paper:#ffffff; --mist:#f7f6f3; --line:#ecebe8;
+  --loss:#d2483a; --ok:#16a06b; --gold:#e8a13a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',system-ui,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 20px}
+.narrow{max-width:760px}
+section{padding:54px 0}
+h1,h2,h3{line-height:1.08;letter-spacing:-.02em;color:var(--inks);font-weight:800}
+h1{font-size:30px}
+h2{font-size:25px}
+h3{font-size:18px}
+p{font-size:16px}
+.or{color:var(--or)}
+.mut{color:var(--mut)}
+.center{text-align:center}
+.eyebrow{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--or-deep);background:var(--or-soft);padding:7px 14px;border-radius:40px}
+.kx{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--or)}
+.divider{height:4px;width:52px;background:var(--or);border-radius:4px;margin:14px 0 20px}
+.center .divider{margin:14px auto 20px}
+
+/* announcement */
+.annc{background:var(--inks);color:#fff;text-align:center;font-size:12.5px;font-weight:700;padding:9px 12px;letter-spacing:.02em}
+.annc b{color:#ffb499}
+
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.logo{display:flex;align-items:center;gap:10px}
+.logo .rk{width:36px;height:36px;border-radius:10px;background:linear-gradient(160deg,#ff6a3d,var(--or-deep));display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.logo .wm{font-weight:800;font-size:19px;color:var(--inks);line-height:1}
+.logo .wm small{font-weight:600;font-size:10.5px;color:var(--or);margin-left:1px}
+.nav .navbtn{display:none}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--or);color:#fff;font-weight:800;font-size:17px;padding:17px 28px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 10px 26px rgba(251,90,45,.34);transition:.18s;text-align:center;line-height:1.2}
+.btn:hover{background:var(--or-deep);transform:translateY(-2px)}
+.btn.big{font-size:19px;padding:19px 30px;width:100%}
+.btn.pulse{animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 10px 26px rgba(251,90,45,.34)}50%{box-shadow:0 10px 26px rgba(251,90,45,.34),0 0 0 10px rgba(251,90,45,.10)}100%{box-shadow:0 10px 26px rgba(251,90,45,.34)}}
+.ctahint{font-size:12.5px;color:var(--mut);margin-top:10px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-weight:600}
+.ctahint b{color:var(--ink)}
+
+/* hero */
+.hero{background:linear-gradient(180deg,#fff 0%,var(--mist) 100%);padding-top:8px}
+.hero .eyebrow{margin-bottom:16px}
+.hero h1{font-size:32px}
+.hero h1 .hl{color:var(--or)}
+.hero .sub{font-size:17px;color:var(--ink);margin-top:14px;max-width:540px}
+.hero-img{margin:26px auto 6px;max-width:340px;filter:drop-shadow(0 20px 30px rgba(40,25,15,.12))}
+.img-desk{display:none}
+.pricetag{display:inline-flex;align-items:baseline;gap:9px;margin:8px 0 18px}
+.pricetag .from{font-size:15px;color:var(--mut);text-decoration:line-through}
+.pricetag .now{font-size:20px;font-weight:800;color:var(--or-deep)}
+
+/* pains */
+.painlist{display:grid;gap:12px;margin-top:6px}
+.pain{display:flex;gap:13px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-left:4px solid var(--loss);border-radius:12px;padding:14px 16px}
+.pain .xi{flex:0 0 auto;color:var(--loss);margin-top:1px}
+.pain p{font-size:15px;margin:0}
+.agita{background:var(--inks);color:#fff;border-radius:18px;padding:26px 22px;margin-top:24px;text-align:center}
+.agita *{color:#fff}
+.agita h3{color:#fff;font-size:20px}
+.agita p{opacity:.9;margin-top:8px;font-size:15.5px}
+
+/* method / pillars */
+.pillars{display:grid;grid-template-columns:1fr;gap:12px;margin-top:8px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start}
+.pcard .pi{flex:0 0 auto;width:42px;height:42px;border-radius:11px;background:var(--or-soft);display:flex;align-items:center;justify-content:center}
+.pcard h3{font-size:16px;margin-bottom:3px}
+.pcard p{font-size:14px;color:var(--ink);margin:0}
+
+/* learn list */
+.learn{display:grid;grid-template-columns:1fr;gap:11px;margin-top:8px}
+.li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px}
+.li .ck{flex:0 0 auto;color:var(--or);margin-top:2px}
+
+/* inside carousel */
+.inside{display:flex;gap:14px;overflow-x:auto;padding:6px 20px 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.inside::-webkit-scrollbar{height:7px}.inside::-webkit-scrollbar-thumb{background:var(--or-soft2);border-radius:8px}
+.inside img{flex:0 0 auto;width:230px;border:1px solid var(--line);border-radius:10px;scroll-snap-align:center;box-shadow:0 10px 24px rgba(40,25,15,.08)}
+
+/* bonus */
+.bonusband{background:linear-gradient(180deg,var(--mist),#fff)}
+.bonus{display:grid;grid-template-columns:1fr;gap:16px;margin-top:8px}
+.bcard{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 8px 26px rgba(40,25,15,.06)}
+.bcard .bthumb{background:linear-gradient(150deg,#fff,var(--mist));border-bottom:1px solid var(--line);padding:18px;display:flex;align-items:center;justify-content:center;min-height:150px}
+.bcard .bbody{padding:16px 18px 18px}
+.bcard .btag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--or)}
+.bcard h3{font-size:17px;margin:5px 0 6px}
+.bcard p{font-size:14px;color:var(--ink);margin:0 0 10px}
+.bval{display:inline-block;font-size:13px;font-weight:800;color:var(--ok);background:#e9f7f0;padding:5px 11px;border-radius:30px}
+.bval .s{color:var(--mut);text-decoration:line-through;font-weight:700;margin-left:0}
+
+/* mock components */
+.mk-sheet{width:100%;max-width:300px;border-radius:9px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 18px rgba(40,25,15,.10);background:#fff}
+.mk-sheet .mh{background:var(--or);height:26px;display:flex;align-items:center;gap:5px;padding:0 9px}
+.mk-sheet .mh i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.7)}
+.mk-sheet .grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr}
+.mk-sheet .grid div{height:18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mk-sheet .grid div:nth-child(-n+4){background:var(--or-soft);height:20px}
+.mk-doc{width:100%;max-width:240px;background:#fff;border:1px solid var(--line);border-radius:9px;box-shadow:0 8px 18px rgba(40,25,15,.10);padding:16px 16px 20px}
+.mk-doc .dt{height:9px;width:60%;background:var(--or);border-radius:3px;margin-bottom:11px}
+.mk-doc .ln{height:6px;background:#eceae6;border-radius:3px;margin-bottom:7px}
+.mk-doc .ln.s{width:80%}.mk-doc .ln.m{width:92%}
+.mk-doc .chip{height:14px;width:46%;background:var(--or-soft);border-radius:5px;margin-top:10px}
+/* phone frame */
+.phone{width:170px;border:7px solid var(--inks);border-radius:26px;overflow:hidden;box-shadow:0 14px 30px rgba(40,25,15,.18);background:#000}
+.phone img{width:100%;display:block}
+
+/* value stack / price */
+.stack{background:#fff;border:1px solid var(--line);border-radius:18px;padding:8px 18px;margin-top:10px}
+.srow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+.srow:last-child{border-bottom:none}
+.srow .nm{font-weight:600}.srow .nm b{color:var(--inks)}
+.srow .vl{font-weight:800;color:var(--mut);text-decoration:line-through;white-space:nowrap}
+.stotal{display:flex;justify-content:space-between;align-items:center;margin-top:14px;background:var(--mist);border-radius:12px;padding:14px 16px;font-weight:800}
+.stotal .t{font-size:14px;color:var(--ink)}
+.stotal .v{font-size:18px;color:var(--mut);text-decoration:line-through}
+
+.pricebox{background:linear-gradient(160deg,#fff 0%,var(--or-soft) 100%);border:2px solid var(--or);border-radius:22px;padding:30px 22px;text-align:center;box-shadow:0 18px 40px rgba(251,90,45,.16);margin-top:18px}
+.pricebox .chip{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--or);padding:6px 14px;border-radius:30px}
+.pricebox .de{font-size:15px;color:var(--mut);margin-top:14px}
+.pricebox .de s{color:var(--mut)}
+.pricebox .por{font-size:14px;color:var(--ink);font-weight:700;margin-top:6px}
+.pricebox .priceval{font-size:54px;font-weight:800;color:var(--or-deep);line-height:1;margin:4px 0 2px;letter-spacing:-.03em}
+.pricebox .av{font-size:15px;font-weight:700;color:var(--ink)}
+.pricebox .btn{margin-top:18px}
+
+/* guarantee */
+.guar{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.guar .seal{flex:0 0 auto;width:66px;height:66px;border-radius:50%;background:var(--or-soft);display:flex;align-items:center;justify-content:center}
+.guar h3{font-size:17px;margin-bottom:4px}
+.guar p{font-size:14px;margin:0}
+
+/* authority */
+.auth{background:var(--inks);color:#fff;border-radius:20px;padding:28px 22px}
+.auth *{color:#fff}
+.auth h2{color:#fff}
+.auth .src{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.auth .src span{border:1px solid rgba(255,255,255,.25);border-radius:30px;padding:6px 13px;font-size:12.5px;font-weight:700}
+.auth .who{margin-top:18px;font-size:15px;opacity:.95}
+.auth .who b{color:#ffb499}
+
+/* faq */
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 16px;margin-bottom:10px}
+.faq summary{list-style:none;cursor:pointer;padding:15px 0;font-weight:700;font-size:15.5px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .pl{color:var(--or);font-weight:800;font-size:20px;transition:.2s}
+.faq details[open] summary .pl{transform:rotate(45deg)}
+.faq .ans{font-size:14.5px;color:var(--ink);padding:0 0 16px}
+
+/* footer */
+footer{background:var(--mist);border-top:1px solid var(--line);padding:30px 0 110px}
+footer .logo{margin-bottom:10px}
+footer p{font-size:12.5px;color:var(--mut);line-height:1.7}
+
+/* sticky mobile cta */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(40,25,15,.10);padding:10px 14px;display:flex;align-items:center;gap:12px;transform:translateY(120%);transition:.3s}
+.sticky.show{transform:none}
+.sticky .sp{flex:1;line-height:1.1}
+.sticky .sp .s1{font-size:11px;color:var(--mut);font-weight:700}
+.sticky .sp .s2{font-size:18px;font-weight:800;color:var(--or-deep)}
+.sticky .sp .s2 small{font-size:11px;color:var(--mut);text-decoration:line-through;margin-left:5px;font-weight:700}
+.sticky .btn{font-size:15px;padding:14px 18px;box-shadow:none;flex:0 0 auto}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(min-width:820px){
+  h1{font-size:46px}.hero h1{font-size:50px}h2{font-size:34px}
+  section{padding:74px 0}
+  .nav .navbtn{display:inline-flex;font-size:14px;padding:12px 20px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+  .hero .center{text-align:left}.hero .ctahint{justify-content:flex-start}.hero .pricetag{margin-top:6px}
+  .hero .img-mob{display:none}
+  .hero .img-desk{display:block;max-width:440px;margin:0 auto}
+  .hero .btn.big{width:auto}
+  .pillars{grid-template-columns:1fr 1fr}
+  .learn{grid-template-columns:1fr 1fr}
+  .bonus{grid-template-columns:1fr 1fr 1fr}
+  .bcard.feat{grid-column:span 3;display:grid;grid-template-columns:1fr 1.4fr}
+  .bcard.feat .bthumb{border-bottom:none;border-right:1px solid var(--line);min-height:auto}
+  .pricebox .priceval{font-size:64px}
+  .painlist{grid-template-columns:1fr 1fr}
+  .sticky{display:none}
+  .pricebox .big{font-size:64px}
+}
+</style>
+</head>
+<body>
+
+<div class="annc">🚀 Oferta de lançamento — de <b>R$ 297</b> por <b>R$ 47</b> · acesso imediato</div>
+
+<div class="wrap">
+  <div class="nav">
+    <div class="logo">
+      <span class="rk"><svg width="22" height="22" viewBox="0 0 120 120"><path d="M60 22c12 7 17 20 17 35l-4 15H51l-4-15c0-15 5-28 17-35z" fill="#fff"/><circle cx="60" cy="48" r="8" fill="#e8430f"/><path d="M51 66c-8 2-12 8-12 16l10-4z" fill="#fff"/><path d="M73 66c8 2 12 8 12 16l-10-4z" fill="#fff"/><path d="M54 84c0 4-1 8-3 11M60 85c0 5-1 10-3 14M66 84c0 4 1 8 3 11" stroke="#fff" stroke-width="3.6" stroke-linecap="round" fill="none"/></svg></span>
+      <span class="wm">USUAL<small>digital</small></span>
+    </div>
+    <a class="btn navbtn" data-cta href="#oferta">Quero o acesso</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="center">
+        <span class="eyebrow">Para quem vende no improviso</span>
+        <h1>Pare de vender por <span class="hl">sorte</span> e indicação.</h1>
+        <p class="sub">O passo a passo para montar um comercial que vende todo mês — com método, scripts, planilhas e CRM já prontos. Mesmo que você nunca tenha estruturado vendas na vida.</p>
+        <div class="hero-img img-mob"><img src="img/ebook3d.png" alt="Ebook Do Improviso ao Previsível"></div>
+        <div class="pricetag"><span class="from">R$ 297</span><span class="now">R$ 47 hoje</span></div>
+        <div><a class="btn big pulse" data-cta href="#oferta">QUERO ESTRUTURAR MEU COMERCIAL →</a></div>
+        <div class="ctahint"><span>✅ Acesso imediato</span><span>✅ <b>7 dias</b> de garantia</span><span>✅ Pague no Pix ou cartão</span></div>
+      </div>
+      <div class="hero-img img-desk"><img src="img/ebook3d.png" alt="Ebook Do Improviso ao Previsível"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section>
+  <div class="wrap narrow">
+    <div class="center"><span class="kx">A real do seu comercial</span>
+    <h2>Você se reconhece em alguma dessas?</h2><div class="divider"></div></div>
+    <div class="painlist reveal">
+      <div class="pain"><span class="xi">✗</span><p>Seu faturamento é uma <b>montanha-russa</b>: um mês explode, no outro seca.</p></div>
+      <div class="pain"><span class="xi">✗</span><p>As vendas <b>dependem de você</b>. Se você sai de cena, a empresa trava.</p></div>
+      <div class="pain"><span class="xi">✗</span><p>Você vive de <b>indicação e sorte</b> — não de um processo que se repete.</p></div>
+      <div class="pain"><span class="xi">✗</span><p>Já <b>contratou vendedor</b> que prometeu muito e não engatou em 3 meses.</p></div>
+      <div class="pain"><span class="xi">✗</span><p>Seu "CRM" é o WhatsApp, a memória e uma <b>planilha que ninguém atualiza</b>.</p></div>
+      <div class="pain"><span class="xi">✗</span><p>O lead chega, ninguém faz follow-up e a <b>conversa esfria</b>.</p></div>
+      <div class="pain"><span class="xi">✗</span><p>Você <b>não consegue prever</b> quanto vai vender no mês que vem.</p></div>
+      <div class="pain"><span class="xi">✗</span><p>No fundo, você sente que <b>deixa dinheiro na mesa</b> todo mês.</p></div>
+    </div>
+    <div class="agita reveal">
+      <h3>Tudo isso tem a mesma causa.</h3>
+      <p>Não é falta de esforço, nem de um "vendedor bom". É falta de <b>estrutura</b>. E estrutura não se resolve com sorte — se constrói com método. É exatamente isso que você vai montar aqui.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TURN / METHOD -->
+<section style="background:var(--mist)">
+  <div class="wrap">
+    <div class="center"><span class="kx">A virada de chave</span>
+    <h2>Do improviso ao previsível.</h2><div class="divider"></div>
+    <p class="mut" style="max-width:600px;margin:0 auto">Vendedor não constrói operação. Vendedor opera dentro de uma operação que já existe. Estes são os 5 pilares que você vai colocar de pé:</p></div>
+    <div class="pillars reveal" style="margin-top:24px">
+      <div class="pcard"><span class="pi">💰</span><div><h3>Oferta &amp; produtos</h3><p>O cliente certo (ICP) e uma oferta que vende, com ancoragem e esteira de valor.</p></div></div>
+      <div class="pcard"><span class="pi">🎯</span><div><h3>Funis de aquisição</h3><p>Leads entrando de forma previsível, por marketing e por prospecção.</p></div></div>
+      <div class="pcard"><span class="pi">💬</span><div><h3>Pré-vendas (SDR)</h3><p>Cadência e follow-up que não deixam nenhum lead esfriar.</p></div></div>
+      <div class="pcard"><span class="pi">🤝</span><div><h3>Vendas (closer)</h3><p>Um protocolo de fechamento com diagnóstico, ancoragem e quebra de objeções.</p></div></div>
+      <div class="pcard"><span class="pi">📈</span><div><h3>Gestão por métricas</h3><p>CRM, KPIs e rotina para o comercial rodar sem depender de você.</p></div></div>
+      <div class="pcard" style="border-color:var(--or-soft2);background:var(--or-soft)"><span class="pi" style="background:#fff">⭐</span><div><h3>Pós-venda &amp; LTV</h3><p>Recompra e indicação: onde mora o lucro de verdade.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EBOOK / LEARN -->
+<section>
+  <div class="wrap narrow">
+    <div class="center"><span class="kx">O produto principal</span>
+    <h2>O Ebook “Do Improviso ao Previsível”</h2><div class="divider"></div>
+    <p class="mut" style="max-width:600px;margin:0 auto">Um manual prático, direto ao ponto, com tudo que você precisa para estruturar seu comercial passo a passo. Nada de teoria solta.</p></div>
+    <div class="learn reveal" style="margin-top:22px">
+      <div class="li"><span class="ck">✓</span><span>Como definir seu cliente ideal (ICP) e parar de vender pra qualquer um.</span></div>
+      <div class="li"><span class="ck">✓</span><span>A engenharia de oferta que faz o cliente dizer sim na call.</span></div>
+      <div class="li"><span class="ck">✓</span><span>Os 2 funis que enchem sua agenda (VSL e social selling).</span></div>
+      <div class="li"><span class="ck">✓</span><span>A cadência de follow-up onde 80% das vendas realmente acontecem.</span></div>
+      <div class="li"><span class="ck">✓</span><span>O protocolo de vendas em 5 passos (com SPIN Selling).</span></div>
+      <div class="li"><span class="ck">✓</span><span>Quantas pessoas contratar e quando (dimensionamento).</span></div>
+      <div class="li"><span class="ck">✓</span><span>Como montar o CRM, as automações e a gestão por métricas.</span></div>
+      <div class="li"><span class="ck">✓</span><span>O plano de implementação: do zero ao previsível em etapas.</span></div>
+    </div>
+  </div>
+  <div class="center" style="margin-top:6px"><span class="kx">Veja por dentro</span></div>
+  <div class="inside reveal">
+    <img loading="lazy" src="img/inside-pilares.png" alt="Os 5 pilares"><img loading="lazy" src="img/inside-escada.png" alt="Escada de valor">
+    <img loading="lazy" src="img/inside-oferta.png" alt="Engenharia da oferta"><img loading="lazy" src="img/inside-vendas.png" alt="Protocolo de vendas">
+    <img loading="lazy" src="img/inside-dimensionamento.png" alt="Dimensionamento"><img loading="lazy" src="img/inside-metricas.png" alt="Métricas">
+  </div>
+</section>
+
+<!-- BONUS -->
+<section class="bonusband">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Você não leva só o ebook</span>
+    <h2>Leva o sistema comercial <span class="or">completo</span>.</h2><div class="divider"></div>
+    <p class="mut" style="max-width:620px;margin:0 auto">Cada gargalo do seu comercial tem uma ferramenta pronta pra resolver. Tudo editável, é só usar.</p></div>
+
+    <div class="bonus" style="margin-top:26px">
+      <!-- diagnostico (destaque) -->
+      <div class="bcard feat reveal">
+        <div class="bthumb"><div class="phone"><img loading="lazy" src="img/diag-mobile.png" alt="Diagnóstico Comercial online"></div></div>
+        <div class="bbody" style="display:flex;flex-direction:column;justify-content:center">
+          <span class="btag">Bônus #1 · Ferramenta online</span>
+          <h3>Diagnóstico Comercial Interativo</h3>
+          <p>Uma ferramenta online (não é planilha!) que dá o raio-X da sua operação: maturidade por pilar, simulador de faturamento com sliders de verba e custo por lead, e plano de ação. Você usa quantas vezes quiser.</p>
+          <span class="bval"><span class="s">R$ 197</span>&nbsp; grátis no kit</span>
+        </div>
+      </div>
+
+      <div class="bcard reveal">
+        <div class="bthumb"><div class="mk-sheet"><div class="mh"><i></i><i></i><i></i></div><div class="grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div></div>
+        <div class="bbody"><span class="btag">Bônus #2 · Planilha</span><h3>Gestão Financeira</h3><p>Organize entradas, despesas, metas e investimentos. Dashboard anual automático.</p><span class="bval"><span class="s">R$ 97</span>&nbsp; incluso</span></div>
+      </div>
+
+      <div class="bcard reveal">
+        <div class="bthumb"><div class="mk-sheet"><div class="mh"><i></i><i></i><i></i></div><div class="grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div></div>
+        <div class="bbody"><span class="btag">Bônus #3 · Planilha</span><h3>Calculadora de Dimensionamento</h3><p>Descubra quantos SDRs e closers você precisa e o faturamento projetado.</p><span class="bval"><span class="s">R$ 97</span>&nbsp; incluso</span></div>
+      </div>
+
+      <div class="bcard reveal">
+        <div class="bthumb"><div class="mk-sheet"><div class="mh"><i></i><i></i><i></i></div><div class="grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div></div>
+        <div class="bbody"><span class="btag">Bônus #4 · Planilha</span><h3>Dashboard de KPIs</h3><p>Acompanhe taxas, CAC e ROAS e bata nos KPIs ideais do mercado.</p><span class="bval"><span class="s">R$ 97</span>&nbsp; incluso</span></div>
+      </div>
+
+      <div class="bcard reveal">
+        <div class="bthumb"><div class="mk-doc"><div class="dt"></div><div class="ln m"></div><div class="ln"></div><div class="ln s"></div><div class="chip"></div></div></div>
+        <div class="bbody"><span class="btag">Bônus #5 · Documento</span><h3>Scripts de Pré-vendas (SDR)</h3><p>Mensagens, ligação, social selling, break-up e quebra de objeções prontos.</p><span class="bval"><span class="s">R$ 127</span>&nbsp; incluso</span></div>
+      </div>
+
+      <div class="bcard reveal">
+        <div class="bthumb"><div class="mk-doc"><div class="dt"></div><div class="ln m"></div><div class="ln"></div><div class="ln s"></div><div class="chip"></div></div></div>
+        <div class="bbody"><span class="btag">Bônus #6 · Documento</span><h3>Playbook de Vendas (Closer)</h3><p>O protocolo de 5 passos + banco de perguntas SPIN para fechar mais.</p><span class="bval"><span class="s">R$ 127</span>&nbsp; incluso</span></div>
+      </div>
+
+      <div class="bcard reveal">
+        <div class="bthumb"><div class="mk-doc"><div class="dt"></div><div class="ln m"></div><div class="ln"></div><div class="ln s"></div><div class="chip"></div></div></div>
+        <div class="bbody"><span class="btag">Bônus #7 · Documento</span><h3>Modelo de CRM</h3><p>Pipelines de pré-vendas, vendas e pós-venda + automações essenciais.</p><span class="bval"><span class="s">R$ 97</span>&nbsp; incluso</span></div>
+      </div>
+
+      <div class="bcard reveal">
+        <div class="bthumb"><div class="mk-doc"><div class="dt"></div><div class="ln m"></div><div class="ln"></div><div class="ln s"></div><div class="chip"></div></div></div>
+        <div class="bbody"><span class="btag">Bônus #8 · Documento</span><h3>Checklists de Implementação</h3><p>Do zero ao previsível, funil VSL e contratação — sem pular etapa.</p><span class="bval"><span class="s">R$ 47</span>&nbsp; incluso</span></div>
+      </div>
+
+      <div class="bcard reveal">
+        <div class="bthumb"><div class="mk-doc"><div class="dt"></div><div class="ln m"></div><div class="ln"></div><div class="ln s"></div><div class="chip"></div></div></div>
+        <div class="bbody"><span class="btag">Bônus #9 · Documento</span><h3>Quadro de Produtos &amp; Ofertas</h3><p>Centralize preços, condições e armas de fechamento num só lugar.</p><span class="bval"><span class="s">R$ 67</span>&nbsp; incluso</span></div>
+      </div>
+
+      <div class="bcard reveal">
+        <div class="bthumb"><div class="mk-doc"><div class="dt"></div><div class="ln m"></div><div class="ln"></div><div class="ln s"></div><div class="chip"></div></div></div>
+        <div class="bbody"><span class="btag">Bônus #10 · IA</span><h3>Pack de Prompts de IA Comercial</h3><p>12 prompts prontos: ICP, SPIN, objeções, VSL, criativos de anúncio e mais.</p><span class="bval"><span class="s">R$ 97</span>&nbsp; incluso</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTA / PRICE -->
+<section id="oferta">
+  <div class="wrap narrow">
+    <div class="center"><span class="kx">A oferta completa</span>
+    <h2>Tudo que você recebe hoje</h2><div class="divider"></div></div>
+
+    <div class="stack reveal">
+      <div class="srow"><span class="nm"><b>Ebook</b> Do Improviso ao Previsível</span><span class="vl">R$ 197</span></div>
+      <div class="srow"><span class="nm">Diagnóstico Comercial interativo</span><span class="vl">R$ 197</span></div>
+      <div class="srow"><span class="nm">Planilha de Gestão Financeira</span><span class="vl">R$ 97</span></div>
+      <div class="srow"><span class="nm">Calculadora de Dimensionamento</span><span class="vl">R$ 97</span></div>
+      <div class="srow"><span class="nm">Dashboard de KPIs</span><span class="vl">R$ 97</span></div>
+      <div class="srow"><span class="nm">Scripts de Pré-vendas (SDR)</span><span class="vl">R$ 127</span></div>
+      <div class="srow"><span class="nm">Playbook de Vendas (Closer)</span><span class="vl">R$ 127</span></div>
+      <div class="srow"><span class="nm">Modelo de CRM + automações</span><span class="vl">R$ 97</span></div>
+      <div class="srow"><span class="nm">Quadro de Produtos &amp; Checklists</span><span class="vl">R$ 114</span></div>
+      <div class="srow"><span class="nm">Pack de Prompts de IA Comercial</span><span class="vl">R$ 97</span></div>
+      <div class="stotal"><span class="t">Valor real de tudo isso</span><span class="v">R$ 1.247</span></div>
+    </div>
+
+    <div class="pricebox reveal">
+      <span class="chip">Oferta de lançamento</span>
+      <div class="de">De <s>R$ 1.247</s> &nbsp;•&nbsp; hoje por apenas</div>
+      <div class="big">R$ 47<small></small></div>
+      <div class="av">à vista no Pix &nbsp;ou&nbsp; <b>12x de R$ 4,79</b> no cartão</div>
+      <a class="btn big pulse" data-cta href="#" style="margin-top:18px">QUERO TUDO ISSO POR R$ 47 →</a>
+      <div class="ctahint" style="justify-content:center"><span>🔒 Compra segura na Hotmart</span><span>⚡ Acesso imediato</span></div>
+    </div>
+
+    <div class="guar reveal" style="margin-top:22px">
+      <span class="seal"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#e8430f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4.3"/></svg></span>
+      <div><h3>Risco zero por 7 dias</h3><p>Comprou, não curtiu? É só pedir e a Hotmart devolve 100% do seu dinheiro em até 7 dias. Sem burocracia e sem perguntas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTHORITY -->
+<section class="narrow">
+  <div class="wrap narrow">
+    <div class="auth reveal">
+      <span class="kx" style="color:#ffb499">Por que confiar nesse método</span>
+      <h2 style="margin-top:8px">Não é "achismo". É o que as melhores operações de vendas usam.</h2>
+      <p style="opacity:.9;margin-top:10px">O conteúdo é destilado das metodologias que estruturam os comerciais de alta performance do mercado — e organizado em um passo a passo que cabe na sua realidade.</p>
+      <div class="src"><span>Receita Previsível</span><span>SPIN Selling</span><span>Sistema Full Sales</span><span>+600 projetos comerciais</span></div>
+      <p class="who">Material criado por <b>Gabriel Isidoro</b> e <b>Renan Paiva</b>, especialistas em estruturação comercial, que vivem na prática a construção de operações de vendas previsíveis.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap narrow">
+    <div class="center"><span class="kx">Perguntas frequentes</span><h2>Ainda com dúvida?</h2><div class="divider"></div></div>
+    <div class="faq reveal">
+      <details><summary>É um curso em vídeo ou um ebook?<span class="pl">+</span></summary><div class="ans">É um ebook prático (PDF) + um kit de materiais prontos (planilhas, scripts, playbook, CRM, checklists, prompts) e o diagnóstico online. Você aprende e já aplica com as ferramentas na mão.</div></details>
+      <details><summary>Funciona pro meu segmento?<span class="pl">+</span></summary><div class="ans">Sim. O método funciona em negócios B2B e de serviço/alto valor (agências, clínicas, SaaS, consultorias, construção, energia, infoprodutos) e em B2C de ticket alto. A única exceção é venda para governo.</div></details>
+      <details><summary>Preciso já ter um time de vendas?<span class="pl">+</span></summary><div class="ans">Não. Serve tanto para quem ainda vende sozinho quanto para quem já tem time e quer estruturar. Tem um capítulo inteiro sobre quando e como contratar.</div></details>
+      <details><summary>Como eu recebo depois de comprar?<span class="pl">+</span></summary><div class="ans">Acesso imediato. Assim que o pagamento é aprovado, você recebe tudo por e-mail / área de membros da Hotmart, com um guia simples ensinando a baixar e copiar cada material.</div></details>
+      <details><summary>E se eu não gostar?<span class="pl">+</span></summary><div class="ans">Você tem 7 dias de garantia incondicional. Se não fizer sentido pra você, pede o reembolso e a Hotmart devolve 100%.</div></details>
+      <details><summary>Por que tão barato?<span class="pl">+</span></summary><div class="ans">Porque o nosso objetivo é colocar esse material na mão do máximo de empresários possível. É uma oferta de lançamento — o preço pode subir a qualquer momento.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:var(--mist)">
+  <div class="wrap narrow center">
+    <h2>Seu comercial pode parar de depender de sorte ainda esta semana.</h2>
+    <div class="divider" style="margin:14px auto 18px"></div>
+    <p class="mut" style="max-width:560px;margin:0 auto 22px">Por menos do que custa um almoço, você leva o sistema completo para estruturar suas vendas. A decisão é simples — e tem 7 dias de garantia.</p>
+    <a class="btn big pulse" data-cta href="#" style="max-width:460px">QUERO COMEÇAR POR R$ 47 →</a>
+    <div class="ctahint" style="justify-content:center"><span>de <s>R$ 1.247</s> por R$ 47</span><span>ou 12x de R$ 4,79</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo"><span class="rk"><svg width="20" height="20" viewBox="0 0 120 120"><path d="M60 22c12 7 17 20 17 35l-4 15H51l-4-15c0-15 5-28 17-35z" fill="#fff"/><circle cx="60" cy="48" r="8" fill="#e8430f"/><path d="M51 66c-8 2-12 8-12 16l10-4z" fill="#fff"/><path d="M73 66c8 2 12 8 12 16l-10-4z" fill="#fff"/></svg></span><span class="wm">USUAL<small>digital</small></span></div>
+    <p><b>Usual Digital</b> — Estruturação comercial · Autores: Gabriel Isidoro e Renan Paiva.<br>
+    Suporte: WhatsApp (14) 99876-0335. Pagamento processado com segurança pela Hotmart.<br>
+    Este material é educacional. Os resultados dependem da aplicação, do mercado e do esforço de cada pessoa — não há garantia de faturamento. © 2026 Usual Digital. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky" id="sticky">
+  <div class="sp"><div class="s1">Oferta de lançamento</div><div class="s2">R$ 47 <small>R$ 1.247</small></div></div>
+  <a class="btn" data-cta href="#">Quero agora →</a>
+</div>
+
+<script>
+// >>> TROQUE pelo link do checkout da Hotmart <<<
+var CHECKOUT = "https://pay.hotmart.com/SEU-CODIGO-AQUI";
+document.querySelectorAll('[data-cta]').forEach(function(a){
+  // mantém âncora #oferta dos botões de "rolar até a oferta"; demais vão pro checkout
+  if(a.getAttribute('href')==='#oferta') return;
+  a.setAttribute('href', CHECKOUT); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener');
+});
+// reveal on scroll
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+// sticky cta after hero
+var sticky=document.getElementById('sticky'), hero=document.querySelector('.hero');
+window.addEventListener('scroll',function(){
+  if(window.scrollY > hero.offsetHeight){sticky.classList.add('show');}else{sticky.classList.remove('show');}
+},{passive:true});
+</script>
+</body>
+</html>
