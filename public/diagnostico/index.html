@@ -244,7 +244,7 @@ let state = {
   step:0, // 0 intro, 1..6 pillars, 7 forecast, 8 results
   answers:{}, // index -> score
   name:"", seg:"",
-  fc:{leads:600, ag:12, comp:55, conv:18, ticket:5000, cpl:0},
+  fc:{leads:600, ag:12, comp:55, conv:18, ticket:5000, cpl:0, verba:0},
   liveBench:false
 };
 
@@ -282,8 +282,9 @@ function calc(fc, useBench){
   const reun = agend*comp;
   const vendas = reun*conv;
   const fat = vendas*fc.ticket;
-  const cpl = fc.cpl||0;
-  const invest = cpl*fc.leads;
+  const invest = fc.verba||0;
+  let cpl = fc.cpl||0;
+  if(!cpl && invest>0 && fc.leads>0) cpl = invest/fc.leads;
   const cac = vendas? invest/vendas : 0;
   const roas = invest? fat/invest : 0;
   return {agend,reun,vendas,fat,cac,roas,cpl,invest};
@@ -372,8 +373,10 @@ function renderForecast(){
       <div class="field"><label>Taxa de agendamento (%)</label><input type="number" id="i_ag" value="${f.ag}" min="0" max="100"></div>
       <div class="field"><label>Taxa de comparecimento (%)</label><input type="number" id="i_comp" value="${f.comp}" min="0" max="100"></div>
       <div class="field"><label>Taxa de conversão em venda (%)</label><input type="number" id="i_conv" value="${f.conv}" min="0" max="100"></div>
-      <div class="field"><label>Custo por lead (R$)</label><input type="number" id="i_cpl" value="${f.cpl}" min="0" step="0.01" placeholder="0 se não investe em tráfego"></div>
+      <div class="field"><label>Verba de tráfego pago / mês (R$)</label><input type="number" id="i_verba" value="${f.verba}" min="0" placeholder="0 se não investe"></div>
+      <div class="field"><label>Custo por lead (R$)</label><input type="number" id="i_cpl" value="${f.cpl}" min="0" step="0.01" placeholder="0 se não investe"></div>
     </div>
+    <p style="font-size:12.5px;color:var(--mut);margin-top:2px">Investe em tráfego pago? Informe a <b>verba</b> e o <b>custo por lead</b> — usamos para calcular seus leads, o CAC e o ROAS. Se não investe, deixe em 0.</p>
     <div class="nav">
       <button class="btn ghost" onclick="saveForecast(6)">← Voltar</button>
       <button class="btn lg" onclick="saveForecast(8)">Gerar meu diagnóstico →</button>
@@ -382,7 +385,11 @@ function renderForecast(){
 }
 function saveForecast(go){
   const g=id=>parseFloat(document.getElementById(id).value)||0;
-  state.fc={leads:g('i_leads'),ticket:g('i_ticket'),ag:g('i_ag'),comp:g('i_comp'),conv:g('i_conv'),cpl:g('i_cpl')};
+  let leads=g('i_leads'), cpl=g('i_cpl'), verba=g('i_verba');
+  if(verba>0 && cpl>0) leads=Math.round(verba/cpl);
+  else if(cpl>0) verba=Math.round(leads*cpl);
+  else if(verba>0 && leads>0) cpl=+(verba/leads).toFixed(2);
+  state.fc={leads, ticket:g('i_ticket'), ag:g('i_ag'), comp:g('i_comp'), conv:g('i_conv'), cpl, verba};
   setStep(go);
 }
 
@@ -440,21 +447,30 @@ function renderResults(){
       <div class="kpis">
         ${kpi(cur.vendas.toFixed(0),"vendas / mês")}
         ${kpi(money(cur.fat),"faturamento estimado")}
+        ${kpi(cur.invest?money(cur.invest):"—","verba de tráfego")}
         ${kpi(cur.cpl?money(cur.cpl):"—","custo por lead")}
-        ${kpi(cur.cpl?money(cur.cac):"—","CAC", cur.cpl?cacStatus(cur.cac,state.fc.ticket):"")}
-        ${kpi(cur.cpl?cur.roas.toFixed(1):"—","ROAS", cur.cpl?roasStatus(cur.roas):"")}
+        ${kpi(cur.invest?money(cur.cac):"—","CAC", cur.invest?cacStatus(cur.cac,state.fc.ticket):"")}
+        ${kpi(cur.invest?cur.roas.toFixed(1):"—","ROAS", cur.invest?roasStatus(cur.roas):"")}
       </div>
     </div>
 
     <div class="section">
       <div class="sh">Previsão de faturamento · simulador</div>
       <div class="fcast">
-        <p style="font-size:14px;font-weight:700;margin-bottom:14px">Arraste e veja o impacto de melhorar cada etapa do seu funil:</p>
+        <p style="font-size:14px;font-weight:700;margin-bottom:4px">Arraste e veja o impacto de melhorar cada etapa do seu funil:</p>
+        <p style="font-size:12px;color:var(--mut);margin-bottom:14px">A verba de tráfego e o custo por lead definem seus leads (leads = verba ÷ custo por lead). Baixar o custo por lead, com a mesma verba, gera mais leads.</p>
+        ${slider('s_verba','Verba de tráfego pago / mês',state.fc.verba,0,50000,500,'R$')}
+        ${slider('s_cpl','Custo por lead',state.fc.cpl,0,200,1,'R$')}
         ${slider('s_leads','Leads / mês',state.fc.leads,0,3000,10,'')}
         ${slider('s_ag','Taxa de agendamento',state.fc.ag,0,60,1,'%')}
         ${slider('s_comp','Taxa de comparecimento',state.fc.comp,0,100,1,'%')}
         ${slider('s_conv','Taxa de conversão',state.fc.conv,0,60,1,'%')}
         ${slider('s_ticket','Ticket médio',state.fc.ticket,0,50000,500,'R$')}
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;font-weight:700;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 15px;margin-bottom:14px">
+          <span>Leads gerados: <b class="or" id="sim_leads">—</b></span>
+          <span>CAC: <b class="or" id="sim_cac">—</b></span>
+          <span>ROAS: <b class="or" id="sim_roas">—</b></span>
+        </div>
         <div class="compare">
           <div class="cc atual"><small>Faturamento atual</small><b id="r_atual">${money(cur.fat)}</b></div>
           <div class="cc pot"><small>Simulado</small><b id="r_sim">${money(cur.fat)}</b></div>
@@ -487,10 +503,19 @@ function renderResults(){
   </div>`;
   app.innerHTML=html;
   // wire sliders
-  ['s_leads','s_ag','s_comp','s_conv','s_ticket'].forEach(id=>{
+  ['s_verba','s_cpl','s_leads','s_ag','s_comp','s_conv','s_ticket'].forEach(id=>{
     const el=document.getElementById(id);
-    if(el) el.addEventListener('input',updateSim);
+    if(el) el.addEventListener('input',()=>onSlider(id));
   });
+  updateSim();
+}
+function onSlider(changed){
+  const g=id=>{const e=document.getElementById(id);return e?parseFloat(e.value):0;};
+  let verba=g('s_verba'), cpl=g('s_cpl'), leads=g('s_leads');
+  if(changed==='s_cpl' || changed==='s_verba'){ if(cpl>0) leads=Math.round(verba/cpl); }
+  else if(changed==='s_leads'){ verba=Math.round(leads*cpl); }
+  if(changed!=='s_leads'){ const e=document.getElementById('s_leads'); if(e) e.value=leads; }
+  if(changed==='s_leads'){ const e=document.getElementById('s_verba'); if(e) e.value=verba; }
   updateSim();
 }
 
@@ -511,11 +536,15 @@ function slider(id,label,val,min,max,step,unit){
 }
 function updateSim(){
   const g=id=>{const e=document.getElementById(id);return e?parseFloat(e.value):0;};
-  const fc={leads:g('s_leads'),ag:g('s_ag'),comp:g('s_comp'),conv:g('s_conv'),ticket:g('s_ticket'),cpl:state.fc.cpl};
-  setTxt('s_leads_v',fc.leads); setTxt('s_ag_v',fc.ag+'%'); setTxt('s_comp_v',fc.comp+'%');
+  const fc={leads:g('s_leads'),ag:g('s_ag'),comp:g('s_comp'),conv:g('s_conv'),ticket:g('s_ticket'),cpl:g('s_cpl'),verba:g('s_verba')};
+  setTxt('s_verba_v',money(fc.verba)); setTxt('s_cpl_v',money(fc.cpl)); setTxt('s_leads_v',fc.leads);
+  setTxt('s_ag_v',fc.ag+'%'); setTxt('s_comp_v',fc.comp+'%');
   setTxt('s_conv_v',fc.conv+'%'); setTxt('s_ticket_v',money(fc.ticket));
   const sim=calc(fc,false);
   setTxt('r_sim',money(sim.fat));
+  setTxt('sim_leads',fc.leads);
+  setTxt('sim_cac',sim.invest?money(sim.cac):'—');
+  setTxt('sim_roas',sim.invest?sim.roas.toFixed(1):'—');
 }
 function setTxt(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
 function applyBench(){
