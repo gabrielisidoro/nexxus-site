@@ -142,7 +142,8 @@ p{font-size:16px}
 .pricebox .por{font-size:14px;color:var(--ink);font-weight:700;margin-top:6px}
 .pricebox .priceval{font-size:54px;font-weight:800;color:var(--or-deep);line-height:1;margin:4px 0 2px;letter-spacing:-.03em}
 .pricebox .av{font-size:15px;font-weight:700;color:var(--ink)}
-.pricebox .btn{margin-top:18px}
+.pricebox .btn{margin-top:18px;font-size:19px;padding:18px 22px;line-height:1.25;border-radius:16px}
+.pricebox .btnsub{font-size:12px;color:var(--mut);font-weight:600;margin-top:9px}
 
 /* guarantee */
 .guar{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
@@ -167,10 +168,33 @@ p{font-size:16px}
 .faq details[open] summary .pl{transform:rotate(45deg)}
 .faq .ans{font-size:14.5px;color:var(--ink);padding:0 0 16px}
 
+/* testimonials */
+.tgrid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:8px}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 8px 22px rgba(40,25,15,.05)}
+.tcard .stars{color:#e8a13a;font-size:15px;letter-spacing:3px;margin-bottom:8px}
+.tcard .q{font-size:14.5px;color:var(--ink);margin:0 0 14px;font-style:italic}
+.tcard .who{display:flex;align-items:center;gap:11px}
+.tcard .who .av{width:42px;height:42px;border-radius:50%;background:var(--or-soft);color:var(--or-deep);font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:15px}
+.tcard .who b{display:block;font-size:14px;color:var(--inks);line-height:1.2}
+.tcard .who small{font-size:12px;color:var(--mut)}
+
 /* footer */
-footer{background:var(--mist);border-top:1px solid var(--line);padding:30px 0 110px}
-footer .logo{margin-bottom:10px}
-footer p{font-size:12.5px;color:var(--mut);line-height:1.7}
+footer{background:var(--inks);padding:38px 0 120px}
+footer *{color:#fff}
+.foot-top{display:flex;flex-direction:column;gap:22px;align-items:flex-start}
+.foot-brand p{font-size:13px;opacity:.8;margin-top:10px;max-width:380px;line-height:1.6}
+.foot-brand .wm{color:#fff}
+.foot-brand .wm small{color:#ffb499}
+.foot-badges{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.seal7{width:92px;height:92px;border-radius:50%;background:var(--or);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;flex:0 0 auto;border:3px solid #fff;box-shadow:0 0 0 2px var(--or)}
+.seal7 b{font-size:28px;font-weight:800;line-height:.85}
+.seal7 span{font-size:8px;font-weight:800;letter-spacing:.12em;margin-top:2px}
+.paybadge{display:flex;flex-direction:column;gap:9px}
+.paybadge span{font-size:12.5px;font-weight:700;opacity:.9}
+.foot-line{height:1px;background:rgba(255,255,255,.14);margin:24px 0}
+.foot-legal{font-size:12px;opacity:.72;line-height:1.8}
+.foot-legal .links{margin:8px 0;display:flex;gap:16px;flex-wrap:wrap;font-weight:600}
+.foot-legal .links a{text-decoration:underline}
 
 /* sticky mobile cta */
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(40,25,15,.10);padding:10px 14px;display:flex;align-items:center;gap:12px;transform:translateY(120%);transition:.3s}
@@ -202,7 +226,8 @@ footer p{font-size:12.5px;color:var(--mut);line-height:1.7}
   .pricebox .priceval{font-size:64px}
   .painlist{grid-template-columns:1fr 1fr}
   .sticky{display:none}
-  .pricebox .big{font-size:64px}
+  .tgrid{grid-template-columns:1fr 1fr 1fr}
+  .foot-top{flex-direction:row;justify-content:space-between;align-items:center}
 }
 </style>
 </head>
@@ -369,6 +394,19 @@ footer p{font-size:12.5px;color:var(--mut);line-height:1.7}
   </div>
 </section>
 
+<!-- DEPOIMENTOS (EXEMPLOS — substituir pelos depoimentos reais dos clientes) -->
+<section>
+  <div class="wrap">
+    <div class="center"><span class="kx">Quem está estruturando</span><h2>O que dizem sobre o método</h2><div class="divider"></div></div>
+    <div class="tgrid reveal">
+      <div class="tcard"><div class="stars">★★★★★</div><p class="q">"Montei a cadência de follow-up no mesmo dia que comecei. Em 3 semanas parei de perder lead no WhatsApp e fechei 2 contratos que estavam parados."</p><div class="who"><span class="av">R</span><div><b>Rafael M.</b><small>Dono de agência</small></div></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="q">"A calculadora de dimensionamento me mostrou que eu não precisava de mais 2 vendedores, e sim de processo. Economizei uma folha inteira."</p><div class="who"><span class="av">C</span><div><b>Camila R.</b><small>Clínica de estética</small></div></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="q">"Apliquei os scripts de SDR com meu time e a taxa de agendamento subiu logo na primeira semana. Material direto ao ponto, sem enrolação."</p><div class="who"><span class="av">D</span><div><b>Diego F.</b><small>SaaS B2B</small></div></div></div>
+    </div>
+    <p class="center mut" style="font-size:12px;margin-top:14px">Resultados variam conforme a aplicação de cada pessoa.</p>
+  </div>
+</section>
+
 <!-- OFERTA / PRICE -->
 <section id="oferta">
   <div class="wrap narrow">
@@ -392,10 +430,10 @@ footer p{font-size:12.5px;color:var(--mut);line-height:1.7}
     <div class="pricebox reveal">
       <span class="chip">Oferta de lançamento</span>
       <div class="de">De <s>R$ 1.247</s> &nbsp;•&nbsp; hoje por apenas</div>
-      <div class="big">R$ 47<small></small></div>
-      <div class="av">à vista no Pix &nbsp;ou&nbsp; <b>12x de R$ 4,79</b> no cartão</div>
-      <a class="btn big pulse" data-cta href="#" style="margin-top:18px">QUERO TUDO ISSO POR R$ 47 →</a>
-      <div class="ctahint" style="justify-content:center"><span>🔒 Compra segura na Hotmart</span><span>⚡ Acesso imediato</span></div>
+      <div class="priceval">R$ 47</div>
+      <div class="av">à vista no Pix &nbsp;ou&nbsp; <b>4x de R$ 12,79</b> no cartão</div>
+      <a class="btn pulse" data-cta href="#">QUERO GARANTIR MEU ACESSO →</a>
+      <div class="btnsub">🔒 Compra 100% segura na Hotmart · ⚡ Acesso imediato</div>
     </div>
 
     <div class="guar reveal" style="margin-top:22px">
@@ -406,7 +444,7 @@ footer p{font-size:12.5px;color:var(--mut);line-height:1.7}
 </section>
 
 <!-- AUTHORITY -->
-<section class="narrow">
+<section>
   <div class="wrap narrow">
     <div class="auth reveal">
       <span class="kx" style="color:#ffb499">Por que confiar nesse método</span>
@@ -440,16 +478,33 @@ footer p{font-size:12.5px;color:var(--mut);line-height:1.7}
     <div class="divider" style="margin:14px auto 18px"></div>
     <p class="mut" style="max-width:560px;margin:0 auto 22px">Por menos do que custa um almoço, você leva o sistema completo para estruturar suas vendas. A decisão é simples — e tem 7 dias de garantia.</p>
     <a class="btn big pulse" data-cta href="#" style="max-width:460px">QUERO COMEÇAR POR R$ 47 →</a>
-    <div class="ctahint" style="justify-content:center"><span>de <s>R$ 1.247</s> por R$ 47</span><span>ou 12x de R$ 4,79</span></div>
+    <div class="ctahint" style="justify-content:center"><span>de <s>R$ 1.247</s> por R$ 47</span><span>ou 4x de R$ 12,79</span></div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div class="logo"><span class="rk"><svg width="20" height="20" viewBox="0 0 120 120"><path d="M60 22c12 7 17 20 17 35l-4 15H51l-4-15c0-15 5-28 17-35z" fill="#fff"/><circle cx="60" cy="48" r="8" fill="#e8430f"/><path d="M51 66c-8 2-12 8-12 16l10-4z" fill="#fff"/><path d="M73 66c8 2 12 8 12 16l-10-4z" fill="#fff"/></svg></span><span class="wm">USUAL<small>digital</small></span></div>
-    <p><b>Usual Digital</b> — Estruturação comercial · Autores: Gabriel Isidoro e Renan Paiva.<br>
-    Suporte: WhatsApp (14) 99876-0335. Pagamento processado com segurança pela Hotmart.<br>
-    Este material é educacional. Os resultados dependem da aplicação, do mercado e do esforço de cada pessoa — não há garantia de faturamento. © 2026 Usual Digital. Todos os direitos reservados.</p>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="logo"><span class="rk"><svg width="20" height="20" viewBox="0 0 120 120"><path d="M60 22c12 7 17 20 17 35l-4 15H51l-4-15c0-15 5-28 17-35z" fill="#fff"/><circle cx="60" cy="48" r="8" fill="#e8430f"/><path d="M51 66c-8 2-12 8-12 16l10-4z" fill="#fff"/><path d="M73 66c8 2 12 8 12 16l-10-4z" fill="#fff"/></svg></span><span class="wm">USUAL<small>digital</small></span></div>
+        <p>Estruturação comercial de alta performance.<br>Autores: Gabriel Isidoro e Renan Paiva.</p>
+      </div>
+      <div class="foot-badges">
+        <div class="seal7"><b>7</b><span>DIAS DE</span><span>GARANTIA</span></div>
+        <div class="paybadge">
+          <span>🔒 Compra 100% segura</span>
+          <span>💳 Pix, cartão e boleto</span>
+          <span>⚡ Acesso imediato</span>
+        </div>
+      </div>
+    </div>
+    <div class="foot-line"></div>
+    <div class="foot-legal">
+      <b>Usual Digital</b> &nbsp;·&nbsp; CNPJ 47.668.335/0001-46<br>
+      Pagamento processado com segurança pela Hotmart. Este material é educacional; os resultados dependem da aplicação, do mercado e do esforço de cada pessoa — não há garantia de faturamento.
+      <div class="links"><a href="#">Termos de uso</a><a href="#">Política de privacidade</a></div>
+      © 2026 Usual Digital. Todos os direitos reservados.
+    </div>
   </div>
 </footer>
 
