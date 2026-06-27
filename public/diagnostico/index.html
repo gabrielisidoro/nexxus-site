@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico Comercial · Usual Digital</title>
+<meta name="description" content="Descubra em 3 minutos onde seu comercial perde dinheiro e quanto você pode crescer. Diagnóstico de maturidade + previsão de faturamento.">
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:'Montserrat';src:url('Montserrat.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
+:root{
+  --or:#fb5a2d; --or-deep:#e8430f; --or-soft:#fff1ea; --or-soft2:#ffe7da;
+  --ink:#2e2e33; --ink-strong:#1c1c20; --mut:#8c8c93;
+  --paper:#ffffff; --mist:#f7f6f3; --line:#ececea;
+  --loss:#d2483a; --warn:#e8a13a; --ok:#16a06b;
+  --shadow:0 10px 40px rgba(40,30,25,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',system-ui,Arial,sans-serif;color:var(--ink);background:var(--mist);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:22px 18px 60px}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer;border:none}
+
+/* header */
+.top{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 18px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo .rk{width:40px;height:40px;border-radius:11px;background:linear-gradient(160deg,#ff6a3d,var(--or-deep));display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.logo .wm{font-weight:800;font-size:21px;letter-spacing:.01em;color:var(--ink-strong);line-height:1}
+.logo .wm small{font-weight:600;font-size:11px;color:var(--or);margin-left:2px}
+.top .tagk{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+
+/* card */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:34px 34px 30px}
+@media(max-width:600px){.card{padding:24px 18px}.wrap{padding:16px 12px 50px}}
+
+.chip{display:inline-block;background:var(--or-soft);color:var(--or-deep);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:7px 14px;border-radius:40px}
+h1{font-size:38px;font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--ink-strong)}
+@media(max-width:600px){h1{font-size:28px}}
+h2{font-size:24px;font-weight:800;color:var(--ink-strong);line-height:1.1}
+h3{font-size:15px;font-weight:800;color:var(--ink-strong)}
+p.lead{font-size:17px;color:var(--ink)}
+.muted{color:var(--mut)}
+.or{color:var(--or)}
+
+/* progress */
+.prog{height:7px;background:var(--mist);border-radius:10px;overflow:hidden;margin:0 0 22px}
+.prog>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--or),var(--or-deep));border-radius:10px;transition:width .35s ease}
+.steplbl{font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--mut);margin-bottom:7px;display:flex;justify-content:space-between}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--or);color:#fff;font-weight:800;font-size:16px;padding:15px 26px;border-radius:14px;transition:.2s;box-shadow:0 8px 22px rgba(251,90,45,.32)}
+.btn:hover{background:var(--or-deep);transform:translateY(-1px)}
+.btn:disabled{background:#e7c6ba;box-shadow:none;cursor:not-allowed;transform:none}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:none;border:1.5px solid var(--line);font-size:15px;padding:13px 20px}
+.btn.ghost:hover{background:var(--mist);transform:none}
+.btn.wide{width:100%}
+.btn.lg{font-size:18px;padding:17px 30px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:26px}
+
+/* fields */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:700;color:var(--ink-strong);margin-bottom:6px}
+.field input,.field select{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:15px;font-family:inherit;color:var(--ink);background:#fff;transition:.15s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--or);box-shadow:0 0 0 3px var(--or-soft)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+
+/* questions */
+.qblock{margin-bottom:24px}
+.qblock>.qh{font-size:17px;font-weight:800;color:var(--ink-strong);margin-bottom:12px;display:flex;gap:10px}
+.qblock>.qh .qn{color:var(--or)}
+.opt{display:flex;align-items:center;gap:13px;border:1.5px solid var(--line);border-radius:13px;padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:.15s;background:#fff}
+.opt:hover{border-color:var(--or-soft2);background:var(--or-soft)}
+.opt .dot{width:21px;height:21px;border-radius:50%;border:2px solid #cfcdc9;flex:0 0 auto;transition:.15s;position:relative}
+.opt.sel{border-color:var(--or);background:var(--or-soft)}
+.opt.sel .dot{border-color:var(--or)}
+.opt.sel .dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--or)}
+.opt .ot{font-size:14.5px;font-weight:600;color:var(--ink)}
+.pillartag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--or);margin-bottom:4px}
+
+/* results */
+.gauge-wrap{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.ring{position:relative;width:170px;height:170px;flex:0 0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring .ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .ctr b{font-size:44px;font-weight:800;color:var(--ink-strong);line-height:1}
+.ring .ctr span{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.classbadge{display:inline-block;font-weight:800;font-size:15px;padding:8px 16px;border-radius:30px}
+.bars{margin-top:10px}
+.bar{margin-bottom:13px}
+.bar .bl{display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;margin-bottom:5px}
+.bar .bl .pct{font-weight:800}
+.bar .track{height:11px;background:var(--mist);border-radius:8px;overflow:hidden}
+.bar .track>i{display:block;height:100%;border-radius:8px;transition:width .8s ease}
+
+.section{margin-top:30px}
+.section .sh{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--or);margin-bottom:10px}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:700px){.kpis{grid-template-columns:1fr 1fr}}
+.kpi{background:var(--mist);border:1px solid var(--line);border-radius:14px;padding:14px}
+.kpi b{display:block;font-size:24px;font-weight:800;color:var(--ink-strong);line-height:1}
+.kpi span{font-size:11.5px;font-weight:600;color:var(--mut)}
+.kpi .st{font-size:11px;font-weight:800;margin-top:5px;display:inline-block}
+
+.fcast{background:var(--mist);border:1px solid var(--line);border-radius:18px;padding:20px}
+.slider{margin-bottom:15px}
+.slider .sl{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:6px}
+.slider .sl b{color:var(--or-deep)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:var(--or-soft2);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--or);cursor:pointer;box-shadow:0 2px 6px rgba(251,90,45,.5)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border:none;border-radius:50%;background:var(--or);cursor:pointer}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+.compare .cc{border-radius:14px;padding:16px;text-align:center}
+.compare .atual{background:#fff;border:1.5px solid var(--line)}
+.compare .pot{background:var(--or);color:#fff}
+.compare .cc small{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.compare .cc b{display:block;font-size:27px;font-weight:800;margin-top:4px;line-height:1}
+.uplift{margin-top:14px;background:var(--or-soft);border:1px dashed var(--or);border-radius:14px;padding:14px 16px;text-align:center;font-weight:700;color:var(--or-deep)}
+.uplift b{font-size:22px}
+
+.rec{display:flex;gap:14px;background:var(--mist);border:1px solid var(--line);border-left:5px solid var(--or);border-radius:0 14px 14px 0;padding:15px 17px;margin-bottom:12px}
+.rec .rn{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--or);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.rec h4{font-size:15px;font-weight:800;color:var(--ink-strong);margin-bottom:3px}
+.rec p{font-size:13.5px;color:var(--ink)}
+.rec .ch{font-size:11.5px;font-weight:800;color:var(--or);text-transform:uppercase;letter-spacing:.06em;margin-top:5px;display:block}
+
+.cta{margin-top:30px;background:linear-gradient(150deg,#ff6a3d,var(--or) 55%,var(--or-deep));border-radius:20px;padding:28px;color:#fff;text-align:center}
+.cta h2{color:#fff}
+.cta p{color:#fff;opacity:.95;margin:10px auto 18px;max-width:520px;font-size:15px}
+.cta .btn{background:#fff;color:var(--or-deep);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.cta .btn:hover{background:#fff;color:var(--or-deep);transform:translateY(-1px)}
+
+.foot{text-align:center;color:var(--mut);font-size:12px;margin-top:26px;line-height:1.6}
+.hidden{display:none!important}
+.fade{animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+@media print{
+  body{background:#fff}
+  .noprint{display:none!important}
+  .card{box-shadow:none;border:none;padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="logo">
+      <span class="rk">
+        <svg width="24" height="24" viewBox="0 0 120 120" aria-hidden="true">
+          <path d="M60 22c12 7 17 20 17 35l-4 15H51l-4-15c0-15 5-28 17-35z" fill="#fff"/>
+          <circle cx="60" cy="48" r="8" fill="#e8430f"/>
+          <path d="M51 66c-8 2-12 8-12 16l10-4z" fill="#fff"/>
+          <path d="M73 66c8 2 12 8 12 16l-10-4z" fill="#fff"/>
+          <path d="M54 84c0 4-1 8-3 11M60 85c0 5-1 10-3 14M66 84c0 4 1 8 3 11" stroke="#fff" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+        </svg>
+      </span>
+      <span class="wm">USUAL<small>digital</small></span>
+    </div>
+    <div class="tagk">Diagnóstico Comercial</div>
+  </div>
+
+  <div id="app"></div>
+
+  <div class="foot noprint">
+    Mentor Gabriel Isidoro · Especialista em Estruturação Comercial · WhatsApp (14) 99876-0335<br>
+    Ferramenta de uso educativo. Os resultados são estimativas baseadas nos dados informados.
+  </div>
+</div>
+
+<script>
+const WA = "https://wa.me/5514998760335?text=" + encodeURIComponent("Oi! Fiz o Diagnóstico Comercial da Usual e quero aprofundar meu resultado.");
+
+const PILLARS = [
+  {id:"aq", name:"Aquisição & Marketing", chapter:"Cap. 5 — Funis de aquisição"},
+  {id:"pv", name:"Pré-vendas", chapter:"Cap. 6 — Pré-vendas (SDR)"},
+  {id:"vd", name:"Vendas", chapter:"Cap. 7 — Vendas (Closer)"},
+  {id:"of", name:"Oferta & Produto", chapter:"Cap. 2-4 — ICP, esteira e oferta"},
+  {id:"gm", name:"Gestão & Métricas", chapter:"Cap. 11-12 — CRM e gestão"},
+  {id:"pp", name:"Pós-venda & Pessoas", chapter:"Cap. 8-9 — Pós-venda e time"},
+];
+
+const QUESTIONS = [
+  {p:"aq", q:"Como chegam os seus leads hoje?", o:[
+    ["Só por indicação e sorte",0],["Dependo de um canal só",1],
+    ["Tenho 1 ou 2 canais previsíveis",2],["Funis de marketing E comerciais rodando juntos",3]]},
+  {p:"aq", q:"Você sabe quantos leads novos vai gerar no próximo mês?", o:[
+    ["Não faço ideia",0],["Tenho um chute",1],
+    ["Tenho uma média histórica",2],["Previsão baseada em investimento e taxas",3]]},
+  {p:"pv", q:"Quanto tempo leva para um lead novo ser contatado?", o:[
+    ["Às vezes nem é contatado",0],["Horas ou dias",1],
+    ["No mesmo dia",2],["Em minutos, com processo definido",3]]},
+  {p:"pv", q:"Existe uma cadência de follow-up definida?", o:[
+    ["Contato 1 ou 2 vezes e desisto",0],["Faço follow-up, mas sem padrão",1],
+    ["Tenho uma cadência básica",2],["Cadência multicanal de 8 a 12 toques",3]]},
+  {p:"vd", q:"Sua reunião de vendas segue um processo?", o:[
+    ["Cada venda é no improviso",0],["Tenho um roteiro mental",1],
+    ["Tenho um script básico",2],["Protocolo completo: diagnóstico, ancoragem, fechamento",3]]},
+  {p:"vd", q:"Você usa perguntas de diagnóstico (tipo SPIN) antes de apresentar?", o:[
+    ["Não, já apresento o produto",0],["Pergunto algumas coisas",1],
+    ["Tenho perguntas-chave",2],["Diagnóstico estruturado guiando a venda",3]]},
+  {p:"of", q:"Você tem clareza do seu cliente ideal (ICP)?", o:[
+    ["Vendo para qualquer um",0],["Tenho uma ideia vaga",1],
+    ["ICP definido",2],["ICP + cliente mínimo ideal + critérios de qualificação",3]]},
+  {p:"of", q:"Como é a sua oferta na hora de fechar?", o:[
+    ["Preço na hora, sem padrão",0],["Tenho uma tabela fixa",1],
+    ["Tabela + condição promocional",2],["Engenharia de oferta: ancoragem, bônus, última condição",3]]},
+  {p:"of", q:"Você tem uma esteira de produtos (entrada → principal → high ticket)?", o:[
+    ["Só um produto",0],["Dois produtos sem conexão",1],
+    ["Esteira começando",2],["Esteira de valor com ascensão clara",3]]},
+  {p:"gm", q:"Você acompanha métricas do comercial (taxas, CAC, ROAS)?", o:[
+    ["Não acompanho nada",0],["Olho só o faturamento",1],
+    ["Acompanho algumas taxas",2],["Dashboard com KPIs e metas",3]]},
+  {p:"gm", q:"Existe um CRM organizado, com funil por etapas?", o:[
+    ["Está na cabeça / WhatsApp / planilha bagunçada",0],["Planilha organizada",1],
+    ["Tenho CRM, mas subutilizado",2],["CRM com pipelines e automações",3]]},
+  {p:"gm", q:"Com que frequência você analisa os números e ajusta a rota?", o:[
+    ["Nunca / só quando dá problema",0],["De vez em quando",1],
+    ["Mensalmente",2],["Rotina semanal de métricas",3]]},
+  {p:"pp", q:"Existe processo de pós-venda (onboarding, recompra, indicação)?", o:[
+    ["Acabou a venda, acabou",0],["Atendo quando o cliente chama",1],
+    ["Tenho algum acompanhamento",2],["Pós-venda estruturado gerando LTV e indicação",3]]},
+  {p:"pp", q:"O comercial roda sem você na operação do dia a dia?", o:[
+    ["Para tudo se eu saio",0],["Depende muito de mim",1],
+    ["Roda parcialmente sem mim",2],["Opera sozinho, com gestão por métricas",3]]},
+];
+
+const REC = {
+  aq:{tip:"Monte ao menos um funil de marketing (VSL) e um comercial (social selling/prospecção) para parar de depender de indicação."},
+  pv:{tip:"Implante uma cadência de 8 a 12 toques e responda todo lead em até 5 minutos. 80% das vendas acontecem entre o 5º e o 12º contato."},
+  vd:{tip:"Padronize a call com o protocolo de 5 passos e use perguntas de diagnóstico (SPIN) antes de apresentar a solução."},
+  of:{tip:"Defina o ICP, monte a esteira de valor e estruture a engenharia da oferta (ancoragem, bônus, última condição)."},
+  gm:{tip:"Coloque um CRM com pipelines, acompanhe os KPIs num dashboard e crie a rotina semanal de métricas."},
+  pp:{tip:"Estruture o pós-venda (onboarding, recompra, indicação) e comece a documentar processos para o comercial rodar sem você."},
+};
+
+const BENCH = {ag:0.20, comp:0.70, conv:0.28};
+
+let state = {
+  step:0, // 0 intro, 1..6 pillars, 7 forecast, 8 results
+  answers:{}, // index -> score
+  name:"", seg:"",
+  fc:{leads:600, ag:12, comp:55, conv:18, ticket:5000, invest:8000},
+  liveBench:false
+};
+
+const app = document.getElementById('app');
+const money = v => "R$ " + Math.round(v).toLocaleString('pt-BR');
+const TOTALSTEPS = 8;
+
+function pillarQuestions(pid){ return QUESTIONS.map((q,i)=>({...q,i})).filter(q=>q.p===pid); }
+
+function pillarScore(pid){
+  const qs = pillarQuestions(pid);
+  let s=0, m=0;
+  qs.forEach(q=>{ m+=3; if(state.answers[q.i]!==undefined) s+=state.answers[q.i]; });
+  return m? Math.round(s/m*100):0;
+}
+function overallScore(){
+  let s=0,m=0;
+  QUESTIONS.forEach((q,i)=>{ m+=3; if(state.answers[i]!==undefined)s+=state.answers[i]; });
+  return m? Math.round(s/m*100):0;
+}
+function classify(p){
+  if(p<40) return {t:"Comercial no improviso", c:"var(--loss)", bg:"#fbe9e6"};
+  if(p<65) return {t:"Em estruturação", c:"#c4791a", bg:"#fdf2e2"};
+  if(p<85) return {t:"Estruturado", c:"var(--ok)", bg:"#e6f6ef"};
+  return {t:"Alta performance", c:"var(--ok)", bg:"#e6f6ef"};
+}
+function barColor(p){ return p<40?"var(--loss)":p<65?"var(--warn)":"var(--ok)"; }
+
+/* ---------- forecast math ---------- */
+function calc(fc, useBench){
+  const ag = useBench? Math.max(fc.ag/100, BENCH.ag) : fc.ag/100;
+  const comp = useBench? Math.max(fc.comp/100, BENCH.comp) : fc.comp/100;
+  const conv = useBench? Math.max(fc.conv/100, BENCH.conv) : fc.conv/100;
+  const agend = fc.leads*ag;
+  const reun = agend*comp;
+  const vendas = reun*conv;
+  const fat = vendas*fc.ticket;
+  const cac = vendas? fc.invest/vendas : 0;
+  const roas = fc.invest? fat/fc.invest : 0;
+  return {agend,reun,vendas,fat,cac,roas};
+}
+
+/* ---------- render ---------- */
+function setStep(s){ state.step=Math.max(0,Math.min(TOTALSTEPS,s)); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+function render(){
+  const s=state.step;
+  if(s===0) return renderIntro();
+  if(s>=1 && s<=6) return renderPillar(s);
+  if(s===7) return renderForecast();
+  if(s===8) return renderResults();
+}
+
+function progressBar(frac, label){
+  return `<div class="steplbl noprint"><span>${label}</span><span>${Math.round(frac*100)}%</span></div>
+  <div class="prog noprint"><i style="width:${frac*100}%"></i></div>`;
+}
+
+function renderIntro(){
+  app.innerHTML = `<div class="card fade">
+    <span class="chip">Para donos de negócio que querem previsibilidade</span>
+    <h1 style="margin-top:16px">Raio-X do seu<br><span class="or">comercial</span>.</h1>
+    <p class="lead" style="margin-top:16px;max-width:560px">Em menos de 3 minutos, descubra a maturidade da sua operação de vendas, quanto você deixa na mesa hoje e qual o seu potencial de faturamento com a estrutura certa.</p>
+    <div class="grid2" style="margin-top:22px">
+      <div class="field"><label>Seu nome (opcional)</label><input id="f_name" placeholder="Como te chamamos?" value="${state.name}"></div>
+      <div class="field"><label>Segmento (opcional)</label><input id="f_seg" placeholder="Ex.: agência, clínica, SaaS..." value="${state.seg}"></div>
+    </div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap;margin:10px 0 4px">
+      <div class="muted" style="font-size:13px">✓ 15 perguntas rápidas</div>
+      <div class="muted" style="font-size:13px">✓ Previsão de faturamento</div>
+      <div class="muted" style="font-size:13px">✓ Plano de ação personalizado</div>
+    </div>
+    <div class="nav">
+      <span></span>
+      <button class="btn lg" onclick="startQuiz()">Começar diagnóstico →</button>
+    </div>
+  </div>`;
+}
+function startQuiz(){
+  state.name=(document.getElementById('f_name').value||"").trim();
+  state.seg=(document.getElementById('f_seg').value||"").trim();
+  setStep(1);
+}
+
+function renderPillar(s){
+  const pillar=PILLARS[s-1];
+  const qs=pillarQuestions(pillar.id);
+  const frac=(s)/TOTALSTEPS;
+  let html=`<div class="card fade">${progressBar(frac, `Etapa ${s} de 7 · ${pillar.name}`)}
+    <div class="pillartag">${dot()} ${pillar.name}</div>`;
+  qs.forEach((q,k)=>{
+    html+=`<div class="qblock"><div class="qh"><span class="qn">${k+1}.</span><span>${q.q}</span></div>`;
+    q.o.forEach((opt,oi)=>{
+      const sel=state.answers[q.i]===opt[1] && state.answers[q.i]!==undefined && selIndex(q.i)===oi;
+      html+=`<div class="opt ${sel?'sel':''}" onclick="pick(${q.i},${oi},${opt[1]})"><span class="dot"></span><span class="ot">${opt[0]}</span></div>`;
+    });
+    html+=`</div>`;
+  });
+  const answered=qs.every(q=>state.answers[q.i]!==undefined);
+  html+=`<div class="nav">
+    <button class="btn ghost" onclick="setStep(${s-1})">← Voltar</button>
+    <button class="btn" id="nextbtn" ${answered?'':'disabled'} onclick="setStep(${s+1})">${s===6?'Ir para a previsão →':'Próximo →'}</button>
+  </div></div>`;
+  app.innerHTML=html;
+}
+// track which option index was chosen (to highlight even with duplicate scores)
+let chosenIndex={};
+function selIndex(qi){ return chosenIndex[qi]; }
+function pick(qi,oi,score){
+  state.answers[qi]=score; chosenIndex[qi]=oi;
+  render();
+}
+function dot(){return '<svg width="14" height="14" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3.4" fill="#fb5a2d"/></svg>';}
+
+function renderForecast(){
+  const f=state.fc;
+  app.innerHTML=`<div class="card fade">${progressBar(7/TOTALSTEPS,"Etapa 7 de 7 · Seus números")}
+    <h2>Seus números atuais</h2>
+    <p class="muted" style="margin:6px 0 18px;font-size:14px">Preencha com o que você tem hoje. Não sabe ao certo? Use uma estimativa — você ajusta os resultados depois.</p>
+    <div class="grid2">
+      <div class="field"><label>Leads novos por mês</label><input type="number" id="i_leads" value="${f.leads}" min="0"></div>
+      <div class="field"><label>Ticket médio (R$)</label><input type="number" id="i_ticket" value="${f.ticket}" min="0"></div>
+      <div class="field"><label>Taxa de agendamento (%)</label><input type="number" id="i_ag" value="${f.ag}" min="0" max="100"></div>
+      <div class="field"><label>Taxa de comparecimento (%)</label><input type="number" id="i_comp" value="${f.comp}" min="0" max="100"></div>
+      <div class="field"><label>Taxa de conversão em venda (%)</label><input type="number" id="i_conv" value="${f.conv}" min="0" max="100"></div>
+      <div class="field"><label>Investimento em marketing/mês (R$)</label><input type="number" id="i_invest" value="${f.invest}" min="0"></div>
+    </div>
+    <div class="nav">
+      <button class="btn ghost" onclick="saveForecast(6)">← Voltar</button>
+      <button class="btn lg" onclick="saveForecast(8)">Gerar meu diagnóstico →</button>
+    </div>
+  </div>`;
+}
+function saveForecast(go){
+  const g=id=>parseFloat(document.getElementById(id).value)||0;
+  state.fc={leads:g('i_leads'),ticket:g('i_ticket'),ag:g('i_ag'),comp:g('i_comp'),conv:g('i_conv'),invest:g('i_invest')};
+  setStep(go);
+}
+
+function renderResults(){
+  const score=overallScore();
+  const cls=classify(score);
+  const C=2*Math.PI*72;
+  const off=C*(1-score/100);
+  const hi=state.name? `, ${state.name}`:"";
+
+  // pillars sorted for recommendations
+  const pscores=PILLARS.map(p=>({...p,score:pillarScore(p.id)}));
+  const lowest=[...pscores].sort((a,b)=>a.score-b.score).slice(0,3);
+
+  // forecast
+  const cur=calc(state.fc,false);
+  const pot=calc(state.fc,true);
+  const uplift=pot.fat-cur.fat;
+  const upPct=cur.fat? Math.round(uplift/cur.fat*100):0;
+
+  // predictability
+  const prev=Math.round(pillarScore('gm')*0.4 + pillarScore('pv')*0.35 + pillarScore('vd')*0.25);
+  const prevTxt = prev<40?"Baixa":prev<70?"Média":"Alta";
+  const prevC = prev<40?"var(--loss)":prev<70?"var(--warn)":"var(--ok)";
+
+  let html=`<div class="card fade">
+    <div class="pillartag noprint">${dot()} Seu resultado${hi}</div>
+    <div class="gauge-wrap">
+      <div class="ring">
+        <svg width="170" height="170">
+          <circle cx="85" cy="85" r="72" fill="none" stroke="#f0eeea" stroke-width="15"/>
+          <circle cx="85" cy="85" r="72" fill="none" stroke="${cls.c}" stroke-width="15" stroke-linecap="round"
+            stroke-dasharray="${C}" stroke-dashoffset="${off}"/>
+        </svg>
+        <div class="ctr"><b>${score}<span style="font-size:20px">%</span></b><span>Maturidade</span></div>
+      </div>
+      <div style="flex:1;min-width:240px">
+        <span class="classbadge" style="color:${cls.c};background:${cls.bg}">${cls.t}</span>
+        <h2 style="margin-top:12px">${diagSentence(score)}</h2>
+        <p class="muted" style="margin-top:8px;font-size:14px">Previsibilidade da operação:
+          <b style="color:${prevC}">${prevTxt}</b> (${prev}/100)</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sh">Maturidade por pilar</div>
+      <div class="bars">
+        ${pscores.map(p=>`<div class="bar"><div class="bl"><span>${p.name}</span><span class="pct" style="color:${barColor(p.score)}">${p.score}%</span></div>
+          <div class="track"><i style="width:${p.score}%;background:${barColor(p.score)}"></i></div></div>`).join('')}
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sh">Sua operação hoje</div>
+      <div class="kpis">
+        ${kpi(cur.vendas.toFixed(0),"vendas / mês")}
+        ${kpi(money(cur.fat),"faturamento estimado")}
+        ${kpi(state.fc.invest?money(cur.cac):"—","CAC", state.fc.invest?cacStatus(cur.cac,state.fc.ticket):"")}
+        ${kpi(state.fc.invest?cur.roas.toFixed(1):"—","ROAS", state.fc.invest?roasStatus(cur.roas):"")}
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sh">Previsão de faturamento · simulador</div>
+      <div class="fcast">
+        <p style="font-size:14px;font-weight:700;margin-bottom:14px">Arraste e veja o impacto de melhorar cada etapa do seu funil:</p>
+        ${slider('s_leads','Leads / mês',state.fc.leads,0,3000,10,'')}
+        ${slider('s_ag','Taxa de agendamento',state.fc.ag,0,60,1,'%')}
+        ${slider('s_comp','Taxa de comparecimento',state.fc.comp,0,100,1,'%')}
+        ${slider('s_conv','Taxa de conversão',state.fc.conv,0,60,1,'%')}
+        ${slider('s_ticket','Ticket médio',state.fc.ticket,0,50000,500,'R$')}
+        <div class="compare">
+          <div class="cc atual"><small>Faturamento atual</small><b id="r_atual">${money(cur.fat)}</b></div>
+          <div class="cc pot"><small>Simulado</small><b id="r_sim">${money(cur.fat)}</b></div>
+        </div>
+        <div class="uplift">Atingindo os KPIs ideais do mercado, seu potencial é
+          <b id="r_pot">${money(pot.fat)}</b><br>
+          <span id="r_up">${uplift>0?`+ ${money(uplift)} por mês (${upPct}% a mais)`:'você já está acima dos benchmarks nas taxas — foque em volume e ticket'}</span>
+          <div style="margin-top:10px"><button class="btn ghost noprint" style="font-size:13px;padding:9px 16px" onclick="applyBench()">Aplicar KPIs ideais ↑</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sh">Seu plano de ação · 3 prioridades</div>
+      ${lowest.map((p,i)=>`<div class="rec"><div class="rn">${i+1}</div><div>
+        <h4>${p.name} <span class="muted" style="font-weight:700">· ${p.score}%</span></h4>
+        <p>${REC[p.id].tip}</p><span class="ch">${p.chapter} — Ebook Usual</span></div></div>`).join('')}
+    </div>
+
+    <div class="cta noprint">
+      <h2>Quer um diagnóstico aprofundado, com plano sob medida?</h2>
+      <p>Leve esse resultado para uma conversa com o Mentor Gabriel Isidoro. Em uma call, mapeamos os gargalos da sua operação e as 3 alavancas de maior impacto para os próximos 90 dias.</p>
+      <a class="btn lg" href="${WA}" target="_blank" rel="noopener">Falar no WhatsApp (14) 99876-0335</a>
+    </div>
+
+    <div class="nav noprint">
+      <button class="btn ghost" onclick="window.print()">Salvar / imprimir resultado</button>
+      <button class="btn ghost" onclick="restart()">Refazer diagnóstico</button>
+    </div>
+  </div>`;
+  app.innerHTML=html;
+  // wire sliders
+  ['s_leads','s_ag','s_comp','s_conv','s_ticket'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.addEventListener('input',updateSim);
+  });
+  updateSim();
+}
+
+function diagSentence(score){
+  if(score<40) return "Seu comercial ainda depende de improviso e sorte.";
+  if(score<65) return "Você já começou a estruturar, mas há lacunas que travam o crescimento.";
+  if(score<85) return "Boa base estruturada. Agora o jogo é otimizar e escalar.";
+  return "Operação madura. Foco em escala e eficiência.";
+}
+function kpi(big,lbl,st){ return `<div class="kpi"><b>${big}</b><span>${lbl}</span>${st?`<div class="st">${st}</div>`:''}</div>`; }
+function cacStatus(cac,ticket){ if(!ticket)return ''; const r=cac/ticket; return r<0.3?'<span style="color:var(--ok)">saudável</span>':r<0.6?'<span style="color:var(--warn)">atenção</span>':'<span style="color:var(--loss)">alto</span>'; }
+function roasStatus(r){ return r>=7?'<span style="color:var(--ok)">ótimo</span>':r>=3?'<span style="color:var(--warn)">médio</span>':'<span style="color:var(--loss)">baixo</span>'; }
+
+function slider(id,label,val,min,max,step,unit){
+  const disp = unit==='R$'? money(val) : (unit==='%'? val+'%' : val);
+  return `<div class="slider"><div class="sl"><span>${label}</span><b id="${id}_v">${disp}</b></div>
+    <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${val}"></div>`;
+}
+function updateSim(){
+  const g=id=>{const e=document.getElementById(id);return e?parseFloat(e.value):0;};
+  const fc={leads:g('s_leads'),ag:g('s_ag'),comp:g('s_comp'),conv:g('s_conv'),ticket:g('s_ticket'),invest:state.fc.invest};
+  setTxt('s_leads_v',fc.leads); setTxt('s_ag_v',fc.ag+'%'); setTxt('s_comp_v',fc.comp+'%');
+  setTxt('s_conv_v',fc.conv+'%'); setTxt('s_ticket_v',money(fc.ticket));
+  const sim=calc(fc,false);
+  setTxt('r_sim',money(sim.fat));
+}
+function setTxt(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function applyBench(){
+  state.fc.ag=Math.max(state.fc.ag,BENCH.ag*100);
+  state.fc.comp=Math.max(state.fc.comp,BENCH.comp*100);
+  state.fc.conv=Math.max(state.fc.conv,BENCH.conv*100);
+  render();
+}
+function restart(){ state={step:0,answers:{},name:state.name,seg:state.seg,fc:state.fc,liveBench:false}; chosenIndex={}; setStep(0); }
+
+render();
+</script>
+</body>
+</html>
