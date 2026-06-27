@@ -97,7 +97,7 @@ p.lead{font-size:17px;color:var(--ink)}
 .section{margin-top:30px}
 .section .sh{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--or);margin-bottom:10px}
 
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
 @media(max-width:700px){.kpis{grid-template-columns:1fr 1fr}}
 .kpi{background:var(--mist);border:1px solid var(--line);border-radius:14px;padding:14px}
 .kpi b{display:block;font-size:24px;font-weight:800;color:var(--ink-strong);line-height:1}
@@ -244,7 +244,7 @@ let state = {
   step:0, // 0 intro, 1..6 pillars, 7 forecast, 8 results
   answers:{}, // index -> score
   name:"", seg:"",
-  fc:{leads:600, ag:12, comp:55, conv:18, ticket:5000, invest:8000},
+  fc:{leads:600, ag:12, comp:55, conv:18, ticket:5000, cpl:0},
   liveBench:false
 };
 
@@ -282,9 +282,11 @@ function calc(fc, useBench){
   const reun = agend*comp;
   const vendas = reun*conv;
   const fat = vendas*fc.ticket;
-  const cac = vendas? fc.invest/vendas : 0;
-  const roas = fc.invest? fat/fc.invest : 0;
-  return {agend,reun,vendas,fat,cac,roas};
+  const cpl = fc.cpl||0;
+  const invest = cpl*fc.leads;
+  const cac = vendas? invest/vendas : 0;
+  const roas = invest? fat/invest : 0;
+  return {agend,reun,vendas,fat,cac,roas,cpl,invest};
 }
 
 /* ---------- render ---------- */
@@ -370,7 +372,7 @@ function renderForecast(){
       <div class="field"><label>Taxa de agendamento (%)</label><input type="number" id="i_ag" value="${f.ag}" min="0" max="100"></div>
       <div class="field"><label>Taxa de comparecimento (%)</label><input type="number" id="i_comp" value="${f.comp}" min="0" max="100"></div>
       <div class="field"><label>Taxa de conversão em venda (%)</label><input type="number" id="i_conv" value="${f.conv}" min="0" max="100"></div>
-      <div class="field"><label>Investimento em marketing/mês (R$)</label><input type="number" id="i_invest" value="${f.invest}" min="0"></div>
+      <div class="field"><label>Custo por lead (R$)</label><input type="number" id="i_cpl" value="${f.cpl}" min="0" step="0.01" placeholder="0 se não investe em tráfego"></div>
     </div>
     <div class="nav">
       <button class="btn ghost" onclick="saveForecast(6)">← Voltar</button>
@@ -380,7 +382,7 @@ function renderForecast(){
 }
 function saveForecast(go){
   const g=id=>parseFloat(document.getElementById(id).value)||0;
-  state.fc={leads:g('i_leads'),ticket:g('i_ticket'),ag:g('i_ag'),comp:g('i_comp'),conv:g('i_conv'),invest:g('i_invest')};
+  state.fc={leads:g('i_leads'),ticket:g('i_ticket'),ag:g('i_ag'),comp:g('i_comp'),conv:g('i_conv'),cpl:g('i_cpl')};
   setStep(go);
 }
 
@@ -438,8 +440,9 @@ function renderResults(){
       <div class="kpis">
         ${kpi(cur.vendas.toFixed(0),"vendas / mês")}
         ${kpi(money(cur.fat),"faturamento estimado")}
-        ${kpi(state.fc.invest?money(cur.cac):"—","CAC", state.fc.invest?cacStatus(cur.cac,state.fc.ticket):"")}
-        ${kpi(state.fc.invest?cur.roas.toFixed(1):"—","ROAS", state.fc.invest?roasStatus(cur.roas):"")}
+        ${kpi(cur.cpl?money(cur.cpl):"—","custo por lead")}
+        ${kpi(cur.cpl?money(cur.cac):"—","CAC", cur.cpl?cacStatus(cur.cac,state.fc.ticket):"")}
+        ${kpi(cur.cpl?cur.roas.toFixed(1):"—","ROAS", cur.cpl?roasStatus(cur.roas):"")}
       </div>
     </div>
 
@@ -508,7 +511,7 @@ function slider(id,label,val,min,max,step,unit){
 }
 function updateSim(){
   const g=id=>{const e=document.getElementById(id);return e?parseFloat(e.value):0;};
-  const fc={leads:g('s_leads'),ag:g('s_ag'),comp:g('s_comp'),conv:g('s_conv'),ticket:g('s_ticket'),invest:state.fc.invest};
+  const fc={leads:g('s_leads'),ag:g('s_ag'),comp:g('s_comp'),conv:g('s_conv'),ticket:g('s_ticket'),cpl:state.fc.cpl};
   setTxt('s_leads_v',fc.leads); setTxt('s_ag_v',fc.ag+'%'); setTxt('s_comp_v',fc.comp+'%');
   setTxt('s_conv_v',fc.conv+'%'); setTxt('s_ticket_v',money(fc.ticket));
   const sim=calc(fc,false);
