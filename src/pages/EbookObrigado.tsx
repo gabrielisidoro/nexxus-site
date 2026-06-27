@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { MessageCircle, CheckCircle2, Download, Instagram, ArrowRight } from 'lucide-react'
 import logo from '@/assets/logo-nexxus.png'
 import { site } from '@/data/site'
+import { loadMetaPixel, metaTrack } from '@/lib/metaPixel'
 
 declare global {
   interface Window { dataLayer: Record<string, unknown>[] }
@@ -23,6 +24,15 @@ export default function EbookObrigado() {
     window.dataLayer = window.dataLayer || []
     window.dataLayer.push({ event: 'lead_convertido' })
     window.dataLayer.push({ event: 'ebook_lead_obrigado' })
+
+    // Meta Pixel: dispara ao acessar a página de obrigado (conversão).
+    const w = window as unknown as { __nxEbookLead?: boolean }
+    loadMetaPixel()
+    metaTrack('PageView')
+    if (!w.__nxEbookLead) {
+      metaTrack('Lead')
+      w.__nxEbookLead = true
+    }
   }, [])
 
   return (

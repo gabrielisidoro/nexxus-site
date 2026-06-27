@@ -7,6 +7,7 @@ import {
 } from 'lucide-react'
 import logo from '@/assets/logo-nexxus.png'
 import { submitLead, validateLead, applyCountryCode } from '@/lib/submitLead'
+import { loadMetaPixel, metaTrack } from '@/lib/metaPixel'
 
 declare global {
   interface Window { dataLayer: Record<string, unknown>[] }
@@ -61,6 +62,11 @@ export default function LPEbook() {
   useEffect(() => {
     window.dataLayer = window.dataLayer || []
     window.dataLayer.push({ event: 'view_lp_ebook' })
+
+    // Meta Pixel: PageView na landing para capturar o clique do anúncio (fbclid)
+    // e permitir a atribuição do Lead disparado na página de obrigado.
+    loadMetaPixel()
+    metaTrack('PageView')
   }, [])
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
