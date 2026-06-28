@@ -241,8 +241,8 @@ footer *{color:#fff}
 
 /* vsl */
 .vsl{background:#fff}
-.vsl .frame{position:relative;max-width:760px;margin:20px auto 0;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#1c1c20;box-shadow:0 24px 60px rgba(40,25,15,.20)}
-.vsl .frame iframe,.vsl .frame video{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.vsl .frame{position:relative;max-width:540px;margin:20px auto 0;aspect-ratio:1/1;border-radius:18px;overflow:hidden;background:#1c1c20;box-shadow:0 24px 60px rgba(40,25,15,.20)}
+.vsl .frame iframe,.vsl .frame video{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;object-fit:cover}
 .vsl .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 38%,#34343c,#1c1c20);cursor:pointer}
 .vsl .play{width:86px;height:86px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(251,90,45,.5);transition:.2s}
 .vsl .ph:hover .play{transform:scale(1.07)}
@@ -315,12 +315,10 @@ footer *{color:#fff}
     <h2>Veja como sair do improviso</h2>
     <div class="divider" style="margin:14px auto 4px"></div>
     <div class="frame">
-      <!-- VSL: para publicar o vídeo, troque TODO o bloco <div class="ph">...</div> por um iframe. Ex.:
-           <iframe src="https://www.youtube.com/embed/SEU_ID" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
-      <div class="ph">
-        <div class="play"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
-        <p>Seu vídeo de vendas (VSL) entra aqui</p>
-      </div>
+      <video controls playsinline preload="metadata" poster="img/vsl-poster.jpg">
+        <source src="vsl.mp4" type="video/mp4">
+        Seu navegador não suporta vídeo.
+      </video>
     </div>
     <a class="btn pulse" data-cta href="#oferta" style="margin-top:24px">QUERO ESTRUTURAR MEU COMERCIAL →</a>
   </div>
