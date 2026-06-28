@@ -65,7 +65,7 @@ p{font-size:16px}
 .hero h1 .hl{color:var(--or)}
 .hero .sub{font-size:17px;color:var(--ink);margin-top:14px;max-width:540px}
 .hero-img{margin:16px auto 6px;max-width:390px}
-.hero-img img{mix-blend-mode:multiply}
+.hero-img img{filter:drop-shadow(0 22px 30px rgba(40,25,15,.22))}
 .img-desk{display:none}
 .pricetag{display:inline-flex;align-items:baseline;gap:9px;margin:8px 0 18px}
 .pricetag .from{font-size:15px;color:var(--mut);text-decoration:line-through}
@@ -206,6 +206,25 @@ footer *{color:#fff}
 .sticky .sp .s2 small{font-size:11px;color:var(--mut);text-decoration:line-through;margin-left:5px;font-weight:700}
 .sticky .btn{font-size:15px;padding:14px 18px;box-shadow:none;flex:0 0 auto}
 
+/* clients marquee */
+.clients{background:var(--mist);padding:34px 0 30px}
+.clients .lbl{text-align:center;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:20px;padding:0 16px}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.marquee .track{display:flex;align-items:center;gap:16px;width:max-content;animation:scroll 42s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.marquee .item{flex:0 0 auto;height:74px;width:162px;background:#fff;border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;justify-content:center;padding:12px 18px;box-shadow:0 6px 16px rgba(40,25,15,.05)}
+.marquee .item img{max-height:44px;max-width:126px;width:auto;object-fit:contain}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* vsl */
+.vsl{background:#fff}
+.vsl .frame{position:relative;max-width:760px;margin:20px auto 0;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#1c1c20;box-shadow:0 24px 60px rgba(40,25,15,.20)}
+.vsl .frame iframe,.vsl .frame video{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.vsl .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 38%,#34343c,#1c1c20);cursor:pointer}
+.vsl .play{width:86px;height:86px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(251,90,45,.5);transition:.2s}
+.vsl .ph:hover .play{transform:scale(1.07)}
+.vsl .ph p{color:#fff;margin-top:16px;font-weight:700;font-size:15px;opacity:.92}
+
 /* reveal */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
@@ -254,12 +273,59 @@ footer *{color:#fff}
         <span class="eyebrow">Para quem vende no improviso</span>
         <h1>Pare de vender por <span class="hl">sorte</span> e indicação.</h1>
         <p class="sub">O passo a passo para montar um comercial que vende todo mês — com método, scripts, planilhas e CRM já prontos. Mesmo que você nunca tenha estruturado vendas na vida.</p>
-        <div class="hero-img img-mob"><img src="img/ebook3d.jpg" alt="Ebook Do Improviso ao Previsível"></div>
+        <div class="hero-img img-mob"><img src="img/ebook3d.webp" alt="Ebook Do Improviso ao Previsível"></div>
         <div class="pricetag"><span class="from">R$ 297</span><span class="now">R$ 47 hoje</span></div>
         <div><a class="btn big pulse" data-cta href="#oferta">QUERO ESTRUTURAR MEU COMERCIAL →</a></div>
         <div class="ctahint"><span>✅ Acesso imediato</span><span>✅ <b>7 dias</b> de garantia</span><span>✅ Pague no Pix ou cartão</span></div>
       </div>
-      <div class="hero-img img-desk"><img src="img/ebook3d.jpg" alt="Ebook Do Improviso ao Previsível"></div>
+      <div class="hero-img img-desk"><img src="img/ebook3d.webp" alt="Ebook Do Improviso ao Previsível"></div>
+    </div>
+  </div>
+</section>
+
+<!-- VSL -->
+<section class="vsl">
+  <div class="wrap narrow center">
+    <span class="kx">Assista antes de decidir</span>
+    <h2>Veja como sair do improviso</h2>
+    <div class="divider" style="margin:14px auto 4px"></div>
+    <div class="frame">
+      <!-- VSL: para publicar o vídeo, troque TODO o bloco <div class="ph">...</div> por um iframe. Ex.:
+           <iframe src="https://www.youtube.com/embed/SEU_ID" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
+      <div class="ph">
+        <div class="play"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+        <p>Seu vídeo de vendas (VSL) entra aqui</p>
+      </div>
+    </div>
+    <a class="btn pulse" data-cta href="#oferta" style="margin-top:24px">QUERO ESTRUTURAR MEU COMERCIAL →</a>
+  </div>
+</section>
+
+<!-- CLIENTES (marquee em loop) -->
+<section class="clients">
+  <div class="lbl">Clientes que confiaram na estruturação comercial</div>
+  <div class="marquee">
+    <div class="track">
+      <div class="item"><img loading="lazy" src="img/logos/unimed.png" alt="Unimed"></div>
+      <div class="item"><img loading="lazy" src="img/logos/portoseguro.png" alt="Porto Seguro"></div>
+      <div class="item"><img loading="lazy" src="img/logos/sulamerica.jpg" alt="SulAmérica"></div>
+      <div class="item"><img loading="lazy" src="img/logos/odontoprev.png" alt="OdontoPrev"></div>
+      <div class="item"><img loading="lazy" src="img/logos/v4.png" alt="V4 Company"></div>
+      <div class="item"><img loading="lazy" src="img/logos/embracon.png" alt="Embracon"></div>
+      <div class="item"><img loading="lazy" src="img/logos/ademicon.png" alt="Ademicon"></div>
+      <div class="item"><img loading="lazy" src="img/logos/loovi.png" alt="Loovi"></div>
+      <div class="item"><img loading="lazy" src="img/logos/vitta.jpg" alt="Construtora Vitta"></div>
+      <div class="item"><img loading="lazy" src="img/logos/gouodonto.png" alt="Gou Odonto"></div>
+      <div class="item"><img loading="lazy" src="img/logos/unimed.png" alt="Unimed"></div>
+      <div class="item"><img loading="lazy" src="img/logos/portoseguro.png" alt="Porto Seguro"></div>
+      <div class="item"><img loading="lazy" src="img/logos/sulamerica.jpg" alt="SulAmérica"></div>
+      <div class="item"><img loading="lazy" src="img/logos/odontoprev.png" alt="OdontoPrev"></div>
+      <div class="item"><img loading="lazy" src="img/logos/v4.png" alt="V4 Company"></div>
+      <div class="item"><img loading="lazy" src="img/logos/embracon.png" alt="Embracon"></div>
+      <div class="item"><img loading="lazy" src="img/logos/ademicon.png" alt="Ademicon"></div>
+      <div class="item"><img loading="lazy" src="img/logos/loovi.png" alt="Loovi"></div>
+      <div class="item"><img loading="lazy" src="img/logos/vitta.jpg" alt="Construtora Vitta"></div>
+      <div class="item"><img loading="lazy" src="img/logos/gouodonto.png" alt="Gou Odonto"></div>
     </div>
   </div>
 </section>
