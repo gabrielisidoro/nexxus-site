@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora Comercial · Usual Digital</title>
+<meta name="description" content="Calcule quantos leads seu investimento gera e quanto seu comercial pode faturar. Com benchmarks ideais de mercado.">
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:'Montserrat';src:url('/diagnostico/Montserrat.ttf') format('truetype');font-weight:100 900;font-display:swap}
+:root{--or:#fb5a2d;--or-deep:#e8430f;--or-soft:#fff1ea;--or-soft2:#ffe7da;--ink:#2e2e33;--inks:#1c1c20;--mut:#8c8c93;--paper:#fff;--mist:#f7f6f3;--line:#ecebe8;--loss:#d2483a;--ok:#16a06b;--warn:#e8a13a;--shadow:0 10px 40px rgba(40,30,25,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Montserrat',system-ui,Arial,sans-serif;color:var(--ink);background:var(--mist);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:22px 16px 70px}
+button,a{font-family:inherit}
+.top{display:flex;align-items:center;justify-content:space-between;padding:4px 2px 18px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo .rk{width:40px;height:40px;border-radius:11px;background:linear-gradient(160deg,#ff6a3d,var(--or-deep));display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.logo .wm{font-weight:800;font-size:21px;color:var(--inks);line-height:1}
+.logo .wm small{font-weight:600;font-size:11px;color:var(--or);margin-left:2px}
+.top .tag{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.chip{display:inline-block;background:var(--or-soft);color:var(--or-deep);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:7px 14px;border-radius:40px}
+h1{font-size:30px;font-weight:800;line-height:1.06;letter-spacing:-.02em;color:var(--inks);margin-top:14px}
+h1 .or{color:var(--or)}
+.lead{font-size:16px;color:var(--ink);margin-top:10px;max-width:640px}
+.grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:24px}
+.card h2{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--or);margin-bottom:6px}
+.card .h2sub{font-size:13px;color:var(--mut);margin-bottom:16px}
+.slider{margin-bottom:16px}
+.slider .sl{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;font-weight:700;margin-bottom:7px}
+.slider .sl b{color:var(--or-deep);font-size:15px}
+.slider .bm{font-size:11px;font-weight:600;color:var(--mut);margin-top:5px}
+.slider .bm .ok{color:var(--ok)}.slider .bm .warn{color:var(--warn)}.slider .bm .bad{color:var(--loss)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:var(--or-soft2);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--or);cursor:pointer;box-shadow:0 2px 6px rgba(251,90,45,.5)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border:none;border-radius:50%;background:var(--or);cursor:pointer}
+
+/* funnel */
+.fname{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:2px 0 12px}
+.funnel{display:flex;flex-direction:column;gap:7px}
+.fstep{display:flex;align-items:center;justify-content:space-between;border-radius:11px;padding:12px 16px;color:#fff}
+.fstep small{font-size:12px;font-weight:700;opacity:.92}
+.fstep b{font-size:20px;font-weight:800}
+.farrow{height:9px;display:flex;align-items:center;justify-content:center;color:var(--or-soft2)}
+.bigfat{background:linear-gradient(135deg,#ff6a3d,var(--or-deep));border-radius:14px;padding:16px;text-align:center;margin-top:6px}
+.bigfat small{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#ffe1d4}
+.bigfat b{display:block;font-size:32px;font-weight:800;color:#fff;line-height:1.05;margin-top:3px}
+
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.kpi{background:var(--mist);border:1px solid var(--line);border-radius:12px;padding:12px}
+.kpi b{display:block;font-size:19px;font-weight:800;color:var(--inks);line-height:1}
+.kpi span{font-size:11.5px;font-weight:600;color:var(--mut)}
+.kpi .st{font-size:10.5px;font-weight:800;margin-top:4px;display:inline-block}
+.st.ok{color:var(--ok)}.st.warn{color:var(--warn)}.st.bad{color:var(--loss)}
+.team{display:flex;gap:10px;margin-top:10px}
+.team .t{flex:1;background:var(--or-soft);border:1px solid var(--or-soft2);border-radius:12px;padding:12px;text-align:center}
+.team .t b{display:block;font-size:22px;font-weight:800;color:var(--or-deep)}
+.team .t span{font-size:11.5px;font-weight:700;color:var(--ink)}
+
+.bench{background:var(--mist);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:8px}
+.bench h3{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--or);margin-bottom:10px}
+.bench .row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.bench .row:last-child{border-bottom:none}
+.bench .row b{color:var(--inks)}
+
+.meta input[type=number]{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:16px;font-family:inherit;color:var(--ink)}
+.meta input:focus{outline:none;border-color:var(--or);box-shadow:0 0 0 3px var(--or-soft)}
+.metaout{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.metaout .m{background:var(--mist);border:1px solid var(--line);border-radius:12px;padding:12px}
+.metaout .m b{display:block;font-size:18px;font-weight:800;color:var(--or-deep)}
+.metaout .m span{font-size:11.5px;font-weight:600;color:var(--mut)}
+
+.cta{margin-top:20px;background:linear-gradient(150deg,#ff6a3d,var(--or) 55%,var(--or-deep));border-radius:18px;padding:24px;color:#fff;text-align:center}
+.cta h2{color:#fff;font-size:21px;font-weight:800;letter-spacing:-.01em}
+.cta p{color:#fff;opacity:.95;font-size:14px;margin:8px auto 16px;max-width:460px}
+.cta a{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--or-deep);font-weight:800;font-size:16px;padding:15px 24px;border-radius:13px;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.foot{text-align:center;font-size:12px;color:var(--mut);margin-top:24px;line-height:1.7}
+@media(min-width:900px){
+  h1{font-size:40px}
+  .grid{grid-template-columns:1fr 1fr;align-items:start}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="logo"><span class="rk"><svg width="24" height="24" viewBox="0 0 120 120"><path d="M60 22c12 7 17 20 17 35l-4 15H51l-4-15c0-15 5-28 17-35z" fill="#fff"/><circle cx="60" cy="48" r="8" fill="#e8430f"/><path d="M51 66c-8 2-12 8-12 16l10-4z" fill="#fff"/><path d="M73 66c8 2 12 8 12 16l-10-4z" fill="#fff"/><path d="M54 84c0 4-1 8-3 11M60 85c0 5-1 10-3 14M66 84c0 4 1 8 3 11" stroke="#fff" stroke-width="3.6" stroke-linecap="round" fill="none"/></svg></span><span class="wm">USUAL<small>digital</small></span></div>
+    <div class="tag">Calculadora Comercial</div>
+  </div>
+
+  <span class="chip">Simulador de resultados</span>
+  <h1>Quanto seu comercial pode <span class="or">faturar</span>?</h1>
+  <p class="lead">Ajuste seu investimento e suas taxas e veja, na hora, quantos leads você gera, quantas vendas isso vira e o seu faturamento, CAC e ROAS, com os padrões ideais de mercado.</p>
+
+  <div class="grid">
+    <!-- INPUTS -->
+    <div class="card">
+      <h2>Seus números</h2>
+      <div class="h2sub">Arraste os controles conforme a sua realidade.</div>
+      <div class="slider"><div class="sl"><span>Investimento em tráfego / mês</span><b id="v_invest">R$ 8.000</b></div><input type="range" id="invest" min="500" max="50000" step="250" value="8000"></div>
+      <div class="slider"><div class="sl"><span>Custo por lead</span><b id="v_cpl">R$ 5</b></div><input type="range" id="cpl" min="1" max="200" step="1" value="5"><div class="bm">Tráfego frio costuma ficar entre R$ 3 e R$ 30 por lead.</div></div>
+      <div class="slider"><div class="sl"><span>Taxa de agendamento</span><b id="v_ag">15%</b></div><input type="range" id="ag" min="1" max="40" step="1" value="15"><div class="bm" id="bm_ag"></div></div>
+      <div class="slider"><div class="sl"><span>Taxa de comparecimento</span><b id="v_comp">70%</b></div><input type="range" id="comp" min="20" max="100" step="1" value="70"><div class="bm" id="bm_comp"></div></div>
+      <div class="slider"><div class="sl"><span>Taxa de conversão (closer)</span><b id="v_conv">25%</b></div><input type="range" id="conv" min="1" max="50" step="1" value="25"><div class="bm" id="bm_conv"></div></div>
+      <div class="slider"><div class="sl"><span>Ticket médio</span><b id="v_ticket">R$ 2.000</b></div><input type="range" id="ticket" min="100" max="50000" step="100" value="2000"></div>
+
+      <div class="bench">
+        <h3>Padrões ideais de mercado</h3>
+        <div class="row"><span>Tempo p/ contatar o lead</span><b>&lt; 5 minutos</b></div>
+        <div class="row"><span>Taxa de agendamento</span><b>15% a 20%+</b></div>
+        <div class="row"><span>Taxa de comparecimento</span><b>65% a 85%</b></div>
+        <div class="row"><span>Taxa de conversão</span><b>20% a 30%+</b></div>
+        <div class="row"><span>ROAS</span><b>acima de 7 (ideal &gt; 10)</b></div>
+        <div class="row"><span>Capacidade por SDR</span><b>~750 leads/mês</b></div>
+        <div class="row"><span>Capacidade por Closer</span><b>~90 reuniões/mês</b></div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="card">
+      <h2>Seu funil em números</h2>
+      <div class="h2sub">Quantos leads o seu investimento gera, e onde eles param.</div>
+      <div class="funnel">
+        <div class="fstep" style="background:#fc7a52"><small>Leads gerados</small><b id="r_leads">0</b></div>
+        <div class="farrow">▼</div>
+        <div class="fstep" style="background:#fb6a3f"><small>Agendamentos</small><b id="r_agend">0</b></div>
+        <div class="farrow">▼</div>
+        <div class="fstep" style="background:#f1572c"><small>Reuniões realizadas</small><b id="r_reun">0</b></div>
+        <div class="farrow">▼</div>
+        <div class="fstep" style="background:#e8430f"><small>Vendas no mês</small><b id="r_vendas">0</b></div>
+      </div>
+      <div class="bigfat"><small>Faturamento projetado / mês</small><b id="r_fat">R$ 0</b></div>
+
+      <div class="kpis">
+        <div class="kpi"><b id="r_ccr">R$ 0</b><span>Custo por reunião</span></div>
+        <div class="kpi"><b id="r_cac">R$ 0</b><span>CAC (por cliente)</span></div>
+        <div class="kpi"><b id="r_roas">0x</b><span>ROAS <span class="st" id="r_roas_st"></span></span></div>
+        <div class="kpi"><b id="r_lucro">R$ 0</b><span>Receita menos tráfego</span></div>
+      </div>
+      <div class="team">
+        <div class="t"><b id="r_sdr">0</b><span>SDR(s) necessário(s)</span></div>
+        <div class="t"><b id="r_closer">0</b><span>Closer(s) necessário(s)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- META -->
+  <div class="card meta" style="margin-top:18px">
+    <h2>Planejamento por meta</h2>
+    <div class="h2sub">Tem uma meta de faturamento? Veja quantos leads e quanto de verba você precisa (com as taxas acima).</div>
+    <input type="number" id="meta" value="100000" min="0" placeholder="Meta de faturamento mensal (R$)">
+    <div class="metaout">
+      <div class="m"><b id="m_vendas">0</b><span>vendas necessárias</span></div>
+      <div class="m"><b id="m_reun">0</b><span>reuniões necessárias</span></div>
+      <div class="m"><b id="m_leads">0</b><span>leads necessários</span></div>
+      <div class="m"><b id="m_invest">R$ 0</b><span>verba de tráfego necessária</span></div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h2>Quer transformar esses números em realidade?</h2>
+    <p>Leve seu resultado para uma conversa com o Mentor Gabriel Isidoro e monte, passo a passo, a operação que entrega essas vendas.</p>
+    <a id="wa" href="#" target="_blank" rel="noopener">Falar no WhatsApp (14) 99876-0335</a>
+  </div>
+
+  <div class="foot">Usual Digital · Calculadora de uso educativo. Os resultados são estimativas baseadas nos dados informados.</div>
+</div>
+
+<script>
+var money=function(v){return "R$ "+Math.round(v).toLocaleString('pt-BR');};
+var g=function(id){return parseFloat(document.getElementById(id).value)||0;};
+var t=function(id,v){document.getElementById(id).textContent=v;};
+function farol(el,val,okv,warnv){var e=document.getElementById(el);if(val>=okv){e.textContent="ideal";e.className="bm ok";}else if(val>=warnv){e.textContent="atenção";e.className="bm warn";}else{e.textContent="abaixo do ideal";e.className="bm bad";}}
+function calc(){
+  var invest=g('invest'),cpl=g('cpl'),ag=g('ag')/100,comp=g('comp')/100,conv=g('conv')/100,ticket=g('ticket');
+  // labels
+  t('v_invest',money(invest));t('v_cpl',money(cpl));t('v_ag',g('ag')+'%');t('v_comp',g('comp')+'%');t('v_conv',g('conv')+'%');t('v_ticket',money(ticket));
+  farol('bm_ag',g('ag'),15,10);farol('bm_comp',g('comp'),65,50);farol('bm_conv',g('conv'),20,12);
+  var leads=cpl>0?invest/cpl:0, agend=leads*ag, reun=agend*comp, vendas=reun*conv, fat=vendas*ticket;
+  t('r_leads',Math.round(leads).toLocaleString('pt-BR'));
+  t('r_agend',Math.round(agend).toLocaleString('pt-BR'));
+  t('r_reun',Math.round(reun).toLocaleString('pt-BR'));
+  t('r_vendas',Math.round(vendas).toLocaleString('pt-BR'));
+  t('r_fat',money(fat));
+  t('r_ccr',reun?money(invest/reun):'—');
+  t('r_cac',vendas?money(invest/vendas):'—');
+  var roas=invest?fat/invest:0; t('r_roas',roas.toFixed(1)+'x');
+  var rs=document.getElementById('r_roas_st'); if(roas>=7){rs.textContent="ótimo";rs.className="st ok";}else if(roas>=3){rs.textContent="médio";rs.className="st warn";}else{rs.textContent="baixo";rs.className="st bad";}
+  t('r_lucro',money(fat-invest));
+  t('r_sdr',Math.max(1,Math.ceil(leads/750)));
+  t('r_closer',Math.max(1,Math.ceil(reun/90)));
+  // meta
+  var meta=g('meta');
+  var mv=ticket?meta/ticket:0, mr=conv?mv/conv:0, ma=comp?mr/comp:0, ml=ag?ma/ag:0, mi=ml*cpl;
+  t('m_vendas',Math.ceil(mv).toLocaleString('pt-BR'));
+  t('m_reun',Math.ceil(mr).toLocaleString('pt-BR'));
+  t('m_leads',Math.ceil(ml).toLocaleString('pt-BR'));
+  t('m_invest',money(mi));
+}
+['invest','cpl','ag','comp','conv','ticket','meta'].forEach(function(id){document.getElementById(id).addEventListener('input',calc);});
+document.getElementById('wa').href="https://wa.me/5514998760335?text="+encodeURIComponent("Oi! Usei a calculadora comercial da Usual e quero estruturar meu comercial.");
+calc();
+</script>
+</body>
+</html>
