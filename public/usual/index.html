@@ -144,6 +144,15 @@ p{font-size:16px}
 /* phone frame */
 .phone{width:170px;border:7px solid var(--inks);border-radius:26px;overflow:hidden;box-shadow:0 14px 30px rgba(40,25,15,.18);background:#000}
 .phone img{width:100%;display:block}
+/* browser frame (preview animado) */
+.browser{width:100%;max-width:480px;border-radius:13px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 44px rgba(40,25,15,.20);background:#fff}
+.browser .bbar{height:30px;background:#f1efec;display:flex;align-items:center;gap:6px;padding:0 12px;border-bottom:1px solid var(--line)}
+.browser .bbar i{width:9px;height:9px;border-radius:50%;background:#d6d0c9;flex:0 0 auto}
+.browser .url{flex:1;margin-left:8px;font-size:10.5px;font-weight:600;color:#9a948d;background:#fff;border:1px solid var(--line);border-radius:20px;padding:3px 0;text-align:center}
+.browser video{width:100%;display:block;background:#f7f6f3}
+.livetag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.08em;color:#e8430f;margin-bottom:10px}
+.livetag .dot{width:8px;height:8px;border-radius:50%;background:#e8430f;box-shadow:0 0 0 0 rgba(232,67,15,.5);animation:lpulse 1.6s infinite}
+@keyframes lpulse{0%{box-shadow:0 0 0 0 rgba(232,67,15,.5)}70%{box-shadow:0 0 0 8px rgba(232,67,15,0)}100%{box-shadow:0 0 0 0 rgba(232,67,15,0)}}
 
 /* value stack / price */
 .stack{background:#fff;border:1px solid var(--line);border-radius:18px;padding:8px 18px;margin-top:10px}
@@ -432,11 +441,12 @@ footer *{color:#fff}
     <div class="bonus" style="margin-top:26px">
       <!-- diagnostico (destaque) -->
       <div class="bcard feat reveal">
-        <div class="bthumb"><div class="phone"><img loading="lazy" src="img/diag-mobile.png" alt="Diagnóstico Comercial online"></div></div>
+        <div class="bthumb"><div class="browser"><div class="bbar"><i></i><i></i><i></i><span class="url">nexxusagencia.com.br/diagnostico</span></div><video autoplay muted loop playsinline preload="metadata" poster="img/diag-poster.jpg"><source src="img/diag-result.mp4" type="video/mp4"></video></div></div>
         <div class="bbody" style="display:flex;flex-direction:column;justify-content:center">
-          <span class="btag">Bônus #1 · Ferramenta online</span>
+          <span class="livetag"><span class="dot"></span>FERRAMENTA ONLINE AO VIVO</span>
+          <span class="btag">Bônus #1 · O mais querido</span>
           <h3>Diagnóstico Comercial Interativo</h3>
-          <p>Uma ferramenta online (não é planilha!) que dá o raio-X da sua operação: maturidade por pilar, simulador de faturamento com sliders de verba e custo por lead, e plano de ação. Você usa quantas vezes quiser.</p>
+          <p>Não é planilha. É uma ferramenta online que dá o raio-X da sua operação: nota de maturidade por pilar, métricas (CAC, ROAS) e um <b>simulador de faturamento ao vivo</b> que mostra quanto você pode crescer. Veja no preview ao lado. Use quantas vezes quiser.</p>
           <span class="bval"><span class="s">R$ 197</span>&nbsp; grátis no kit</span>
         </div>
       </div>
