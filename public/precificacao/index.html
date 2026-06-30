@@ -146,7 +146,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
       <div class="field"><label>Comissão de vendedor</label><div class="inwrap"><input id="comissao" inputmode="decimal" value="0"><span class="suf">%</span></div></div>
       <div class="field"><label>Marketplace / plataforma</label><div class="inwrap"><input id="marketplace" inputmode="decimal" value="0"><span class="suf">%</span></div></div>
     </div>
-    <div class="field"><label>Tráfego pago / marketing (sobre o preço)</label><div class="inwrap"><input id="marketing" inputmode="decimal" value="8"><span class="suf">%</span></div></div>
+    <p class="hint" style="margin:2px 0 0">O <b>tráfego pago / anúncios</b> agora é um custo do mês (em R$), lá no item 2. Assim você informa o valor real que gasta por mês.</p>
   </div>
 
   <!-- 4. MARGEM -->
@@ -216,7 +216,7 @@ function brl(v){return 'R$ '+(v||0).toLocaleString('pt-BR',{minimumFractionDigit
 function brl0(v){return 'R$ '+Math.round(v||0).toLocaleString('pt-BR');}
 
 /* custos fixos editaveis */
-var FIX=[['Aluguel',2500],['Água',120],['Luz / energia',350],['Internet',150],['Funcionário',1800],['Pró-labore (você)',2500],['Sistema / ERP / apps',200]];
+var FIX=[['Aluguel',2500],['Água',120],['Luz / energia',350],['Internet',150],['Funcionário',1800],['Pró-labore (você)',2500],['Tráfego pago / anúncios',800],['Sistema / ERP / apps',200]];
 var fixlist=$('fixlist');
 function fixRow(nome,val){
   var d=document.createElement('div');d.className='fixrow';
@@ -245,7 +245,7 @@ function linkMargem(){
 }
 linkMargem();
 
-['custoPeca','custoEmb','pecasMes','imposto','cartao','comissao','marketplace','marketing','testar'].forEach(function(id){
+['custoPeca','custoEmb','pecasMes','imposto','cartao','comissao','marketplace','testar'].forEach(function(id){
   $(id).addEventListener('input',calc);
 });
 
@@ -258,9 +258,9 @@ function calc(){
   $('totalFixo').textContent=brl0(totalFixo);
   $('fixoPeca').textContent=brl(fixoPeca);
 
-  var imp=pnum($('imposto').value),car=pnum($('cartao').value),com=pnum($('comissao').value),mkp=pnum($('marketplace').value),mkt=pnum($('marketing').value);
+  var imp=pnum($('imposto').value),car=pnum($('cartao').value),com=pnum($('comissao').value),mkp=pnum($('marketplace').value);
   var Vtax=imp+car+com+mkp; // taxas
-  var Vtotal=Vtax+mkt; // todos os % por venda
+  var Vtotal=Vtax; // todos os % por venda (trafego agora eh custo fixo em R$)
   var L=pnum($('margemN').value);
   var C=custoPeca+emb+fixoPeca; // custos em R$ por peca
 
@@ -288,8 +288,8 @@ function calc(){
   $('margemReal').textContent= viavel? (L.toFixed(0)+'%'):'—';
 
   // breakdown
-  var segProduto=custoPeca+emb, segFixo=fixoPeca, segTax=preco*Vtax/100, segMkt=preco*mkt/100, segLucro=preco*L/100;
-  var parts=[['Produto + embalagem',segProduto,'#1c1c20'],['Custos fixos',segFixo,'#6b6b78'],['Impostos + taxas',segTax,'#c4791a'],['Tráfego / marketing',segMkt,'#fb5a2d'],['Seu lucro',segLucro,'#16a06b']];
+  var segProduto=custoPeca+emb, segFixo=fixoPeca, segTax=preco*Vtax/100, segLucro=preco*L/100;
+  var parts=[['Produto + embalagem',segProduto,'#1c1c20'],['Custos do mês (inclui tráfego)',segFixo,'#fb5a2d'],['Impostos + taxas',segTax,'#c4791a'],['Seu lucro',segLucro,'#16a06b']];
   var bar=$('bar'), legend=$('legend'); bar.innerHTML=''; legend.innerHTML='';
   if(viavel && preco>0){
     parts.forEach(function(p){
