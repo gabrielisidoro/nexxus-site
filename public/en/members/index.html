@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Members Area · Usual Digital</title>
+<style>
+  @font-face{font-family:'Montserrat';src:url('./Montserrat.ttf') format('truetype');font-weight:100 900;font-display:swap}
+  :root{
+    --orange:#fb5a2d; --odeep:#e8430f; --ink:#2e2e33; --bg:#f7f6f3; --mut:#8e8e96;
+    --card:#ffffff; --line:rgba(46,46,51,.08);
+    --pdf:#e8430f; --docx:#2b6cb0; --xlsx:#2f855a; --tool:#e8430f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  a{color:inherit;text-decoration:none}
+
+  header{padding:34px 0 10px}
+  .logo{display:flex;align-items:center;gap:12px}
+  .logo .mark{width:46px;height:46px;border-radius:13px;background:var(--orange);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(251,90,45,.35)}
+  .logo .name{font-weight:800;font-size:27px;letter-spacing:1px}
+  .logo .name small{font-weight:500;font-size:15px;color:var(--mut);letter-spacing:2px;margin-left:4px}
+
+  .hero{padding:26px 0 8px}
+  .eyebrow{display:inline-block;background:rgba(251,90,45,.12);color:var(--odeep);font-weight:800;font-size:13px;letter-spacing:3px;padding:8px 16px;border-radius:100px;margin-bottom:16px}
+  h1{font-size:38px;font-weight:800;line-height:1.12;letter-spacing:-.5px}
+  h1 .o{color:var(--orange)}
+  .sub{color:#5c5c64;font-size:17px;margin-top:12px;max-width:560px}
+
+  .actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 6px}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:16px;padding:16px 24px;border-radius:14px;border:0;cursor:pointer;transition:transform .12s ease, box-shadow .12s ease}
+  .btn:active{transform:scale(.98)}
+  .btn-drive{background:var(--ink);color:#fff;box-shadow:0 12px 28px rgba(46,46,51,.22)}
+  .btn-zip{background:var(--orange);color:#fff;box-shadow:0 12px 28px rgba(251,90,45,.3)}
+  .btn svg{width:20px;height:20px;flex:0 0 auto}
+  .hint{display:flex;gap:9px;align-items:flex-start;color:#6a6a72;font-size:14px;margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .hint svg{width:18px;height:18px;flex:0 0 auto;margin-top:2px;color:var(--orange)}
+
+  .sec-title{font-size:14px;font-weight:800;letter-spacing:2px;color:var(--mut);text-transform:uppercase;margin:34px 0 14px}
+  .badge-new{display:inline-block;background:var(--orange);color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;padding:3px 8px;border-radius:100px;margin-left:8px;vertical-align:2px}
+
+  .grid{display:flex;flex-direction:column;gap:12px}
+  .item{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:0 10px 26px rgba(46,46,51,.05)}
+  .item.feat{border-color:rgba(251,90,45,.35);box-shadow:0 14px 30px rgba(251,90,45,.12);background:linear-gradient(180deg,#fff,#fff8f5)}
+  .chip{flex:0 0 auto;width:58px;height:58px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;letter-spacing:.5px}
+  .chip.pdf{background:var(--pdf)} .chip.docx{background:var(--docx)} .chip.xlsx{background:var(--xlsx)}
+  .chip.tool{background:linear-gradient(150deg,#ff7a45,#e8430f)}
+  .chip svg{width:22px;height:22px;margin-bottom:2px}
+  .meta{flex:1 1 auto;min-width:0}
+  .meta .t{font-weight:800;font-size:17px;line-height:1.25}
+  .meta .d{color:#6a6a72;font-size:14px;margin-top:2px}
+  .dl{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+  .dl .main{display:inline-flex;align-items:center;gap:7px;background:rgba(251,90,45,.1);color:var(--odeep);font-weight:800;font-size:14px;padding:11px 16px;border-radius:11px;white-space:nowrap}
+  .dl .main:hover{background:rgba(251,90,45,.16)}
+  .dl .main svg{width:16px;height:16px}
+  .dl .alt{font-size:12px;color:var(--mut);font-weight:700}
+
+  footer{margin:46px 0 60px;padding-top:26px;border-top:1px solid var(--line);color:var(--mut);font-size:13px;text-align:center}
+  footer .logo{justify-content:center;margin-bottom:12px}
+
+  @media(max-width:560px){
+    h1{font-size:30px}
+    .actions{flex-direction:column}
+    .btn{justify-content:center}
+    .item{flex-wrap:wrap}
+    .dl{width:100%;flex-direction:row;justify-content:space-between;align-items:center;margin-top:4px;padding-left:74px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo">
+      <span class="mark">
+        <svg width="27" height="27" viewBox="0 0 48 48" fill="none"><path d="M24 4C30 10 33 18 33 27v7H15v-7c0-9 3-17 9-23Z" fill="#fff"/><circle cx="24" cy="21" r="5" fill="#fb5a2d"/><path d="M15 31 8 39l7-2zM33 31l7 8-7-2z" fill="#fff"/><path d="M20 34l4 9 4-9z" fill="#fff" opacity=".85"/></svg>
+      </span>
+      <span class="name">USUAL<small>digital</small></span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow">MEMBERS AREA</span>
+    <h1>Your system is <span class="o">unlocked.</span></h1>
+    <p class="sub">Everything you need to move from guesswork to predictable. Use the live online tools any time, and download the editable materials, whichever you prefer.</p>
+
+    <div class="actions">
+      <a class="btn btn-drive" href="https://drive.google.com/drive/folders/YOUR-ENGLISH-KIT-FOLDER" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M8 3h8l5 9-4 7H7l-4-7L8 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8 3l4 9-4 7M16 3l-4 9 4 7M3.2 12h17.6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        Open your kit in Google Drive
+      </a>
+    </div>
+
+    <div class="hint">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 8h.01M11 12h1v4h1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>
+      <span>The spreadsheets and documents live in Drive as <b>editable Google Sheets and Docs</b>. Just open one, click <b>File &rarr; Make a copy</b>, and it's yours to edit.</span>
+    </div>
+  </section>
+
+  <div class="sec-title">Live online tools</div>
+  <div class="grid" id="grid-tools"></div>
+
+  <div class="sec-title">Start here</div>
+  <div class="grid" id="grid-start"></div>
+
+  <div class="sec-title">Sales materials</div>
+  <div class="grid" id="grid-core"></div>
+
+  <div class="sec-title">Bonus tools</div>
+  <div class="grid" id="grid-extra"></div>
+
+  <footer>
+    <div class="logo">
+      <span class="mark"><svg width="22" height="22" viewBox="0 0 48 48" fill="none"><path d="M24 4C30 10 33 18 33 27v7H15v-7c0-9 3-17 9-23Z" fill="#fff"/><circle cx="24" cy="21" r="5" fill="#fb5a2d"/><path d="M15 31 8 39l7-2zM33 31l7 8-7-2z" fill="#fff"/><path d="M20 34l4 9 4-9z" fill="#fff" opacity=".85"/></svg></span>
+      <span class="name" style="font-size:20px">USUAL<small style="font-size:12px">digital</small></span>
+    </div>
+    Exclusive access for members. Enjoy, and happy selling.<br/>© Usual Digital · High-performance sales structuring
+  </footer>
+
+</div>
+
+<script>
+  var DRIVE = "https://drive.google.com/drive/folders/YOUR-ENGLISH-KIT-FOLDER";
+  var ICON = {
+    book:'<path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2V4z" stroke="#fff" stroke-width="1.7" fill="none"/><path d="M9 8h6M9 12h6" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>',
+    flag:'<path d="M6 21V4h11l-2 4 2 4H6" stroke="#fff" stroke-width="1.7" fill="none" stroke-linejoin="round"/>',
+    grid:'<rect x="4" y="4" width="7" height="7" rx="1.3" stroke="#fff" stroke-width="1.7" fill="none"/><rect x="13" y="4" width="7" height="7" rx="1.3" stroke="#fff" stroke-width="1.7" fill="none"/><rect x="4" y="13" width="7" height="7" rx="1.3" stroke="#fff" stroke-width="1.7" fill="none"/><rect x="13" y="13" width="7" height="7" rx="1.3" stroke="#fff" stroke-width="1.7" fill="none"/>',
+    calc:'<rect x="5" y="3" width="14" height="18" rx="2" stroke="#fff" stroke-width="1.7" fill="none"/><path d="M8 7h8M8 11h2M12 11h.01M15 11h.01M8 15h2M12 15h.01M15 15h.01" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>',
+    chart:'<path d="M4 20V10M10 20V4M16 20v-8M22 20H2" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>',
+    chat:'<path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-4 4V6z" stroke="#fff" stroke-width="1.6" fill="none" stroke-linejoin="round"/>',
+    target:'<circle cx="12" cy="12" r="8" stroke="#fff" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="3.4" stroke="#fff" stroke-width="1.6" fill="none"/>',
+    flow:'<circle cx="6" cy="7" r="2.2" stroke="#fff" stroke-width="1.6" fill="none"/><circle cx="18" cy="7" r="2.2" stroke="#fff" stroke-width="1.6" fill="none"/><circle cx="12" cy="17" r="2.2" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M8 8l3 7M16 8l-3 7" stroke="#fff" stroke-width="1.6"/>',
+    check:'<path d="M5 12.5l4.5 4.5L19 7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
+    bolt:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="#fff"/>',
+    wallet:'<rect x="3" y="6" width="18" height="13" rx="2.4" stroke="#fff" stroke-width="1.7" fill="none"/><path d="M3 10h18M16.5 13.5h.01" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>',
+    message:'<path d="M4 5h16v11H8l-4 4V5z" stroke="#fff" stroke-width="1.6" fill="none" stroke-linejoin="round"/><path d="M8 9h8M8 12h5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>',
+    funnel:'<path d="M4 5h16l-6 7v5l-4 2v-7L4 5z" stroke="#fff" stroke-width="1.7" fill="none" stroke-linejoin="round"/>',
+    money:'<rect x="3" y="6" width="18" height="12" rx="2" stroke="#fff" stroke-width="1.7" fill="none"/><circle cx="12" cy="12" r="2.6" stroke="#fff" stroke-width="1.7" fill="none"/><path d="M6 9.5v5M18 9.5v5" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>',
+    meet:'<rect x="3" y="5" width="18" height="16" rx="2" stroke="#fff" stroke-width="1.7" fill="none"/><path d="M3 9h18M8 3v4M16 3v4" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/><path d="M9 14.5l2 2 4-4" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
+    gauge:'<circle cx="12" cy="12" r="8.5" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M12 12l4-3" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/><path d="M8 15a5 5 0 0 1 8 0" stroke="#fff" stroke-width="1.6" fill="none"/>'
+  };
+  var GO = '<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  // live web tools (real, built in English)
+  var TOOLS = [
+    {t:'Interactive Sales Diagnostic', d:'X-ray your operation: maturity score, CAC/ROAS and a live revenue simulator.', type:'tool', icon:'gauge', href:'../diagnostic/', label:'Open tool'},
+    {t:'Sales Calculator', d:'From budget to leads to revenue: the funnel, CAC, ROAS and how many reps you need.', type:'tool', icon:'calc', href:'../calculator/', label:'Open tool'}
+  ];
+  var START = [
+    {t:'Ebook · From Guesswork to Predictable', d:'The full manual. Start your reading here.', type:'pdf', icon:'book', href:DRIVE, drive:true},
+    {t:'Start Here', d:'A quick guide on how to use your whole kit.', type:'docx', icon:'flag', href:DRIVE, drive:true}
+  ];
+  var CORE = [
+    {t:'Product &amp; Offer Board', d:'Build your value ladder and your offers.', type:'xlsx', icon:'grid', href:DRIVE, drive:true},
+    {t:'Ramp Calculator', d:'How many SDRs and closers your team needs.', type:'xlsx', icon:'calc', href:DRIVE, drive:true},
+    {t:'KPI Dashboard', d:'Track the numbers of your sales operation.', type:'xlsx', icon:'chart', href:DRIVE, drive:true},
+    {t:'SDR Scripts', d:'Outreach, qualification and cadence, ready to use.', type:'docx', icon:'chat', href:DRIVE, drive:true},
+    {t:'Closer Playbook', d:'From discovery to close, step by step.', type:'docx', icon:'target', href:DRIVE, drive:true},
+    {t:'CRM Template', d:'Pipelines and automations ready to copy.', type:'docx', icon:'flow', href:DRIVE, drive:true},
+    {t:'Implementation Checklists', d:'The step-by-step so you skip nothing.', type:'docx', icon:'check', href:DRIVE, drive:true},
+    {t:'AI Prompt Pack', d:'12 sales prompts ready to use.', type:'docx', icon:'bolt', href:DRIVE, drive:true}
+  ];
+  var EXTRA = [
+    {t:'Revenue Tracker', d:'Track income, expenses, goals and balance.', type:'xlsx', icon:'wallet', href:DRIVE, drive:true},
+    {t:'100 Prospecting Messages', d:'Ready templates for outreach and follow-up.', type:'docx', icon:'message', href:DRIVE, drive:true},
+    {t:'Performance Tracker (In + Out)', d:'Inbound and outbound funnel vs the market benchmark: shows where to attack.', type:'xlsx', icon:'funnel', href:DRIVE, drive:true},
+    {t:'Commercial Control (Cash + Commissions)', d:'Automatic rep and SDR commissions, ranking and monthly dashboard.', type:'xlsx', icon:'money', href:DRIVE, drive:true},
+    {t:'Closers\' Meetings Tracker', d:'Booked, no-shows, proposals and conversion of each rep vs benchmark.', type:'xlsx', icon:'meet', href:DRIVE, drive:true}
+  ];
+
+  function card(it){
+    var cls = it.type;
+    var newtab = it.drive ? ' target="_blank" rel="noopener"' : '';
+    var label = it.label || 'Open in Drive';
+    var alt = it.drive ? '<span class="alt">Google Drive</span>' : '';
+    return '<div class="item'+(it.type==='tool'?' feat':'')+'">'
+      + '<div class="chip '+cls+'"><svg viewBox="0 0 24 24" fill="none">'+ICON[it.icon]+'</svg>'+(it.type==='tool'?'TOOL':it.type.toUpperCase())+'</div>'
+      + '<div class="meta"><div class="t">'+it.t+'</div><div class="d">'+it.d+'</div></div>'
+      + '<div class="dl"><a class="main" href="'+it.href+'"'+newtab+'>'+(it.type==='tool'?GO:'')+label+'</a>'+alt+'</div>'
+      + '</div>';
+  }
+  function render(id, arr){ document.getElementById(id).innerHTML = arr.map(card).join(''); }
+  render('grid-tools', TOOLS); render('grid-start', START); render('grid-core', CORE); render('grid-extra', EXTRA);
+</script>
+</body>
+</html>
