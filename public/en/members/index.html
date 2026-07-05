@@ -32,8 +32,8 @@
   .actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 6px}
   .btn{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:16px;padding:16px 24px;border-radius:14px;border:0;cursor:pointer;transition:transform .12s ease, box-shadow .12s ease}
   .btn:active{transform:scale(.98)}
-  .btn-drive{background:var(--ink);color:#fff;box-shadow:0 12px 28px rgba(46,46,51,.22)}
   .btn-zip{background:var(--orange);color:#fff;box-shadow:0 12px 28px rgba(251,90,45,.3)}
+  .btn-drive{background:var(--ink);color:#fff;box-shadow:0 12px 28px rgba(46,46,51,.22)}
   .btn svg{width:20px;height:20px;flex:0 0 auto}
   .hint{display:flex;gap:9px;align-items:flex-start;color:#6a6a72;font-size:14px;margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
   .hint svg{width:18px;height:18px;flex:0 0 auto;margin-top:2px;color:var(--orange)}
@@ -56,6 +56,7 @@
   .dl .main:hover{background:rgba(251,90,45,.16)}
   .dl .main svg{width:16px;height:16px}
   .dl .alt{font-size:12px;color:var(--mut);font-weight:700}
+  .dl .alt:hover{color:var(--odeep)}
 
   footer{margin:46px 0 60px;padding-top:26px;border-top:1px solid var(--line);color:var(--mut);font-size:13px;text-align:center}
   footer .logo{justify-content:center;margin-bottom:12px}
@@ -84,18 +85,22 @@
   <section class="hero">
     <span class="eyebrow">MEMBERS AREA</span>
     <h1>Your system is <span class="o">unlocked.</span></h1>
-    <p class="sub">Everything you need to move from guesswork to predictable. Use the live online tools any time, and download the editable materials, whichever you prefer.</p>
+    <p class="sub">Everything you need to move from guesswork to predictable. Download each material with one click below, or open the editable versions in Google Drive, whichever you prefer.</p>
 
     <div class="actions">
+      <a class="btn btn-zip" href="Kit-Usual-EN.zip" download>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12M7 10l5 5 5-5M5 20h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download everything (.zip)
+      </a>
       <a class="btn btn-drive" href="https://drive.google.com/drive/folders/1-E0PE3TdCVE30h7F4DDHqteXNmbaEM-w?usp=sharing" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none"><path d="M8 3h8l5 9-4 7H7l-4-7L8 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8 3l4 9-4 7M16 3l-4 9 4 7M3.2 12h17.6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-        Open your kit in Google Drive
+        Open in Google Drive
       </a>
     </div>
 
     <div class="hint">
       <svg viewBox="0 0 24 24" fill="none"><path d="M12 8h.01M11 12h1v4h1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>
-      <span>The spreadsheets and documents live in Drive as <b>editable Google Sheets and Docs</b>. Just open one, click <b>File &rarr; Make a copy</b>, and it's yours to edit.</span>
+      <span>Every material downloads with one click. Prefer to edit online? Open it in Drive and click <b>File &rarr; Make a copy</b> to get your own editable Google Sheet or Doc.</span>
     </div>
   </section>
 
@@ -141,43 +146,49 @@
     meet:'<rect x="3" y="5" width="18" height="16" rx="2" stroke="#fff" stroke-width="1.7" fill="none"/><path d="M3 9h18M8 3v4M16 3v4" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/><path d="M9 14.5l2 2 4-4" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
     gauge:'<circle cx="12" cy="12" r="8.5" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M12 12l4-3" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/><path d="M8 15a5 5 0 0 1 8 0" stroke="#fff" stroke-width="1.6" fill="none"/>'
   };
+  var DL = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3v10M8 9l4 4 4-4M5 19h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var GO = '<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-  // live web tools (real, built in English)
   var TOOLS = [
     {t:'Interactive Sales Diagnostic', d:'X-ray your operation: maturity score, CAC/ROAS and a live revenue simulator.', type:'tool', icon:'gauge', href:'../diagnostic/', label:'Open tool'}
   ];
   var START = [
-    {t:'Ebook · From Guesswork to Predictable', d:'The full manual. Start your reading here.', type:'pdf', icon:'book', href:DRIVE, drive:true},
-    {t:'Start Here', d:'A quick guide on how to use your whole kit.', type:'docx', icon:'flag', href:DRIVE, drive:true}
+    {t:'Ebook · From Guesswork to Predictable', d:'The full manual. Start your reading here.', type:'pdf', icon:'book', soon:true},
+    {t:'Start Here', d:'A quick guide on how to use your whole kit.', type:'docx', icon:'flag', file:'00-Start-Here.docx'}
   ];
   var CORE = [
-    {t:'Product &amp; Offer Board', d:'Build your value ladder and your offers.', type:'xlsx', icon:'grid', href:DRIVE, drive:true},
-    {t:'Ramp Calculator', d:'How many SDRs and closers your team needs.', type:'xlsx', icon:'calc', href:DRIVE, drive:true},
-    {t:'KPI Dashboard', d:'Track the numbers of your sales operation.', type:'xlsx', icon:'chart', href:DRIVE, drive:true},
-    {t:'SDR Scripts', d:'Outreach, qualification and cadence, ready to use.', type:'docx', icon:'chat', href:DRIVE, drive:true},
-    {t:'Closer Playbook', d:'From discovery to close, step by step.', type:'docx', icon:'target', href:DRIVE, drive:true},
-    {t:'CRM Template', d:'Pipelines and automations ready to copy.', type:'docx', icon:'flow', href:DRIVE, drive:true},
-    {t:'Implementation Checklists', d:'The step-by-step so you skip nothing.', type:'docx', icon:'check', href:DRIVE, drive:true},
-    {t:'AI Prompt Pack', d:'12 sales prompts ready to use.', type:'docx', icon:'bolt', href:DRIVE, drive:true}
+    {t:'Product &amp; Offer Board', d:'Build your value ladder and your offers.', type:'xlsx', icon:'grid', file:'01-Product-and-Offer-Board.xlsx'},
+    {t:'Sales Ramp Calculator', d:'How many SDRs and closers your team needs.', type:'xlsx', icon:'calc', file:'02-Sales-Ramp-Calculator.xlsx'},
+    {t:'KPI Dashboard', d:'Track the numbers of your sales operation.', type:'xlsx', icon:'chart', file:'03-KPI-Dashboard.xlsx'},
+    {t:'SDR Scripts', d:'Outreach, qualification and cadence, ready to use.', type:'docx', icon:'chat', file:'04-SDR-Scripts.docx'},
+    {t:'Closer Playbook', d:'From discovery to close, step by step.', type:'docx', icon:'target', file:'05-Closer-Playbook.docx'},
+    {t:'CRM Template', d:'Pipelines and automations ready to copy.', type:'docx', icon:'flow', file:'06-CRM-Template.docx'},
+    {t:'Implementation Checklists', d:'The step-by-step so you skip nothing.', type:'docx', icon:'check', file:'07-Implementation-Checklists.docx'},
+    {t:'AI Prompt Pack', d:'12 sales prompts ready to use.', type:'docx', icon:'bolt', file:'08-AI-Prompt-Pack.docx'}
   ];
   var EXTRA = [
-    {t:'Revenue Tracker', d:'Track income, expenses, goals and balance.', type:'xlsx', icon:'wallet', href:DRIVE, drive:true},
-    {t:'100 Prospecting Messages', d:'Ready templates for outreach and follow-up.', type:'docx', icon:'message', href:DRIVE, drive:true},
-    {t:'Performance Tracker (In + Out)', d:'Inbound and outbound funnel vs the market benchmark: shows where to attack.', type:'xlsx', icon:'funnel', href:DRIVE, drive:true},
-    {t:'Commercial Control (Cash + Commissions)', d:'Automatic rep and SDR commissions, ranking and monthly dashboard.', type:'xlsx', icon:'money', href:DRIVE, drive:true},
-    {t:'Closers\' Meetings Tracker', d:'Booked, no-shows, proposals and conversion of each rep vs benchmark.', type:'xlsx', icon:'meet', href:DRIVE, drive:true}
+    {t:'Revenue Tracker', d:'Track income, expenses, goals and balance.', type:'xlsx', icon:'wallet', soon:true},
+    {t:'100 Prospecting Messages', d:'Ready templates for outreach and follow-up.', type:'docx', icon:'message', file:'100-Prospecting-Messages.docx'},
+    {t:'Performance Tracker (In + Out)', d:'Inbound and outbound funnel vs the market benchmark: shows where to attack.', type:'xlsx', icon:'funnel', file:'Performance-Tracker.xlsx'},
+    {t:'Commercial Control (Cash + Commissions)', d:'Automatic rep and SDR commissions, ranking and monthly dashboard.', type:'xlsx', icon:'money', soon:true},
+    {t:'Closers\' Meetings Tracker', d:'Booked, no-shows, proposals and conversion of each rep vs benchmark.', type:'xlsx', icon:'meet', soon:true}
   ];
 
   function card(it){
-    var cls = it.type;
-    var newtab = it.drive ? ' target="_blank" rel="noopener"' : '';
-    var label = it.label || 'Open in Drive';
-    var alt = it.drive ? '<span class="alt">Google Drive</span>' : '';
+    var action;
+    if(it.type==='tool'){
+      action = '<a class="main" href="'+it.href+'">'+GO+(it.label||'Open tool')+'</a>';
+    } else if(it.file){
+      action = '<a class="main" href="arquivos/'+it.file+'" download>'+DL+'Download</a>'
+             + '<a class="alt" href="'+DRIVE+'" target="_blank" rel="noopener">or Google Drive</a>';
+    } else {
+      action = '<a class="main" href="'+DRIVE+'" target="_blank" rel="noopener">'+GO+'Open in Drive</a>'
+             + '<span class="alt">download coming soon</span>';
+    }
     return '<div class="item'+(it.type==='tool'?' feat':'')+'">'
-      + '<div class="chip '+cls+'"><svg viewBox="0 0 24 24" fill="none">'+ICON[it.icon]+'</svg>'+(it.type==='tool'?'TOOL':it.type.toUpperCase())+'</div>'
+      + '<div class="chip '+it.type+'"><svg viewBox="0 0 24 24" fill="none">'+ICON[it.icon]+'</svg>'+(it.type==='tool'?'TOOL':it.type.toUpperCase())+'</div>'
       + '<div class="meta"><div class="t">'+it.t+'</div><div class="d">'+it.d+'</div></div>'
-      + '<div class="dl"><a class="main" href="'+it.href+'"'+newtab+'>'+(it.type==='tool'?GO:'')+label+'</a>'+alt+'</div>'
+      + '<div class="dl">'+action+'</div>'
       + '</div>';
   }
   function render(id, arr){ document.getElementById(id).innerHTML = arr.map(card).join(''); }
