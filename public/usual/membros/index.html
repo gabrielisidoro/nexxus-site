@@ -48,6 +48,9 @@
   .item{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:0 10px 26px rgba(46,46,51,.05)}
   .chip{flex:0 0 auto;width:58px;height:58px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px;letter-spacing:.5px}
   .chip.pdf{background:var(--pdf)} .chip.docx{background:var(--docx)} .chip.xlsx{background:var(--xlsx)}
+  .chip.video{background:linear-gradient(150deg,#ff7a45,#e8430f)}
+  .item.feat{border-color:rgba(251,90,45,.35);box-shadow:0 14px 30px rgba(251,90,45,.12);background:linear-gradient(180deg,#fff,#fff8f5)}
+  .badge-new{display:inline-block;background:var(--orange);color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;padding:3px 8px;border-radius:100px;margin-left:8px;vertical-align:2px}
   .chip svg{width:22px;height:22px;margin-bottom:2px}
   .meta{flex:1 1 auto;min-width:0}
   .meta .t{font-weight:800;font-size:17px;line-height:1.25}
@@ -105,6 +108,9 @@
     </div>
   </section>
 
+  <div class="sec-title">Sala de treinamentos<span class="badge-new">NOVO TODA SEMANA</span></div>
+  <div class="grid" id="grid-train"></div>
+
   <div class="sec-title">Comece por aqui</div>
   <div class="grid" id="grid-start"></div>
 
@@ -140,10 +146,15 @@
     message:'<path d="M4 5h16v11H8l-4 4V5z" stroke="#fff" stroke-width="1.6" fill="none" stroke-linejoin="round"/><path d="M8 9h8M8 12h5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>',
     funnel:'<path d="M4 5h16l-6 7v5l-4 2v-7L4 5z" stroke="#fff" stroke-width="1.7" fill="none" stroke-linejoin="round"/>',
     money:'<rect x="3" y="6" width="18" height="12" rx="2" stroke="#fff" stroke-width="1.7" fill="none"/><circle cx="12" cy="12" r="2.6" stroke="#fff" stroke-width="1.7" fill="none"/><path d="M6 9.5v5M18 9.5v5" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>',
-    meet:'<rect x="3" y="5" width="18" height="16" rx="2" stroke="#fff" stroke-width="1.7" fill="none"/><path d="M3 9h18M8 3v4M16 3v4" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/><path d="M9 14.5l2 2 4-4" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+    meet:'<rect x="3" y="5" width="18" height="16" rx="2" stroke="#fff" stroke-width="1.7" fill="none"/><path d="M3 9h18M8 3v4M16 3v4" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/><path d="M9 14.5l2 2 4-4" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
+    play:'<circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="1.7" fill="none"/><path d="M10 8.5v7l6-3.5z" fill="#fff"/>'
   };
   var DL = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3v10M8 9l4 4 4-4M5 19h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var PLAY = '<svg viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>';
 
+  var TRAIN = [
+    {t:'Sala de Treinamentos de Vendas', d:'Reuniões e calls reais gravadas toda semana, com o fechamento acontecendo ao vivo, mais os treinamentos que aplicamos com os clientes. Conteúdo novo sempre, é só assistir.', type:'video', clabel:'SALA', icon:'play', feat:true, link:'https://drive.google.com/drive/folders/1VJlLiTTv4wh1bXrHwWcHVoeQW1d5mJRG'}
+  ];
   var START = [
     {t:'Ebook · Do Improviso ao Previsível', d:'O manual completo, 41 páginas. Comece a leitura por aqui.', type:'pdf', icon:'book', file:'arquivos/ebook.pdf'},
     {t:'Comece por aqui', d:'Guia rápido de como usar todo o seu kit.', type:'docx', icon:'flag', file:'arquivos/00-comece.docx'}
@@ -167,15 +178,21 @@
   ];
 
   function card(it){
-    var pdf = it.pdf ? '<a class="alt" href="'+it.pdf+'" download>versão PDF</a>' : '';
-    return '<div class="item">'
-      + '<div class="chip '+it.type+'"><svg viewBox="0 0 24 24" fill="none">'+ICON[it.icon]+'</svg>'+it.type.toUpperCase()+'</div>'
+    var action;
+    if(it.link){
+      action = '<div class="dl"><a class="main" href="'+it.link+'" target="_blank" rel="noopener">'+PLAY+'Abrir a sala</a><span class="alt">no Google Drive</span></div>';
+    } else {
+      var pdf = it.pdf ? '<a class="alt" href="'+it.pdf+'" download>versão PDF</a>' : '';
+      action = '<div class="dl"><a class="main" href="'+it.file+'" download>'+DL+'Baixar</a>'+pdf+'</div>';
+    }
+    return '<div class="item'+(it.feat?' feat':'')+'">'
+      + '<div class="chip '+it.type+'"><svg viewBox="0 0 24 24" fill="none">'+ICON[it.icon]+'</svg>'+(it.clabel||it.type.toUpperCase())+'</div>'
       + '<div class="meta"><div class="t">'+it.t+'</div><div class="d">'+it.d+'</div></div>'
-      + '<div class="dl"><a class="main" href="'+it.file+'" download>'+DL+'Baixar</a>'+pdf+'</div>'
+      + action
       + '</div>';
   }
   function render(id, arr){ document.getElementById(id).innerHTML = arr.map(card).join(''); }
-  render('grid-start', START); render('grid-core', CORE); render('grid-extra', EXTRA);
+  render('grid-train', TRAIN); render('grid-start', START); render('grid-core', CORE); render('grid-extra', EXTRA);
 </script>
 </body>
 </html>
