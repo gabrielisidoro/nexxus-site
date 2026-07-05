@@ -147,6 +147,11 @@ p{font-size:16px}
 .lbrow .nm small{display:block;font-size:10.5px;color:var(--mut);font-weight:600}
 .lbrow .amt{font-weight:800;font-size:15px;color:var(--or-deep)}
 
+.browser{width:100%;max-width:480px;border-radius:13px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 44px rgba(40,25,15,.20);background:#fff}
+.browser .bbar{height:30px;background:#f1efec;display:flex;align-items:center;gap:6px;padding:0 12px;border-bottom:1px solid var(--line)}
+.browser .bbar i{width:9px;height:9px;border-radius:50%;background:#d6d0c9;flex:0 0 auto}
+.browser .url{flex:1;margin-left:8px;font-size:10.5px;font-weight:600;color:#9a948d;background:#fff;border:1px solid var(--line);border-radius:20px;padding:3px 0;text-align:center}
+.browser video{width:100%;display:block;background:#f7f6f3}
 .livetag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.08em;color:#e8430f;margin-bottom:10px}
 .livetag .dot{width:8px;height:8px;border-radius:50%;background:#e8430f;box-shadow:0 0 0 0 rgba(232,67,15,.5);animation:lpulse 1.6s infinite}
 @keyframes lpulse{0%{box-shadow:0 0 0 0 rgba(232,67,15,.5)}70%{box-shadow:0 0 0 8px rgba(232,67,15,0)}100%{box-shadow:0 0 0 0 rgba(232,67,15,0)}}
@@ -405,7 +410,7 @@ footer *{color:#fff}
     <div class="bonus" style="margin-top:26px">
       <!-- diagnostic (featured) -->
       <div class="bcard feat reveal">
-        <div class="bthumb"><div class="fmock dark"><div class="mt"><span class="l">Sales Maturity Score</span><span class="live"><i></i>LIVE</span></div><div class="chartrow"><div class="gauge"><span>74%</span></div><div class="bars"><div class="b" style="height:46%"></div><div class="b" style="height:64%"></div><div class="b" style="height:52%"></div><div class="b" style="height:80%"></div><div class="b" style="height:70%"></div><div class="b" style="height:96%"></div></div></div></div></div>
+        <div class="bthumb"><div class="browser"><div class="bbar"><i></i><i></i><i></i><span class="url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9a948d" stroke-width="2.4" style="vertical-align:-1px;margin-right:5px"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Sales Diagnostic · live tool</span></div><video autoplay muted loop playsinline preload="metadata" poster="img/diag-poster.jpg"><source src="img/diag-result.mp4" type="video/mp4"></video></div></div>
         <div class="bbody" style="display:flex;flex-direction:column;justify-content:center">
           <span class="livetag"><span class="dot"></span>LIVE ONLINE TOOL</span>
           <span class="btag">Bonus #1 · Most loved</span>
@@ -418,7 +423,7 @@ footer *{color:#fff}
 
       <!-- commercial control (featured) -->
       <div class="bcard feat reveal">
-        <div class="bthumb"><div class="fmock"><div class="mt"><span class="l" style="color:var(--ink)">Top Closers · this month</span></div><div class="lbrow top"><span class="md">🥇</span><span class="nm">Jordan Blake<small>3 deals closed</small></span><span class="amt">$30.5k</span></div><div class="lbrow"><span class="md">🥈</span><span class="nm">Taylor Reed<small>2 deals closed</small></span><span class="amt">$21.0k</span></div><div class="lbrow"><span class="md">🥉</span><span class="nm">Morgan Cole<small>2 deals closed</small></span><span class="amt">$14.7k</span></div></div></div>
+        <div class="bthumb"><div class="browser"><div class="bbar"><i></i><i></i><i></i><span class="url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9a948d" stroke-width="2.4" style="vertical-align:-1px;margin-right:5px"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Commercial Control · exclusive of the kit</span></div><video autoplay muted loop playsinline preload="metadata" poster="img/ranking-poster.jpg"><source src="img/ranking-loop.mp4" type="video/mp4"></video></div></div>
         <div class="bbody" style="display:flex;flex-direction:column;justify-content:center">
           <span class="livetag"><span class="dot"></span>AUTO-UPDATING RANKING</span>
           <span class="btag">Bonus #2 · Runner-up favorite</span>
