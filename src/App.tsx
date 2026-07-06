@@ -12,6 +12,7 @@ import NotFound from './pages/NotFound'
 import LP from './pages/LP'
 import LPIA from './pages/LPIA'
 import LPEbook from './pages/LPEbook'
+import LPGlobal from './pages/LPGlobal'
 import Obrigado from './pages/Obrigado'
 import EbookObrigado from './pages/EbookObrigado'
 import Links from './pages/Links'
@@ -41,6 +42,7 @@ export default function App() {
   const { pathname } = useLocation()
   if (pathname === '/lp') return <LP />
   if (pathname === '/lp-ia') return <LPIA />
+  if (pathname === '/global') return <LPGlobal />
   if (pathname === '/ebook') return <LPEbook />
   if (pathname === '/obrigado') return <Obrigado />
   if (pathname === '/ebook-obrigado') return <EbookObrigado />
