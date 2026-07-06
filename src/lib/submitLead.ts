@@ -16,6 +16,8 @@ export interface LeadData {
   mensagem: string
   origem: 'lp' | 'lp-ia' | 'lp-ebook' | 'lp-global' | 'site'
   pagina?: string
+  /** País onde está a empresa (usado na LP Global) */
+  pais?: string
 }
 
 // Campos obrigatórios que a Kommo precisa ter preenchidos
@@ -32,6 +34,7 @@ function sanitize(data: LeadData): LeadData {
     mensagem:    data.mensagem.trim(),
     origem:      data.origem,
     pagina:      data.pagina?.trim(),
+    pais:        data.pais?.trim(),
   }
 }
 
@@ -65,6 +68,7 @@ export async function submitLead(data: LeadData): Promise<void> {
       Empresa:     d.empresa,
       Email:       d.email,
       WhatsApp:    d.whatsapp,
+      ...(d.pais ? { Pais: d.pais } : {}),
       Faturamento: d.faturamento,
       Mensagem:    d.mensagem,
       Origem:      d.origem,
@@ -81,6 +85,7 @@ export async function submitLead(data: LeadData): Promise<void> {
         empresa:     d.empresa,
         email:       d.email,
         whatsapp:    d.whatsapp,
+        pais:        d.pais ?? '',
         faturamento: d.faturamento,
         mensagem:    d.mensagem,
         origem:      d.origem,

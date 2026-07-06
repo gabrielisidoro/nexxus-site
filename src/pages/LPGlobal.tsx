@@ -153,7 +153,7 @@ const BG_PANEL = '#0c1220'
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function LPGlobal() {
   const navigate = useNavigate()
-  const [form, setForm] = useState({ nome:'', empresa:'', email:'', whatsapp:'', faturamento:'', mensagem:'' })
+  const [form, setForm] = useState({ nome:'', empresa:'', email:'', whatsapp:'', pais:'', faturamento:'', mensagem:'' })
   const [formError, setFormError] = useState<string | null>(null)
   const [angle, setAngle] = useState(0)
   const [statOn, setStatOn] = useState(false)
@@ -176,7 +176,7 @@ export default function LPGlobal() {
     e.preventDefault()
     setFormError(null)
     const data = { ...form, origem: 'lp-global' as const }
-    const emptyField = validateLead(data)
+    const emptyField = validateLead(data) || (!form.pais.trim() ? 'pais' : null) || (!form.faturamento.trim() ? 'faturamento' : null)
     if (emptyField) {
       setFormError('Por favor, preencha todos os campos obrigatórios corretamente.')
       return
@@ -733,6 +733,13 @@ export default function LPGlobal() {
                     </div>
 
                     <div style={{gridColumn:'1/-1'}}>
+                      <label style={{display:'block', fontSize:'.78rem', fontWeight:600, color:'rgba(255,255,255,.65)', marginBottom:6, letterSpacing:'.04em'}}>PAÍS ONDE ESTÁ A SUA EMPRESA <span style={{color:BLUE}}>*</span></label>
+                      <input required type="text" autoComplete="country-name" placeholder="Ex.: Estados Unidos, Portugal, Austrália"
+                        value={form.pais} onChange={e=>setForm(f=>({...f,pais:e.target.value}))}
+                        style={inputStyle} onFocus={onFocus} onBlur={onBlur}/>
+                    </div>
+
+                    <div style={{gridColumn:'1/-1'}}>
                       <label style={{display:'block', fontSize:'.78rem', fontWeight:600, color:'rgba(255,255,255,.65)', marginBottom:6, letterSpacing:'.04em'}}>FATURAMENTO MENSAL (EM US$ OU EQUIVALENTE) <span style={{color:BLUE}}>*</span></label>
                       <select required value={form.faturamento} onChange={e=>setForm(f=>({...f,faturamento:e.target.value}))}
                         style={{...inputStyle, cursor:'pointer', appearance:'none', background:'#0c1220', color:form.faturamento?'#fff':'rgba(255,255,255,.35)'}}
@@ -743,8 +750,8 @@ export default function LPGlobal() {
                     </div>
 
                     <div style={{gridColumn:'1/-1'}}>
-                      <label style={{display:'block', fontSize:'.78rem', fontWeight:600, color:'rgba(255,255,255,.65)', marginBottom:6, letterSpacing:'.04em'}}>CONTE SOBRE SUA OPERAÇÃO <span style={{color:BLUE}}>*</span></label>
-                      <textarea required rows={4} placeholder="Em que país está sua empresa e qual o seu principal desafio comercial hoje?"
+                      <label style={{display:'block', fontSize:'.78rem', fontWeight:600, color:'rgba(255,255,255,.65)', marginBottom:6, letterSpacing:'.04em'}}>CONTE SOBRE SUA OPERAÇÃO <span style={{color:'rgba(255,255,255,.4)', fontWeight:500}}>(opcional)</span></label>
+                      <textarea rows={4} placeholder="Qual o seu principal desafio comercial hoje?"
                         value={form.mensagem} onChange={e=>setForm(f=>({...f,mensagem:e.target.value}))}
                         style={{...inputStyle, resize:'none'}}
                         onFocus={onFocus} onBlur={onBlur}/>
