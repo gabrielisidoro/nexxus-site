@@ -145,6 +145,12 @@ function StatBlock({ value, sfx, label, on }: { value:number; sfx:string; label:
 // ─── Scroll to form ───────────────────────────────────────────────────────────
 const scrollToForm = () => document.getElementById('form')?.scrollIntoView({ behavior:'smooth' })
 
+/** WhatsApp internacional: precisa começar com + e ter de 7 a 15 dígitos (padrão E.164) */
+function isValidIntlWhatsapp(v: string): boolean {
+  const clean = v.replace(/[\s\-().]/g, '')
+  return /^\+\d{7,15}$/.test(clean)
+}
+
 // ─── Colors ───────────────────────────────────────────────────────────────────
 const BG_HERO  = '#080d1a'
 const BG_DARK  = '#060a16'
@@ -179,6 +185,10 @@ export default function LPGlobal() {
     const emptyField = validateLead(data) || (!form.pais.trim() ? 'pais' : null) || (!form.faturamento.trim() ? 'faturamento' : null)
     if (emptyField) {
       setFormError('Por favor, preencha todos os campos obrigatórios corretamente.')
+      return
+    }
+    if (!isValidIntlWhatsapp(form.whatsapp)) {
+      setFormError('No WhatsApp, inclua o código do país começando com +. Exemplos: +1 para EUA, +351 para Portugal, +55 para Brasil.')
       return
     }
     await submitLead(data)
@@ -729,7 +739,11 @@ export default function LPGlobal() {
                       </label>
                       <input required type="tel" autoComplete="tel" placeholder="+1 407 555 0134"
                         value={form.whatsapp} onChange={e=>setForm(f=>({...f,whatsapp:e.target.value}))}
-                        style={inputStyle} onFocus={onFocus} onBlur={onBlur}/>
+                        style={inputStyle} onFocus={onFocus}
+                        onBlur={e=>{ onBlur(e); const v=e.target.value.trim(); if (v.startsWith('00')) setForm(f=>({...f,whatsapp:'+'+v.slice(2)})) }}/>
+                      <p style={{marginTop:6, fontSize:'.72rem', color:'rgba(255,255,255,.38)', lineHeight:1.4}}>
+                        Comece com + e o código do país. Ex.: +1 (EUA), +351 (Portugal)
+                      </p>
                     </div>
 
                     <div style={{gridColumn:'1/-1'}}>
