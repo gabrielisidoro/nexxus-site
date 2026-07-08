@@ -157,6 +157,7 @@ h3{font-size:1.22rem;font-weight:700;font-family:var(--font-body)}
 .stat-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--teal-bright))}
 .stat-num{font-family:var(--font-display);font-size:clamp(2.3rem,3.4vw,3rem);font-weight:800;color:var(--teal);line-height:1;display:flex;align-items:baseline}
 .stat-num small{font-size:.55em}
+.stat-pre{font-size:.42em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-right:.5em;align-self:center;transform:translateY(-.08em)}
 .stat-label{margin-top:12px;font-size:.94rem;color:var(--ink-soft);font-weight:600}
 .stat-src{margin-top:10px;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(11,30,36,.38)}
 .provoca{margin-top:56px;background:linear-gradient(150deg,var(--deep),#053A38);border-radius:calc(var(--radius) + 6px);padding:clamp(34px,4.5vw,56px);color:#fff;display:grid;grid-template-columns:1.5fr 1fr;gap:36px;align-items:center;position:relative;overflow:hidden}
@@ -438,20 +439,20 @@ h3{font-size:1.22rem;font-weight:700;font-family:var(--font-body)}
     </div>
     <div class="stats-grid">
       <div class="stat-card reveal" data-delay="0">
-        <div class="stat-num">até <span class="count" data-to="200">0</span>%</div>
+        <div class="stat-num"><span class="stat-pre">até</span><span class="count" data-to="200">0</span>%</div>
         <p class="stat-label">do salário anual: é o custo real de substituir um profissional que pediu demissão</p>
       </div>
       <div class="stat-card reveal" data-delay="100">
-        <div class="stat-num">até <span class="count" data-to="30">0</span>%</div>
+        <div class="stat-num"><span class="stat-pre">até</span><span class="count" data-to="30">0</span>%</div>
         <p class="stat-label">do tempo produtivo da equipe se perde em retrabalho por falta de treinamento</p>
       </div>
       <div class="stat-card reveal" data-delay="200">
-        <div class="stat-num">até -<span class="count" data-to="21">0</span>%</div>
+        <div class="stat-num"><span class="stat-pre">até</span>-<span class="count" data-to="21">0</span>%</div>
         <p class="stat-label">de produtividade em times desengajados, sem perspectiva de desenvolvimento</p>
         <p class="stat-src">Fonte: Gallup</p>
       </div>
       <div class="stat-card reveal" data-delay="300">
-        <div class="stat-num">até +<span class="count" data-to="60">0</span>%</div>
+        <div class="stat-num"><span class="stat-pre">até</span>+<span class="count" data-to="60">0</span>%</div>
         <p class="stat-label">de rotatividade quando quem foi promovido não foi preparado para liderar</p>
       </div>
     </div>
