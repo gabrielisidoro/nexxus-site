@@ -42,6 +42,10 @@ h2{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.6px;line-heig
 .pricebox{max-width:560px;margin:30px auto 0;padding:28px;text-align:center}
 .pricebox .de{font-size:15px;font-weight:700;color:var(--mut)}
 .pricebox .em{font-size:15px;font-weight:800;color:var(--ord);margin-top:6px;letter-spacing:.6px}
+.widgetbox{max-width:560px;margin:26px auto 0;padding:26px 24px}
+.widgetbox .wtitle{font-size:14px;font-weight:800;color:var(--mut);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:16px}
+#hotmart-sales-funnel{min-height:130px}
+html{scroll-behavior:smooth}
 .strike{background:#fff;border:1px dashed var(--line);border-radius:14px;padding:18px 22px;max-width:640px;margin:26px auto 0;text-align:left;font-size:15px;font-weight:600;color:var(--mut);line-height:1.6}
 .strike b{color:var(--ink)}
 .foot{padding:26px 0 40px;text-align:center;font-size:12.5px;color:#9a948d;font-weight:600}
@@ -59,8 +63,7 @@ h2{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.6px;line-heig
     <h1>1h30 é muito? Então faz assim: <span class="hl">1 hora, direto ao ponto</span>.</h1>
     <p class="sub">Versão <b>express</b> da sessão individual: em 1 hora ao vivo comigo, a gente vai direto no que interessa. Abro o seu funil com as ferramentas do kit, aponto <b>os 2 ou 3 vazamentos que mais custam dinheiro</b> e te digo o que corrigir primeiro.</p>
     <div style="margin-top:30px">
-      <a class="btn" href="#" id="btn-aceitar-1">SIM, QUERO O DIAGNÓSTICO EXPRESS DE 1 HORA<small>adicionar ao meu pedido com 1 clique</small></a>
-      <a class="no" href="#" id="btn-recusar-1">Não, obrigado. Vou descobrir os vazamentos sozinho, na base do erro.</a>
+      <a class="btn" href="#oferta">SIM, QUERO O DIAGNÓSTICO EXPRESS DE 1 HORA<small>ver minha condição final ↓</small></a>
     </div>
   </div>
 </section>
@@ -81,7 +84,7 @@ h2{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.6px;line-heig
 </section>
 
 <!-- SEÇÃO 3 · COMO FUNCIONA + OFERTA -->
-<section class="sec center">
+<section class="sec center" id="oferta">
   <div class="wrap">
     <span class="kx">Simples assim</span>
     <h2 style="margin-top:14px">Como funciona</h2>
@@ -94,9 +97,11 @@ h2{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.6px;line-heig
       <div class="de">Diagnóstico Express · 1 hora individual e ao vivo · com Gabriel Isidoro, autor do kit (16 anos de comercial, mais de 600 projetos)</div>
       <div class="em">CONDIÇÃO FINAL · ESTA OFERTA NÃO SE REPETE</div>
     </div>
-    <div style="margin-top:26px">
-      <a class="btn" href="#" id="btn-aceitar-2">SIM, QUERO MINHA HORA COM O GABRIEL<small>última oportunidade, aprovação em 1 clique</small></a>
-      <a class="no" href="#" id="btn-recusar-2">Não, obrigado. Entendo que essa condição não vai aparecer de novo.</a>
+    <div class="card widgetbox">
+      <div class="wtitle">Garanta em 1 clique · última oportunidade</div>
+      <!-- HOTMART - Sales Funnel Widget -->
+      <div id="hotmart-sales-funnel"></div>
+      <!-- HOTMART - Sales Funnel Widget -->
     </div>
     <div class="timer">⏳ Ao sair desta página, seu pedido é finalizado sem a sessão.</div>
   </div>
@@ -104,16 +109,10 @@ h2{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.6px;line-heig
 
 <div class="foot">Usual Digital · Do Improviso ao Previsível<br>Este produto é vendido com processamento seguro da Hotmart.</div>
 
+<!-- HOTMART - Sales Funnel Widget: script -->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
 <script>
-/* ==========================================================================
-   COLE AQUI OS LINKS DO FUNIL DA HOTMART
-   - LINK_ACEITAR: o link/funcao de ACEITE do downsell 1-click gerado pela Hotmart
-   - LINK_RECUSAR: o link de RECUSA (finaliza e vai para a pagina de obrigado)
-   ========================================================================== */
-var LINK_ACEITAR = "#COLE-AQUI-O-LINK-DE-ACEITE-DA-HOTMART";
-var LINK_RECUSAR = "#COLE-AQUI-O-LINK-DE-RECUSA-DA-HOTMART";
-["btn-aceitar-1","btn-aceitar-2"].forEach(function(id){document.getElementById(id).href=LINK_ACEITAR;});
-["btn-recusar-1","btn-recusar-2"].forEach(function(id){document.getElementById(id).href=LINK_RECUSAR;});
+checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
 </script>
 </body>
 </html>

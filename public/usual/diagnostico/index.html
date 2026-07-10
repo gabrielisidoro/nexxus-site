@@ -50,6 +50,10 @@ h2{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.6px;line-heig
 .pricebox .de{font-size:15px;font-weight:700;color:var(--mut)}
 .pricebox .de s{color:#b9b3ac}
 .pricebox .em{font-size:15px;font-weight:800;color:var(--ord);margin-top:6px;letter-spacing:.6px}
+.widgetbox{max-width:560px;margin:26px auto 0;padding:26px 24px}
+.widgetbox .wtitle{font-size:14px;font-weight:800;color:var(--mut);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:16px}
+#hotmart-sales-funnel{min-height:130px}
+html{scroll-behavior:smooth}
 </style>
 </head>
 <body>
@@ -64,8 +68,7 @@ h2{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.6px;line-heig
     <h1>Seu kit está garantido. Agora deixa eu te mostrar <span class="hl">o atalho</span>.</h1>
     <p class="sub">Em uma sessão individual de <b>1h30, ao vivo comigo</b>, eu abro o SEU comercial com as mesmas ferramentas que você acabou de comprar, te mostro <b>exatamente onde o seu funil está vazando</b> e monto com você o plano do que corrigir primeiro.</p>
     <div style="margin-top:30px">
-      <a class="btn" href="#" id="btn-aceitar-1">SIM, QUERO MINHA SESSÃO 1:1 COM O GABRIEL<small>adicionar ao meu pedido com 1 clique</small></a>
-      <a class="no" href="#" id="btn-recusar-1">Não, obrigado. Prefiro tentar sozinho, sem ajuda de um especialista.</a>
+      <a class="btn" href="#oferta">SIM, QUERO MINHA SESSÃO 1:1 COM O GABRIEL<small>ver minha condição exclusiva de novo aluno ↓</small></a>
     </div>
   </div>
 </section>
@@ -115,7 +118,7 @@ h2{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.6px;line-heig
 </section>
 
 <!-- SEÇÃO 5 · OFERTA -->
-<section class="sec center">
+<section class="sec center" id="oferta">
   <div class="wrap">
     <span class="kx">Só nesta página</span>
     <h2 style="margin-top:14px">Quanto custa um diagnóstico assim?</h2>
@@ -125,9 +128,11 @@ h2{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.6px;line-heig
       <div class="em">CONDIÇÃO EXCLUSIVA DE NOVO ALUNO · APARECE UMA ÚNICA VEZ</div>
       <div class="de" style="margin-top:12px;font-size:13.5px">Depois do clique: você recebe o acesso com o link direto pro meu WhatsApp e a gente agenda o melhor horário pra você.</div>
     </div>
-    <div style="margin-top:26px">
-      <a class="btn" href="#" id="btn-aceitar-2">SIM, QUERO ADICIONAR MINHA SESSÃO 1:1<small>pagamento aprovado em 1 clique, sem digitar cartão de novo</small></a>
-      <a class="no" href="#" id="btn-recusar-2">Não, obrigado. Abro mão da condição exclusiva e sigo só com o kit.</a>
+    <div class="card widgetbox">
+      <div class="wtitle">Adicione ao seu pedido em 1 clique</div>
+      <!-- HOTMART - Sales Funnel Widget -->
+      <div id="hotmart-sales-funnel"></div>
+      <!-- HOTMART - Sales Funnel Widget -->
     </div>
     <div class="timer">⏳ Ao sair desta página, a oferta desaparece do seu checkout.</div>
   </div>
@@ -135,16 +140,10 @@ h2{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.6px;line-heig
 
 <div class="foot">Usual Digital · Do Improviso ao Previsível<br>Este produto é vendido com processamento seguro da Hotmart.</div>
 
+<!-- HOTMART - Sales Funnel Widget: script -->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
 <script>
-/* ==========================================================================
-   COLE AQUI OS LINKS DO FUNIL DA HOTMART
-   - LINK_ACEITAR: o link/funcao de ACEITE do upsell 1-click gerado pela Hotmart
-   - LINK_RECUSAR: o link de RECUSA (que leva ao downsell)
-   ========================================================================== */
-var LINK_ACEITAR = "#COLE-AQUI-O-LINK-DE-ACEITE-DA-HOTMART";
-var LINK_RECUSAR = "#COLE-AQUI-O-LINK-DE-RECUSA-DA-HOTMART";
-["btn-aceitar-1","btn-aceitar-2"].forEach(function(id){document.getElementById(id).href=LINK_ACEITAR;});
-["btn-recusar-1","btn-recusar-2"].forEach(function(id){document.getElementById(id).href=LINK_RECUSAR;});
+checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
 </script>
 </body>
 </html>
