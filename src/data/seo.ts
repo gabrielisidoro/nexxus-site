@@ -297,6 +297,43 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
   }
 }
 
+// ─── Metadados das páginas estáticas ─────────────────────────────────────────
+// Fonte única: as páginas leem daqui e o build pré-renderiza o <head> de cada
+// rota com estes mesmos valores. Evita o título da aba divergir do que o
+// Google e as redes sociais leem.
+export interface PaginaSeo {
+  title: string
+  description: string
+}
+
+export const paginasSeo: Record<string, PaginaSeo> = {
+  '/': {
+    title: 'Terceirização e Estruturação Comercial B2B | Nexxus',
+    description:
+      'Pare de contratar vendedor CLT ou PJ e torcer. A Nexxus monta e opera sua equipe comercial completa (SDR, Hunter e Closer) com método e dados, com a operação no ar em 20 dias. Diagnóstico gratuito.',
+  },
+  '/servicos': {
+    title: 'Terceirização Comercial, Mentoria e Estruturação de Vendas | Nexxus',
+    description:
+      'Terceirize seu comercial com squad SDR, Hunter e Closer em 20 dias. Ou estruture o time interno com ICP, playbook e CRM. Conheça as 3 frentes da Nexxus para vendas B2B com previsibilidade.',
+  },
+  '/sobre': {
+    title: 'Sobre a Nexxus | Empresa de Terceirização Comercial em São Paulo',
+    description:
+      'Conheça a Nexxus, empresa especializada em terceirização comercial e estruturação de vendas B2B, com sede no Edifício Capital Corporate Office em São Paulo. Método próprio, time dedicado e governança por dados.',
+  },
+  '/blog': {
+    title: 'Blog de Vendas B2B e Estruturação Comercial | Nexxus',
+    description:
+      'Artigos práticos sobre terceirização comercial, SDR, Hunter e Closer, prospecção outbound, CRM, playbook e como escalar vendas B2B com método. Conteúdo da equipe Nexxus.',
+  },
+  '/contato': {
+    title: 'Diagnóstico Comercial Gratuito | Fale com a Nexxus',
+    description:
+      'Solicite seu diagnóstico comercial gratuito. Em até 12 horas nossa equipe analisa sua operação de vendas e apresenta um plano real, sem custo e sem compromisso.',
+  },
+}
+
 // ─── Keywords por página ─────────────────────────────────────────────────────
 export const pageKeywords = {
   home: [

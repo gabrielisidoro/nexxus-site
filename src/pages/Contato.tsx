@@ -5,7 +5,7 @@ import { SEO } from '@/components/SEO'
 import { Reveal } from '@/components/Reveal'
 import { site, mailtoLink } from '@/data/site'
 import { submitLead, validateLead, applyCountryCode } from '@/lib/submitLead'
-import { breadcrumbSchema, pageKeywords } from '@/data/seo'
+import { breadcrumbSchema, pageKeywords, paginasSeo } from '@/data/seo'
 
 interface FormState {
   nome: string
@@ -64,8 +64,8 @@ export default function Contato() {
   return (
     <>
       <SEO
-        title="Diagnóstico Comercial Gratuito | Fale com a Nexxus"
-        description="Solicite seu diagnóstico comercial gratuito. Em até 12 horas nossa equipe analisa sua operação de vendas e apresenta um plano real — sem custo e sem compromisso."
+        title={paginasSeo['/contato'].title}
+        description={paginasSeo['/contato'].description}
         keywords={pageKeywords.contato}
         path="/contato"
         schema={[breadcrumbSchema([

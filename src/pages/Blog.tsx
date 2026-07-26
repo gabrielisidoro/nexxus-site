@@ -1,5 +1,5 @@
 import { SEO } from '@/components/SEO'
-import { breadcrumbSchema, blogIndexSchema, pageKeywords } from '@/data/seo'
+import { breadcrumbSchema, blogIndexSchema, pageKeywords, paginasSeo } from '@/data/seo'
 import { Reveal } from '@/components/Reveal'
 import { BlogCard } from '@/components/BlogCard'
 import { CTASection } from '@/components/CTASection'
@@ -9,8 +9,8 @@ export default function Blog() {
   return (
     <>
       <SEO
-        title="Blog de Vendas B2B e Estruturação Comercial | Nexxus"
-        description="Artigos práticos sobre terceirização comercial, SDR, Hunter e Closer, prospecção outbound, CRM, playbook e como escalar vendas B2B com método. Conteúdo da equipe Nexxus."
+        title={paginasSeo['/blog'].title}
+        description={paginasSeo['/blog'].description}
         keywords={pageKeywords.blog}
         path="/blog"
         schema={[

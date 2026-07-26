@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { SEO } from '@/components/SEO'
-import { organizationSchema, localBusinessSchema, websiteSchema, homeFaqSchema, pageKeywords } from '@/data/seo'
+import { organizationSchema, localBusinessSchema, websiteSchema, homeFaqSchema, pageKeywords, paginasSeo } from '@/data/seo'
 import { Button } from '@/components/Button'
 import { Reveal } from '@/components/Reveal'
 import { SectionHeading } from '@/components/SectionHeading'
@@ -26,8 +26,8 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Terceirização e Estruturação Comercial B2B | Nexxus"
-        description="Pare de contratar vendedor CLT ou PJ e torcendo. A Nexxus monta e opera sua equipe comercial completa (SDR, Hunter, Closer) com método e dados — operação no ar em 20 dias. Diagnóstico gratuito."
+        title={paginasSeo['/'].title}
+        description={paginasSeo['/'].description}
         keywords={pageKeywords.home}
         path="/"
         schema={[organizationSchema, localBusinessSchema, websiteSchema, homeFaqSchema]}

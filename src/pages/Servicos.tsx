@@ -1,6 +1,6 @@
 import { ArrowRight, Check, Users } from 'lucide-react'
 import { SEO } from '@/components/SEO'
-import { terceirizacaoServiceSchema, estruturacaoServiceSchema, mentoriaServiceSchema, breadcrumbSchema, pageKeywords } from '@/data/seo'
+import { terceirizacaoServiceSchema, estruturacaoServiceSchema, mentoriaServiceSchema, breadcrumbSchema, pageKeywords, paginasSeo } from '@/data/seo'
 import { Button } from '@/components/Button'
 import { Reveal } from '@/components/Reveal'
 import { SectionHeading } from '@/components/SectionHeading'
@@ -15,8 +15,8 @@ export default function Servicos() {
   return (
     <>
       <SEO
-        title="Terceirização Comercial, Mentoria e Estruturação de Vendas | Nexxus"
-        description="Terceirize seu comercial com squad SDR, Hunter e Closer em 20 dias. Ou estruture o time interno com ICP, playbook e CRM. Conheça as 3 frentes da Nexxus para vendas B2B com previsibilidade."
+        title={paginasSeo['/servicos'].title}
+        description={paginasSeo['/servicos'].description}
         keywords={pageKeywords.servicos}
         path="/servicos"
         schema={[
