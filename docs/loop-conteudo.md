@@ -1,0 +1,181 @@
+# Loop semanal de conteúdo da Nexxus
+
+Documento operacional do ciclo que publica 2 artigos por semana no blog e os
+entrega ao Google. Escrito para ser executado por um agente, com pontos de
+parada explícitos onde a decisão é humana.
+
+Site: https://nexxusagencia.com.br
+Search Console: propriedade de domínio `sc-domain:nexxusagencia.com.br`
+
+---
+
+## 1. Gatilho
+
+**Terça e quinta, 7h00 (horário de Brasília).**
+
+Dois dias, não três, e nunca terça com quarta. A meia-vida de um post de
+LinkedIn é de aproximadamente 24 horas e cerca de metade das impressões cai
+nas primeiras 48 horas: publicar em dias consecutivos faz o segundo artigo
+competir com a cauda de distribuição do primeiro. Terça e quinta respeitam
+esse ciclo e são, nas três maiores bases públicas (Sprout Social, Metricool e
+Buffer), os dois dias mais fortes para público B2B.
+
+O horário de publicação não move ranking. O Google não liga para o dia da
+semana em que o artigo sobe. As 7h00 servem para outra coisa: garantir que o
+artigo esteja revisado, no sitemap e submetido ao Search Console antes da
+primeira janela de distribuição do dia.
+
+**Janela de distribuição** (separada da publicação):
+- LinkedIn: terça e quinta às 11h30, com quem publicou disponível de 30 a 60
+  minutos depois respondendo comentário por comentário. O alcance é decidido
+  nos primeiros 90 minutos.
+- Instagram: carrossel derivado do artigo entre 11h e 15h; Reels entre 18h e
+  21h. Usar o mesmo horário para os dois joga fora um dos picos.
+- Redistribuição obrigatória: o mesmo artigo volta ao LinkedIn 48 a 72 horas
+  depois com ângulo diferente. O post morre em cerca de 24 horas, o artigo
+  vive anos.
+- Sexta aceita reaproveitamento leve, nunca lançamento. Sábado e domingo, nada.
+
+**Teste pendente:** rodar 6 a 8 semanas alternando janela A (11h30) e janela B
+(16h às 18h) antes de fixar. Sprout e Buffer discordam sobre o pico do
+LinkedIn e as duas medem coisas diferentes, então não dá para resolver no
+papel.
+
+---
+
+## 2. Fonte de pauta
+
+Ordem de prioridade. A pauta sai da primeira fonte que produzir um tema com
+lacuna real de SERP.
+
+1. **Lacuna de SERP com intenção comercial.** Buscar no Google os termos do
+   nicho e procurar perguntas cuja resposta não existe na primeira página. A
+   pauta de maior valor é aquela em que todo concorrente escreve "fale com um
+   consultor" no lugar da informação. Foi assim que saiu o primeiro artigo
+   deste ciclo, sobre custo de terceirização.
+2. **Search Console, relatório de Desempenho.** Consultas em que o site já
+   recebe impressão mas está em posição 8 a 30. É demanda comprovada com
+   entrega fraca, o alvo mais barato que existe.
+3. **Perguntas reais de reunião comercial.** Objeção ouvida em call vira
+   artigo. É a única fonte que produz informação que nenhum concorrente tem.
+4. **Sazonalidade do calendário do cliente.** Fechamento de semestre, virada
+   de ano e planejamento orçamentário mudam o que o dono está decidindo.
+5. **Tendência do Instagram revertida ao contexto.** Formato ou gancho em alta
+   adaptado ao tema comercial, nunca o tema em si. Serve para distribuição, não
+   define a pauta do blog.
+
+**Regras de pauta**
+- Os dois artigos da semana precisam ter intenção de busca diferente entre si:
+  um comercial (fecha venda) e um informacional (abre diagnóstico).
+- Nunca repetir termo já coberto por um artigo publicado. Se o tema evoluiu,
+  atualizar o artigo existente e mexer no campo `updated`, em vez de criar
+  um novo que canibaliza.
+- Priorizar cauda longa. O site tem pouca autoridade: guias amplos disputam com
+  RD Station, Agendor e Meetime e não têm chance no curto prazo.
+
+---
+
+## 3. Verificador com rubrica
+
+Roda antes de publicar. Nota final é a média ponderada. **Corte: 85 pontos.**
+Abaixo disso o artigo volta para reescrita, não vai ao ar.
+
+| Peso | Critério | Como medir | Reprova se |
+|---|---|---|---|
+| 20 | Densidade factual com fonte | Contar afirmações numéricas e conferir se cada uma tem fonte nomeada. Dado com mais de 2 anos declara a idade na própria frase. Dado interno vem rotulado como dado próprio, nunca como benchmark de mercado. | Qualquer número sem fonte. Sem negociação. |
+| 15 | Cobertura do termo e da intenção | Termo principal no title, H1, primeiro parágrafo, ao menos um H2 e na meta description. Quem buscou sai com a resposta ou precisa buscar de novo? | A pergunta implícita do termo não é respondida antes do terceiro H2. |
+| 12 | Superação verificada da SERP | Abrir os 3 primeiros orgânicos do termo e listar o que cobrem. | Menos de 2 blocos de conteúdo que nenhum dos três tem. Ou o artigo é uma lista genérica de vantagens e desvantagens. |
+| 12 | Formato diferenciado | Presença de tabela comparativa, FAQ com 5 ou mais perguntas e um elemento de decisão (checklist, cálculo passo a passo ou critério de corte). | Falta tabela ou falta FAQ. |
+| 10 | Ausência de marcas de texto de IA | Busca literal por travessão e pela lista de clichês. Ler os 3 primeiros parágrafos em voz alta. | Um travessão que seja. Ou um parágrafo puramente introdutório entre um H2 e o conteúdo dele. |
+| 10 | Ativos técnicos | Slug em kebab-case sem acento, title até 60 caracteres, excerpt de 140 a 160, `date` e `updated` em ISO, 5 a 7 keywords, capa existente em 16x9, `readingMinutes` coerente. Rich Results Test por URL ao vivo. | Rich Results Test com erro em BlogPosting ou FAQPage. |
+| 8 | Prova própria | Teste do apagamento: trocar "Nexxus" por qualquer concorrente. | O texto continua inteiramente válido. Significa que qualquer um poderia ter escrito. |
+| 8 | Rede de links | Contar links internos com âncora descritiva (nunca "leia mais") e externos para as fontes. | Menos de 3 links internos, sendo ao menos 1 para página de serviço e 1 para outro post. |
+| 5 | Escaneabilidade | Parágrafo com no máximo 4 linhas, nenhum bloco corrido acima de 250 palavras sem subtítulo, alt text descritivo na capa. | Bloco de texto corrido longo demais. |
+
+**Extensão alvo:** 1.500 a 2.200 palavras. O padrão que ranqueia no nicho fica
+entre 1.200 e 1.500, então o alvo é superar com folga sem encher linguiça.
+
+---
+
+## 4. Definição de pronto
+
+O artigo só conta como entregue quando **todos** os itens abaixo estiverem
+verificados, nesta ordem:
+
+1. Nota do verificador maior ou igual a 85.
+2. Arquivo do post criado e registrado em `src/data/posts/index.ts`.
+3. Capa gerada com foto real do escritório, nunca imagem de banco ou de IA.
+4. `npm run build` sem erro. O build regenera o sitemap e pré-renderiza o
+   `<head>` de cada rota automaticamente.
+5. Commit e push na `main`. O GitHub Actions publica na `gh-pages`.
+6. Deploy confirmado lendo o branch `gh-pages` cru, **não** o domínio. O
+   domínio mente por até 1 hora por causa do cache.
+7. **Purge do cache do Cloudflare.** Sem isso o Google e você continuam vendo
+   a versão antiga. A zona ignora query string, então cache-buster não resolve.
+   Dashboard > Caching > Configuração > Limpar tudo.
+8. Verificação no domínio: status 200, `og:type=article` e `og:image` apontando
+   para a capa do post.
+9. Sitemap reenviado no Search Console (URL completa, não caminho relativo).
+10. Indexação solicitada para a URL do post na Inspeção de URLs.
+
+Depois do passo 10 não há mais nada a fazer: a URL entra na fila de rastreio
+prioritário do Google e a indexação leva de dias a semanas. Voltar a inspecionar
+a URL em 3 a 5 dias para confirmar o estado, e só então considerar o ciclo
+encerrado.
+
+---
+
+## 5. Condição de escalar
+
+Parar e perguntar ao Gabriel, sem decidir sozinho:
+
+1. **Publicar qualquer número da Nexxus.** Preço, faixa de investimento,
+   comissão, faturamento, número real de reuniões por SDR, taxa de no-show,
+   nome de cliente. Publicar preço é decisão de posicionamento com efeito
+   competitivo, e vira ativo permanente na SERP. *Esta condição já foi
+   acionada: o artigo de custo pede a faixa de investimento aberta, que é a
+   maior lacuna da SERP do nicho, e ficou de fora aguardando decisão.*
+2. **Mudança de posicionamento ou de oferta.** Qualquer pauta que redefina o
+   que a Nexxus vende, para quem, ou que crie uma promessa nova.
+3. **Tema sensível ou com risco jurídico.** Pejotização, legislação
+   trabalhista aplicada a caso concreto, comparação nominal com concorrente.
+4. **Queda de desempenho sem causa clara.** Perda maior que 30% de impressões
+   ou cliques semana contra semana, ou página que sai do índice.
+5. **Ação manual ou aviso de segurança no Search Console.** Nunca tratar sozinho.
+6. **Rubrica reprovando duas vezes seguidas na mesma pauta.** Sinal de que o
+   tema não tem sustentação, e a decisão de matar a pauta é do dono.
+7. **Custo de execução fora do combinado.** Se um ciclo exigir muito além do
+   previsto, avisar antes de seguir.
+
+Fora dessas sete situações, o loop decide e executa sozinho.
+
+---
+
+## 6. Armadilhas conhecidas desta stack
+
+Registradas porque já custaram tempo:
+
+- **Cache do Cloudflare com TTL de 1 hora e a zona ignorando query string.**
+  Verificar deploy sempre pelo `raw.githubusercontent.com` no branch
+  `gh-pages`, nunca pelo domínio.
+- **Sitemap divergindo dos slugs reais.** Já aconteceu: as 3 matérias ficaram
+  meses entregando 404 e redirecionamento ao Google. Hoje o sitemap é gerado no
+  build a partir de `allPosts`, então não pode mais divergir. Não editar
+  `public/sitemap.xml` na mão.
+- **Meta tags duplicadas.** O `index.html` traz tags estáticas que vêm antes
+  das do react-helmet. Por isso o build pré-renderiza o `<head>` por rota.
+- **PowerShell corrompendo acento.** `Get-Content` sem `-Encoding UTF8` lê como
+  ANSI e destrói os acentos ao regravar. Editar arquivo de código sempre com a
+  ferramenta de edição, nunca reescrevendo o arquivo por script.
+- **Here-string do PowerShell quebra com aspas na mensagem de commit.** Usar
+  `git commit -F arquivo.txt`.
+
+---
+
+## 7. Estado atual (26/07/2026)
+
+- Indexadas no Google: 1 página. Não indexadas: 8. A causa principal (sitemap
+  com slug errado) foi corrigida neste ciclo.
+- Sitemap: 9 URLs, lido pelo Google em 26/07/2026.
+- Próxima pauta pronta: "Quantas reuniões um SDR deve agendar por mês?",
+  informacional, para a quinta-feira.
