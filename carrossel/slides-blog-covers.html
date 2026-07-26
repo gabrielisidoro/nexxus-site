@@ -15,6 +15,16 @@
     background:#060a16; color:#fff; display:flex; flex-direction:column;
     justify-content:space-between; padding:64px 72px;
   }
+  /* Cartão social padrão do site: 1200x630, o formato que o Google e as redes esperam */
+  .cover.og { width:1200px; height:630px; padding:56px 60px; }
+  .cover.og h1 { font-size:60px; }
+  .cover.og .meta, .cover.og .site { font-size:20px; }
+  /* Capa com foto mais clara, para ambientes escuros do escritório */
+  .cover.clara .shade {
+    background:
+      linear-gradient(100deg, rgba(6,10,22,.92) 0%, rgba(6,10,22,.8) 36%, rgba(6,10,22,.42) 66%, rgba(6,10,22,.28) 100%),
+      linear-gradient(0deg, rgba(6,10,22,.8) 0%, transparent 46%);
+  }
 
   /* foto real de fundo */
   .cover .photo { position:absolute; inset:0; background-size:cover; background-position:center; }
@@ -95,6 +105,36 @@
   </div>
   <footer>
     <span class="meta">Blog Nexxus · <b>7 min de leitura</b></span>
+    <span class="site">nexxusagencia.com.br</span>
+  </footer>
+</div>
+
+<!-- 4 · Quanto custa terceirizar -->
+<div class="cover clara" data-slug="quanto-custa-terceirizar">
+  <div class="photo" style="background-image:url('img/global/varanda-sofa.webp'); background-position:center 62%;"></div>
+  <div class="shade"></div><div class="edge"></div>
+  <header><img class="logo" alt="Nexxus"><span class="chip">Custos e Investimento</span></header>
+  <div class="body">
+    <div class="rule"></div>
+    <h1 class="sm">Quanto custa terceirizar o<br>time de vendas <span class="hl">em 2026</span></h1>
+  </div>
+  <footer>
+    <span class="meta">Blog Nexxus · <b>9 min de leitura</b></span>
+    <span class="site">nexxusagencia.com.br</span>
+  </footer>
+</div>
+
+<!-- 5 · Cartão social padrão do site (og-image) -->
+<div class="cover og" data-slug="og-site">
+  <div class="photo" style="background-image:url('img/global/equipe-operacao.webp'); background-position:center 34%;"></div>
+  <div class="shade"></div><div class="edge"></div>
+  <header><img class="logo" alt="Nexxus"><span class="chip">São Paulo · Brasil</span></header>
+  <div class="body">
+    <div class="rule"></div>
+    <h1>Terceirização e estruturação<br><span class="hl">comercial B2B</span></h1>
+  </div>
+  <footer>
+    <span class="meta">Squad SDR, Hunter e Closer · <b>operação no ar em 20 dias</b></span>
     <span class="site">nexxusagencia.com.br</span>
   </footer>
 </div>

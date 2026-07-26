@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>CazéTV recorde mundial — @gabriel.isidoro_</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --red:#E50914;      --red-deep:#B00610;   --red-soft:#ff2a36;
+    --yellow:#FFD400;   --green:#00A859;
+    --ink:#0C0C0E;      --ink-2:#17171b;      --ink-3:#222228;
+    --paper:#F4F2ED;    --paper-2:#E9E5DD;    --line:#d9d4ca;
+    --white:#ffffff;    --safe:70px;          --yt:#FF0000;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  html,body{background:#2a2a2e;}
+  body{font-family:'Inter',sans-serif;color:var(--ink);}
+
+  .slide{position:relative;width:1080px;height:1350px;overflow:hidden;margin:0 auto 46px;background:var(--paper);}
+  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;}
+
+  /* header lockup */
+  .topbar{position:absolute;top:var(--safe);left:var(--safe);right:var(--safe);
+    display:flex;align-items:center;justify-content:space-between;z-index:30;}
+  .brand{display:flex;align-items:center;gap:16px;}
+  .mono{width:62px;height:62px;border-radius:15px;background:var(--red);color:#fff;
+    font-family:'Anton';font-size:33px;line-height:1;display:flex;align-items:center;justify-content:center;
+    letter-spacing:.5px;box-shadow:0 10px 26px rgba(229,9,20,.42);position:relative;}
+  .mono::after{content:"";position:absolute;left:13px;right:13px;bottom:11px;height:3px;background:rgba(255,255,255,.85);border-radius:2px;}
+  .handle{font-weight:800;font-size:23px;letter-spacing:.2px;color:var(--ink);}
+  .tag{font-weight:800;font-size:18px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);opacity:.55;}
+  .topbar.on-dark .handle{color:#fff;}
+  .topbar.on-dark .tag{color:#fff;opacity:.6;}
+
+  /* dots + cta */
+  .dots{position:absolute;left:0;right:0;bottom:50px;display:flex;gap:11px;justify-content:center;z-index:30;}
+  .dots i{width:10px;height:10px;border-radius:50%;background:rgba(12,12,14,.22);}
+  .dots i.on{background:var(--red);width:30px;border-radius:5px;}
+  .on-dark-dots i{background:rgba(255,255,255,.28);}
+  .on-dark-dots i.on{background:var(--red);}
+
+  .cta{position:absolute;left:var(--safe);right:var(--safe);bottom:108px;z-index:30;
+    background:var(--red);color:#fff;border-radius:999px;padding:24px 30px 24px 38px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 22px 46px rgba(229,9,20,.36);}
+  .cta b{font-weight:800;font-size:32px;letter-spacing:.2px;line-height:1.05;}
+  .cta .arw{flex:0 0 auto;width:58px;height:58px;border-radius:50%;border:3px solid rgba(255,255,255,.92);
+    display:flex;align-items:center;justify-content:center;}
+  .cta .arw svg{width:26px;height:26px;fill:#fff;}
+
+  /* highlights */
+  .hi-y{background:var(--yellow);color:#101012;padding:.02em .22em;border-radius:5px;font-weight:800;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+  .hi-r{color:var(--red);font-weight:800;}
+  .anton{font-family:'Anton';font-weight:400;}
+  .lg{display:inline-flex;} .lg svg{display:block;}
+
+  /* logo CazéTV */
+  .czlogo{height:52px;width:auto;}
+  .czchip{display:inline-flex;align-items:center;gap:0;background:#fff;border:1px solid var(--line);
+    border-radius:14px;padding:12px 20px;box-shadow:0 10px 26px rgba(0,0,0,.08);}
+  .czchip img{height:46px;}
+
+  /* ====================================================================== */
+  /* SLIDE 1 — CAPA                                                          */
+  /* ====================================================================== */
+  #s1{background:#0a0a0c;}
+  #s1 .bg{position:absolute;inset:0;background:url('img/caze2/casimiro.png') 40% 30%/120% no-repeat;}
+  #s1 .scrim{position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(8,8,12,.42) 0%,rgba(8,8,12,0) 26%,rgba(8,8,12,.18) 48%,rgba(8,8,12,.82) 70%,rgba(6,6,9,.99) 100%);}
+  #s1 .glow{position:absolute;left:-10%;bottom:4%;width:84%;height:48%;z-index:1;
+    background:radial-gradient(closest-side,rgba(229,9,20,.55),transparent 70%);filter:blur(20px);opacity:.7;}
+  #s1 .live{position:absolute;top:74px;right:var(--safe);z-index:30;display:flex;align-items:center;gap:11px;
+    background:rgba(10,10,12,.55);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px);
+    padding:11px 18px 11px 14px;border-radius:999px;}
+  #s1 .live .yt{width:34px;height:24px;color:var(--yt);}
+  #s1 .live .dot{width:11px;height:11px;border-radius:50%;background:var(--red);}
+  #s1 .live span{color:#fff;font-weight:800;font-size:19px;letter-spacing:1.5px;}
+  #s1 .wrap{position:absolute;left:var(--safe);right:var(--safe);bottom:250px;z-index:20;}
+  #s1 .kick{display:inline-block;background:var(--red);color:#fff;font-weight:800;font-size:22px;
+    letter-spacing:2.2px;text-transform:uppercase;padding:9px 16px;border-radius:7px;margin-bottom:24px;}
+  #s1 .giant{font-family:'Anton';color:#fff;font-size:150px;line-height:.9;text-transform:uppercase;
+    letter-spacing:1px;text-shadow:0 8px 40px rgba(0,0,0,.55);}
+  #s1 .giant .l2{display:inline-block;background:var(--red);padding:0 18px 8px;margin-top:10px;border-radius:8px;}
+  #s1 .lead{margin-top:32px;max-width:870px;color:#f3f3f3;font-weight:500;font-size:31px;line-height:1.34;
+    text-shadow:0 2px 14px rgba(0,0,0,.6);}
+  #s1 .lead b{font-weight:800;color:#fff;}
+
+  /* ====================================================================== */
+  /* SLIDE 2 — A PROVA (print real)                                          */
+  /* ====================================================================== */
+  #s2{background:var(--paper);}
+  #s2 .head{position:absolute;top:176px;left:var(--safe);right:var(--safe);}
+  #s2 .h{font-weight:900;font-size:66px;line-height:.98;letter-spacing:-1.5px;color:var(--ink);}
+  #s2 .lead{margin-top:20px;font-size:27px;line-height:1.4;color:#3a3a40;font-weight:500;max-width:820px;}
+  #s2 .lead b{color:var(--ink);font-weight:800;}
+  #s2 .shot{position:absolute;top:548px;left:96px;width:888px;height:444px;border-radius:22px;overflow:hidden;
+    border:11px solid #fff;box-shadow:0 40px 80px rgba(0,0,0,.30);transform:rotate(-1.6deg);z-index:3;
+    background:url('img/caze2/caze-record.jpg') center top/cover no-repeat;}
+  #s2 .ytbar{position:absolute;top:548px;left:96px;transform:rotate(-1.6deg);transform-origin:left top;z-index:5;
+    display:flex;align-items:center;gap:10px;background:#0a0a0c;color:#fff;font-weight:800;font-size:20px;
+    padding:12px 20px;border-radius:14px 14px 0 0;margin:-2px 0 0 18px;box-shadow:0 12px 26px rgba(0,0,0,.4);}
+  #s2 .ytbar .yt{width:30px;height:21px;color:var(--yt);}
+  #s2 .pill{position:absolute;top:902px;left:150px;z-index:6;display:flex;align-items:center;gap:12px;
+    background:var(--red);color:#fff;font-weight:800;font-size:26px;padding:14px 24px;border-radius:999px;
+    transform:rotate(-1.6deg);box-shadow:0 18px 40px rgba(229,9,20,.5);}
+  #s2 .pill .dot{width:13px;height:13px;border-radius:50%;background:#fff;}
+  #s2 .stamp{position:absolute;top:498px;right:96px;z-index:7;background:var(--red);color:#fff;
+    font-family:'Anton';font-size:30px;letter-spacing:1px;text-transform:uppercase;padding:12px 22px;border-radius:10px;
+    transform:rotate(5deg);box-shadow:0 16px 34px rgba(229,9,20,.45);}
+
+  /* ====================================================================== */
+  /* SLIDE 3 — O ANTES E DEPOIS DO CANAL                                     */
+  /* ====================================================================== */
+  #s3{background:var(--paper);}
+  #s3 .head{position:absolute;top:172px;left:var(--safe);right:var(--safe);z-index:2;}
+  #s3 .h{font-weight:900;font-size:64px;line-height:.98;letter-spacing:-1.5px;color:var(--ink);}
+  #s3 .h .sub{display:block;font-weight:600;font-size:27px;color:#54545c;letter-spacing:0;margin-top:12px;}
+  #s3 .cards{position:absolute;top:438px;left:var(--safe);right:var(--safe);z-index:2;
+    display:flex;justify-content:space-between;align-items:stretch;gap:24px;}
+  #s3 .rcard{flex:1;background:#fff;border:1px solid var(--line);border-radius:24px;padding:40px 32px 34px;
+    box-shadow:0 22px 50px rgba(0,0,0,.08);position:relative;}
+  #s3 .rcard .rb{position:absolute;top:-15px;left:28px;font-weight:800;font-size:16px;letter-spacing:2px;
+    text-transform:uppercase;padding:7px 14px;border-radius:8px;}
+  #s3 .rcard.before .rb{background:#e6e1d8;color:#6b6b73;}
+  #s3 .rcard.after .rb{background:var(--red);color:#fff;box-shadow:0 10px 22px rgba(229,9,20,.4);}
+  #s3 .rcard .v{font-family:'Anton';font-size:118px;line-height:.82;color:var(--ink);}
+  #s3 .rcard.after .v{color:var(--red);}
+  #s3 .rcard .u{font-weight:800;font-size:25px;margin-top:6px;color:var(--ink);}
+  #s3 .rcard .d{font-weight:600;font-size:20px;color:#6b6b73;margin-top:12px;line-height:1.32;}
+  #s3 .mult{position:absolute;top:650px;left:50%;translate:-50% -50%;z-index:8;
+    width:116px;height:116px;border-radius:50%;background:var(--red);color:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    box-shadow:0 18px 40px rgba(229,9,20,.5);border:6px solid var(--paper);}
+  #s3 .mult b{font-family:'Anton';font-size:48px;line-height:.8;}
+  #s3 .mult span{font-size:14px;font-weight:800;letter-spacing:1px;margin-top:4px;}
+  #s3 .note{position:absolute;left:var(--safe);right:var(--safe);bottom:200px;z-index:2;
+    background:#0c0c0e;border-radius:18px;padding:26px 30px;display:flex;align-items:center;gap:18px;
+    box-shadow:0 18px 40px rgba(0,0,0,.18);}
+  #s3 .note .ic{flex:0 0 auto;width:56px;height:56px;border-radius:13px;background:rgba(229,9,20,.18);
+    display:flex;align-items:center;justify-content:center;font-size:30px;}
+  #s3 .note p{font-weight:600;font-size:24px;line-height:1.32;color:#e8e8ee;}
+  #s3 .note p b{color:#fff;font-weight:800;}
+  #s3 .note p em{font-style:normal;color:var(--red-soft);font-weight:800;}
+
+  /* ====================================================================== */
+  /* SLIDE 4 — O QUE ISSO REPRESENTA                                         */
+  /* ====================================================================== */
+  #s4{background:#0b0b0f;}
+  #s4 .bg{position:absolute;inset:0;background:url('img/caze/stadium-2.jpg') center/cover no-repeat;opacity:.14;}
+  #s4 .scrim{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 0%,rgba(229,9,20,.20),transparent 55%),linear-gradient(180deg,#0b0b0f 0%,#0e0e14 55%,#0b0b0f 100%);}
+  #s4 .head{position:absolute;top:176px;left:var(--safe);right:var(--safe);z-index:5;}
+  #s4 .h{font-weight:900;font-size:60px;line-height:1.02;letter-spacing:-1.2px;color:#fff;max-width:760px;}
+  #s4 .h .hi-y{color:#101012;}
+  #s4 .lead{margin-top:18px;font-size:27px;line-height:1.42;color:#c7c7d0;font-weight:500;max-width:600px;}
+  #s4 .lead b{color:#fff;font-weight:800;}
+  #s4 .photo{position:absolute;right:54px;top:452px;width:440px;height:300px;border-radius:22px;overflow:hidden;z-index:4;
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 36px 70px rgba(0,0,0,.5);transform:rotate(2deg);
+    background:url('img/caze2/caze-team.jpg') center 30%/cover no-repeat;}
+  #s4 .photo .pt{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 12px;
+    background:linear-gradient(180deg,transparent,rgba(0,0,0,.82));color:#fff;font-weight:700;font-size:17px;}
+  #s4 .stk{position:absolute;left:var(--safe);top:790px;width:512px;z-index:5;display:flex;flex-direction:column;gap:18px;}
+  #s4 .stat{background:#15151b;border:1px solid #26262d;border-radius:20px;padding:24px 28px;
+    display:flex;align-items:center;gap:22px;box-shadow:0 18px 40px rgba(0,0,0,.34);}
+  #s4 .stat .v{font-family:'Anton';font-size:62px;line-height:.86;color:var(--red-soft);flex:0 0 auto;min-width:184px;}
+  #s4 .stat .l{font-weight:600;font-size:23px;color:#d2d2da;line-height:1.28;}
+  #s4 .stat .l b{color:#fff;font-weight:800;}
+  #s4 .czf{position:absolute;right:60px;top:790px;width:430px;z-index:5;
+    background:#fff;border-radius:20px;padding:30px;text-align:center;box-shadow:0 22px 50px rgba(0,0,0,.4);}
+  #s4 .czf img{height:120px;width:auto;}
+  #s4 .czf p{margin-top:14px;font-weight:700;font-size:21px;color:#33333a;line-height:1.3;}
+
+  /* ====================================================================== */
+  /* SLIDE 5 — A LIÇÃO / CTA                                                 */
+  /* ====================================================================== */
+  #s5{background:#08080b;}
+  #s5 .bg{position:absolute;inset:0;background:url('img/caze2/casimiro.png') center 16%/cover no-repeat;opacity:.20;}
+  #s5 .scrim{position:absolute;inset:0;background:linear-gradient(180deg,#0a0a0e 0%,rgba(10,10,14,.62) 38%,#08080b 100%);}
+  #s5 .wm{position:absolute;font-family:'Anton';font-size:300px;line-height:1;color:rgba(255,255,255,.045);
+    left:-18px;top:330px;letter-spacing:6px;z-index:1;}
+  #s5 .photo{position:absolute;right:54px;top:438px;width:366px;height:458px;border-radius:24px;overflow:hidden;z-index:3;
+    background:url('img/caze2/casimiro.png') center 14%/cover no-repeat;border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 40px 80px rgba(0,0,0,.55);transform:rotate(2deg);}
+  #s5 .photo .pg{position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,8,11,.9));}
+  #s5 .photo .pt{position:absolute;left:18px;bottom:16px;color:#fff;font-weight:800;font-size:19px;}
+  #s5 .photo .pt small{display:block;font-weight:600;font-size:15px;color:#c9c9d2;margin-top:2px;}
+  #s5 .head{position:absolute;top:184px;left:var(--safe);right:var(--safe);z-index:4;}
+  #s5 .h{font-weight:900;font-size:58px;line-height:1.02;letter-spacing:-1.3px;color:#fff;max-width:880px;}
+  #s5 .body{position:absolute;top:452px;left:var(--safe);z-index:4;width:510px;}
+  #s5 .body p{font-size:27px;line-height:1.42;color:#d6d6de;font-weight:500;}
+  #s5 .body p b{color:#fff;font-weight:800;}
+  #s5 .punch{margin-top:28px;font-family:'Anton';font-size:62px;line-height:.96;color:#fff;text-transform:uppercase;letter-spacing:.5px;}
+  #s5 .punch em{font-style:normal;color:#fff;background:var(--red);padding:0 14px 4px;border-radius:6px;display:inline-block;}
+  #s5 .ctabtn{position:absolute;left:var(--safe);right:var(--safe);bottom:118px;z-index:5;background:var(--red);
+    color:#fff;border-radius:20px;padding:24px 30px;display:flex;align-items:center;justify-content:space-between;gap:18px;
+    box-shadow:0 24px 52px rgba(229,9,20,.4);}
+  #s5 .ctabtn .t b{display:block;font-weight:900;font-size:30px;line-height:1.08;}
+  #s5 .ctabtn .t span{font-weight:600;font-size:20px;opacity:.92;}
+  #s5 .ctabtn .arw{flex:0 0 auto;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.16);
+    border:3px solid rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;}
+  #s5 .ctabtn .arw svg{width:28px;height:28px;fill:#fff;}
+  #s5 .handle{position:absolute;left:var(--safe);right:var(--safe);bottom:256px;z-index:5;text-align:center;
+    font-weight:600;font-size:23px;color:#9a9aa2;}
+  #s5 .handle b{color:#fff;font-weight:800;}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="yt" viewBox="0 0 24 24"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
+  <symbol id="arw" viewBox="0 0 24 24"><path fill="currentColor" d="M5 12h12.2l-4.6-4.6L14 6l7 7-7 7-1.4-1.4 4.6-4.6H5z"/></symbol>
+</defs></svg>
+
+
+<!-- ====================== SLIDE 1 — CAPA ====================== -->
+<section class="slide grain" id="s1">
+  <div class="bg"></div><div class="scrim"></div><div class="glow"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">Poder do digital</div>
+  </div>
+  <div class="live"><span class="dot"></span><svg class="yt lg"><use href="#yt"/></svg><span>AO VIVO</span></div>
+
+  <div class="wrap">
+    <span class="kick">A CazéTV quebrou o YouTube ontem</span>
+    <div class="giant">16,1 MILHÕES<br/><span class="l2">AO VIVO</span></div>
+    <p class="lead">No Brasil x Haiti, a CazéTV bateu o <b>recorde mundial</b> de audiência simultânea do YouTube. Em telas. Ao vivo. De graça.</p>
+  </div>
+
+  <div class="cta"><b>Arrasta que o número é absurdo</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+
+<!-- ====================== SLIDE 2 — A PROVA ====================== -->
+<section class="slide grain" id="s2">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">01 · A prova</div>
+  </div>
+  <div class="head">
+    <div class="h">Esse print vai<br/>direto pra história.</div>
+    <p class="lead">Ontem, no <b>Brasil x Haiti</b>, a CazéTV cravou <b>16,1 milhões de telas</b> assistindo ao mesmo tempo. Recorde mundial de audiência simultânea do YouTube.</p>
+  </div>
+
+  <div class="ytbar"><svg class="yt lg"><use href="#yt"/></svg> YouTube · CazéTV</div>
+  <div class="shot"></div>
+  <div class="stamp">RECORDE MUNDIAL</div>
+  <div class="pill"><span class="dot"></span>16.101.509 assistindo agora</div>
+
+  <div class="cta"><b>Agora olha o antes e o depois</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+</section>
+
+
+<!-- ====================== SLIDE 3 — ANTES E DEPOIS ====================== -->
+<section class="slide grain" id="s3">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">02 · Antes e depois</div>
+  </div>
+  <div class="head">
+    <div class="h">O antes e depois<br/>do canal:<span class="sub">o maior pico de audiência simultânea da CazéTV.</span></div>
+  </div>
+
+  <div class="cards">
+    <div class="rcard before">
+      <span class="rb">Antes · 2025</span>
+      <div class="v">5,6 mi</div>
+      <div class="u">de telas no pico</div>
+      <div class="d">Flamengo x Bayern, o maior público do canal antes da Copa.</div>
+    </div>
+    <div class="rcard after">
+      <span class="rb">Depois · 2026</span>
+      <div class="v">16,1 mi</div>
+      <div class="u">de telas ao vivo</div>
+      <div class="d">Brasil x Haiti na Copa do Mundo. Novo recorde mundial.</div>
+    </div>
+  </div>
+
+  <div class="mult"><b>2,9x</b><span>EM 1 ANO</span></div>
+
+  <div class="note">
+    <span class="ic">🚀</span>
+    <p>De quebra, passou o antigo recorde mundial do YouTube: o <b>pouso lunar de 2023</b> (8 mi). A CazéTV <em>praticamente dobrou</em> a maior marca da plataforma.</p>
+  </div>
+
+  <div class="cta"><b>O que isso significa pro digital</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+</section>
+
+
+<!-- ====================== SLIDE 4 — O QUE REPRESENTA ====================== -->
+<section class="slide grain" id="s4">
+  <div class="bg"></div><div class="scrim"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">03 · O recado</div>
+  </div>
+  <div class="head">
+    <div class="h">A TV aberta perdeu o<br/>monopólio da <span class="hi-y">emoção.</span></div>
+    <p class="lead">Sem antena, sem cabo, sem assinatura. <b>104 jogos de graça</b> no YouTube. O torcedor escolheu o digital.</p>
+  </div>
+
+  <div class="photo"><div class="pt">Casimiro e a Central CazéTV</div></div>
+
+  <div class="stk">
+    <div class="stat"><div class="v">104</div><div class="l"><b>jogos de graça</b>, do primeiro ao último, no YouTube</div></div>
+    <div class="stat"><div class="v">R$ 2 bi</div><div class="l">em <b>cotas de patrocínio</b>, empatando com a TV aberta</div></div>
+    <div class="stat"><div class="v">16,1 mi</div><div class="l">de telas <b>ao mesmo tempo</b>, recorde do planeta</div></div>
+  </div>
+
+  <div class="czf">
+    <img src="img/caze2/cazetv-logo.png" alt="CazéTV" />
+    <p>O streaming virou o novo<br/>estádio do Brasil.</p>
+  </div>
+
+  <div class="cta"><b>A lição que fica pra você</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i></i><i></i><i></i><i class="on"></i><i></i></div>
+</section>
+
+
+<!-- ====================== SLIDE 5 — A LIÇÃO / CTA ====================== -->
+<section class="slide grain" id="s5">
+  <div class="bg"></div><div class="scrim"></div>
+  <div class="wm anton">DIGITAL</div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">04 · A lição</div>
+  </div>
+  <div class="head">
+    <div class="h">Quem entende de<br/>atenção, dita as<br/>regras do jogo.</div>
+  </div>
+
+  <div class="photo"><div class="pg"></div><div class="pt">Casimiro<small>do YouTube ao topo do mundo</small></div></div>
+
+  <div class="body">
+    <p>A CazéTV não comprou audiência. Ela construiu <b>relação</b>, todo dia, por anos.<br/><br/>Quando a Copa chegou, colheu o que plantou: <b>o maior público do planeta.</b></p>
+    <div class="punch">O DIGITAL<br/><em>VENCEU</em></div>
+  </div>
+
+  <div class="handle">Mais análises do digital assim · <b>@gabriel.isidoro_</b></div>
+  <div class="ctabtn">
+    <div class="t"><b>Salva e manda pra quem ainda duvida do digital</b><span>e ativa o 🔔 pra não perder</span></div>
+    <span class="arw"><svg><use href="#arw"/></svg></span>
+  </div>
+  <div class="dots on-dark-dots"><i></i><i></i><i></i><i></i><i class="on"></i></div>
+</section>
+
+</body>
+</html>

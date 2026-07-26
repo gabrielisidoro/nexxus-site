@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Vendas Previsivel — panorama @gabriel.isidoro_</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..500;1,6..96,400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cream:#F2E7D8; --amber:#D9A05F; --base:#0C0806;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  html,body{background:#1a1a1e;}
+  body{font-family:'Inter',sans-serif;}
+
+  .board{position:relative;width:7560px;height:1350px;overflow:hidden;background:var(--base);}
+
+  /* (2) ondulacao quente */
+  .wave{position:absolute;inset:0;z-index:0;
+    background:linear-gradient(90deg,#0E0906 0%,#120B07 22%,#0C0806 40%,#140D08 58%,#0C0806 78%,#16100A 92%,#0D0907 100%);}
+  /* (3) pocas de luz ambar */
+  .pool{position:absolute;z-index:1;border-radius:50%;filter:blur(2px);}
+  /* (4) faixa de chao */
+  .floor{position:absolute;left:0;right:0;bottom:0;height:300px;z-index:1;
+    background:linear-gradient(180deg,transparent,rgba(58,36,20,.35));}
+  /* bokehs falsos */
+  .bok{position:absolute;border-radius:50%;background:rgba(234,178,110,.5);filter:blur(6px);opacity:.25;z-index:1;}
+
+  /* fotos */
+  .ph{position:absolute;overflow:hidden;z-index:2;}
+  .ph img{width:100%;height:100%;object-fit:cover;display:block;}
+  .ov{position:absolute;inset:0;pointer-events:none;}
+
+  #phg2{left:-60px;top:-40px;width:1440px;height:1000px;
+    -webkit-mask-image:linear-gradient(90deg,#000 78%,transparent 99%);
+    mask-image:linear-gradient(90deg,#000 78%,transparent 99%);}
+  #phg2 img{filter:brightness(.84) contrast(1.12) saturate(.78);}
+  #phg2 .settle{background:linear-gradient(180deg,rgba(12,8,6,.35) 0%,transparent 30%,rgba(12,8,6,.55) 74%,#0C0806 97%);}
+  #phg2 .amberize{background:rgba(199,138,77,.18);mix-blend-mode:overlay;}
+  #phg2 .edges{background:linear-gradient(90deg,rgba(30,16,8,.25),transparent 18%,transparent 82%,rgba(30,16,8,.2));mix-blend-mode:multiply;}
+
+  #phg4{left:3700px;top:200px;width:812px;height:1150px;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 160px,#000 calc(100% - 140px),transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 160px,#000 calc(100% - 140px),transparent 100%);}
+  #phg4 img{filter:brightness(.90) contrast(1.06) saturate(.82);}
+  #phg4 .amberize{background:rgba(199,138,77,.12);mix-blend-mode:overlay;}
+  #phg4 .settle{background:linear-gradient(180deg,transparent 60%,rgba(12,8,6,.45) 100%);}
+  #phg4 .topfade{background:linear-gradient(180deg,#0C0806 0%,rgba(12,8,6,.55) 40%,transparent 100%);height:200px;}
+
+  #rimg1{position:absolute;left:6900px;top:520px;width:840px;height:860px;z-index:2;border-radius:50%;
+    background:radial-gradient(ellipse 52% 58% at 60% 46%,rgba(233,175,106,.30),transparent 60%);filter:blur(16px);}
+  #phg1{position:absolute;left:6900px;top:580px;width:760px;height:780px;overflow:hidden;z-index:3;
+    -webkit-mask-image:radial-gradient(ellipse 74% 90% at 58% 50%,#000 44%,rgba(0,0,0,.35) 68%,transparent 84%);
+    mask-image:radial-gradient(ellipse 74% 90% at 58% 50%,#000 44%,rgba(0,0,0,.35) 68%,transparent 84%);}
+  #phg1 img{width:100%;height:100%;object-fit:cover;object-position:center 6%;
+    filter:brightness(.66) contrast(1.16) saturate(.78) sepia(.26);}
+  #phg1 .g1-shadowL{background:radial-gradient(ellipse 52% 82% at 2% 48%,rgba(10,7,5,.92),transparent 55%);}
+
+  /* scrim atras de Vendas. */
+  .scrim-vendas{position:absolute;left:60px;top:700px;width:960px;height:420px;z-index:3;
+    background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(12,8,6,.55),transparent 75%);}
+  /* scrim local apoio s4 */
+  .scrim-s4{position:absolute;left:3270px;top:770px;width:620px;height:260px;z-index:3;
+    background:radial-gradient(ellipse 60% 55% at 45% 50%,rgba(12,8,6,.5),transparent 78%);}
+  #handle7{top:1062px;}
+
+  /* palavras serifadas */
+  .serif{position:absolute;z-index:4;font-family:'Bodoni Moda',serif;font-weight:400;
+    color:var(--cream);line-height:1;letter-spacing:-0.01em;white-space:nowrap;
+    font-optical-sizing:none;font-variation-settings:"opsz" 96;}
+  #w-vendas{left:0;width:1080px;text-align:center;top:742px;font-size:270px;}
+  #w-clareza{left:1250px;top:187px;font-size:320px;}
+  #w-silencio{left:2340px;top:505px;font-size:300px;font-style:italic;}
+  #w-minutos{left:3324px;top:202px;font-size:300px;}
+  #w-sorte{left:4996px;top:527px;font-size:280px;}
+  #w-processo{left:5462px;top:258px;font-size:226px;}
+  #w-previsivel{left:6018px;top:512px;font-size:300px;}
+
+  /* apoios */
+  .apoio{position:absolute;z-index:4;font-family:'Inter',sans-serif;font-weight:400;
+    font-size:31px;line-height:1.55;color:rgba(242,231,216,.78);}
+  .apoio b{font-weight:500;color:rgba(242,231,216,.95);}
+  #a1{left:0;width:1080px;text-align:center;top:988px;}
+  #a2{left:1250px;top:518px;}
+  #a3{left:2340px;top:858px;}
+  #a4{left:3324px;top:800px;}
+  #a5{left:4700px;top:840px;}
+  #a6{left:5462px;top:518px;}
+  #a7{left:6564px;top:826px;}
+  #handle7{position:absolute;left:6564px;top:1024px;z-index:4;font-weight:500;font-size:22px;
+    letter-spacing:.22em;text-transform:uppercase;color:rgba(242,231,216,.5);}
+
+  /* vinheta global */
+  .vig-v{position:absolute;inset:0;z-index:5;pointer-events:none;
+    background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,transparent 18%,transparent 72%,rgba(0,0,0,.50) 100%);}
+  .vig-h{position:absolute;inset:0;z-index:5;pointer-events:none;
+    background:linear-gradient(90deg,rgba(0,0,0,.5) 0,transparent 4%,transparent 96%,rgba(0,0,0,.5) 100%);}
+
+  /* hairline continua */
+  .hairline{position:absolute;left:120px;right:120px;top:1122px;height:1px;z-index:6;
+    background:linear-gradient(90deg,transparent,rgba(214,164,110,.30) 8%,rgba(214,164,110,.30) 92%,transparent);}
+
+  /* furniture por janela */
+  .furn{position:absolute;top:0;width:1080px;height:1350px;z-index:7;}
+  .chips{position:absolute;left:84px;top:88px;display:flex;gap:12px;}
+  .chip{display:flex;align-items:center;gap:9px;border:1px solid rgba(217,160,95,.22);border-radius:999px;
+    padding:9px 16px;font-weight:500;font-size:15px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(242,231,216,.6);}
+  .chip svg{width:9px;height:9px;flex:0 0 auto;}
+  .save{position:absolute;right:84px;top:88px;display:flex;align-items:center;gap:9px;
+    border:1px solid rgba(217,160,95,.22);border-radius:999px;padding:9px 18px;
+    font-weight:500;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,231,216,.7);}
+  .save svg{width:14px;height:14px;}
+  .arraste{position:absolute;right:84px;top:1206px;display:flex;align-items:center;gap:14px;
+    font-weight:500;font-size:16px;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,231,216,.6);}
+  .arraste svg{width:44px;height:12px;}
+  .cop{position:absolute;left:84px;top:1292px;font-weight:400;font-size:15px;letter-spacing:.03em;
+    color:rgba(242,231,216,.35);}
+  .idx{position:absolute;right:84px;top:1292px;font-weight:500;font-size:15px;letter-spacing:.1em;
+    color:rgba(242,231,216,.35);font-variant-numeric:tabular-nums;}
+  .savepost{position:absolute;left:84px;top:1188px;display:flex;align-items:center;gap:12px;
+    border:1px solid rgba(217,160,95,.4);border-radius:999px;padding:16px 28px;
+    font-weight:500;font-size:19px;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,231,216,.92);}
+  .savepost svg{width:17px;height:17px;}
+
+  /* grain global */
+  .grain{position:absolute;inset:0;z-index:9;pointer-events:none;opacity:.06;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='340'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:340px;}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="spark" viewBox="0 0 10 10"><path d="M5 0 L6.1 3.9 L10 5 L6.1 6.1 L5 10 L3.9 6.1 L0 5 L3.9 3.9 Z" fill="#D9A05F"/></symbol>
+  <symbol id="bkm2" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-5-6 5z" fill="none" stroke="#D9A05F" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="arr" viewBox="0 0 44 12"><line x1="0" y1="6" x2="38" y2="6" stroke="#D9A05F" stroke-width="1.5"/><path d="M33 1 L43 6 L33 11" fill="none" stroke="#D9A05F" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="board">
+  <div class="wave"></div>
+
+  <!-- pocas de luz -->
+  <div class="pool" style="left:-130px;top:120px;width:620px;height:520px;background:radial-gradient(closest-side,rgba(224,164,98,.20),transparent 70%)"></div>
+  <div class="pool" style="left:770px;top:40px;width:700px;height:560px;background:radial-gradient(closest-side,rgba(224,164,98,.14),transparent 70%)"></div>
+  <div class="pool" style="left:1880px;top:160px;width:640px;height:520px;background:radial-gradient(closest-side,rgba(228,170,104,.16),transparent 70%)"></div>
+  <div class="pool" style="left:2880px;top:620px;width:720px;height:560px;background:radial-gradient(closest-side,rgba(224,160,92,.15),transparent 70%)"></div>
+  <div class="pool" style="left:4040px;top:30px;width:680px;height:540px;background:radial-gradient(closest-side,rgba(230,172,106,.18),transparent 70%)"></div>
+  <div class="pool" style="left:5100px;top:510px;width:600px;height:500px;background:radial-gradient(closest-side,rgba(224,164,98,.13),transparent 70%)"></div>
+  <div class="pool" style="left:6210px;top:380px;width:820px;height:640px;background:radial-gradient(closest-side,rgba(234,178,110,.22),transparent 70%)"></div>
+  <div class="floor"></div>
+  <div class="bok" style="left:1060px;top:250px;width:12px;height:12px;"></div>
+  <div class="bok" style="left:1180px;top:180px;width:8px;height:8px;"></div>
+  <div class="bok" style="left:4330px;top:210px;width:14px;height:14px;"></div>
+  <div class="bok" style="left:4450px;top:300px;width:9px;height:9px;"></div>
+
+  <!-- FOTO g2 (capa) -->
+  <div class="ph" id="phg2">
+    <img src="img/gabriel/g2.jpg" alt="">
+    <div class="ov amberize"></div>
+    <div class="ov edges"></div>
+    <div class="ov settle"></div>
+  </div>
+  <div class="scrim-vendas"></div>
+
+  <!-- FOTO g4crop (telefone) -->
+  <div class="ph" id="phg4">
+    <img src="img/gabriel/g4crop.jpg" alt="">
+    <div class="ov amberize"></div>
+    <div class="ov settle"></div>
+    <div class="ov topfade"></div>
+  </div>
+  <div class="scrim-s4"></div>
+
+  <!-- FOTO g1 (recorte, fechamento) -->
+  <div id="rimg1"></div>
+  <div class="ph" id="phg1">
+    <img src="img/gabriel/g1-cut.png" alt="">
+    <div class="ov g1-shadowL"></div>
+  </div>
+
+  <!-- PALAVRAS -->
+  <div class="serif" id="w-vendas">Vendas.</div>
+  <div class="serif" id="w-clareza">Clareza.</div>
+  <div class="serif" id="w-silencio">O Silêncio</div>
+  <div class="serif" id="w-minutos">Minutos.</div>
+  <div class="serif" id="w-sorte">Sorte.</div>
+  <div class="serif" id="w-processo">Processo.</div>
+  <div class="serif" id="w-previsivel">Previsível.</div>
+
+  <!-- APOIOS -->
+  <div class="apoio" id="a1">Toda venda é psicologia disfarçada de conversa.<br/><b>Ninguém perde um cliente por acaso.</b></div>
+  <div class="apoio" id="a2">Se o cliente não entende o valor,<br/><b>o preço vira o único critério.</b></div>
+  <div class="apoio" id="a3">Um lead sem resposta não desiste da compra.<br/><b>Desiste de você.</b><br/>O silêncio também vende. Para o concorrente.</div>
+  <div class="apoio" id="a4">Interesse é perecível.<br/><b>A venda começa a morrer</b><br/><b>no tempo da primeira resposta.</b></div>
+  <div class="apoio" id="a5">Vender bem de vez em quando<br/>não é competência.<br/><b>É sorte se repetindo. Por enquanto.</b></div>
+  <div class="apoio" id="a6">Talento fecha uma venda.<br/><b>Processo fecha todas as outras.</b></div>
+  <div class="apoio" id="a7">Venda boa não é a que emociona.<br/>É a que se repete.<br/><b>É isso que eu construo</b><br/><b>dentro das empresas.</b></div>
+  <div id="handle7">@gabriel.isidoro_</div>
+
+  <div class="vig-v"></div>
+  <div class="vig-h"></div>
+  <div class="hairline"></div>
+
+  <!-- FURNITURE por janela (7x) -->
+  <!-- janelas 1 a 6 -->
+  <div class="furn" style="left:0">
+    <div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div>
+    <div class="save"><svg><use href="#bkm2"/></svg>Salvar</div>
+    <div class="arraste">Arraste<svg><use href="#arr"/></svg></div>
+    <div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div>
+    <div class="idx">01 / 07</div>
+  </div>
+  <div class="furn" style="left:1080px">
+    <div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div>
+    <div class="save"><svg><use href="#bkm2"/></svg>Salvar</div>
+    <div class="arraste">Arraste<svg><use href="#arr"/></svg></div>
+    <div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div>
+    <div class="idx">02 / 07</div>
+  </div>
+  <div class="furn" style="left:2160px">
+    <div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div>
+    <div class="save"><svg><use href="#bkm2"/></svg>Salvar</div>
+    <div class="arraste">Arraste<svg><use href="#arr"/></svg></div>
+    <div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div>
+    <div class="idx">03 / 07</div>
+  </div>
+  <div class="furn" style="left:3240px">
+    <div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div>
+    <div class="save"><svg><use href="#bkm2"/></svg>Salvar</div>
+    <div class="arraste">Arraste<svg><use href="#arr"/></svg></div>
+    <div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div>
+    <div class="idx">04 / 07</div>
+  </div>
+  <div class="furn" style="left:4320px">
+    <div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div>
+    <div class="save"><svg><use href="#bkm2"/></svg>Salvar</div>
+    <div class="arraste">Arraste<svg><use href="#arr"/></svg></div>
+    <div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div>
+    <div class="idx">05 / 07</div>
+  </div>
+  <div class="furn" style="left:5400px">
+    <div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div>
+    <div class="save"><svg><use href="#bkm2"/></svg>Salvar</div>
+    <div class="arraste">Arraste<svg><use href="#arr"/></svg></div>
+    <div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div>
+    <div class="idx">06 / 07</div>
+  </div>
+  <!-- janela 7: sem ARRASTE, com pill Salvar este post -->
+  <div class="furn" style="left:6480px">
+    <div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div>
+    <div class="save"><svg><use href="#bkm2"/></svg>Salvar</div>
+    <div class="savepost"><svg><use href="#bkm2"/></svg>Salvar este post</div>
+    <div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div>
+    <div class="idx">07 / 07</div>
+  </div>
+
+  <div class="grain"></div>
+</div>
+
+</body>
+</html>

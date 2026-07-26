@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Solidariedade · Venezuela — @gabriel.isidoro_</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0b0c0f;      --ink-2:#15161b;     --line-d:#26272e;
+    --vz-y:#F5C400;     --vz-b:#0A2A8C;      --vz-r:#D21F33;
+    --paper:#F4F2ED;    --safe:70px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  html,body{background:#2a2a2e;}
+  body{font-family:'Inter',sans-serif;color:#fff;}
+
+  .slide{position:relative;width:1080px;height:1350px;overflow:hidden;margin:0 auto 46px;background:var(--ink);}
+  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;}
+
+  /* header lockup */
+  .topbar{position:absolute;top:var(--safe);left:var(--safe);right:var(--safe);
+    display:flex;align-items:center;justify-content:space-between;z-index:30;}
+  .brand{display:flex;align-items:center;gap:16px;}
+  .mono{width:60px;height:60px;border-radius:15px;background:#fff;color:var(--ink);
+    font-family:'Anton';font-size:31px;line-height:1;display:flex;align-items:center;justify-content:center;
+    letter-spacing:.5px;position:relative;}
+  .mono::after{content:"";position:absolute;left:12px;right:12px;bottom:11px;height:3px;background:rgba(11,12,15,.85);border-radius:2px;}
+  .handle{font-weight:800;font-size:23px;letter-spacing:.2px;color:#fff;}
+  .tag{font-weight:700;font-size:18px;letter-spacing:2.5px;text-transform:uppercase;color:#fff;opacity:.55;}
+
+  /* faixa bandeira (acento respeitoso) */
+  .flagbar{display:flex;height:9px;width:128px;border-radius:5px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.35);}
+  .flagbar i{flex:1;display:block;}
+  .flagbar .y{background:var(--vz-y);} .flagbar .b{background:var(--vz-b);} .flagbar .r{background:var(--vz-r);}
+
+  .dots{position:absolute;left:0;right:0;bottom:50px;display:flex;gap:10px;justify-content:center;z-index:30;}
+  .dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.26);}
+  .dots i.on{background:#fff;width:28px;border-radius:5px;}
+
+  .hint{position:absolute;right:var(--safe);bottom:52px;z-index:30;font-weight:600;font-size:22px;color:rgba(255,255,255,.5);}
+
+  /* ====================================================================== */
+  /* SLIDE 1 — CAPA                                                          */
+  /* ====================================================================== */
+  #s1 .bg{position:absolute;inset:0;background:url('img/vzla/caracas.jpg') center 40%/cover no-repeat;}
+  #s1 .scrim{position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(7,8,11,.72) 0%,rgba(7,8,11,.45) 32%,rgba(7,8,11,.66) 58%,rgba(7,8,11,.93) 82%,rgba(6,6,9,.99) 100%);}
+  #s1 .wrap{position:absolute;left:var(--safe);right:var(--safe);bottom:210px;z-index:20;}
+  #s1 .kick{display:flex;align-items:center;gap:16px;margin-bottom:26px;
+    font-weight:700;font-size:22px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.82);}
+  #s1 .giant{font-family:'Anton';color:#fff;font-size:140px;line-height:.92;text-transform:uppercase;
+    letter-spacing:1px;text-shadow:0 8px 40px rgba(0,0,0,.55);}
+  #s1 .uline{margin-top:18px;height:11px;width:360px;border-radius:6px;display:flex;overflow:hidden;}
+  #s1 .uline i{flex:1;} #s1 .uline .y{background:var(--vz-y);} #s1 .uline .b{background:var(--vz-b);} #s1 .uline .r{background:var(--vz-r);}
+  #s1 .lead{margin-top:30px;max-width:880px;color:#e9e9ec;font-weight:500;font-size:31px;line-height:1.38;
+    text-shadow:0 2px 14px rgba(0,0,0,.6);}
+  #s1 .lead b{font-weight:800;color:#fff;}
+
+  /* ====================================================================== */
+  /* SLIDE 2 — O QUE ACONTECEU                                               */
+  /* ====================================================================== */
+  #s2{background:var(--ink);}
+  #s2 .head{position:absolute;top:182px;left:var(--safe);right:var(--safe);}
+  #s2 .fb{margin-bottom:26px;}
+  #s2 .h{font-weight:900;font-size:72px;line-height:.98;letter-spacing:-1.5px;color:#fff;}
+  #s2 .lead{margin-top:22px;font-size:28px;line-height:1.45;color:#bcbcc6;font-weight:500;max-width:880px;}
+  #s2 .lead b{color:#fff;font-weight:800;}
+  #s2 .rows{position:absolute;top:560px;left:var(--safe);right:var(--safe);display:flex;flex-direction:column;gap:20px;}
+  #s2 .row{display:flex;align-items:center;gap:26px;background:var(--ink-2);border:1px solid var(--line-d);
+    border-radius:20px;padding:30px 34px;box-shadow:0 18px 40px rgba(0,0,0,.34);}
+  #s2 .row .v{font-family:'Anton';font-size:78px;line-height:.82;color:#fff;flex:0 0 auto;min-width:240px;}
+  #s2 .row .v small{font-size:34px;color:#bcbcc6;}
+  #s2 .row .l{font-weight:600;font-size:25px;color:#cfcfd6;line-height:1.32;}
+  #s2 .row .l b{color:#fff;font-weight:800;}
+  #s2 .src{position:absolute;left:var(--safe);bottom:120px;font-weight:600;font-size:21px;color:rgba(255,255,255,.4);}
+
+  /* ====================================================================== */
+  /* SLIDE 3 — O CONTRASTE                                                   */
+  /* ====================================================================== */
+  #s3 .bg{position:absolute;inset:0;background:url('img/vzla/caracas.jpg') center 60%/cover no-repeat;opacity:.22;}
+  #s3 .scrim{position:absolute;inset:0;background:linear-gradient(180deg,#0a0b0e 0%,rgba(10,11,14,.82) 45%,#0a0b0e 100%);}
+  #s3 .head{position:absolute;top:188px;left:var(--safe);right:var(--safe);z-index:4;}
+  #s3 .h{font-weight:900;font-size:64px;line-height:1.04;letter-spacing:-1.3px;color:#fff;max-width:900px;}
+  #s3 .body{position:absolute;top:470px;left:var(--safe);right:var(--safe);z-index:4;}
+  #s3 .body p{font-size:30px;line-height:1.5;color:#cfcfd6;font-weight:500;max-width:880px;}
+  #s3 .body p b{color:#fff;font-weight:800;}
+  #s3 .num{position:absolute;left:var(--safe);bottom:330px;z-index:4;display:flex;align-items:flex-end;gap:26px;}
+  #s3 .num .big{font-family:'Anton';font-size:188px;line-height:.8;color:#fff;}
+  #s3 .num .cap{padding-bottom:24px;}
+  #s3 .num .cap b{display:block;font-weight:800;font-size:30px;color:#fff;line-height:1.1;}
+  #s3 .num .cap span{font-weight:600;font-size:23px;color:#9a9aa4;}
+  #s3 .candle{position:absolute;right:var(--safe);bottom:336px;z-index:4;font-size:120px;opacity:.9;}
+  #s3 .fb{position:absolute;left:var(--safe);bottom:236px;z-index:4;}
+
+  /* ====================================================================== */
+  /* SLIDE 4 — SOLIDARIEDADE / COMO AJUDAR                                   */
+  /* ====================================================================== */
+  #s4{background:linear-gradient(180deg,#101218 0%,#0a0b0e 100%);}
+  #s4 .head{position:absolute;top:182px;left:var(--safe);right:var(--safe);}
+  #s4 .fb{margin-bottom:26px;}
+  #s4 .h{font-weight:900;font-size:62px;line-height:1.02;letter-spacing:-1.3px;color:#fff;max-width:900px;}
+  #s4 .lead{margin-top:22px;font-size:28px;line-height:1.45;color:#bcbcc6;font-weight:500;max-width:880px;}
+  #s4 .lead b{color:#fff;font-weight:800;}
+  #s4 .help{position:absolute;top:560px;left:var(--safe);right:var(--safe);display:flex;flex-direction:column;gap:18px;}
+  #s4 .item{display:flex;align-items:center;gap:22px;background:var(--ink-2);border:1px solid var(--line-d);
+    border-radius:20px;padding:26px 30px;box-shadow:0 16px 36px rgba(0,0,0,.32);}
+  #s4 .item .ic{flex:0 0 auto;width:60px;height:60px;border-radius:15px;background:rgba(255,255,255,.06);
+    display:flex;align-items:center;justify-content:center;font-size:30px;}
+  #s4 .item .tx b{display:block;font-weight:800;font-size:25px;color:#fff;line-height:1.15;}
+  #s4 .item .tx span{font-weight:600;font-size:21px;color:#b6b6c0;}
+  #s4 .cta{position:absolute;left:var(--safe);right:var(--safe);bottom:116px;z-index:30;background:#fff;color:var(--ink);
+    border-radius:999px;padding:26px 38px;display:flex;align-items:center;justify-content:center;gap:16px;
+    box-shadow:0 22px 46px rgba(0,0,0,.4);}
+  #s4 .cta b{font-weight:800;font-size:31px;letter-spacing:.2px;}
+  #s4 .handle{position:absolute;left:var(--safe);right:var(--safe);bottom:222px;text-align:center;
+    font-weight:600;font-size:22px;color:rgba(255,255,255,.5);}
+  #s4 .handle b{color:#fff;font-weight:800;}
+</style>
+</head>
+<body>
+
+<!-- ====================== SLIDE 1 — CAPA ====================== -->
+<section class="slide grain" id="s1">
+  <div class="bg"></div><div class="scrim"></div>
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">Solidariedade</div>
+  </div>
+
+  <div class="wrap">
+    <div class="kick"><span class="flagbar"><i class="y"></i><i class="b"></i><i class="r"></i></span> Venezuela · 24 de junho de 2026</div>
+    <div class="giant">FORÇA,<br/>VENEZUELA</div>
+    <div class="uline"><i class="y"></i><i class="b"></i><i class="r"></i></div>
+    <p class="lead">Enquanto um país inteiro parava para o jogo, o outro vivia o <b>maior terremoto em mais de um século.</b></p>
+  </div>
+
+  <div class="hint">deslize →</div>
+  <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+</section>
+
+
+<!-- ====================== SLIDE 2 — O QUE ACONTECEU ====================== -->
+<section class="slide grain" id="s2">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">O que aconteceu</div>
+  </div>
+  <div class="head">
+    <span class="flagbar fb"><i class="y"></i><i class="b"></i><i class="r"></i></span>
+    <div class="h">Ontem, a terra<br/>tremeu na Venezuela.</div>
+    <p class="lead">Uma sequência de terremotos atingiu o norte do país, perto de Caracas. O tremor mais forte foi sentido por todo o litoral caribenho.</p>
+  </div>
+
+  <div class="rows">
+    <div class="row"><div class="v">7,5</div><div class="l">de <b>magnitude</b> no tremor principal, em uma sequência de abalos fortes</div></div>
+    <div class="row"><div class="v">+1<small> século</small></div><div class="l">é o tempo desde o <b>último terremoto tão forte</b> registrado no país</div></div>
+    <div class="row"><div class="v">~13<small> km</small></div><div class="l">de <b>profundidade</b>, o que tornou os tremores ainda mais destrutivos</div></div>
+  </div>
+
+  <div class="src">Fontes: USGS, CNN, Al Jazeera · dados de 24/06/2026</div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i></div>
+</section>
+
+
+<!-- ====================== SLIDE 3 — O CONTRASTE ====================== -->
+<section class="slide grain" id="s3">
+  <div class="bg"></div><div class="scrim"></div>
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">No mesmo dia</div>
+  </div>
+  <div class="head">
+    <div class="h">Enquanto uns<br/>comemoravam,<br/>outros perdiam tudo.</div>
+  </div>
+  <div class="body">
+    <p>No mesmo momento em que o Brasil parava para torcer, milhares de famílias venezuelanas viam suas casas caírem. Prédios, hospitais e o aeroporto de Caracas foram atingidos.</p>
+  </div>
+
+  <div class="num">
+    <span class="big">164</span>
+    <span class="cap"><b>vidas perdidas até agora</b><span>e os números ainda podem crescer (971 feridos)</span></span>
+  </div>
+  <span class="candle">🕯️</span>
+  <span class="flagbar fb"><i class="y"></i><i class="b"></i><i class="r"></i></span>
+
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i></div>
+</section>
+
+
+<!-- ====================== SLIDE 4 — SOLIDARIEDADE ====================== -->
+<section class="slide grain" id="s4">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">Como ajudar</div>
+  </div>
+  <div class="head">
+    <span class="flagbar fb"><i class="y"></i><i class="b"></i><i class="r"></i></span>
+    <div class="h">A dor do vizinho<br/>também é nossa.</div>
+    <p class="lead">A gente não pode trazer de volta o que foi perdido. Mas pode não virar o rosto. Atenção também é uma forma de solidariedade.</p>
+  </div>
+
+  <div class="help">
+    <div class="item"><span class="ic">🤲</span><div class="tx"><b>Doe por canais confiáveis</b><span>Cruz Vermelha e organizações humanitárias atuando no local</span></div></div>
+    <div class="item"><span class="ic">📢</span><div class="tx"><b>Compartilhe informação checada</b><span>boato atrapalha o resgate. Notícia verdadeira ajuda</span></div></div>
+    <div class="item"><span class="ic">🤍</span><div class="tx"><b>Mantenha a Venezuela em pauta</b><span>quanto mais gente sabe, mais ajuda chega</span></div></div>
+  </div>
+
+  <div class="handle">Uma mensagem de <b>@gabriel.isidoro_</b></div>
+  <div class="cta"><b>Compartilhe e mande força 🤍</b></div>
+  <div class="dots"><i></i><i></i><i></i><i class="on"></i></div>
+</section>
+
+</body>
+</html>

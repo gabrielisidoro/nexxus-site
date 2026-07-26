@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf9f5;
+    --paper2:#f3f0e8;
+    --ink:#141416;
+    --ink2:#1e1e22;
+    --muted:#6e6a63;
+    --muted-d:#b9b3a6;
+    --gold:#a8874f;
+    --gold2:#c9a86a;
+    --gold3:#e6d3a8;
+    --line:rgba(20,20,22,.12);
+    --line-d:rgba(230,211,168,.22);
+    --serif:'Cormorant Garamond', Georgia, serif;
+    --sans:'Manrope', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#333;font-family:var(--sans)}
+  .slide{
+    width:1080px;height:1350px;position:relative;overflow:hidden;
+    background:var(--paper);color:var(--ink);
+    font-variant-numeric:lining-nums;
+    font-feature-settings:'lnum' 1;
+  }
+  .slide.dark{background:var(--ink);color:#f4efe3}
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    position:absolute;top:44px;left:64px;right:64px;z-index:10;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{display:flex;align-items:center;gap:16px}
+  .brand svg{width:52px;height:52px}
+  .brand .bn{font-family:var(--serif);font-weight:600;font-size:27px;letter-spacing:.3em;line-height:1}
+  .brand .bs{font-size:10px;font-weight:800;letter-spacing:.36em;color:var(--gold);margin-top:5px}
+  .handle{font-size:17px;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+  .dark .handle{color:var(--muted-d)}
+  .dark .brand .bn{color:#f4efe3}
+
+  /* ---------- dots ---------- */
+  .dots{position:absolute;bottom:46px;left:64px;display:flex;gap:9px;z-index:10}
+  .dots i{width:9px;height:9px;border-radius:50%;background:rgba(20,20,22,.18)}
+  .dark .dots i{background:rgba(244,239,227,.22)}
+  .dots i.on{background:var(--gold);width:26px;border-radius:100px}
+
+  /* ---------- pílula CTA ---------- */
+  .pill{
+    position:absolute;bottom:88px;left:64px;right:64px;z-index:10;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+    background:linear-gradient(120deg,var(--gold),var(--gold2));
+    border-radius:100px;padding:20px 22px 20px 34px;
+    box-shadow:0 18px 44px rgba(20,20,22,.28);
+  }
+  .pill .pt{font-size:23px;font-weight:600;color:#141416;letter-spacing:.01em}
+  .pill .pt b{font-weight:800}
+  .pill .arrow{
+    width:52px;height:52px;border-radius:50%;background:#141416;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .pill .arrow svg{width:24px;height:24px}
+
+  /* ---------- tarja / highlight ---------- */
+  .tarja{
+    display:inline-block;
+    background:linear-gradient(120deg,var(--gold),var(--gold2));
+    color:#141416;padding:2px 26px 8px;border-radius:14px;
+  }
+
+  /* ---------- kicker ---------- */
+  .kicker{
+    font-size:19px;font-weight:800;letter-spacing:.34em;color:var(--gold);
+    display:flex;align-items:center;gap:16px;text-transform:uppercase;
+  }
+  .kicker::before{content:'';width:44px;height:2px;background:var(--gold)}
+
+  /* ================= SLIDE 1 : CAPA ================= */
+  .s1 .bg{position:absolute;inset:0;background:url('img/rambro/p3.jpg') center 30%/cover no-repeat}
+  .s1 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,.55) 0%,rgba(10,10,12,.12) 34%,rgba(10,10,12,.32) 58%,rgba(10,10,12,.94) 86%)}
+  .s1 .content{position:absolute;left:64px;right:64px;bottom:196px;z-index:5}
+  .s1 .lead{font-family:var(--serif);font-style:italic;font-size:44px;color:#f4efe3;margin-bottom:10px}
+  .s1 .giant{font-family:var(--serif);font-weight:700;font-size:168px;line-height:.98;letter-spacing:.01em;color:#f4efe3;text-transform:uppercase}
+  .s1 .giant .tarja{font-style:normal;letter-spacing:.02em}
+  .s1 .after{font-family:var(--serif);font-size:56px;font-weight:600;color:#f4efe3;margin-top:14px}
+  .s1 .after em{font-style:italic;color:var(--gold3)}
+
+  /* ================= SLIDE 2 : MERCADO ================= */
+  .s2{background:var(--paper)}
+  .s2 .content{position:absolute;top:150px;left:64px;right:64px}
+  .s2 h2{font-family:var(--serif);font-weight:600;font-size:64px;line-height:1.06;margin:18px 0 40px}
+  .s2 h2 em{font-style:italic;color:var(--gold)}
+  .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .stat{
+    background:#fff;border:1px solid var(--line);border-radius:24px;padding:34px 32px 30px;
+    box-shadow:0 10px 30px rgba(20,20,22,.06);
+  }
+  .stat .ico{width:56px;height:56px;border-radius:16px;background:linear-gradient(120deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+  .stat .ico svg{width:30px;height:30px}
+  .stat .num{font-family:var(--serif);font-weight:700;font-size:64px;line-height:1;color:var(--ink)}
+  .stat .num small{font-size:36px;font-weight:600}
+  .stat .lbl{font-size:20px;color:var(--muted);margin-top:10px;line-height:1.4;font-weight:600}
+  .stat .lbl b{color:var(--ink)}
+  .stat.inkcard{background:var(--ink);border-color:var(--ink)}
+  .stat.inkcard .num{color:var(--gold3)}
+  .stat.inkcard .lbl{color:var(--muted-d)}
+  .stat.inkcard .lbl b{color:#f4efe3}
+  .s2 .fonte{margin-top:26px;font-size:15px;color:var(--muted);letter-spacing:.03em}
+
+  /* ================= SLIDE 3 : CASO NEWMAN ================= */
+  .s3 .glow{position:absolute;inset:0;background:radial-gradient(ellipse 760px 560px at 30% 34%, rgba(201,168,106,.16), transparent 65%)}
+  .s3 .content{position:absolute;top:170px;left:64px;right:64px}
+  .s3 .lead{font-family:var(--serif);font-style:italic;font-size:40px;color:#f4efe3}
+  .s3 .giant{font-family:var(--serif);font-weight:700;font-size:190px;line-height:1;color:var(--gold3);margin:10px 0 6px;letter-spacing:0}
+  .s3 .giant small{font-size:96px}
+  .s3 .sub{font-size:26px;font-weight:700;letter-spacing:.22em;color:var(--muted-d);text-transform:uppercase}
+  .s3 .story{display:flex;gap:36px;margin-top:52px;align-items:stretch}
+  .s3 .story .txt{flex:1}
+  .s3 .story p{font-size:27px;line-height:1.55;color:#e9e4d8;font-weight:500}
+  .s3 .story p + p{margin-top:22px}
+  .s3 .story p b{color:var(--gold3);font-weight:800}
+  .s3 .foto{
+    width:330px;flex-shrink:0;border-radius:22px;overflow:hidden;position:relative;
+    border:1px solid var(--line-d);
+  }
+  .s3 .foto img{width:100%;height:100%;object-fit:cover}
+  .s3 .foto .cap{
+    position:absolute;left:14px;right:14px;bottom:14px;
+    background:rgba(20,20,22,.82);border:1px solid var(--line-d);border-radius:12px;
+    padding:12px 16px;font-size:15px;font-weight:700;letter-spacing:.1em;color:var(--gold3);text-transform:uppercase;text-align:center;
+  }
+  .s3 .ponte{
+    margin-top:52px;text-align:center;font-family:var(--serif);font-style:italic;
+    font-size:36px;color:#f4efe3;
+  }
+  .s3 .ponte b{color:var(--gold3);font-style:normal}
+
+  /* ================= SLIDE 4 : COMO COMPRAR CERTO ================= */
+  .s4{background:var(--paper2)}
+  .s4 .content{position:absolute;top:150px;left:64px;right:64px}
+  .s4 h2{font-family:var(--serif);font-weight:600;font-size:62px;line-height:1.08;margin:18px 0 42px}
+  .s4 h2 .tarja{font-weight:700;padding:0 22px 6px}
+  .rcard{
+    display:flex;align-items:center;gap:28px;
+    background:#fff;border:1px solid var(--line);border-radius:24px;
+    padding:24px 30px 24px 24px;margin-bottom:24px;
+    box-shadow:0 10px 30px rgba(20,20,22,.06);
+  }
+  .rcard .ph{width:170px;height:170px;border-radius:18px;overflow:hidden;flex-shrink:0;position:relative}
+  .rcard .ph img{width:100%;height:100%;object-fit:cover}
+  .rcard .badge{
+    position:absolute;top:10px;left:10px;width:44px;height:44px;border-radius:12px;
+    background:linear-gradient(120deg,var(--gold),var(--gold2));color:#141416;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:700;font-size:24px;
+  }
+  .rcard h3{font-family:var(--serif);font-weight:700;font-size:34px;margin-bottom:8px}
+  .rcard p{font-size:21px;line-height:1.45;color:var(--muted);font-weight:500}
+  .rcard p b{color:var(--ink)}
+
+  /* ================= SLIDE 5 : CTA ================= */
+  .s5 .glow{position:absolute;inset:0;background:radial-gradient(ellipse 700px 520px at 50% 26%, rgba(201,168,106,.18), transparent 65%)}
+  .s5 .content{position:absolute;top:190px;left:64px;right:64px;text-align:center}
+  .s5 .emblema{display:flex;justify-content:center;margin-bottom:30px}
+  .s5 .emblema svg{width:150px;height:150px}
+  .s5 .wm{font-family:var(--serif);font-weight:600;font-size:64px;letter-spacing:.3em;color:#f4efe3}
+  .s5 .fio{width:380px;height:1px;background:var(--gold);margin:18px auto}
+  .s5 .ws{font-size:16px;font-weight:800;letter-spacing:.4em;color:var(--muted-d);text-transform:uppercase}
+  .s5 h2{font-family:var(--serif);font-weight:600;font-size:58px;line-height:1.12;margin:64px 0 52px;color:#f4efe3}
+  .s5 h2 em{font-style:italic;color:var(--gold3)}
+  .s5 .bullets{display:flex;flex-direction:column;gap:22px;max-width:640px;margin:0 auto}
+  .s5 .bullet{
+    display:flex;align-items:center;gap:20px;text-align:left;
+    background:rgba(244,239,227,.05);border:1px solid var(--line-d);border-radius:100px;
+    padding:18px 30px;
+  }
+  .s5 .bullet .ck{width:40px;height:40px;border-radius:50%;background:linear-gradient(120deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .s5 .bullet .ck svg{width:20px;height:20px}
+  .s5 .bullet span{font-size:24px;font-weight:700;color:#f4efe3}
+  .s5 .pill{position:absolute;bottom:110px}
+</style>
+</head>
+<body>
+
+<!-- emblema reutilizável -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="emblema" viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="42" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="60" cy="60" r="34" fill="none" stroke="currentColor" stroke-width=".7" opacity=".55"/>
+    <line x1="60" y1="18" x2="60" y2="26" stroke="#c9a86a" stroke-width="3"/>
+    <line x1="94" y1="60" x2="102" y2="60" stroke="currentColor" stroke-width="1.4"/>
+    <line x1="18" y1="60" x2="26" y2="60" stroke="currentColor" stroke-width="1.4"/>
+    <line x1="60" y1="94" x2="60" y2="102" stroke="currentColor" stroke-width="1.4"/>
+    <text x="60" y="78" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="600" font-size="50" fill="currentColor">R</text>
+  </symbol>
+  <symbol id="seta" viewBox="0 0 24 24">
+    <path d="M4 12h15m0 0l-6-6m6 6l-6 6" fill="none" stroke="#c9a86a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="check" viewBox="0 0 24 24">
+    <path d="M20 6L9 17l-5-5" fill="none" stroke="#141416" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="ico-chart" viewBox="0 0 24 24">
+    <path d="M3 17l6-6 4 4 7-8" fill="none" stroke="#141416" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M20 7h-5m5 0v5" fill="none" stroke="#141416" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="ico-shield" viewBox="0 0 24 24">
+    <path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z" fill="none" stroke="#141416" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M9 12l2 2 4-4" fill="none" stroke="#141416" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="ico-watch" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="6.5" fill="none" stroke="#141416" stroke-width="2.2"/>
+    <path d="M12 9.5V12l2 1.5M9.5 2.5h5M9.5 21.5h5" fill="none" stroke="#141416" stroke-width="2.2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="ico-car" viewBox="0 0 24 24">
+    <path d="M4 13l1.7-4.3A2 2 0 0 1 7.6 7.5h8.8a2 2 0 0 1 1.9 1.2L20 13m-16 0h16m-16 0v5h2.2m13.8-5v5h-2.2m-9.4 0h9.4" fill="none" stroke="#f4efe3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M17 20.5l4-9" fill="none" stroke="#c9a86a" stroke-width="2.4" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- ============ SLIDE 1 : CAPA ============ -->
+<div class="slide dark s1">
+  <div class="bg"></div>
+  <div class="shade"></div>
+  <div class="topbar">
+    <div class="brand" style="color:#f4efe3">
+      <svg><use href="#emblema"/></svg>
+      <div>
+        <div class="bn">RAMBRO</div>
+        <div class="bs">RELÓGIOS DE ALTO PADRÃO</div>
+      </div>
+    </div>
+    <div class="handle">@rambrorelogios</div>
+  </div>
+  <div class="content">
+    <div class="lead">Carro desvaloriza. Roupa sai de moda.</div>
+    <div class="giant">O único<br>acessório que<br><span class="tarja">VALORIZA</span></div>
+    <div class="after">no seu <em>pulso</em>.</div>
+  </div>
+  <div class="pill">
+    <div class="pt">O mercado explica, <b>e os números impressionam</b></div>
+    <div class="arrow"><svg><use href="#seta"/></svg></div>
+  </div>
+  <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+<!-- ============ SLIDE 2 : MERCADO ============ -->
+<div class="slide s2">
+  <div class="topbar">
+    <div class="brand">
+      <svg style="color:#141416"><use href="#emblema"/></svg>
+      <div>
+        <div class="bn">RAMBRO</div>
+        <div class="bs">RELÓGIOS DE ALTO PADRÃO</div>
+      </div>
+    </div>
+    <div class="handle">@rambrorelogios</div>
+  </div>
+  <div class="content">
+    <div class="kicker">Relógio é ativo</div>
+    <h2>O mercado leva isso <em>a sério.</em></h2>
+    <div class="statgrid">
+      <div class="stat">
+        <div class="ico"><svg><use href="#ico-chart"/></svg></div>
+        <div class="num">US$ 24 <small>bi</small></div>
+        <div class="lbl">movimenta por ano o mercado global de <b>relógios de luxo seminovos</b></div>
+      </div>
+      <div class="stat">
+        <div class="ico"><svg><use href="#ico-watch"/></svg></div>
+        <div class="num">+20%<small>/ano</small></div>
+        <div class="lbl">valorização dos <b>modelos mais desejados</b> de Rolex, Patek e AP de 2018 a 2023. <b>O dobro do S&amp;P 500</b></div>
+      </div>
+      <div class="stat">
+        <div class="ico"><svg><use href="#ico-shield"/></svg></div>
+        <div class="num">1,1 <small>mi</small></div>
+        <div class="lbl">relógios Rolex por ano, segundo estimativas. <b>Mesmo assim falta.</b> Por isso existe fila</div>
+      </div>
+      <div class="stat inkcard">
+        <div class="ico" style="background:rgba(244,239,227,.1)"><svg><use href="#ico-car"/></svg></div>
+        <div class="num">-20%</div>
+        <div class="lbl">é quanto um <b>carro zero</b> perde de valor já no primeiro ano. Compare.</div>
+      </div>
+    </div>
+    <div class="fonte">Fontes: BCG (2023) · Morgan Stanley x LuxeConsult · Carfax</div>
+  </div>
+  <div class="pill">
+    <div class="pt">E tem o caso <b>mais famoso da história</b></div>
+    <div class="arrow"><svg><use href="#seta"/></svg></div>
+  </div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+
+<!-- ============ SLIDE 3 : CASO NEWMAN ============ -->
+<div class="slide dark s3">
+  <div class="glow"></div>
+  <div class="topbar">
+    <div class="brand" style="color:#f4efe3">
+      <svg><use href="#emblema"/></svg>
+      <div>
+        <div class="bn">RAMBRO</div>
+        <div class="bs">RELÓGIOS DE ALTO PADRÃO</div>
+      </div>
+    </div>
+    <div class="handle">@rambrorelogios</div>
+  </div>
+  <div class="content">
+    <div class="lead">Um Rolex Daytona comprado por algumas centenas de dólares...</div>
+    <div class="giant">US$ 17,7 <small>mi</small></div>
+    <div class="sub">foi o martelo no leilão, 50 anos depois</div>
+    <div class="story">
+      <div class="txt">
+        <p>O Daytona do ator <b>Paul Newman</b>, presente da esposa nos anos 60, virou <b>o relógio de pulso mais caro já leiloado</b> até então, em Nova York, 2017.</p>
+        <p>Caso extremo? Sim. Mas a lógica se repete <b>em qualquer escala</b>: referência certa + procedência + estado = valor que se sustenta.</p>
+      </div>
+      <div class="foto">
+        <img src="img/rambro/detalhe.jpg" alt="">
+        <div class="cap">Detalhe define preço</div>
+      </div>
+    </div>
+    <div class="ponte">A pergunta certa não é <b>“quanto custa”</b>.<br>É <b>“quanto vale amanhã”</b>.</div>
+  </div>
+  <div class="pill">
+    <div class="pt">Só que isso exige <b>comprar certo</b></div>
+    <div class="arrow"><svg><use href="#seta"/></svg></div>
+  </div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+</div>
+
+<!-- ============ SLIDE 4 : COMO COMPRAR CERTO ============ -->
+<div class="slide s4">
+  <div class="topbar">
+    <div class="brand">
+      <svg style="color:#141416"><use href="#emblema"/></svg>
+      <div>
+        <div class="bn">RAMBRO</div>
+        <div class="bs">RELÓGIOS DE ALTO PADRÃO</div>
+      </div>
+    </div>
+    <div class="handle">@rambrorelogios</div>
+  </div>
+  <div class="content">
+    <div class="kicker">A regra do jogo</div>
+    <h2>Relógio só valoriza pra quem compra <span class="tarja">CERTO</span></h2>
+    <div class="rcard">
+      <div class="ph"><img src="img/rambro/p1.jpg" alt=""><div class="badge">01</div></div>
+      <div>
+        <h3>Procedência acima de tudo</h3>
+        <p>Peça verificada, histórico claro e <b>vendedor com rosto</b>. Sem isso, não há negócio.</p>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="ph"><img src="img/rambro/p2.jpg" alt=""><div class="badge">02</div></div>
+      <div>
+        <h3>Clássicos seguram valor</h3>
+        <p>Submariner, Datejust, Speedmaster: referências com <b>demanda constante</b> no mundo inteiro.</p>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="ph"><img src="img/rambro/p4.jpg" alt=""><div class="badge">03</div></div>
+      <div>
+        <h3>Conjunto completo</h3>
+        <p>Caixa, documentos e estado de conservação <b>definem o preço de revenda</b>.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pill">
+    <div class="pt">É exatamente isso que a <b>curadoria Rambro</b> faz</div>
+    <div class="arrow"><svg><use href="#seta"/></svg></div>
+  </div>
+  <div class="dots"><i></i><i></i><i></i><i class="on"></i><i></i></div>
+</div>
+
+<!-- ============ SLIDE 5 : CTA ============ -->
+<div class="slide dark s5">
+  <div class="glow"></div>
+  <div class="content">
+    <div class="emblema" style="color:#f4efe3"><svg><use href="#emblema"/></svg></div>
+    <div class="wm">RAMBRO</div>
+    <div class="fio"></div>
+    <div class="ws">Relógios de alto padrão</div>
+    <h2>Curadoria é comprar certo.<br><em>Sem achismo. Sem cilada.</em></h2>
+    <div class="bullets">
+      <div class="bullet">
+        <div class="ck"><svg><use href="#check"/></svg></div>
+        <span>Peças selecionadas a dedo, prontas ou sob encomenda</span>
+      </div>
+      <div class="bullet">
+        <div class="ck"><svg><use href="#check"/></svg></div>
+        <span>Parcelamento em até 12x no cartão</span>
+      </div>
+      <div class="bullet">
+        <div class="ck"><svg><use href="#check"/></svg></div>
+        <span>Envio seguro e rastreado para todo o Brasil</span>
+      </div>
+    </div>
+  </div>
+  <div class="pill" style="bottom:110px">
+    <div class="pt">Chama no WhatsApp e <b>encontre a sua peça</b></div>
+    <div class="arrow"><svg><use href="#seta"/></svg></div>
+  </div>
+  <div class="dots"><i></i><i></i><i></i><i></i><i class="on"></i></div>
+</div>
+
+</body>
+</html>

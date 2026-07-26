@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Carrossel Nexxus — Cimed na Copa (v2 com fotos)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* logo embutido (1x) — preenchido pelo build, não editar */
+  img.logo{content:url("__LOGO_URI__");}
+</style>
+<style>
+  :root{
+    --blue:#175eff;
+    --ink:#1c1c1e;
+    --ink-soft:#4d4d50;
+    --yellow:#ffd200;
+    --green:#009b3a;
+    --dark:#14161d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{margin:0;font-family:'Poppins',sans-serif;}
+
+  .slide{width:1080px;height:1350px;position:relative;overflow:hidden;}
+
+  .bg-light{
+    background:
+      radial-gradient(820px 560px at 12% -6%, rgba(255,210,0,.16), transparent 60%),
+      linear-gradient(180deg,#f7f8fc 0%, #eef0f6 100%);
+  }
+  .bg-yellow{
+    background:
+      radial-gradient(860px 620px at 88% -10%, rgba(255,255,255,.35), transparent 60%),
+      linear-gradient(170deg,#ffd83d 0%, #ffce00 100%);
+  }
+  .bg-dark{
+    background:
+      radial-gradient(880px 620px at 50% -6%, rgba(255,210,0,.16), transparent 60%),
+      linear-gradient(180deg,#14161d 0%, #0c0d12 100%);
+  }
+  .grid-bg::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(to right, rgba(120,130,160,.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(120,130,160,.07) 1px, transparent 1px);
+    background-size:72px 72px;
+  }
+  .bg-dark.grid-bg::before{
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.045) 1px, transparent 1px);
+  }
+
+  .logo{position:absolute;top:64px;left:72px;height:54px;z-index:8;}
+  .logo.white{filter:brightness(0) invert(1);}
+  .logo.center{left:50%;transform:translateX(-50%);top:84px;height:62px;}
+
+  .hl{background:var(--blue);color:#fff;padding:3px 18px;border-radius:12px;white-space:nowrap;}
+  .hl-green{background:var(--green);color:var(--yellow);padding:3px 18px;border-radius:12px;white-space:nowrap;}
+  .hl-yellow{background:var(--yellow);color:var(--dark);padding:3px 18px;border-radius:12px;white-space:nowrap;}
+
+  .cta{
+    position:absolute;bottom:54px;left:50%;transform:translateX(-50%);
+    background:var(--blue);color:#fff;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;gap:26px;
+    padding:30px 54px;font-size:35px;font-weight:600;
+    width:max-content;max-width:940px;
+    box-shadow:0 18px 50px -12px rgba(23,94,255,.55);
+    z-index:9;white-space:nowrap;
+  }
+  .cta b{font-weight:800;}
+  .cta .arr{
+    flex:none;width:58px;height:58px;border-radius:50%;
+    border:3px solid rgba(255,255,255,.95);
+    display:flex;align-items:center;justify-content:center;
+    font-size:30px;font-weight:700;line-height:1;
+  }
+  .cta.dark{background:var(--dark);box-shadow:0 18px 50px -12px rgba(20,22,29,.65);}
+
+  .card{background:#fff;border-radius:26px;box-shadow:0 16px 48px -14px rgba(17,38,90,.16);}
+  .nbadge{
+    display:flex;align-items:center;justify-content:center;
+    background:var(--blue);color:#fff;font-weight:800;border-radius:14px;
+  }
+
+  /* janela de foto estilo "print de vídeo" */
+  .frame{
+    position:absolute;border-radius:22px;overflow:hidden;
+    box-shadow:0 30px 70px -20px rgba(0,0,0,.45);
+  }
+  .frame .im{position:absolute;inset:0;background-size:cover;background-position:center;}
+
+  /* polaroid */
+  .ph{
+    position:absolute;background:#fff;
+    padding:16px;border-radius:10px;
+    box-shadow:0 28px 64px -18px rgba(17,38,90,.38);
+  }
+  .ph .win{border-radius:8px;background-size:cover;background-position:center;}
+  .ph .cap{
+    margin-top:14px;text-align:center;
+    font-family:'Inter',sans-serif;font-style:italic;
+    font-size:24px;font-weight:500;color:#555;
+  }
+
+  .stamp{
+    position:absolute;z-index:7;
+    background:#e63322;color:#fff;
+    font-size:30px;font-weight:800;letter-spacing:.04em;
+    padding:14px 30px;border-radius:12px;
+    box-shadow:0 16px 40px -10px rgba(230,51,34,.6);
+  }
+
+  .clip{
+    position:absolute;background:#fff;border-radius:14px;
+    padding:24px 30px;z-index:6;
+    box-shadow:0 26px 60px -16px rgba(0,0,0,.5);
+  }
+  .clip .src{
+    font-family:'Inter',sans-serif;font-size:21px;font-weight:700;
+    letter-spacing:.14em;color:#9a9ba3;text-transform:uppercase;
+  }
+  .clip h3{
+    margin-top:10px;font-family:Georgia,'Times New Roman',serif;
+    font-size:29px;line-height:1.3;color:#111;font-weight:700;
+  }
+
+  /* ================= SLIDE 1 — CAPA (foto full-bleed) ================= */
+  .c1{background:url("img/metro-2.jpg") center top / cover no-repeat #0c0d12;}
+  .c1::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(5,6,10,.62) 0%, rgba(5,6,10,0) 26%);
+  }
+  .c1::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(5,6,10,0) 42%, rgba(5,6,10,.55) 64%, rgba(5,6,10,.96) 100%);
+  }
+  .c1 .line1{
+    position:absolute;top:856px;left:0;right:0;z-index:2;text-align:center;
+    color:#fff;font-size:54px;font-weight:700;
+    text-shadow:0 6px 30px rgba(0,0,0,.6);
+  }
+  .c1 .giant{
+    position:absolute;top:920px;left:0;right:0;z-index:2;text-align:center;
+    font-family:'Anton',sans-serif;font-size:228px;line-height:1;color:#fff;
+    letter-spacing:3px;
+    text-shadow:0 24px 70px rgba(0,0,0,.65);
+  }
+  .c1 .line2{
+    position:absolute;top:1168px;left:0;right:0;z-index:2;text-align:center;
+    color:#fff;font-size:54px;font-weight:700;
+    text-shadow:0 6px 30px rgba(0,0,0,.6);
+  }
+  .c1 .footer-hint{
+    position:absolute;bottom:46px;left:0;right:0;z-index:2;text-align:center;
+    color:#b9bdc9;font-size:28px;font-weight:600;letter-spacing:.04em;
+  }
+
+  /* ================= SLIDE 2 — O FATO (Neymar) ================= */
+  .c2 .content{position:absolute;top:186px;left:72px;right:72px;}
+  .c2 h1{font-size:58px;font-weight:800;color:var(--ink);line-height:1.35;}
+  .c2 .p1{margin-top:26px;font-size:34px;line-height:1.5;color:var(--ink-soft);font-weight:500;}
+  .c2 .p1 b{color:var(--ink);font-weight:700;}
+  .c2 .f-ney{left:72px;top:500px;width:700px;height:470px;transform:rotate(-3deg);}
+  .c2 .ph-karla{right:58px;top:700px;width:380px;transform:rotate(5deg);z-index:5;}
+  .c2 .ph-karla .win{height:360px;background-image:url("img/metro-6.jpg");}
+  .c2 .stamp{right:80px;top:560px;transform:rotate(7deg);}
+
+  /* ================= SLIDE 3 — A OPERAÇÃO (Times Square) ================= */
+  .c3 h1{
+    position:absolute;top:188px;left:72px;right:72px;
+    font-size:54px;font-weight:800;color:var(--dark);line-height:1.3;
+  }
+  .c3 .pills{position:absolute;top:388px;left:72px;right:72px;display:flex;flex-direction:column;gap:20px;}
+  .c3 .ypill{
+    display:flex;align-items:center;gap:22px;
+    background:#fff;border-radius:999px;
+    padding:20px 36px;font-size:31px;font-weight:600;color:var(--dark);
+    box-shadow:0 14px 36px -12px rgba(90,70,0,.30);
+  }
+  .c3 .ypill b{font-weight:800;}
+  .c3 .ypill::before{content:"";flex:none;width:15px;height:15px;border-radius:50%;background:var(--dark);}
+  .c3 .stats{position:absolute;top:704px;left:72px;right:72px;display:flex;gap:26px;z-index:3;}
+  .c3 .stat{flex:1;background:var(--dark);border-radius:24px;padding:30px 36px;}
+  .c3 .stat .v{font-size:54px;font-weight:800;color:var(--yellow);}
+  .c3 .stat .l{margin-top:8px;font-size:26px;font-weight:500;color:#d6d8df;line-height:1.3;}
+  .c3 .strip{
+    position:absolute;left:0;right:0;bottom:0;height:420px;z-index:1;
+    background:url("img/mde-ny.jpg") center 30% / cover no-repeat;
+  }
+  .c3 .strip::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, #ffce00 0%, rgba(255,206,0,0) 26%);
+  }
+
+  /* ================= SLIDE 4 — A TESE (João Adibe coletiva) ================= */
+  .c4 .content{position:absolute;top:186px;left:72px;right:72px;}
+  .c4 h1{font-size:56px;font-weight:800;color:#fff;line-height:1.4;}
+  .c4 .p1{margin-top:26px;font-size:34px;line-height:1.5;color:#b9bdc9;font-weight:500;}
+  .c4 .p1 b{color:#fff;font-weight:700;}
+  .c4 .f-adibe{left:110px;top:528px;width:860px;height:470px;transform:rotate(-2deg);}
+  .c4 .clip1{right:40px;top:886px;width:540px;transform:rotate(2.5deg);}
+  .c4 .punch{
+    position:absolute;top:1124px;left:72px;width:560px;
+    font-size:40px;font-weight:800;color:#fff;line-height:1.55;
+  }
+
+  /* ================= SLIDE 5 — A LIÇÃO ================= */
+  .c5 .content{position:absolute;top:178px;left:72px;right:72px;}
+  .c5 h1{font-size:56px;font-weight:800;color:var(--ink);line-height:1.25;}
+  .c5 .sub{margin-top:14px;font-size:34px;color:var(--ink-soft);font-weight:500;}
+  .c5 .ph-mascote{right:-74px;top:404px;width:430px;transform:rotate(6deg);z-index:1;}
+  .c5 .ph-mascote .win{height:520px;background-image:url("img/metro-3.jpg");}
+  .c5 .plays{position:absolute;top:436px;left:72px;width:600px;display:flex;flex-direction:column;gap:36px;z-index:3;}
+  .c5 .play{position:relative;padding:36px 32px 26px;}
+  .c5 .play .nbadge{
+    position:absolute;top:-24px;left:30px;
+    width:66px;height:52px;font-size:25px;
+    box-shadow:0 10px 26px -6px rgba(23,94,255,.55);
+  }
+  .c5 .play h2{font-size:33px;font-weight:800;color:var(--ink);}
+  .c5 .play p{margin-top:8px;font-size:27px;color:var(--ink-soft);font-weight:500;line-height:1.38;}
+  .c5 .play p b{color:var(--ink);font-weight:700;}
+  .c5 .handle{
+    position:absolute;bottom:168px;left:0;right:0;text-align:center;z-index:3;
+    font-size:27px;font-weight:600;color:#8a8c95;
+  }
+  .c5 .handle b{color:var(--ink);font-weight:800;}
+</style>
+</head>
+<body>
+
+<!-- ============ SLIDE 1 — CAPA ============ -->
+<section class="slide c1">
+  <img class="logo white center" src="logo-nexxus.png" alt="Nexxus">
+  <div class="line1">A farmácia que</div>
+  <div class="giant">INVADIU</div>
+  <div class="line2">a Copa do Mundo</div>
+  <div class="footer-hint">a jogada de R$ 2 bilhões da Cimed &nbsp;→</div>
+</section>
+
+<!-- ============ SLIDE 2 — O FATO ============ -->
+<section class="slide c2 bg-light grid-bg">
+  <img class="logo" src="logo-nexxus.png" alt="Nexxus">
+  <div class="content">
+    <h1>O remédio virou <span class="hl-green">streetwear.</span></h1>
+    <p class="p1">Collab com o <b>Neymar</b> inspirada na Seleção: óculos do Canarinho, <b>600 unidades</b>, fora do varejo.</p>
+  </div>
+  <div class="frame f-ney"><div class="im" style="background-image:url('img/metro-7.jpg');"></div></div>
+  <div class="stamp">ESGOTOU EM DIAS</div>
+  <div class="ph ph-karla">
+    <div class="win"></div>
+    <div class="cap">a collab tomou conta</div>
+  </div>
+  <div class="cta">Mas isso é só a vitrine <span class="arr">→</span></div>
+</section>
+
+<!-- ============ SLIDE 3 — A OPERAÇÃO ============ -->
+<section class="slide c3 bg-yellow">
+  <img class="logo" src="logo-nexxus.png" alt="Nexxus">
+  <h1>Por trás do óculos tem uma operação inteira de Copa:</h1>
+  <div class="pills">
+    <div class="ypill"><span><b>Motorhome</b> rodando os Estados Unidos</span></div>
+    <div class="ypill"><span>Tela bloqueada na <b>Times Square</b></span></div>
+    <div class="ypill"><span><b>Compre 1, leve 2</b> em dia de jogo da Seleção</span></div>
+  </div>
+  <div class="stats">
+    <div class="stat">
+      <div class="v">R$ 200 mi</div>
+      <div class="l">investidos no ano</div>
+    </div>
+    <div class="stat">
+      <div class="v">R$ 2 bi</div>
+      <div class="l">de meta até julho</div>
+    </div>
+  </div>
+  <div class="strip"></div>
+  <div class="cta dark">E aqui entra a parte genial <span class="arr">→</span></div>
+</section>
+
+<!-- ============ SLIDE 4 — A TESE ============ -->
+<section class="slide c4 bg-dark grid-bg">
+  <img class="logo white" src="logo-nexxus.png" alt="Nexxus">
+  <div class="content">
+    <h1>Eles não queriam patrocinar. Queriam <span class="hl-yellow">FAZER PARTE.</span></h1>
+    <p class="p1">De "empresa de genéricos" a <b>marca que joga a Copa com você.</b></p>
+  </div>
+  <div class="frame f-adibe"><div class="im" style="background-image:url('img/adibe-mm.jpg');"></div></div>
+  <div class="clip clip1">
+    <div class="src">CNN Brasil · Economia</div>
+    <h3>Carmed bomba nas redes e faturamento dispara +1.500%</h3>
+  </div>
+  <div class="punch">Para de disputar preço.<br><span class="hl">Disputa memória.</span></div>
+</section>
+
+<!-- ============ SLIDE 5 — A LIÇÃO ============ -->
+<section class="slide c5 bg-light grid-bg">
+  <img class="logo" src="logo-nexxus.png" alt="Nexxus">
+  <div class="content">
+    <h1>O que copiar da Cimed</h1>
+    <p class="sub">(sem precisar do Neymar) — são 3 jogadas:</p>
+  </div>
+  <div class="ph ph-mascote">
+    <div class="win"></div>
+    <div class="cap">virou pauta nacional</div>
+  </div>
+  <div class="plays">
+    <div class="play card">
+      <div class="nbadge">01</div>
+      <h2>Entre na conversa do momento.</h2>
+      <p>Newsjacking é <b>canal de aquisição.</b></p>
+    </div>
+    <div class="play card">
+      <div class="nbadge">02</div>
+      <h2>Conecte mundos distantes.</h2>
+      <p><b>Remédio + moda</b> rendeu mais que anúncio.</p>
+    </div>
+    <div class="play card">
+      <div class="nbadge">03</div>
+      <h2>Amarre o marketing na gôndola.</h2>
+      <p>Buzz bom é o que <b>puxa venda.</b></p>
+    </div>
+  </div>
+  <div class="handle"><b>@nexxus.inc</b> · estruturação comercial completa</div>
+  <div class="cta">Manda <b>&nbsp;"JOGADA"&nbsp;</b> no direct <span class="arr">→</span></div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>3 erros que matam a venda no primeiro contato — @gabriel.isidoro_</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --red:#E50914;      --red-deep:#B00610;   --red-soft:#ff2a36;
+    --grn:#12B76A;      --grn-deep:#0B7C48;   --gold:#F5B301;
+    --ink:#0C0C0E;      --ink-2:#15151b;      --ink-3:#222228;
+    --paper:#F4F2ED;    --paper-2:#E9E5DD;    --line:#d9d4ca;
+    --white:#ffffff;    --safe:70px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  html,body{background:#2a2a2e;}
+  body{font-family:'Inter',sans-serif;color:var(--ink);}
+
+  .slide{position:relative;width:1080px;height:1350px;overflow:hidden;margin:0 auto 46px;background:var(--paper);}
+  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;}
+
+  .topbar{position:absolute;top:var(--safe);left:var(--safe);right:var(--safe);
+    display:flex;align-items:center;justify-content:space-between;z-index:30;}
+  .brand{display:flex;align-items:center;gap:16px;}
+  .mono{width:62px;height:62px;border-radius:15px;background:var(--red);color:#fff;
+    font-family:'Anton';font-size:33px;line-height:1;display:flex;align-items:center;justify-content:center;
+    letter-spacing:.5px;box-shadow:0 10px 26px rgba(229,9,20,.42);position:relative;}
+  .mono::after{content:"";position:absolute;left:13px;right:13px;bottom:11px;height:3px;background:rgba(255,255,255,.85);border-radius:2px;}
+  .handle{font-weight:800;font-size:23px;letter-spacing:.2px;color:var(--ink);}
+  .tag{font-weight:800;font-size:18px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);opacity:.55;}
+  .topbar.on-dark .handle{color:#fff;}
+  .topbar.on-dark .tag{color:#fff;opacity:.6;}
+
+  .dots{position:absolute;left:0;right:0;bottom:50px;display:flex;gap:9px;justify-content:center;z-index:30;}
+  .dots i{width:8px;height:8px;border-radius:50%;background:rgba(12,12,14,.22);}
+  .dots i.on{background:var(--red);width:26px;border-radius:5px;}
+  .on-dark-dots i{background:rgba(255,255,255,.28);}
+  .on-dark-dots i.on{background:var(--red);}
+
+  .cta{position:absolute;left:var(--safe);right:var(--safe);bottom:104px;z-index:30;
+    background:var(--red);color:#fff;border-radius:999px;padding:24px 30px 24px 38px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 22px 46px rgba(229,9,20,.36);}
+  .cta b{font-weight:800;font-size:29px;letter-spacing:.2px;line-height:1.05;}
+  .cta .arw{flex:0 0 auto;width:56px;height:56px;border-radius:50%;border:3px solid rgba(255,255,255,.92);
+    display:flex;align-items:center;justify-content:center;}
+  .cta .arw svg{width:25px;height:25px;fill:#fff;}
+  .anton{font-family:'Anton';font-weight:400;}
+
+  /* error-slide shared bits */
+  .ehead{position:absolute;top:158px;left:var(--safe);right:var(--safe);z-index:6;display:flex;align-items:flex-start;gap:22px;}
+  .ebadge{flex:0 0 auto;width:96px;height:96px;border-radius:22px;background:var(--red);color:#fff;
+    font-family:'Anton';font-size:54px;display:flex;align-items:center;justify-content:center;line-height:1;
+    box-shadow:0 16px 34px rgba(229,9,20,.36);position:relative;}
+  .ebadge .ic{position:absolute;right:-14px;bottom:-14px;width:52px;height:52px;border-radius:50%;
+    background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,.22);}
+  .ebadge .ic svg{width:28px;height:28px;}
+  .etitle{padding-top:4px;}
+  .etitle .k{font-weight:800;font-size:19px;letter-spacing:2.4px;text-transform:uppercase;color:var(--red);}
+  .etitle .h{font-weight:900;font-size:52px;line-height:1.02;letter-spacing:-1.1px;margin-top:6px;}
+  .edor{position:absolute;left:var(--safe);right:var(--safe);top:300px;z-index:6;font-size:24px;line-height:1.4;font-weight:500;}
+  .edor b{font-weight:800;}
+  .fix{position:absolute;left:var(--safe);right:var(--safe);z-index:6;display:flex;align-items:flex-start;gap:16px;
+    background:rgba(18,183,106,.1);border:1px solid rgba(18,183,106,.35);border-radius:18px;padding:22px 26px;}
+  .fix .fk{flex:0 0 auto;width:40px;height:40px;border-radius:11px;background:var(--grn);display:flex;align-items:center;justify-content:center;}
+  .fix .fk svg{width:22px;height:22px;fill:#fff;}
+  .fix .ft{font-size:21px;line-height:1.36;font-weight:600;}
+  .fix .ft b{font-weight:800;}
+
+  .statcard{position:absolute;z-index:6;background:var(--ink);color:#fff;border-radius:22px;padding:26px 30px;
+    display:flex;align-items:center;gap:26px;box-shadow:0 20px 44px rgba(0,0,0,.28);}
+  .statcard .big{font-family:'Anton';font-size:78px;line-height:.9;color:var(--red-soft);}
+  .statcard .tx{font-size:21px;line-height:1.34;font-weight:600;color:#e9e9ee;}
+  .statcard .tx b{color:#fff;font-weight:800;}
+  .statcard .src{margin-top:8px;font-size:15px;font-weight:600;color:#8f8f99;letter-spacing:.3px;}
+
+  /* ===================== SLIDE 1 — CAPA ===================== */
+  #s1{background:radial-gradient(1150px 820px at 78% -8%,#2a0a0d 0%,#0c0c10 52%,#08080b 100%);}
+  #s1 .glow{position:absolute;right:-14%;top:-6%;width:70%;height:48%;
+    background:radial-gradient(closest-side,rgba(229,9,20,.4),transparent 70%);filter:blur(34px);z-index:1;}
+  #s1 .chat{position:absolute;right:64px;top:250px;z-index:3;display:flex;flex-direction:column;gap:14px;align-items:flex-end;transform:rotate(3deg);}
+  #s1 .chat .b{max-width:300px;padding:16px 20px;border-radius:18px;font-size:20px;font-weight:600;line-height:1.3;box-shadow:0 14px 30px rgba(0,0,0,.4);}
+  #s1 .chat .b.in{background:#fff;color:#111;border-bottom-left-radius:5px;}
+  #s1 .chat .b.gone{background:#1c1c22;color:#6f6f79;border:1px dashed #3a3a44;border-bottom-right-radius:5px;font-style:italic;}
+  #s1 .chat .seen{font-size:15px;color:#7a7a84;font-weight:600;}
+  #s1 .kicker{position:absolute;left:var(--safe);top:658px;z-index:6;display:flex;align-items:center;gap:14px;
+    color:#fff;font-weight:800;font-size:20px;letter-spacing:2.6px;text-transform:uppercase;}
+  #s1 .kicker .bar{width:52px;height:6px;background:var(--red);border-radius:3px;}
+  #s1 .giant{position:absolute;left:var(--safe);top:700px;z-index:6;font-family:'Anton';color:#fff;
+    font-size:98px;line-height:.98;letter-spacing:.5px;text-transform:uppercase;}
+  #s1 .giant .n{color:var(--red-soft);}
+  #s1 .giant .tarja{display:inline-block;background:var(--red);padding:2px 22px 0;border-radius:10px;margin-top:8px;
+    box-shadow:0 20px 50px rgba(229,9,20,.42);}
+  #s1 .sub{position:absolute;left:var(--safe);top:1030px;z-index:6;max-width:900px;color:#d9d9df;
+    font-size:25px;line-height:1.4;font-weight:500;}
+  #s1 .sub b{color:#fff;font-weight:800;}
+
+  /* ===================== SLIDE 2 — ERRO 01 ===================== */
+  #s2{background:var(--paper);}
+  #s2 .edor{color:#4c4a45;}
+  #s2 .edor b{color:var(--ink);}
+  #s2 .split{position:absolute;left:var(--safe);right:var(--safe);top:452px;z-index:6;display:flex;gap:20px;}
+  #s2 .col{flex:1;border-radius:20px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 16px 34px rgba(20,18,12,.12);}
+  #s2 .col .hd{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;color:#fff;font-weight:800;font-size:19px;}
+  #s2 .col.win .hd{background:var(--grn);}
+  #s2 .col.lose .hd{background:#6b6b73;}
+  #s2 .col .hd .clk{font-family:'Anton';font-size:26px;letter-spacing:.5px;}
+  #s2 .col .bd{padding:20px;min-height:150px;display:flex;flex-direction:column;gap:12px;background:#ECE5DD;}
+  #s2 .col .msg{align-self:flex-start;background:#fff;border-radius:14px;border-top-left-radius:4px;padding:12px 15px;font-size:18px;font-weight:600;color:#222;max-width:88%;box-shadow:0 2px 6px rgba(0,0,0,.08);}
+  #s2 .col .rep{align-self:flex-end;background:#DCF8C6;border-radius:14px;border-top-right-radius:4px;padding:12px 15px;font-size:18px;font-weight:600;color:#111;max-width:88%;}
+  #s2 .col .rep .t{display:block;text-align:right;font-size:13px;color:#5a8f5a;margin-top:4px;font-weight:700;}
+  #s2 .col .status{align-self:flex-end;font-size:16px;color:#8a8a8a;font-weight:600;font-style:italic;}
+  #s2 .col .foot{padding:12px 20px 16px;font-weight:800;font-size:18px;}
+  #s2 .col.win .foot{color:var(--grn-deep);}
+  #s2 .col.lose .foot{color:#9a4a4a;}
+  #s2 .statcard{left:var(--safe);right:var(--safe);top:838px;}
+  #s2 .fix{top:1004px;}
+
+  /* ===================== SLIDE 3 — ERRO 02 ===================== */
+  #s3{background:#0b0b0f;}
+  #s3 .etitle .h{color:#fff;}
+  #s3 .edor{color:#c3c3cc;}
+  #s3 .edor b{color:#fff;}
+  #s3 .compare{position:absolute;left:var(--safe);right:var(--safe);top:492px;z-index:6;display:flex;flex-direction:column;gap:42px;}
+  #s3 .row{position:relative;border-radius:20px;padding:24px 26px;}
+  #s3 .row .lb{position:absolute;right:22px;top:-14px;font-weight:900;font-size:15px;letter-spacing:1.6px;padding:8px 15px;border-radius:999px;}
+  #s3 .row.bad{background:#15151b;border:1px solid #2a2a32;}
+  #s3 .row.bad .lb{background:#3a3a44;color:#c9c9d2;}
+  #s3 .row.bad .bub{background:#26262d;color:#9a9aa4;border:1px dashed #40404a;}
+  #s3 .row.good{background:rgba(18,183,106,.12);border:1px solid rgba(18,183,106,.4);}
+  #s3 .row.good .lb{background:var(--grn);color:#fff;}
+  #s3 .row.good .bub{background:#DCF8C6;color:#123;}
+  #s3 .row .bub{display:inline-block;border-radius:16px;border-top-left-radius:5px;padding:16px 20px;font-size:22px;line-height:1.34;font-weight:600;max-width:640px;}
+  #s3 .row .bub .hl{color:var(--grn-deep);font-weight:800;}
+  #s3 .row .note{margin-top:12px;font-size:19px;font-weight:600;}
+  #s3 .row.bad .note{color:#83838d;}
+  #s3 .row.good .note{color:#cfeede;}
+  #s3 .fix{top:984px;background:rgba(18,183,106,.14);}
+  #s3 .fix .ft{color:#e9f7ef;}
+  #s3 .fix .ft b{color:#fff;}
+
+  /* ===================== SLIDE 4 — ERRO 03 ===================== */
+  #s4{background:var(--paper);}
+  #s4 .edor{color:#4c4a45;}
+  #s4 .edor b{color:var(--ink);}
+  #s4 .diag{position:absolute;left:var(--safe);right:var(--safe);top:476px;z-index:6;display:flex;gap:22px;align-items:stretch;}
+  #s4 .flow{flex:1;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 16px 34px rgba(20,18,12,.12);position:relative;}
+  #s4 .flow .step{display:flex;align-items:center;gap:16px;padding:14px 0;}
+  #s4 .flow .step:not(:last-child){border-bottom:1px dashed var(--line);}
+  #s4 .flow .step .q{flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:rgba(229,9,20,.1);color:var(--red);
+    font-family:'Anton';font-size:26px;display:flex;align-items:center;justify-content:center;}
+  #s4 .flow .step .st{font-size:21px;font-weight:700;color:#2b2925;line-height:1.28;}
+  #s4 .flow .arrowdown{text-align:center;margin:2px 0;color:var(--grn);font-weight:900;font-size:22px;}
+  #s4 .flow .price{margin-top:6px;display:flex;align-items:center;justify-content:center;gap:12px;
+    background:#f3efe6;border-radius:14px;padding:16px;font-weight:800;font-size:22px;color:var(--grn-deep);}
+  #s4 .pricecut{position:absolute;right:26px;top:22px;font-family:'Anton';font-size:40px;color:#c7c1b4;
+    text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:5px;transform:rotate(-8deg);}
+  #s4 .statcard{position:static;flex:0 0 300px;flex-direction:column;align-items:flex-start;justify-content:center;gap:0;}
+  #s4 .statcard .big{font-size:72px;}
+  #s4 .statcard .tx{margin-top:12px;}
+  #s4 .flow .step{padding:19px 0;}
+  #s4 .fix{top:992px;}
+
+  /* ===================== SLIDE 5 — VIRADA ===================== */
+  #s5{background:radial-gradient(1050px 760px at 22% 4%,#12241b 0%,#0b0b0f 55%,#08080b 100%);}
+  #s5 .glow{position:absolute;left:-12%;bottom:-4%;width:62%;height:42%;
+    background:radial-gradient(closest-side,rgba(18,183,106,.24),transparent 70%);filter:blur(30px);z-index:1;}
+  #s5 .head{position:absolute;top:172px;left:var(--safe);right:var(--safe);z-index:6;}
+  #s5 .head .k{font-weight:800;font-size:19px;letter-spacing:2.4px;text-transform:uppercase;color:var(--grn);}
+  #s5 .head .h{font-weight:900;font-size:58px;line-height:1.04;letter-spacing:-1.2px;color:#fff;margin-top:10px;}
+  #s5 .head .h .hl{color:var(--grn);}
+  #s5 .lead{position:absolute;top:352px;left:var(--safe);right:var(--safe);z-index:6;font-size:24px;line-height:1.42;color:#c3c3cc;font-weight:500;max-width:900px;}
+  #s5 .lead b{color:#fff;font-weight:800;}
+  #s5 .list{position:absolute;left:var(--safe);right:var(--safe);top:530px;z-index:6;display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  #s5 .it{display:flex;align-items:center;gap:16px;background:#15151b;border:1px solid #26262d;border-radius:18px;padding:22px 24px;}
+  #s5 .it .ck{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:rgba(18,183,106,.16);border:2px solid var(--grn);display:flex;align-items:center;justify-content:center;}
+  #s5 .it .ck svg{width:22px;height:22px;fill:var(--grn);}
+  #s5 .it b{font-weight:800;font-size:23px;color:#fff;line-height:1.2;}
+  #s5 .it span{display:block;font-weight:500;font-size:18px;color:#9a9aa4;margin-top:3px;}
+  #s5 .kicker{position:absolute;left:var(--safe);right:var(--safe);top:848px;z-index:6;text-align:center;
+    font-size:23px;font-weight:600;color:#d9d9df;line-height:1.42;}
+  #s5 .kicker b{color:var(--grn);font-weight:800;}
+  #s5 .kicker .terc{color:#fff;font-weight:800;}
+
+  /* ===================== SLIDE 6 — LICAO + CTA ===================== */
+  #s6{background:radial-gradient(1100px 800px at 80% 8%,#2a0a0d 0%,#0b0b0f 52%,#08080b 100%);}
+  #s6 .glow{position:absolute;right:-12%;top:6%;width:64%;height:44%;
+    background:radial-gradient(closest-side,rgba(229,9,20,.3),transparent 70%);filter:blur(32px);z-index:1;}
+  #s6 .kicker{position:absolute;left:var(--safe);top:236px;z-index:6;display:flex;align-items:center;gap:14px;
+    color:#fff;font-weight:800;font-size:20px;letter-spacing:2.6px;text-transform:uppercase;}
+  #s6 .kicker .bar{width:52px;height:6px;background:var(--red);border-radius:3px;}
+  #s6 .giant{position:absolute;left:var(--safe);right:var(--safe);top:290px;z-index:6;font-family:'Anton';color:#fff;
+    font-size:92px;line-height:1.0;letter-spacing:.5px;text-transform:uppercase;}
+  #s6 .giant .tarja{display:inline-block;background:var(--red);padding:2px 22px 2px;border-radius:10px;margin-top:12px;
+    box-shadow:0 20px 50px rgba(229,9,20,.4);}
+  #s6 .sub{position:absolute;left:var(--safe);right:var(--safe);top:706px;z-index:6;font-size:27px;line-height:1.46;
+    color:#d9d9df;font-weight:500;max-width:920px;}
+  #s6 .sub b{color:#fff;font-weight:800;}
+  #s6 .recap{position:absolute;left:var(--safe);right:var(--safe);top:872px;z-index:6;display:flex;flex-direction:column;gap:12px;}
+  #s6 .recap .r{display:flex;align-items:center;gap:16px;color:#c3c3cc;font-size:22px;font-weight:600;}
+  #s6 .recap .r .n{flex:0 0 auto;width:38px;height:38px;border-radius:10px;background:#1c1c22;border:1px solid #2e2e38;
+    color:var(--red-soft);font-family:'Anton';font-size:20px;display:flex;align-items:center;justify-content:center;}
+  #s6 .recap .r b{color:#fff;font-weight:800;}
+  #s6 .handle-line{position:absolute;left:var(--safe);right:var(--safe);bottom:210px;z-index:6;text-align:center;
+    color:#9a9aa4;font-weight:700;font-size:21px;}
+  #s6 .handle-line b{color:#fff;}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="arw" viewBox="0 0 24 24"><path fill="currentColor" d="M5 12h12.2l-4.6-4.6L14 6l7 7-7 7-1.4-1.4 4.6-4.6H5z"/></symbol>
+  <symbol id="ck" viewBox="0 0 24 24"><path d="M9.55 17.05 4.5 12l1.4-1.4 3.65 3.65 8.55-8.55 1.4 1.4z"/></symbol>
+  <symbol id="watch" viewBox="0 0 24 24"><path fill="#E50914" d="M9 1h6v2H9zM12 4a9 9 0 1 0 0 18 9 9 0 0 0 0-18m1 9V8h-2v7h6v-2z"/></symbol>
+  <symbol id="copy" viewBox="0 0 24 24"><path fill="#E50914" d="M16 1H4a2 2 0 0 0-2 2v13h2V3h12zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m0 16H8V7h11z"/></symbol>
+  <symbol id="glass" viewBox="0 0 24 24"><path fill="#E50914" d="M15.5 14h-.8l-.3-.3a6.5 6.5 0 1 0-.7.7l.3.3v.8l5 5 1.5-1.5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14M9 6h1v2h2v1h-2v2H9V9H7V8h2z"/></symbol>
+</svg>
+
+<!-- ==================== SLIDE 1 — CAPA ==================== -->
+<section class="slide grain" id="s1">
+  <div class="glow"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">Comercial</div>
+  </div>
+
+  <div class="chat">
+    <div class="b in">Oi, quero saber como funciona 👀</div>
+    <div class="b in">Ainda tem vaga pra esse mês?</div>
+    <div class="seen">visto às 14:02</div>
+    <div class="b gone">...sem resposta</div>
+  </div>
+
+  <div class="kicker"><span class="bar"></span> Para quem vive de vender</div>
+  <div class="giant">
+    <span class="n">3</span> ERROS<br/>
+    que matam a venda no<br/>
+    <span class="tarja">1º CONTATO</span>
+  </div>
+  <div class="sub">O lead chega quente, você responde, e ele some. <b>Veja o que espanta a venda antes da conversa começar.</b></div>
+
+  <div class="cta"><b>Arrasta, o 3º é o mais caro</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ==================== SLIDE 2 — ERRO 01 ==================== -->
+<section class="slide grain" id="s2">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">01 · O primeiro erro</div>
+  </div>
+
+  <div class="ehead">
+    <div class="ebadge">01<span class="ic"><svg><use href="#watch"/></svg></span></div>
+    <div class="etitle"><div class="k">O primeiro erro</div><div class="h">Você demora<br/>pra responder</div></div>
+  </div>
+
+  <div class="edor">O lead te procura no auge do interesse. A cada minuto de silêncio ele <b>esfria, abre o concorrente ou some.</b></div>
+
+  <div class="split">
+    <div class="col win">
+      <div class="hd"><span>Respondeu na hora</span><span class="clk">00:05</span></div>
+      <div class="bd">
+        <div class="msg">Ainda tem vaga?</div>
+        <div class="rep">Tenho sim! Já te explico<span class="t">14:03 ✓✓</span></div>
+      </div>
+      <div class="foot">Lead quente, conversa aberta</div>
+    </div>
+    <div class="col lose">
+      <div class="hd"><span>Respondeu depois</span><span class="clk">02:00</span></div>
+      <div class="bd">
+        <div class="msg">Ainda tem vaga?</div>
+        <div class="status">visto por último</div>
+        <div class="status">já fechou com o concorrente</div>
+      </div>
+      <div class="foot">Lead frio, dinheiro no lixo</div>
+    </div>
+  </div>
+
+  <div class="statcard">
+    <div class="big">21x</div>
+    <div class="tx"><b>mais chance de qualificar</b> o lead respondendo em 5 min em vez de 30 min. E 100x mais chance de contato.
+      <div class="src">Estudo Lead Response Management · MIT / InsideSales</div>
+    </div>
+  </div>
+
+  <div class="fix">
+    <div class="fk"><svg><use href="#ck"/></svg></div>
+    <div class="ft"><b>O que fazer:</b> trate o primeiro retorno como plantão. Alerta na hora, um dono definido e uma mensagem pronta pra disparar.</div>
+  </div>
+
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ==================== SLIDE 3 — ERRO 02 ==================== -->
+<section class="slide grain" id="s3">
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">02 · O segundo erro</div>
+  </div>
+
+  <div class="ehead">
+    <div class="ebadge">02<span class="ic"><svg><use href="#copy"/></svg></span></div>
+    <div class="etitle"><div class="k" style="color:var(--red-soft)">O segundo erro</div><div class="h">Você responde<br/>igual pra todo mundo</div></div>
+  </div>
+
+  <div class="edor">O lead percebe em 3 segundos que caiu num <b>copia e cola.</b> Não sente que vai falar com quem resolve o problema dele.</div>
+
+  <div class="compare">
+    <div class="row bad">
+      <span class="lb">CTRL+C · CTRL+V</span>
+      <div class="bub">Olá, tudo bem? Como posso ajudar?</div>
+      <div class="note">Serve pra qualquer um. O lead esfria.</div>
+    </div>
+    <div class="row good">
+      <span class="lb">PERSONALIZADO</span>
+      <div class="bub">Oi <span class="hl">Marcos</span>, vi que você quer <span class="hl">reduzir o custo do time</span>. Me confirma uma coisa que eu já te mostro o caminho.</div>
+      <div class="note">Cita o nome e a dor exata. O lead responde.</div>
+    </div>
+  </div>
+
+  <div class="fix">
+    <div class="fk"><svg><use href="#ck"/></svg></div>
+    <div class="ft"><b>O que fazer:</b> a abertura tem que ser impossível de colar pro próximo lead. Nome, a dor que ele usou e de onde ele veio.</div>
+  </div>
+
+  <div class="dots on-dark-dots"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ==================== SLIDE 4 — ERRO 03 ==================== -->
+<section class="slide grain" id="s4">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">03 · O erro mais caro</div>
+  </div>
+
+  <div class="ehead">
+    <div class="ebadge">03<span class="ic"><svg><use href="#glass"/></svg></span></div>
+    <div class="etitle"><div class="k">O erro mais caro</div><div class="h">Você joga o preço<br/>antes da dor</div></div>
+  </div>
+
+  <div class="edor">Você dispara solução e valor sem descobrir o que dói. Vira mais um empurrando. O lead <b>ancora tudo no preço</b> e some.</div>
+
+  <div class="diag">
+    <div class="flow">
+      <div class="pricecut">R$ ?</div>
+      <div class="step"><span class="q">?</span><span class="st">Qual a dor, e há quanto tempo?</span></div>
+      <div class="step"><span class="q">?</span><span class="st">Quanto isso custa pro negócio?</span></div>
+      <div class="step"><span class="q">?</span><span class="st">O que já tentaram antes?</span></div>
+      <div class="arrowdown">↓</div>
+      <div class="price">Só então: solução e preço</div>
+    </div>
+    <div class="statcard">
+      <div class="big">11 a 14</div>
+      <div class="tx"><b>perguntas de descoberta</b> antes de apresentar preço é o ponto ideal.
+        <div class="src">Gong · análise de +519 mil ligações</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fix">
+    <div class="fk"><svg><use href="#ck"/></svg></div>
+    <div class="ft"><b>O que fazer:</b> no primeiro contato, boca fechada e pergunta aberta. Diagnostique a dor antes de apresentar qualquer coisa.</div>
+  </div>
+
+  <div class="dots"><i></i><i></i><i></i><i class="on"></i><i></i><i></i></div>
+</section>
+
+<!-- ==================== SLIDE 5 — VIRADA ==================== -->
+<section class="slide grain" id="s5">
+  <div class="glow"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">A virada</div>
+  </div>
+
+  <div class="head">
+    <div class="k">O que separa quem perde</div>
+    <div class="h">Nenhum desses erros é falta de <span class="hl">esforço.</span> É falta de <span class="hl">processo.</span></div>
+  </div>
+
+  <div class="lead">Quando o primeiro contato depende do humor e da memória de alguém no dia, <b>todo lead quente vira aposta.</b> Empresa que fecha tem processo rodando:</div>
+
+  <div class="list">
+    <div class="it"><span class="ck"><svg><use href="#ck"/></svg></span><div><b>Um dono do 1º toque</b><span>alguém responsável, não o improviso</span></div></div>
+    <div class="it"><span class="ck"><svg><use href="#ck"/></svg></span><div><b>SLA de resposta</b><span>tempo definido, em minutos</span></div></div>
+    <div class="it"><span class="ck"><svg><use href="#ck"/></svg></span><div><b>Roteiro de diagnóstico</b><span>as perguntas antes do preço</span></div></div>
+    <div class="it"><span class="ck"><svg><use href="#ck"/></svg></span><div><b>Follow-up de verdade</b><span>que não depende de lembrança</span></div></div>
+  </div>
+
+  <div class="kicker">Com time interno ou uma <span class="terc">estrutura comercial terceirizada</span>, o que muda o jogo é ter <b>processo</b>, não um vendedor improvisando.</div>
+
+  <div class="cta"><b>A lição que fecha isso</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div>
+</section>
+
+<!-- ==================== SLIDE 6 — LICAO + CTA ==================== -->
+<section class="slide grain" id="s6">
+  <div class="glow"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">A lição</div>
+  </div>
+
+  <div class="kicker"><span class="bar"></span> Guarda essa frase</div>
+  <div class="giant">
+    VENDA NÃO SE<br/>
+    PERDE NO PREÇO.<br/>
+    <span class="tarja">SE PERDE NO 1º CONTATO.</span>
+  </div>
+  <div class="sub">Sem processo, todo lead quente vira aposta. <b>Com processo, o primeiro contato deixa de ser sorte.</b></div>
+
+  <div class="recap">
+    <div class="r"><span class="n">01</span> Responda <b>na hora</b>, não em horas</div>
+    <div class="r"><span class="n">02</span> Fale com <b>a pessoa</b>, não com todo mundo</div>
+    <div class="r"><span class="n">03</span> Diagnostique <b>a dor</b> antes do preço</div>
+  </div>
+
+  <div class="handle-line">Mais sobre processo comercial: <b>@gabriel.isidoro_</b></div>
+  <div class="cta"><b>Salva e manda pro seu comercial</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i></i><i></i><i></i><i></i><i></i><i class="on"></i></div>
+</section>
+
+</body>
+</html>

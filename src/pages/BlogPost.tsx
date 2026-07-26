@@ -5,13 +5,16 @@ import { BlogCard } from '@/components/BlogCard'
 import { CTASection } from '@/components/CTASection'
 import { PostCover } from '@/components/PostCover'
 import { getPost, relatedPosts, formatDate, type PostBlock } from '@/data/posts'
-import { blogPostingSchema, breadcrumbSchema } from '@/data/seo'
+import { blogPostingSchema, breadcrumbSchema, postFaqSchema, organizationSchema } from '@/data/seo'
 import { site } from '@/data/site'
 
 /** Conta as palavras do corpo do post, para o campo wordCount do JSON-LD. */
 function contarPalavras(blocks: PostBlock[]): number {
   return blocks.reduce((total, bloco) => {
-    const texto = bloco.type === 'ul' ? bloco.items.join(' ') : bloco.text
+    let texto: string
+    if (bloco.type === 'ul') texto = bloco.items.join(' ')
+    else if (bloco.type === 'table') texto = [...bloco.headers, ...bloco.rows.flat()].join(' ')
+    else texto = bloco.text
     return total + texto.trim().split(/\s+/).filter(Boolean).length
   }, 0)
 }
@@ -40,6 +43,52 @@ function Block({ block }: { block: PostBlock }) {
         <blockquote className="mt-8 rounded-2xl border-l-4 border-brand-500 bg-brand-50/60 px-6 py-5 font-display text-lg font-semibold italic text-ink-800">
           “{block.text}”
         </blockquote>
+      )
+    case 'table':
+      return (
+        <figure className="mt-8">
+          {/* Rola sozinha no celular, sem estourar a largura da página */}
+          <div className="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
+            <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
+              <thead>
+                <tr>
+                  {block.headers.map((h, i) => (
+                    <th
+                      key={i}
+                      scope="col"
+                      className="border-b-2 border-ink-900/15 pb-3 pr-4 font-display text-xs font-bold uppercase tracking-wider text-ink-500 last:pr-0"
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {block.rows.map((row, i) => (
+                  <tr key={i} className="border-b border-ink-100 last:border-0">
+                    {row.map((cell, j) => (
+                      <td
+                        key={j}
+                        className={
+                          j === 0
+                            ? 'py-3.5 pr-4 font-semibold text-ink-800'
+                            : 'py-3.5 pr-4 tabular-nums text-ink-600 last:pr-0'
+                        }
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {block.caption && (
+            <figcaption className="mt-3 text-xs leading-relaxed text-ink-400">
+              {block.caption}
+            </figcaption>
+          )}
+        </figure>
       )
     default:
       return null
@@ -70,12 +119,16 @@ export default function BlogPost() {
         modifiedTime={post.updated}
         section={post.category}
         schema={[
+          // O publisher do BlogPosting referencia a Organization por @id, e @id só
+          // resolve dentro do grafo da mesma página. Sem isto o publisher fica órfão.
+          organizationSchema,
           blogPostingSchema({ ...post, wordCount }),
           breadcrumbSchema([
             { name: 'Início', url: site.url },
             { name: 'Blog', url: `${site.url}/blog` },
             { name: post.title, url: `${site.url}/blog/${post.slug}` },
           ]),
+          ...(post.faq?.length ? [postFaqSchema(post.slug, post.faq)] : []),
         ]}
       />
 
@@ -117,6 +170,21 @@ export default function BlogPost() {
           {post.content.map((block, i) => (
             <Block key={i} block={block} />
           ))}
+
+          {/* Dúvidas frequentes */}
+          {post.faq && post.faq.length > 0 && (
+            <section className="mt-14 border-t border-ink-100 pt-10">
+              <h2 className="heading text-2xl sm:text-[1.7rem]">Perguntas frequentes</h2>
+              <dl className="mt-6 divide-y divide-ink-100">
+                {post.faq.map((item) => (
+                  <div key={item.pergunta} className="py-5 first:pt-0">
+                    <dt className="font-display text-lg font-bold text-ink-900">{item.pergunta}</dt>
+                    <dd className="mt-2 leading-[1.8] text-ink-600">{item.resposta}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
         </div>
       </article>
 

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>94% dos compradores B2B usaram IA — @gabriel.isidoro_</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --red:#E50914; --red-deep:#B00610; --red-paper:#c40810;
+    --ink:#0C0C0E; --ink-2:#141417; --ink-3:#26262d;
+    --paper:#F4F2ED; --paper-dim:rgba(244,242,237,.7); --paper-faint:rgba(244,242,237,.55);
+    --pad:84px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  html,body{background:#2a2a2e;}
+  body{font-family:'Inter',sans-serif;color:var(--paper);}
+
+  .slide{position:relative;width:1080px;height:1350px;overflow:hidden;margin:0 auto 46px;background:var(--ink);}
+  .slide.paper{background:var(--paper);color:var(--ink);}
+
+  /* grain */
+  .slide::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:60;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;}
+
+  /* chart-grid */
+  .chartgrid::before{content:"";position:absolute;inset:0;z-index:0;
+    background:repeating-linear-gradient(to bottom, rgba(244,242,237,.05) 0 1px, transparent 1px 108px);}
+  .slide.paper.chartgrid::before{background:repeating-linear-gradient(to bottom, rgba(12,12,14,.05) 0 1px, transparent 1px 108px);}
+
+  /* ---------- frame ---------- */
+  .topbar{position:absolute;top:70px;left:var(--pad);right:var(--pad);height:56px;
+    display:flex;align-items:center;justify-content:space-between;z-index:40;}
+  .brand{display:flex;align-items:center;gap:14px;}
+  .mono{width:56px;height:56px;border-radius:14px;background:var(--red);color:#fff;
+    font-family:'Anton';font-size:29px;line-height:1;display:flex;align-items:center;justify-content:center;
+    letter-spacing:.5px;position:relative;}
+  .mono::after{content:"";position:absolute;left:12px;right:12px;bottom:10px;height:3px;background:rgba(255,255,255,.85);border-radius:2px;}
+  .handle{font-weight:600;font-size:22px;letter-spacing:.2px;color:var(--paper);}
+  .paper .handle{color:var(--ink);}
+  .pag{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;letter-spacing:.06em;
+    font-variant-numeric:tabular-nums;color:var(--paper-faint);}
+  .paper .pag{color:rgba(12,12,14,.55);}
+  .pag i{display:block;width:2px;height:16px;background:var(--red);transform:rotate(24deg);}
+
+  .kicker{position:absolute;top:164px;left:var(--pad);right:var(--pad);z-index:10;
+    display:flex;align-items:center;gap:14px;font-weight:800;font-size:22px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--paper);}
+  .paper .kicker{color:var(--ink);}
+  .kicker::before{content:"";width:28px;height:3px;background:var(--red);flex:0 0 auto;}
+
+  .cta{position:absolute;left:var(--pad);right:var(--pad);bottom:104px;height:84px;z-index:40;
+    background:var(--red);color:#fff;border-radius:999px;padding:0 28px 0 36px;
+    display:flex;align-items:center;justify-content:space-between;gap:18px;
+    box-shadow:0 18px 44px rgba(229,9,20,.32), inset 0 1px 0 rgba(255,255,255,.22);}
+  .cta b{font-weight:800;font-size:23px;letter-spacing:.05em;text-transform:uppercase;line-height:1.05;}
+  .cta .arw{flex:0 0 auto;width:50px;height:50px;border-radius:50%;border:3px solid rgba(255,255,255,.92);
+    display:flex;align-items:center;justify-content:center;}
+  .cta .arw svg{width:23px;height:23px;fill:#fff;}
+
+  .dots{position:absolute;left:0;right:0;bottom:50px;display:flex;gap:9px;justify-content:center;z-index:40;}
+  .dots i{width:8px;height:8px;border-radius:50%;background:rgba(244,242,237,.25);}
+  .paper .dots i{background:rgba(12,12,14,.22);}
+  .dots i.on{background:var(--red);width:26px;border-radius:5px;}
+
+  .foot{position:absolute;top:1086px;left:var(--pad);right:var(--pad);z-index:10;
+    font-weight:600;font-size:20px;letter-spacing:.04em;text-transform:uppercase;color:rgba(244,242,237,.6);}
+  .paper .foot{color:rgba(12,12,14,.55);}
+  .foot sup{color:var(--red);font-size:14px;font-weight:800;}
+
+  .anton{font-family:'Anton';font-weight:400;}
+  .riso{position:relative;}
+  .riso::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+    background-image:radial-gradient(rgba(12,12,14,.22) 1px, transparent 1.4px);background-size:5px 5px;}
+
+  /* baseline assinatura */
+  .baseline{position:absolute;z-index:8;height:6px;background:var(--red);}
+  .baseline::after{content:"";position:absolute;left:0;right:0;top:6px;height:14px;
+    background:repeating-linear-gradient(to right, transparent 0 70px, var(--red) 70px 72px);}
+  .paper .baseline{background:var(--red-paper);}
+  .paper .baseline::after{background:repeating-linear-gradient(to right, transparent 0 70px, var(--red-paper) 70px 72px);}
+
+  .caret{display:inline-block;background:var(--red);box-shadow:0 0 24px rgba(229,9,20,.6);vertical-align:baseline;}
+
+  /* ============================================================ */
+  /* SLIDE 1 — CAPA                                                */
+  /* ============================================================ */
+  #s1{background:radial-gradient(ellipse 90% 70% at 30% 42%, #141418, #0C0C0E 70%);}
+  #s1 .h1{position:absolute;left:var(--pad);top:224px;z-index:10;font-family:'Anton';
+    color:var(--paper);font-size:112px;line-height:.92;letter-spacing:-0.01em;text-transform:uppercase;}
+  #s1 .h1 .ln{display:block;width:fit-content;}
+  #s1 .gg{position:relative;display:inline-block;}
+  #s1 .gg svg{position:absolute;left:-3%;top:34%;width:106%;height:60%;z-index:3;transform:rotate(-3deg);}
+  #s1 .tarjaline{display:inline-block;margin-top:22px;margin-left:24px;transform:rotate(-1.5deg);
+    background:var(--red);color:var(--paper);font-size:78px;padding:10px 26px 6px;line-height:1;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone;}
+  #s1 .lab{position:absolute;left:var(--pad);z-index:10;font-weight:700;font-size:20px;
+    letter-spacing:.14em;text-transform:uppercase;}
+  #s1 .lab.dead{top:734px;color:var(--paper-faint);}
+  #s1 .lab.live{top:900px;color:var(--red);}
+  #s1 .gpill{position:absolute;left:var(--pad);top:770px;width:760px;height:84px;z-index:9;
+    background:#1a1a1f;border:1px solid rgba(244,242,237,.1);border-radius:999px;
+    display:flex;align-items:center;gap:18px;padding:0 30px;filter:saturate(.7);}
+  #s1 .gpill .ghost{font-weight:500;font-size:24px;color:rgba(244,242,237,.42);}
+  #s1 .gpill svg{width:26px;height:26px;flex:0 0 auto;}
+  #s1 .strike{position:absolute;left:44px;top:784px;width:848px;height:60px;z-index:11;pointer-events:none;}
+  #s1 .aiinput{position:absolute;left:var(--pad);top:936px;width:820px;height:96px;z-index:10;
+    background:#17171c;border-radius:20px;display:flex;align-items:center;gap:6px;padding:0 30px;
+    box-shadow:0 0 0 1px rgba(229,9,20,.5), 0 0 48px rgba(229,9,20,.18),
+      inset 0 1px 0 rgba(244,242,237,.06), 0 2px 6px rgba(12,12,14,.18),
+      0 24px 48px -12px rgba(12,12,14,.35), 0 60px 120px -24px rgba(229,9,20,.12);}
+  #s1 .aiinput .typed{font-weight:500;font-size:26px;color:#e8e6e0;}
+  #s1 .aiinput .caret{width:6px;height:38px;margin-left:8px;}
+  #s1 .aiinput .icons{margin-left:auto;display:flex;gap:16px;}
+  #s1 .aiinput .icons svg{width:24px;height:24px;}
+
+  /* ============================================================ */
+  /* SLIDE 2 — O DADO / DONUT                                      */
+  /* ============================================================ */
+  #s2 .h2{position:absolute;left:var(--pad);top:224px;z-index:10;font-family:'Anton';
+    color:var(--paper);font-size:72px;line-height:.95;text-transform:uppercase;}
+  #s2 .h2 sup{color:var(--red);font-size:34px;vertical-align:super;}
+  #s2 .sub{position:absolute;left:var(--pad);top:474px;width:400px;z-index:10;
+    font-weight:400;font-size:22px;line-height:1.45;color:var(--paper-dim);}
+  #s2 .sub b{color:var(--paper);font-weight:700;}
+  #s2 .donutwrap{position:absolute;left:500px;top:330px;width:520px;height:520px;z-index:9;}
+  #s2 .donutwrap::before{content:"";position:absolute;left:-20px;top:-20px;width:560px;height:560px;
+    border-radius:50%;background:radial-gradient(circle, rgba(229,9,20,.14), transparent 65%);}
+  #s2 .donut{position:absolute;inset:0;border-radius:50%;
+    background:conic-gradient(from 0deg, #E50914 0deg 337.9deg, #26262d 338.9deg 360deg);
+    -webkit-mask:radial-gradient(circle, transparent 169px, #000 170px);
+    mask:radial-gradient(circle, transparent 169px, #000 170px);}
+  #s2 .donut::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
+    background-image:radial-gradient(rgba(12,12,14,.28) 1px, transparent 1.4px);background-size:5px 5px;
+    -webkit-mask:radial-gradient(circle, transparent 169px, #000 170px);
+    mask:radial-gradient(circle, transparent 169px, #000 170px);}
+  #s2 .dotend{position:absolute;inset:0;transform:rotate(337.9deg);z-index:3;}
+  #s2 .dotend i{position:absolute;left:50%;top:16px;width:14px;height:14px;margin-left:-7px;border-radius:50%;
+    background:var(--paper);box-shadow:0 0 0 5px rgba(229,9,20,.35);}
+  #s2 .dnum{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;}
+  #s2 .dnum .n{font-family:'Anton';font-size:170px;line-height:1;color:var(--paper);letter-spacing:-.01em;}
+  #s2 .dnum .p{font-family:'Anton';font-size:80px;line-height:1;color:var(--red);align-self:flex-start;
+    margin-top:150px;text-shadow:0 2px 0 rgba(229,9,20,.35);}
+  #s2 .sixlab{position:absolute;left:520px;top:258px;z-index:11;font-weight:600;font-size:20px;
+    color:rgba(244,242,237,.65);}
+  #s2 .sixlab::after{content:"";position:absolute;left:168px;top:32px;width:1px;height:46px;
+    background:rgba(244,242,237,.4);transform:rotate(-14deg);}
+  #s2 .rank{position:absolute;left:var(--pad);right:var(--pad);top:898px;z-index:10;
+    display:flex;flex-direction:column;gap:10px;}
+  #s2 .rrow{display:grid;grid-template-columns:412px 1fr;align-items:center;gap:18px;height:28px;padding:0 10px;}
+  #s2 .rrow .rl{font-weight:600;font-size:20px;letter-spacing:.02em;color:rgba(244,242,237,.65);
+    display:flex;align-items:center;gap:12px;white-space:nowrap;}
+  #s2 .rrow .bar{height:16px;border-radius:4px;background:#26262d;}
+  #s2 .rrow.first{background:rgba(229,9,20,.08);border-left:3px solid var(--red);height:38px;border-radius:0 6px 6px 0;}
+  #s2 .rrow.first .rl{color:var(--paper);font-weight:700;}
+  #s2 .rrow.first .bar{background:var(--red);position:relative;}
+  #s2 .rrow.first .bar::after{content:"";position:absolute;inset:0;border-radius:4px;
+    background-image:radial-gradient(rgba(12,12,14,.25) 1px, transparent 1.4px);background-size:5px 5px;}
+  #s2 .chip1{width:30px;height:30px;border-radius:6px;background:var(--red);color:#fff;flex:0 0 auto;
+    font-family:'Anton';font-size:20px;display:flex;align-items:center;justify-content:center;}
+  #s2 .bl2{left:var(--pad);right:var(--pad);top:1054px;}
+
+  /* ============================================================ */
+  /* SLIDE 3 — A TROCA / SLOPE (paper)                             */
+  /* ============================================================ */
+  #s3 .h2{position:absolute;left:var(--pad);top:216px;z-index:10;font-family:'Anton';
+    color:var(--ink);font-size:76px;line-height:.98;text-transform:uppercase;}
+  #s3 .axis{position:absolute;top:446px;width:2px;height:390px;background:rgba(12,12,14,.18);z-index:5;}
+  #s3 .axlab{position:absolute;top:410px;z-index:10;font-weight:700;font-size:21px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink);}
+  #s3 .axlab.b{background:rgba(229,9,20,.1);padding:3px 10px;border-radius:6px;}
+  #s3 .wedgebox{position:absolute;left:180px;top:446px;width:720px;height:390px;z-index:6;}
+  #s3 .wedge{position:absolute;inset:0;background:linear-gradient(95deg,#E50914,#b10710);
+    clip-path:polygon(0 26px, 720px 300px, 720px 372px, 0 58px);}
+  #s3 .wedge::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(rgba(12,12,14,.22) 1px, transparent 1.4px);background-size:5px 5px;
+    clip-path:polygon(0 26px, 720px 300px, 720px 372px, 0 58px);}
+  #s3 .arrowB{position:absolute;left:714px;top:314px;width:0;height:0;z-index:7;
+    border-left:36px solid #b10710;border-top:24px solid transparent;border-bottom:24px solid transparent;
+    transform:rotate(21deg);}
+  #s3 .dash31{position:absolute;left:180px;top:466px;width:720px;height:3px;z-index:5;
+    background:repeating-linear-gradient(to right, #9a968d 0 14px, transparent 14px 26px);}
+  #s3 .lab31{position:absolute;left:620px;top:428px;z-index:10;font-weight:600;font-size:20px;color:rgba(12,12,14,.6);}
+  #s3 .node{position:absolute;width:20px;height:20px;border-radius:50%;background:var(--ink);z-index:8;
+    box-shadow:0 0 0 5px var(--paper), 0 0 0 7px rgba(12,12,14,.25);}
+  #s3 .big69{position:absolute;left:330px;top:520px;z-index:9;font-family:'Anton';font-size:180px;
+    line-height:1;color:var(--red);text-shadow:5px 5px 0 rgba(12,12,14,.12);}
+  #s3 .big69 small{font-size:90px;}
+  #s3 .cap69{position:absolute;left:252px;top:748px;width:370px;z-index:9;font-weight:600;font-size:21px;
+    line-height:1.35;color:rgba(12,12,14,.72);}
+  #s3 .bl{left:var(--pad);right:var(--pad);top:852px;}
+  #s3 .band{position:absolute;left:0;right:0;top:906px;height:168px;background:#ebe8e1;z-index:7;
+    border-top:1px solid rgba(12,12,14,.08);display:flex;align-items:center;gap:44px;padding:0 var(--pad);}
+  #s3 .trio{display:flex;gap:34px;align-items:baseline;flex:0 0 auto;}
+  #s3 .trio span{font-family:'Anton';font-size:118px;line-height:1;}
+  #s3 .trio .o{color:transparent;-webkit-text-stroke:2px rgba(12,12,14,.28);}
+  #s3 .trio .f{color:var(--red);text-shadow:0 8px 32px rgba(229,9,20,.3);}
+  #s3 .bandtx{font-weight:400;font-size:22px;line-height:1.45;color:var(--ink);max-width:480px;}
+  #s3 .bandtx b{font-weight:800;}
+  #s3 .bandtx .mk{background:linear-gradient(transparent 55%, rgba(229,9,20,.35) 55%);font-weight:800;}
+  #s3 .bandtx sup{color:var(--red);font-size:14px;font-weight:800;}
+
+  /* ============================================================ */
+  /* SLIDE 4 — QUEDA / BARRAS + TOAST                              */
+  /* ============================================================ */
+  #s4 .h2{position:absolute;left:var(--pad);top:216px;z-index:10;font-family:'Anton';
+    color:var(--paper);font-size:78px;line-height:.98;text-transform:uppercase;}
+  #s4 .axtitle{position:absolute;left:var(--pad);top:452px;z-index:10;font-weight:700;font-size:20px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--paper-faint);}
+  #s4 .bars{position:absolute;left:var(--pad);top:500px;width:544px;height:454px;z-index:8;
+    display:flex;align-items:flex-end;gap:26px;}
+  #s4 .bars i{display:block;width:88px;border-radius:4px 4px 0 0;
+    background:linear-gradient(180deg,#3a3a41,#26262d);box-shadow:inset 0 1px 0 rgba(244,242,237,.07);}
+  #s4 .bars i.last{background:var(--red);position:relative;}
+  #s4 .bars i.last::after{content:"";position:absolute;inset:0;border-radius:4px 4px 0 0;
+    background-image:radial-gradient(rgba(12,12,14,.25) 1px, transparent 1.4px);background-size:5px 5px;}
+  #s4 .trend{position:absolute;left:var(--pad);top:500px;width:620px;height:454px;z-index:9;pointer-events:none;}
+  #s4 .hatch{position:absolute;left:648px;top:508px;width:348px;height:132px;z-index:9;
+    border:1px solid rgba(229,9,20,.5);display:flex;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(45deg, rgba(229,9,20,.28) 0 6px, transparent 6px 12px);}
+  #s4 .hatch .n{font-family:'Anton';font-size:54px;color:var(--red);letter-spacing:.01em;white-space:nowrap;
+    text-shadow:0 2px 0 rgba(229,9,20,.3);background:var(--ink);padding:6px 20px;}
+  #s4 .hatchlab{position:absolute;left:648px;top:664px;width:348px;z-index:9;font-weight:600;
+    font-size:21px;line-height:1.4;color:var(--paper-dim);}
+  #s4 .hatchlab sup{color:var(--red);font-size:14px;font-weight:800;}
+  #s4 .bl{left:0;right:0;top:954px;}
+  #s4 .toast{position:absolute;left:560px;top:844px;width:432px;z-index:12;background:#fff;color:var(--ink);
+    border-radius:14px;transform:rotate(-2deg);padding:22px 24px 22px 26px;
+    box-shadow:0 2px 6px rgba(12,12,14,.18), 0 24px 48px -12px rgba(12,12,14,.35), 0 60px 120px -24px rgba(229,9,20,.12);}
+  #s4 .toast::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:2px;background:var(--red);}
+  #s4 .toast .tt{display:flex;align-items:flex-start;gap:12px;}
+  #s4 .toast .tt svg{width:26px;height:26px;flex:0 0 auto;margin-top:2px;}
+  #s4 .toast .tt b{font-weight:800;font-size:21px;line-height:1.25;}
+  #s4 .toast .tb{margin-top:8px;font-weight:500;font-size:20px;line-height:1.35;color:#55555c;}
+  #s4 .toast .tb sup{color:var(--red);font-size:13px;font-weight:800;}
+  #s4 .toast .x{position:absolute;right:14px;top:12px;width:18px;height:18px;}
+
+  /* ============================================================ */
+  /* SLIDE 5 — JORNADA / CÁPSULA                                   */
+  /* ============================================================ */
+  #s5 .h2{position:absolute;left:var(--pad);top:216px;z-index:10;font-family:'Anton';
+    color:var(--paper);font-size:78px;line-height:.98;text-transform:uppercase;}
+  #s5 .divider{position:absolute;left:var(--pad);right:var(--pad);top:424px;height:1px;
+    background:rgba(244,242,237,.14);z-index:5;}
+  #s5 .divider::before{content:"";position:absolute;left:0;top:-4px;width:8px;height:8px;background:var(--red);}
+  #s5 .capsule{position:absolute;left:var(--pad);top:498px;width:646px;height:158px;z-index:6;
+    border:2px dashed rgba(229,9,20,.7);border-radius:80px;background:rgba(229,9,20,.07);}
+  #s5 .capslab{position:absolute;left:150px;top:484px;z-index:10;font-weight:800;font-size:21px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--red);background:var(--ink);padding:4px 14px;}
+  #s5 .track-red{position:absolute;left:110px;top:572px;width:594px;height:6px;background:var(--red);z-index:7;}
+  #s5 .track-gray{position:absolute;left:730px;top:572px;width:266px;height:6px;background:rgba(244,242,237,.25);z-index:7;}
+  #s5 .st{position:absolute;top:566px;width:18px;height:18px;border-radius:50%;background:var(--red);z-index:8;
+    box-shadow:0 0 0 6px var(--ink), 0 0 0 8px rgba(229,9,20,.4);}
+  #s5 .st.gray{background:#3a3a41;box-shadow:0 0 0 6px var(--ink), 0 0 0 8px rgba(244,242,237,.2);}
+  #s5 .stlab{position:absolute;top:604px;z-index:8;font-weight:600;font-size:20px;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--paper-faint);transform:translateX(-50%);}
+  #s5 .marker{position:absolute;left:938px;top:498px;width:4px;height:60px;background:var(--red);z-index:9;}
+  #s5 .youlab{position:absolute;left:700px;right:var(--pad);top:462px;z-index:9;text-align:right;
+    font-family:'Anton';font-size:32px;color:var(--paper);letter-spacing:.02em;
+    text-shadow:0 0 18px rgba(229,9,20,.35);}
+  #s5 .bullets{position:absolute;left:var(--pad);right:var(--pad);top:808px;z-index:10;
+    display:flex;flex-direction:column;gap:36px;}
+  #s5 .bu{display:flex;align-items:flex-start;gap:20px;font-weight:400;font-size:23px;line-height:1.5;
+    color:var(--paper-dim);}
+  #s5 .bu b{color:var(--paper);font-weight:700;}
+  #s5 .bu .dia{flex:0 0 auto;width:12px;height:12px;border:3px solid var(--red);transform:rotate(45deg);margin-top:9px;}
+  #s5 .bu .mk{background:linear-gradient(transparent 55%, rgba(229,9,20,.35) 55%);color:var(--paper);font-weight:700;}
+  #s5 .bu .caret{width:4px;height:22px;margin-left:8px;box-shadow:0 0 20px rgba(229,9,20,.55);}
+
+  /* ============================================================ */
+  /* SLIDE 6 — O QUE FAZER (paper)                                 */
+  /* ============================================================ */
+  #s6 .h2{position:absolute;left:var(--pad);top:216px;z-index:10;font-family:'Anton';
+    color:var(--ink);font-size:82px;line-height:.98;text-transform:uppercase;}
+  #s6 .bignum{position:absolute;left:64px;z-index:6;font-family:'Anton';font-size:150px;line-height:.8;
+    color:transparent;-webkit-text-stroke:3px var(--red);}
+  #s6 .bh{position:absolute;left:330px;z-index:10;font-family:'Anton';font-size:40px;line-height:1;
+    color:var(--ink);text-transform:uppercase;letter-spacing:.01em;}
+  #s6 .items{position:absolute;left:330px;right:var(--pad);z-index:10;display:flex;flex-direction:column;gap:20px;}
+  #s6 .it{display:flex;align-items:flex-start;gap:14px;font-weight:400;font-size:21px;line-height:1.4;
+    color:rgba(12,12,14,.72);}
+  #s6 .it b{font-weight:700;color:var(--ink);}
+  #s6 .it svg{flex:0 0 auto;width:18px;height:18px;margin-top:6px;}
+  #s6 .dline{position:absolute;left:var(--pad);right:var(--pad);top:724px;height:1px;background:rgba(12,12,14,.15);z-index:5;}
+  #s6 .flow{position:absolute;left:0;right:0;top:698px;z-index:10;display:flex;align-items:center;
+    justify-content:center;gap:14px;}
+  #s6 .fchip{border:1.5px solid var(--ink);background:var(--paper);border-radius:999px;padding:12px 20px;
+    font-weight:700;font-size:20px;letter-spacing:.02em;color:var(--ink);white-space:nowrap;}
+  #s6 .fchip.red{background:var(--red);border-color:var(--red);color:var(--paper);position:relative;overflow:hidden;}
+  #s6 .fchip.red::after{content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(12,12,14,.22) 1px, transparent 1.4px);background-size:5px 5px;}
+  #s6 .farrow{width:34px;height:2px;background:var(--ink);position:relative;flex:0 0 auto;}
+  #s6 .farrow::after{content:"";position:absolute;right:-9px;top:-5px;width:0;height:0;
+    border-left:10px solid var(--ink);border-top:6px solid transparent;border-bottom:6px solid transparent;}
+
+  /* ============================================================ */
+  /* SLIDE 7 — LIÇÃO (centrado)                                    */
+  /* ============================================================ */
+  #s7{background:radial-gradient(circle at 50% 115%, rgba(229,9,20,.22), transparent 55%),
+      radial-gradient(circle at 50% 30%, #141418, #0C0C0E 70%);}
+  #s7 .kicker{justify-content:center;}
+  #s7 .ruler{position:absolute;left:120px;right:120px;top:336px;height:6px;background:var(--red);z-index:8;}
+  #s7 .ruler::after{content:"";position:absolute;left:0;right:0;top:6px;height:14px;
+    background:repeating-linear-gradient(to right, transparent 0 70px, var(--red) 70px 72px);}
+  #s7 .tiles{position:absolute;left:120px;right:120px;top:210px;height:126px;z-index:9;
+    display:flex;justify-content:space-between;}
+  #s7 .tile{width:200px;text-align:center;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;
+    padding-bottom:16px;}
+  #s7 .tile .n{font-family:'Anton';font-size:52px;line-height:1;color:var(--paper);font-variant-numeric:tabular-nums;}
+  #s7 .tile .l{font-weight:600;font-size:19px;letter-spacing:.04em;text-transform:uppercase;
+    color:rgba(244,242,237,.65);line-height:1.25;}
+  #s7 .h2{position:absolute;left:0;right:0;top:452px;z-index:10;text-align:center;font-family:'Anton';
+    font-size:88px;line-height:1.02;color:var(--paper);text-transform:uppercase;}
+  #s7 .h2 .rd{color:var(--red);text-shadow:0 2px 0 rgba(229,9,20,.3);}
+  #s7 .h2 .caret{width:8px;height:58px;margin-left:12px;}
+  #s7 .sub{position:absolute;left:50%;transform:translateX(-50%);top:806px;width:720px;z-index:10;
+    text-align:center;font-weight:400;font-size:23px;line-height:1.55;color:rgba(244,242,237,.8);}
+  #s7 .sub b{color:var(--paper);font-weight:700;}
+  #s7 .fontes{position:absolute;left:0;right:0;top:1042px;z-index:10;text-align:center;font-weight:600;
+    font-size:20px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,242,237,.5);}
+  #s7 .cta{justify-content:center;gap:14px;overflow:hidden;
+    box-shadow:0 0 60px rgba(229,9,20,.35), inset 0 1px 0 rgba(255,255,255,.25);}
+  #s7 .cta::after{content:"";position:absolute;inset:0;border-radius:999px;pointer-events:none;
+    background-image:radial-gradient(rgba(12,12,14,.18) 1px, transparent 1.4px);background-size:5px 5px;}
+  #s7 .cta svg{width:24px;height:24px;}
+  #s7 .dots i{background:var(--red);}
+  #s7 .dots i.on{box-shadow:0 0 0 3px rgba(229,9,20,.25);}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="arw" viewBox="0 0 24 24"><path fill="currentColor" d="M5 12h12.2l-4.6-4.6L14 6l7 7-7 7-1.4-1.4 4.6-4.6H5z"/></symbol>
+  <symbol id="lupa" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="rgba(244,242,237,.4)" stroke-width="2.5"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="rgba(244,242,237,.4)" stroke-width="2.5" stroke-linecap="round"/></symbol>
+  <symbol id="clip" viewBox="0 0 24 24"><path d="M21 12.5 12.7 20.8a5.5 5.5 0 0 1-7.8-7.8l8.5-8.5a3.7 3.7 0 0 1 5.2 5.2l-8.5 8.5a1.8 1.8 0 0 1-2.6-2.6l7.8-7.8" fill="none" stroke="#55555c" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="#55555c" stroke-width="1.6"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3.2" fill="none" stroke="#55555c" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="chat" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.6 4V16H6.5A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="#0C0C0E" stroke-width="2"/></symbol>
+  <symbol id="xic" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19" stroke="#9a968d" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="tick" viewBox="0 0 16 16"><path d="M2 8.5l4 4 8-9.5" fill="none" stroke="#E50914" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="bkm" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-5-6 5z" fill="none" stroke="#F4F2ED" stroke-width="2" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ==================== SLIDE 1 — CAPA ==================== -->
+<section class="slide chartgrid" id="s1">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="pag"><i></i>01/07</div>
+  </div>
+  <div class="kicker">Relatório Forrester 2026, 18 mil compradores B2B</div>
+
+  <div class="h1">
+    <span class="ln">SEU CLIENTE</span>
+    <span class="ln">TE PROCURAVA</span>
+    <span class="ln">NO <span class="gg">GOOGLE.<svg viewBox="0 0 400 60" preserveAspectRatio="none"><path d="M4 34 C 90 22, 300 20, 396 30" fill="none" stroke="#E50914" stroke-width="14" stroke-linecap="round"/><path d="M8 44 C 100 34, 290 32, 392 40" fill="none" stroke="#E50914" stroke-width="12" stroke-linecap="round" opacity=".4"/></svg></span></span>
+    <span class="tarjaline riso">AGORA PERGUNTA PRA IA.</span>
+  </div>
+
+  <div class="lab dead">Busca tradicional</div>
+  <div class="gpill">
+    <svg viewBox="0 0 24 24"><use href="#lupa"/></svg>
+    <span class="ghost">melhor empresa de...</span>
+  </div>
+  <svg class="strike" viewBox="0 0 848 60" preserveAspectRatio="none">
+    <path d="M6 24 C 200 14, 640 12, 842 20" fill="none" stroke="#E50914" stroke-width="8" stroke-linecap="round"/>
+    <path d="M12 36 C 220 26, 620 24, 836 32" fill="none" stroke="#E50914" stroke-width="6" stroke-linecap="round" opacity=".45"/>
+  </svg>
+
+  <div class="lab live">Novo comportamento</div>
+  <div class="aiinput">
+    <span class="typed">qual empresa devo contratar p</span><span class="caret"></span>
+    <span class="icons"><svg viewBox="0 0 24 24"><use href="#clip"/></svg><svg viewBox="0 0 24 24"><use href="#mic"/></svg></span>
+  </div>
+
+  <div class="cta"><b>Arrasta. O número do próximo slide assusta</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ==================== SLIDE 2 — O DADO ==================== -->
+<section class="slide chartgrid" id="s2">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="pag"><i></i>02/07</div>
+  </div>
+  <div class="kicker">O dado</div>
+
+  <div class="h2">94% DOS<br/>COMPRADORES<br/>B2B USARAM IA<sup>1</sup></div>
+  <div class="sub">na última compra. E os motores de resposta de IA viraram <b>a fonte número 1</b> de pesquisa de fornecedor.</div>
+
+  <div class="sixlab">só 6% compraram sem IA</div>
+  <div class="donutwrap">
+    <div class="donut"></div>
+    <div class="dotend"><i></i></div>
+    <div class="dnum"><span class="n">94</span><span class="p">%</span></div>
+  </div>
+
+  <div class="rank">
+    <div class="rrow first"><span class="rl"><span class="chip1">1</span>MOTORES DE RESPOSTA DE IA</span><span class="bar" style="width:100%"></span></div>
+    <div class="rrow"><span class="rl">2&nbsp;&nbsp;SITE DO FORNECEDOR</span><span class="bar" style="width:74%"></span></div>
+    <div class="rrow"><span class="rl">3&nbsp;&nbsp;VENDEDOR</span><span class="bar" style="width:61%"></span></div>
+    <div class="rrow"><span class="rl">4&nbsp;&nbsp;ESPECIALISTA DO SETOR</span><span class="bar" style="width:52%"></span></div>
+  </div>
+  <div class="baseline bl2"></div>
+
+  <div class="foot"><sup>1</sup> Forrester Buyers Journey Survey 2026, N=18.000</div>
+
+  <div class="cta"><b>E tem pior: 69% trocaram</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ==================== SLIDE 3 — A TROCA (paper) ==================== -->
+<section class="slide paper chartgrid" id="s3">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="pag"><i></i>03/07</div>
+  </div>
+  <div class="kicker">A troca</div>
+
+  <div class="h2">A IA NÃO SÓ AJUDA.<br/>ELA TROCA O FORNECEDOR.</div>
+
+  <div class="axis" style="left:180px;"></div>
+  <div class="axis" style="left:900px;"></div>
+  <div class="axlab" style="left:150px;">Planejava</div>
+  <div class="axlab b" style="right:60px;">Escolheu outro</div>
+
+  <div class="dash31"></div>
+  <div class="lab31">31% mantiveram o plano</div>
+
+  <div class="wedgebox">
+    <div class="wedge"></div>
+  </div>
+  <div class="arrowB" style="left:894px;top:756px;"></div>
+
+  <div class="node" style="left:170px;top:456px;"></div>
+  <div class="node" style="left:890px;top:770px;"></div>
+
+  <div class="big69">69<small>%</small></div>
+  <div class="cap69">escolheram um fornecedor <b>diferente do que planejavam</b>, por orientação da IA</div>
+
+  <div class="baseline bl"></div>
+
+  <div class="band">
+    <div class="trio"><span class="o">1</span><span class="o">1</span><span class="f">1</span></div>
+    <div class="bandtx"><b>1 em cada 3</b> comprou de uma empresa que <span class="mk">NUNCA</span> tinha ouvido falar<sup>1</sup></div>
+  </div>
+
+  <div class="foot"><sup>1</sup> Forrester Buyers Journey Survey 2026</div>
+
+  <div class="cta"><b>Seu site já está sentindo isso</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ==================== SLIDE 4 — O EFEITO COLATERAL ==================== -->
+<section class="slide chartgrid" id="s4">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="pag"><i></i>04/07</div>
+  </div>
+  <div class="kicker">O efeito colateral</div>
+
+  <div class="h2">O TRÁFEGO DO SEU SITE<br/>JÁ ESTÁ CAINDO.</div>
+
+  <div class="axtitle">Tráfego do site, trimestre a trimestre</div>
+  <div class="bars">
+    <i style="height:300px"></i>
+    <i style="height:260px"></i>
+    <i style="height:215px"></i>
+    <i style="height:175px"></i>
+    <i class="last" style="height:132px"></i>
+  </div>
+  <svg class="trend" viewBox="0 0 620 454" preserveAspectRatio="none">
+    <polyline points="44,154 158,194 272,239 386,279 500,322 588,368" fill="none" stroke="#E50914" stroke-width="12" opacity=".15" filter="blur(4px)"/>
+    <polyline points="44,154 158,194 272,239 386,279 500,322 588,368" fill="none" stroke="#E50914" stroke-width="5" stroke-linecap="round"/>
+    <polygon points="588,368 566,352 574,376" fill="#E50914" transform="rotate(14 588 368)"/>
+  </svg>
+  <div class="hatch"><span class="n">-10 A -40%</span></div>
+  <div class="hatchlab">de queda no tráfego, já reportada<sup>1</sup></div>
+
+  <div class="baseline bl"></div>
+
+  <div class="toast">
+    <span class="x"><svg viewBox="0 0 24 24"><use href="#xic"/></svg></span>
+    <div class="tt"><svg viewBox="0 0 24 24"><use href="#chat"/></svg><b>51% começam num chatbot de IA</b></div>
+    <div class="tb">não no Google, entre compradores de software<sup>2</sup></div>
+  </div>
+
+  <div class="foot"><sup>1</sup> Forrester 2026 &nbsp;·&nbsp; <sup>2</sup> G2 Software Buyer Behavior</div>
+
+  <div class="cta"><b>O que isso muda na sua venda</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ==================== SLIDE 5 — O QUE MUDA ==================== -->
+<section class="slide chartgrid" id="s5">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="pag"><i></i>05/07</div>
+  </div>
+  <div class="kicker">O que muda no comercial</div>
+
+  <div class="h2">O LEAD AGORA CHEGA<br/>COM A DECISÃO PRONTA.</div>
+  <div class="divider"></div>
+
+  <div class="capsule"></div>
+  <div class="capslab">Feito com a IA, antes de você saber</div>
+  <div class="track-red"></div>
+  <div class="track-gray"></div>
+
+  <div class="st" style="left:141px"></div><div class="stlab" style="left:150px">Descoberta</div>
+  <div class="st" style="left:301px"></div><div class="stlab" style="left:310px">Pesquisa</div>
+  <div class="st" style="left:461px"></div><div class="stlab" style="left:470px">Comparação</div>
+  <div class="st" style="left:621px"></div><div class="stlab" style="left:630px">Decisão</div>
+  <div class="st gray" style="left:931px"></div><div class="stlab" style="left:940px">Contato</div>
+
+  <div class="youlab">VOCÊ ENTRA AQUI</div>
+  <div class="marker"></div>
+
+  <div class="bullets">
+    <div class="bu"><span class="dia"></span><div><b>Ele já te comparou</b> com os concorrentes sem falar com ninguém.</div></div>
+    <div class="bu"><span class="dia"></span><div><b>Chega com menos paciência:</b> quer confirmar a escolha, não assistir apresentação.</div></div>
+    <div class="bu"><span class="dia"></span><div>E se a IA não te citou, <span class="mk">você nem entrou na disputa.</span><span class="caret"></span></div></div>
+  </div>
+
+  <div class="cta"><b>O que fazer: próximo slide</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></div>
+</section>
+
+<!-- ==================== SLIDE 6 — O QUE FAZER (paper) ==================== -->
+<section class="slide paper chartgrid" id="s6">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="pag"><i></i>06/07</div>
+  </div>
+  <div class="kicker">O que fazer agora</div>
+
+  <div class="h2">SEJA A RESPOSTA<br/>QUE A IA DÁ.</div>
+
+  <div class="bignum" style="top:426px;">01</div>
+  <div class="bh" style="top:438px;">Ser encontrável pela IA</div>
+  <div class="items" style="top:502px;">
+    <div class="it"><svg viewBox="0 0 16 16"><use href="#tick"/></svg><div>Responda em público <b>as perguntas reais</b> do seu mercado.</div></div>
+    <div class="it"><svg viewBox="0 0 16 16"><use href="#tick"/></svg><div>Publique <b>casos, números e avaliações</b> onde a IA lê.</div></div>
+    <div class="it"><svg viewBox="0 0 16 16"><use href="#tick"/></svg><div>Apareça nos <b>comparativos e rankings</b> do seu setor.</div></div>
+  </div>
+
+  <div class="dline"></div>
+  <div class="flow">
+    <span class="fchip">CITADO PELA IA</span>
+    <span class="farrow"></span>
+    <span class="fchip">LEAD DECIDIDO CHEGA</span>
+    <span class="farrow"></span>
+    <span class="fchip red">PROCESSO FECHA</span>
+  </div>
+
+  <div class="bignum" style="top:800px;">02</div>
+  <div class="bh" style="top:812px;">Processo no primeiro contato</div>
+  <div class="items" style="top:876px;">
+    <div class="it"><svg viewBox="0 0 16 16"><use href="#tick"/></svg><div><b>Resposta em minutos.</b> Lead decidido não espera três dias.</div></div>
+    <div class="it"><svg viewBox="0 0 16 16"><use href="#tick"/></svg><div><b>Diagnóstico direto:</b> ele já pesquisou, não repita o óbvio.</div></div>
+    <div class="it"><svg viewBox="0 0 16 16"><use href="#tick"/></svg><div><b>Follow-up em cadência</b> até a decisão virar contrato.</div></div>
+  </div>
+
+  <div class="cta"><b>A lição final no último slide</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div>
+</section>
+
+<!-- ==================== SLIDE 7 — A LIÇÃO ==================== -->
+<section class="slide" id="s7">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="pag"><i></i>07/07</div>
+  </div>
+  <div class="kicker">A lição</div>
+
+  <div class="tiles">
+    <div class="tile"><span class="n">94%</span><span class="l">usam IA</span></div>
+    <div class="tile"><span class="n">#1</span><span class="l">fonte de pesquisa</span></div>
+    <div class="tile"><span class="n">69%</span><span class="l">trocaram de fornecedor</span></div>
+    <div class="tile"><span class="n">1/3</span><span class="l">comprou de desconhecida</span></div>
+  </div>
+  <div class="ruler"></div>
+
+  <div class="h2">
+    A PERGUNTA NÃO É<br/>
+    SE A IA VAI ESCOLHER.<br/>
+    <span class="rd">É SE ELA TE ESCOLHE.<span class="caret"></span></span>
+  </div>
+
+  <div class="sub">Salva este post e faz o teste: pergunta pra IA quem são as melhores empresas do seu mercado. <b>Se o seu nome não aparece, é disso que eu cuido.</b></div>
+
+  <div class="fontes">Fontes: Forrester 2026 · G2</div>
+
+  <div class="cta"><b><svg style="vertical-align:-4px;margin-right:6px;" width="24" height="24" viewBox="0 0 24 24"><use href="#bkm"/></svg>Salvar este post</b></div>
+  <div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i></div>
+</section>
+
+</body>
+</html>

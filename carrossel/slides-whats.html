@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>WhatsApp API — verdade ou fake — @gabriel.isidoro_</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --red:#E50914;      --red-deep:#B00610;   --red-soft:#ff2a36;
+    --wa:#25D366;       --wa-deep:#075E54;    --wa-dark:#0b3d2e;   --wa-ok:#128C4A;
+    --gold:#F5B301;
+    --ink:#0C0C0E;      --ink-2:#15151b;      --ink-3:#222228;
+    --paper:#F4F2ED;    --paper-2:#E9E5DD;    --line:#d9d4ca;
+    --white:#ffffff;    --safe:70px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  html,body{background:#2a2a2e;}
+  body{font-family:'Inter',sans-serif;color:var(--ink);}
+
+  .slide{position:relative;width:1080px;height:1350px;overflow:hidden;margin:0 auto 46px;background:var(--paper);}
+  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;}
+
+  .topbar{position:absolute;top:var(--safe);left:var(--safe);right:var(--safe);
+    display:flex;align-items:center;justify-content:space-between;z-index:30;}
+  .brand{display:flex;align-items:center;gap:16px;}
+  .mono{width:62px;height:62px;border-radius:15px;background:var(--red);color:#fff;
+    font-family:'Anton';font-size:33px;line-height:1;display:flex;align-items:center;justify-content:center;
+    letter-spacing:.5px;box-shadow:0 10px 26px rgba(229,9,20,.42);position:relative;}
+  .mono::after{content:"";position:absolute;left:13px;right:13px;bottom:11px;height:3px;background:rgba(255,255,255,.85);border-radius:2px;}
+  .handle{font-weight:800;font-size:23px;letter-spacing:.2px;color:var(--ink);}
+  .tag{font-weight:800;font-size:18px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);opacity:.55;}
+  .topbar.on-dark .handle{color:#fff;}
+  .topbar.on-dark .tag{color:#fff;opacity:.6;}
+
+  .dots{position:absolute;left:0;right:0;bottom:50px;display:flex;gap:9px;justify-content:center;z-index:30;}
+  .dots i{width:8px;height:8px;border-radius:50%;background:rgba(12,12,14,.22);}
+  .dots i.on{background:var(--red);width:26px;border-radius:5px;}
+  .on-dark-dots i{background:rgba(255,255,255,.28);}
+  .on-dark-dots i.on{background:var(--red);}
+
+  .cta{position:absolute;left:var(--safe);right:var(--safe);bottom:104px;z-index:30;
+    background:var(--red);color:#fff;border-radius:999px;padding:24px 30px 24px 38px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 22px 46px rgba(229,9,20,.36);}
+  .cta b{font-weight:800;font-size:30px;letter-spacing:.2px;line-height:1.05;}
+  .cta .arw{flex:0 0 auto;width:56px;height:56px;border-radius:50%;border:3px solid rgba(255,255,255,.92);
+    display:flex;align-items:center;justify-content:center;}
+  .cta .arw svg{width:25px;height:25px;fill:#fff;}
+
+  .anton{font-family:'Anton';font-weight:400;}
+  .stamp{display:inline-block;font-family:'Anton';letter-spacing:2px;text-transform:uppercase;
+    border:5px solid currentColor;border-radius:12px;padding:8px 22px 6px;transform:rotate(-7deg);}
+  .stamp.fake{color:var(--red-soft);}
+  .stamp.ok{color:var(--wa);}
+
+  /* ====================================================================== */
+  /* SLIDE 1 — CAPA                                                          */
+  /* ====================================================================== */
+  #s1{background:radial-gradient(1200px 900px at 82% -10%,#0e2e20 0%,#0a0a0c 55%,#070709 100%);}
+  #s1 .glow{position:absolute;right:-16%;top:-6%;width:70%;height:48%;
+    background:radial-gradient(closest-side,rgba(37,211,102,.4),transparent 70%);filter:blur(30px);z-index:1;}
+  #s1 .glow2{position:absolute;left:-14%;bottom:6%;width:64%;height:40%;
+    background:radial-gradient(closest-side,rgba(229,9,20,.30),transparent 70%);filter:blur(34px);z-index:1;}
+  #s1 .walogo{position:absolute;right:64px;top:196px;width:300px;z-index:3;
+    filter:drop-shadow(0 30px 60px rgba(37,211,102,.45));}
+  #s1 .walogo img{width:100%;display:block;}
+  #s1 .photo{position:absolute;left:var(--safe);top:284px;width:520px;height:340px;z-index:4;
+    border-radius:22px;overflow:hidden;transform:rotate(-3deg);
+    border:1px solid rgba(255,255,255,.14);box-shadow:0 34px 70px rgba(0,0,0,.6);}
+  #s1 .photo::before{content:"";position:absolute;inset:0;background:url('img/whats/canaltech.png') center/cover no-repeat;}
+  #s1 .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.45));}
+  #s1 .photo .cap{position:absolute;left:18px;bottom:12px;z-index:2;color:#fff;font-weight:700;font-size:16px;opacity:.9;}
+  #s1 .tape{position:absolute;width:150px;height:42px;background:rgba(244,242,237,.24);z-index:5;
+    backdrop-filter:blur(2px);border-left:1px dashed rgba(255,255,255,.25);border-right:1px dashed rgba(255,255,255,.25);}
+  #s1 .tape.t1{left:206px;top:266px;transform:rotate(-8deg);}
+  #s1 .kicker{position:absolute;left:var(--safe);top:652px;z-index:6;display:flex;align-items:center;gap:14px;
+    color:#fff;font-weight:800;font-size:21px;letter-spacing:2.6px;text-transform:uppercase;}
+  #s1 .kicker .bar{width:52px;height:6px;background:var(--wa);border-radius:3px;}
+  #s1 .giant{position:absolute;left:var(--safe);top:694px;z-index:6;font-family:'Anton';color:#fff;
+    font-size:104px;line-height:1.0;letter-spacing:.5px;text-transform:uppercase;}
+  #s1 .giant .tarja{display:inline-block;background:var(--red);padding:2px 22px 0;border-radius:10px;
+    box-shadow:0 20px 50px rgba(229,9,20,.4);margin-top:10px;}
+  #s1 .giant .tarja-g{display:inline-block;background:var(--wa);color:#062b18;padding:2px 22px 0;border-radius:10px;
+    box-shadow:0 20px 50px rgba(37,211,102,.35);margin-top:10px;}
+  #s1 .sub{position:absolute;left:var(--safe);top:1036px;z-index:6;max-width:880px;
+    color:#d9d9df;font-size:26px;line-height:1.4;font-weight:500;}
+  #s1 .sub b{color:#fff;font-weight:800;}
+  #s1 .stamp-pos{position:absolute;right:88px;top:640px;z-index:7;font-size:34px;}
+
+  /* ====================================================================== */
+  /* SLIDE 2 — O QUE É FAKE                                                  */
+  /* ====================================================================== */
+  #s2{background:#0b0b0f;}
+  #s2 .wm{position:absolute;right:-110px;top:-90px;width:520px;opacity:.06;z-index:1;}
+  #s2 .wm img{width:100%;display:block;}
+  #s2 .head{position:absolute;top:176px;left:var(--safe);right:var(--safe);z-index:5;}
+  #s2 .h{font-weight:900;font-size:64px;line-height:1.02;letter-spacing:-1.4px;color:#fff;}
+  #s2 .h .tarja{display:inline-block;background:var(--red);color:#fff;padding:0 18px 2px;border-radius:10px;}
+  #s2 .lead{margin-top:18px;font-size:26px;line-height:1.4;color:#c7c7d0;font-weight:500;max-width:880px;}
+  #s2 .lead b{color:#fff;font-weight:800;}
+  #s2 .myths{position:absolute;top:424px;left:var(--safe);right:var(--safe);z-index:5;display:flex;flex-direction:column;gap:20px;}
+  #s2 .myth{position:relative;background:#15151b;border:1px solid #26262d;border-radius:22px;padding:27px 195px 27px 34px;
+    box-shadow:0 16px 36px rgba(0,0,0,.32);}
+  #s2 .myth .q{font-size:28px;line-height:1.25;font-weight:800;color:#fff;}
+  #s2 .myth .q::before{content:"“";color:var(--red-soft);}
+  #s2 .myth .q::after{content:"”";color:var(--red-soft);}
+  #s2 .myth .a{margin-top:10px;font-size:22px;line-height:1.4;color:#b9b9c2;font-weight:500;}
+  #s2 .myth .a b{color:#fff;font-weight:800;}
+  #s2 .myth .a .g{color:var(--wa);font-weight:800;}
+  #s2 .myth .stamp{position:absolute;right:34px;top:50%;transform:translateY(-50%) rotate(-9deg);font-size:36px;}
+
+  /* ====================================================================== */
+  /* SLIDE 3 — O QUE É VERDADE (chat mockup)                                 */
+  /* ====================================================================== */
+  #s3{background:var(--paper);}
+  #s3 .blob{position:absolute;left:-160px;bottom:-200px;width:640px;height:640px;border-radius:50%;
+    background:radial-gradient(closest-side,rgba(37,211,102,.16),transparent 72%);z-index:1;}
+  #s3 .head{position:absolute;top:176px;left:var(--safe);right:var(--safe);z-index:5;}
+  #s3 .h{font-weight:900;font-size:64px;line-height:1.02;letter-spacing:-1.4px;color:var(--ink);}
+  #s3 .h .tarja{display:inline-block;background:var(--wa-ok);color:#fff;padding:0 18px 2px;border-radius:10px;}
+  #s3 .lead{margin-top:16px;font-size:25px;line-height:1.4;color:#4c4a45;font-weight:500;max-width:820px;}
+  #s3 .lead b{color:var(--ink);font-weight:800;}
+  #s3 .stamp-pos{position:absolute;right:60px;top:148px;z-index:6;font-size:27px;}
+
+  #s3 .phone{position:absolute;left:var(--safe);top:462px;width:560px;z-index:5;border-radius:30px;overflow:hidden;
+    background:#ECE5DD;box-shadow:0 30px 64px rgba(20,18,12,.28);border:1px solid #d8d2c8;}
+  #s3 .ph-head{background:var(--wa-deep);color:#fff;display:flex;align-items:center;gap:16px;padding:20px 22px;}
+  #s3 .ph-head .av{width:56px;height:56px;border-radius:50%;background:var(--wa);color:#06331f;font-weight:900;
+    display:flex;align-items:center;justify-content:center;font-size:23px;}
+  #s3 .ph-head .nm{font-weight:800;font-size:24px;line-height:1.1;}
+  #s3 .ph-head .st{font-size:17px;opacity:.75;margin-top:3px;}
+  #s3 .ph-body{padding:26px 22px 30px;display:flex;flex-direction:column;gap:18px;
+    background:#ECE5DD url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' opacity='0.05'%3E%3Ccircle cx='20' cy='20' r='3' fill='%23075E54'/%3E%3Ccircle cx='80' cy='70' r='4' fill='%23075E54'/%3E%3Ccircle cx='40' cy='100' r='3' fill='%23075E54'/%3E%3C/svg%3E");}
+  #s3 .bub{position:relative;max-width:82%;border-radius:16px;padding:16px 18px 14px;font-size:22px;line-height:1.35;
+    font-weight:500;color:#111;box-shadow:0 3px 8px rgba(0,0,0,.10);}
+  #s3 .bub .t{display:block;text-align:right;font-size:15px;color:#7b7b7b;margin-top:6px;font-weight:600;}
+  #s3 .bub.in{align-self:flex-start;background:#fff;border-top-left-radius:4px;}
+  #s3 .bub.out{align-self:flex-end;background:#DCF8C6;border-top-right-radius:4px;}
+  #s3 .bub .price{position:absolute;right:-14px;top:-16px;background:var(--red);color:#fff;font-weight:900;
+    font-size:17px;padding:7px 13px;border-radius:999px;box-shadow:0 10px 22px rgba(229,9,20,.4);transform:rotate(4deg);}
+  #s3 .sysmsg{align-self:center;background:#FFF6D8;border:1px solid #eadfae;color:#6b5d1e;border-radius:12px;
+    padding:12px 18px;font-size:19px;font-weight:700;text-align:center;max-width:94%;line-height:1.35;}
+
+  #s3 .facts{position:absolute;right:var(--safe);top:462px;width:330px;z-index:5;display:flex;flex-direction:column;gap:22px;}
+  #s3 .fact{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 26px 24px;
+    box-shadow:0 14px 30px rgba(20,18,12,.10);}
+  #s3 .fact .n{font-family:'Anton';font-size:52px;line-height:1;color:var(--ink);}
+  #s3 .fact .n em{font-style:normal;color:var(--wa-ok);}
+  #s3 .fact .n .rd{color:var(--red);}
+  #s3 .fact .d{margin-top:8px;font-size:20px;line-height:1.35;color:#55524c;font-weight:600;}
+  #s3 .fact .d b{color:var(--ink);font-weight:800;}
+  #s3 .foot{position:absolute;left:var(--safe);right:var(--safe);bottom:240px;z-index:5;text-align:center;
+    font-size:24px;font-weight:700;color:#403d38;}
+  #s3 .foot b{color:var(--red);}
+
+  /* ====================================================================== */
+  /* SLIDE 4 — CALENDÁRIO + IMPACTO                                          */
+  /* ====================================================================== */
+  #s4{background:#0b0b0f;}
+  #s4 .wm{position:absolute;left:-130px;bottom:-140px;width:560px;opacity:.05;z-index:1;}
+  #s4 .wm img{width:100%;display:block;}
+  #s4 .head{position:absolute;top:176px;left:var(--safe);right:var(--safe);z-index:5;}
+  #s4 .h{font-weight:900;font-size:62px;line-height:1.02;letter-spacing:-1.3px;color:#fff;}
+  #s4 .h .hi{color:var(--wa);}
+  #s4 .lead{margin-top:16px;font-size:25px;line-height:1.4;color:#c7c7d0;font-weight:500;max-width:880px;}
+  #s4 .lead b{color:#fff;font-weight:800;}
+
+  #s4 .tl{position:absolute;top:430px;left:var(--safe);right:var(--safe);z-index:5;display:flex;flex-direction:column;gap:0;}
+  #s4 .ev{display:flex;align-items:flex-start;gap:30px;position:relative;padding-bottom:34px;}
+  #s4 .ev::before{content:"";position:absolute;left:89px;top:14px;bottom:-8px;width:4px;background:#26262d;border-radius:2px;}
+  #s4 .ev:last-child::before{display:none;}
+  #s4 .date{flex:0 0 182px;background:#1b1b22;border:1px solid #2c2c34;color:#fff;border-radius:16px;
+    font-family:'Anton';font-size:44px;text-align:center;padding:16px 0 12px;line-height:1;position:relative;z-index:2;}
+  #s4 .date small{display:block;font-family:'Inter';font-weight:800;font-size:15px;letter-spacing:2px;margin-top:7px;color:#9a9aa4;}
+  #s4 .ev.hot .date{background:var(--red);border-color:var(--red);box-shadow:0 16px 38px rgba(229,9,20,.4);}
+  #s4 .ev.hot .date small{color:rgba(255,255,255,.85);}
+  #s4 .ev .tx{padding-top:6px;}
+  #s4 .ev .tt{font-weight:800;font-size:29px;color:#fff;line-height:1.2;}
+  #s4 .ev .tt .g{color:var(--wa);}
+  #s4 .ev .dd{margin-top:8px;font-size:22px;line-height:1.4;color:#b9b9c2;font-weight:500;max-width:660px;}
+  #s4 .ev .dd b{color:#fff;font-weight:800;}
+
+  #s4 .impact{position:absolute;left:var(--safe);right:var(--safe);bottom:250px;z-index:5;display:flex;gap:24px;}
+  #s4 .imp{flex:1;background:#15151b;border:1px solid #26262d;border-radius:20px;padding:26px 28px 24px;}
+  #s4 .imp .k{font-weight:800;font-size:19px;letter-spacing:1.6px;text-transform:uppercase;color:#8f8f99;}
+  #s4 .imp .v{margin-top:8px;font-family:'Anton';font-size:40px;color:#fff;line-height:1.05;}
+  #s4 .imp .v .rd{color:var(--red-soft);}
+  #s4 .imp .v .g{color:var(--wa);}
+  #s4 .imp .s{margin-top:8px;font-size:19px;color:#b9b9c2;font-weight:600;line-height:1.3;}
+  #s4 .src{display:none;}
+
+  /* ====================================================================== */
+  /* SLIDE 5 — LIÇÃO + CTA                                                   */
+  /* ====================================================================== */
+  #s5{background:radial-gradient(1100px 800px at 18% 0%,#12241b 0%,#0a0a0c 52%,#070709 100%);}
+  #s5 .glow{position:absolute;right:-12%;bottom:-4%;width:66%;height:44%;
+    background:radial-gradient(closest-side,rgba(229,9,20,.26),transparent 70%);filter:blur(30px);z-index:1;}
+  #s5 .walogo{position:absolute;right:76px;top:190px;width:150px;z-index:4;opacity:.95;
+    filter:drop-shadow(0 18px 40px rgba(37,211,102,.4));}
+  #s5 .walogo img{width:100%;display:block;}
+  #s5 .kicker{position:absolute;left:var(--safe);top:216px;z-index:5;display:flex;align-items:center;gap:14px;
+    color:#fff;font-weight:800;font-size:21px;letter-spacing:2.6px;text-transform:uppercase;}
+  #s5 .kicker .bar{width:52px;height:6px;background:var(--wa);border-radius:3px;}
+  #s5 .giant{position:absolute;left:var(--safe);top:262px;z-index:5;font-family:'Anton';color:#fff;
+    font-size:118px;line-height:1.0;letter-spacing:.5px;text-transform:uppercase;}
+  #s5 .giant .tarja{display:inline-block;background:var(--red);padding:2px 24px 0;border-radius:10px;
+    box-shadow:0 20px 50px rgba(229,9,20,.4);margin-top:10px;}
+  #s5 .sub{position:absolute;left:var(--safe);top:590px;z-index:5;max-width:900px;
+    color:#d9d9df;font-size:27px;line-height:1.48;font-weight:500;}
+  #s5 .sub b{color:#fff;font-weight:800;}
+  #s5 .sub .g{color:var(--wa);font-weight:800;}
+  #s5 .list{position:absolute;left:var(--safe);right:var(--safe);top:772px;z-index:5;display:flex;flex-direction:column;gap:18px;}
+  #s5 .it{display:flex;align-items:center;gap:20px;background:#15151b;border:1px solid #26262d;border-radius:18px;
+    padding:19px 26px;}
+  #s5 .it .ck{flex:0 0 46px;width:46px;height:46px;border-radius:50%;background:rgba(37,211,102,.14);
+    border:2px solid var(--wa);display:flex;align-items:center;justify-content:center;}
+  #s5 .it .ck svg{width:22px;height:22px;fill:var(--wa);}
+  #s5 .it b{font-weight:800;font-size:25px;color:#fff;}
+  #s5 .it span{font-weight:500;font-size:25px;color:#b9b9c2;}
+  #s5 .handle-line{position:absolute;left:var(--safe);right:var(--safe);bottom:216px;z-index:5;text-align:center;
+    color:#9a9aa4;font-weight:700;font-size:21px;}
+  #s5 .handle-line b{color:#fff;}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="arw" viewBox="0 0 24 24"><path fill="currentColor" d="M5 12h12.2l-4.6-4.6L14 6l7 7-7 7-1.4-1.4 4.6-4.6H5z"/></symbol>
+  <symbol id="ck" viewBox="0 0 24 24"><path d="M9.55 17.05 4.5 12l1.4-1.4 3.65 3.65 8.55-8.55 1.4 1.4z"/></symbol>
+</svg>
+
+<!-- ====================== SLIDE 1 — CAPA ====================== -->
+<section class="slide grain" id="s1">
+  <div class="glow"></div><div class="glow2"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">Checagem completa</div>
+  </div>
+
+  <div class="walogo"><img src="img/whats/wa-logo.png" alt=""></div>
+  <div class="photo"><div class="cap">API oficial do WhatsApp Business</div></div>
+  <div class="tape t1"></div>
+  <div class="stamp-pos"><span class="stamp fake">FAKE?</span></div>
+
+  <div class="kicker"><span class="bar"></span> Nova cobrança da Meta</div>
+  <div class="giant">
+    VÃO COBRAR<br/>
+    <span class="tarja">O SEU</span> <span class="tarja-g">WHATSAPP?</span>
+  </div>
+  <div class="sub">Tem muita gente espalhando <b>informação errada</b> sobre isso. Fui atrás do que a Meta <b>realmente anunciou</b>, com data e valor.</div>
+
+  <div class="cta"><b>Arrasta pra ver o que é verdade</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ====================== SLIDE 2 — O QUE É FAKE ====================== -->
+<section class="slide grain" id="s2">
+  <div class="wm"><img src="img/whats/wa-logo.png" alt=""></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">01 · O fake</div>
+  </div>
+
+  <div class="head">
+    <div class="h">Primeiro, o que é <span class="tarja">mentira.</span></div>
+    <div class="lead">Essas 3 frases estão rodando em grupo de empresário. <b>Nenhuma delas é verdade.</b></div>
+  </div>
+
+  <div class="myths">
+    <div class="myth">
+      <div class="q">O WhatsApp vai cobrar por mensagem de todo mundo</div>
+      <div class="a"><b>Falso.</b> Pra quem usa o app normal, <span class="g">nada muda</span>. Conversa pessoal continua gratuita.</div>
+      <span class="stamp fake">FAKE</span>
+    </div>
+    <div class="myth">
+      <div class="q">O aplicativo WhatsApp Business vai ser pago</div>
+      <div class="a"><b>Falso.</b> O app gratuito segue gratuito. A mudança é só na <b>API oficial</b>, usada por empresas com sistemas e automações integradas.</div>
+      <span class="stamp fake">FAKE</span>
+    </div>
+    <div class="myth">
+      <div class="q">Começa mês que vem pra todo mundo</div>
+      <div class="a"><b>Impreciso.</b> A cobrança por mensagem começa em <b>1º de outubro</b>. Em agosto começa outra coisa: o preço por token da <b>IA da Meta</b>.</div>
+      <span class="stamp fake">FAKE</span>
+    </div>
+  </div>
+
+  <div class="cta"><b>Então o que é verdade?</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ====================== SLIDE 3 — O QUE É VERDADE ====================== -->
+<section class="slide grain" id="s3">
+  <div class="blob"></div>
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">02 · O fato</div>
+  </div>
+
+  <div class="head">
+    <div class="h">Agora, o que é <span class="tarja">verdade.</span></div>
+    <div class="lead">A partir de <b>1º de outubro de 2026</b>, cada resposta que a empresa envia pela <b>API oficial</b> passa a ser cobrada. Hoje isso é grátis.</div>
+  </div>
+  <div class="stamp-pos"><span class="stamp ok" style="color:var(--wa-ok)">CONFIRMADO</span></div>
+
+  <div class="phone">
+    <div class="ph-head">
+      <div class="av">SL</div>
+      <div><div class="nm">Sua Loja</div><div class="st">online</div></div>
+    </div>
+    <div class="ph-body">
+      <div class="bub in">Oi! Meu pedido veio errado 😕<span class="t">14:02</span></div>
+      <div class="bub out">Oi, Maria! Já estou resolvendo aqui pra você<span class="t">14:03 ✓✓</span><span class="price">R$ 0,035</span></div>
+      <div class="bub out">Pronto! O envio correto sai ainda hoje<span class="t">14:05 ✓✓</span><span class="price">R$ 0,035</span></div>
+      <div class="sysmsg">Hoje essas respostas são gratuitas.<br/>A partir de 01/10/2026, cada uma terá custo.</div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div class="fact">
+      <div class="n"><span class="rd">R$ 0,035</span></div>
+      <div class="d">por <b>resposta de serviço</b> enviada pela API oficial</div>
+    </div>
+    <div class="fact">
+      <div class="n"><em>01/10</em></div>
+      <div class="d">é quando a cobrança <b>entra em vigor</b>, no mundo todo</div>
+    </div>
+    <div class="fact">
+      <div class="n">R$ 0,32</div>
+      <div class="d">segue o preço do <b>template de marketing</b>, sem alteração</div>
+    </div>
+  </div>
+
+  <div class="foot">Quem tem volume alto de mensagens ganha <b>desconto progressivo</b> na tabela da Meta.</div>
+
+  <div class="cta"><b>E quanto isso pesa no bolso?</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+</section>
+
+<!-- ====================== SLIDE 4 — CALENDÁRIO + IMPACTO ====================== -->
+<section class="slide grain" id="s4">
+  <div class="wm"><img src="img/whats/wa-logo.png" alt=""></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">03 · As datas</div>
+  </div>
+
+  <div class="head">
+    <div class="h">O calendário <span class="hi">real</span> da mudança.</div>
+    <div class="lead">Anota essas 3 datas. É isso que a Meta anunciou, <b>sem achismo.</b></div>
+  </div>
+
+  <div class="tl">
+    <div class="ev">
+      <div class="date">01 AGO<small>2026</small></div>
+      <div class="tx">
+        <div class="tt">A <span class="g">IA da Meta</span> passa a ser cobrada por token</div>
+        <div class="dd">O Meta Business Agent custará <b>US$ 2 por 1 milhão de tokens</b>. É daqui que vem a confusão do "começa mês que vem".</div>
+      </div>
+    </div>
+    <div class="ev">
+      <div class="date">01 SET<small>2026</small></div>
+      <div class="tx">
+        <div class="tt">Meta publica a <span class="g">tabela final</span> de preços</div>
+        <div class="dd">Os valores oficiais por país saem até essa data. O anunciado pro Brasil é <b>R$ 0,035 por mensagem</b>.</div>
+      </div>
+    </div>
+    <div class="ev hot">
+      <div class="date">01 OUT<small>2026</small></div>
+      <div class="tx">
+        <div class="tt">Começa a cobrança das <span class="g">mensagens de serviço</span></div>
+        <div class="dd">Toda resposta fora de template enviada pela API oficial, seja de humano, robô ou IA, <b>passa a ter custo</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="impact">
+    <div class="imp">
+      <div class="k">Fluxo de carrinho abandonado</div>
+      <div class="v">R$ 0,32 <span class="rd">→ R$ 0,425</span></div>
+      <div class="s">template + 3 respostas, alta de 32%</div>
+    </div>
+    <div class="imp">
+      <div class="k">Operação de atendimento</div>
+      <div class="v"><span class="g">1.000</span> respostas/mês</div>
+      <div class="s">passam a custar cerca de R$ 35</div>
+    </div>
+  </div>
+
+  <div class="cta"><b>O que fazer antes de outubro</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i></i><i></i><i></i><i class="on"></i><i></i></div>
+</section>
+
+<!-- ====================== SLIDE 5 — LIÇÃO + CTA ====================== -->
+<section class="slide grain" id="s5">
+  <div class="glow"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">04 · A lição</div>
+  </div>
+
+  <div class="walogo"><img src="img/whats/wa-logo.png" alt=""></div>
+  <div class="kicker"><span class="bar"></span> A lição pra quem vende</div>
+  <div class="giant">
+    MENSAGEM<br/>
+    <span class="tarja">AGORA TEM PREÇO.</span>
+  </div>
+  <div class="sub">O WhatsApp virou o <b>balcão do Brasil</b>, e a Meta sabe disso. Não é o fim do canal, é o fim do <span class="g">desperdício</span>. Quem tem operação no WhatsApp precisa se organizar <b>antes de outubro</b>.</div>
+
+  <div class="list">
+    <div class="it"><span class="ck"><svg><use href="#ck"/></svg></span><div><b>Audite seus fluxos</b> <span>e corte automação que não vende nem resolve</span></div></div>
+    <div class="it"><span class="ck"><svg><use href="#ck"/></svg></span><div><b>Resolva em menos mensagens,</b> <span>cada resposta a mais vira custo</span></div></div>
+    <div class="it"><span class="ck"><svg><use href="#ck"/></svg></span><div><b>Acompanhe a tabela de setembro</b> <span>antes de fechar seu orçamento</span></div></div>
+  </div>
+
+  <div class="handle-line">Mais checagens e análises assim: <b>@gabriel.isidoro_</b></div>
+  <div class="cta"><b>Salva e manda pra quem usa WhatsApp na empresa</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i></i><i></i><i></i><i></i><i class="on"></i></div>
+</section>
+
+</body>
+</html>

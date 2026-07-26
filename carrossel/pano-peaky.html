@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Vendas Previsivel — Peaky — @gabriel.isidoro_</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{ --cream:#E7E3D8; --brass:#A8845020; --gas:#C2925A; --smoke:#5C6E76; --base:#090A0B; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  html,body{background:#151517;}
+  body{font-family:'Inter',sans-serif;}
+  .board{position:relative;width:7560px;height:1350px;overflow:hidden;background:var(--base);}
+
+  .wave{position:absolute;inset:0;z-index:0;
+    background:linear-gradient(90deg,#0A0B0C 0%,#0D0F10 20%,#090A0B 38%,#0E1012 56%,#090A0B 76%,#0C0E10 92%,#0A0B0C 100%);}
+  .pool{position:absolute;z-index:1;border-radius:50%;filter:blur(3px);}
+  /* fog bands (smoke) */
+  .fog{position:absolute;left:0;right:0;z-index:1;height:340px;opacity:.5;filter:blur(30px);
+    background:radial-gradient(ellipse 60% 100% at 50% 50%,rgba(120,138,146,.10),transparent 72%);}
+  .floor{position:absolute;left:0;right:0;bottom:0;height:320px;z-index:1;
+    background:linear-gradient(180deg,transparent,rgba(28,34,38,.4));}
+
+  .ph{position:absolute;overflow:hidden;z-index:2;}
+  .ph img{width:100%;height:100%;object-fit:cover;display:block;}
+  .ov{position:absolute;inset:0;pointer-events:none;}
+
+  /* cold noir grade shared */
+  .coldtint{background:linear-gradient(180deg,rgba(28,40,46,.42),rgba(14,16,18,.5));mix-blend-mode:multiply;}
+  .warmkiss{background:radial-gradient(ellipse 50% 40% at 62% 40%,rgba(194,146,90,.16),transparent 70%);mix-blend-mode:screen;}
+
+  #phg2{left:-40px;top:-30px;width:1420px;height:1010px;
+    -webkit-mask-image:linear-gradient(90deg,#000 76%,transparent 99%);
+    mask-image:linear-gradient(90deg,#000 76%,transparent 99%);}
+  #phg2 img{filter:brightness(.6) contrast(1.32) saturate(.5) sepia(.12);object-position:center 20%;}
+  #phg2 .settle{background:linear-gradient(180deg,rgba(9,10,11,.4) 0%,transparent 26%,rgba(9,10,11,.62) 74%,#090A0B 97%);}
+  #phg2 .vig{background:radial-gradient(ellipse 70% 80% at 52% 42%,transparent 42%,rgba(6,7,8,.72) 100%);}
+
+  #phg4{left:3700px;top:200px;width:812px;height:1150px;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 170px,#000 calc(100% - 150px),transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 170px,#000 calc(100% - 150px),transparent 100%);}
+  #phg4 img{filter:brightness(.62) contrast(1.28) saturate(.5) sepia(.12);}
+  #phg4 .settle{background:linear-gradient(180deg,transparent 55%,rgba(9,10,11,.55) 100%);}
+  #phg4 .topfade{background:linear-gradient(180deg,#090A0B 0%,rgba(9,10,11,.6) 42%,transparent 100%);height:220px;}
+  #phg4 .vig{background:radial-gradient(ellipse 74% 74% at 55% 46%,transparent 46%,rgba(6,7,8,.6) 100%);}
+
+  #rimg1{position:absolute;left:6900px;top:520px;width:840px;height:860px;z-index:2;border-radius:50%;
+    background:radial-gradient(ellipse 52% 58% at 60% 46%,rgba(198,148,92,.24),transparent 60%);filter:blur(16px);}
+  #phg1{position:absolute;left:6900px;top:580px;width:760px;height:780px;overflow:hidden;z-index:3;
+    -webkit-mask-image:radial-gradient(ellipse 74% 90% at 58% 50%,#000 44%,rgba(0,0,0,.35) 68%,transparent 84%);
+    mask-image:radial-gradient(ellipse 74% 90% at 58% 50%,#000 44%,rgba(0,0,0,.35) 68%,transparent 84%);}
+  #phg1 img{width:100%;height:100%;object-fit:cover;object-position:center 6%;
+    filter:brightness(.58) contrast(1.3) saturate(.5) sepia(.14);}
+  #phg1 .g1-shadowL{background:radial-gradient(ellipse 52% 82% at 2% 48%,rgba(7,8,9,.94),transparent 55%);}
+  #phg1 .g1-cold{background:linear-gradient(180deg,rgba(28,40,46,.4),rgba(9,10,11,.45));mix-blend-mode:multiply;}
+
+  .anton{font-family:'Anton';}
+  .baseline{position:absolute;z-index:8;height:5px;background:var(--gas);opacity:.55;}
+  .baseline::after{content:"";position:absolute;left:0;right:0;top:5px;height:12px;
+    background:repeating-linear-gradient(to right, transparent 0 70px, rgba(194,146,90,.5) 70px 72px);}
+
+  /* palavras UPPERCASE */
+  .serif{position:absolute;z-index:4;font-family:'Bodoni Moda',serif;font-weight:500;
+    color:var(--cream);line-height:1;letter-spacing:.03em;white-space:nowrap;text-transform:uppercase;
+    font-optical-sizing:none;font-variation-settings:"opsz" 96;
+    text-shadow:0 2px 30px rgba(0,0,0,.55);}
+  #w-vendas{left:0;width:1080px;text-align:center;top:780px;font-size:210px;}
+  #w-clareza{left:1180px;top:250px;font-size:224px;}
+  #w-silencio{left:2250px;top:520px;font-size:190px;font-style:italic;font-weight:400;letter-spacing:.01em;}
+  #w-minutos{left:3300px;top:262px;font-size:210px;}
+  #w-sorte{left:5050px;top:540px;font-size:210px;}
+  #w-processo{left:5470px;top:290px;font-size:170px;}
+  #w-previsivel{left:6040px;top:520px;font-size:200px;}
+
+  .apoio{position:absolute;z-index:4;font-family:'Inter',sans-serif;font-weight:400;
+    font-size:31px;line-height:1.55;color:rgba(231,227,216,.72);}
+  .apoio b{font-weight:600;color:rgba(231,227,216,.96);}
+  #a1{left:0;width:1080px;text-align:center;top:1024px;}
+  #a2{left:1190px;top:560px;}
+  #a3{left:2250px;top:842px;}
+  #a4{left:3300px;top:806px;}
+  #a5{left:4760px;top:846px;}
+  #a6{left:5484px;top:806px;}
+  #a7{left:6564px;top:826px;}
+  #handle7{position:absolute;left:6564px;top:1062px;z-index:4;font-weight:500;font-size:22px;
+    letter-spacing:.22em;text-transform:uppercase;color:rgba(231,227,216,.5);}
+
+  .vig-v{position:absolute;inset:0;z-index:5;pointer-events:none;
+    background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,transparent 16%,transparent 70%,rgba(0,0,0,.58) 100%);}
+  .vig-h{position:absolute;inset:0;z-index:5;pointer-events:none;
+    background:linear-gradient(90deg,rgba(0,0,0,.55) 0,transparent 4%,transparent 96%,rgba(0,0,0,.55) 100%);}
+  .hairline{position:absolute;left:120px;right:120px;top:1122px;height:1px;z-index:6;
+    background:linear-gradient(90deg,transparent,rgba(168,132,80,.32) 8%,rgba(168,132,80,.32) 92%,transparent);}
+
+  .furn{position:absolute;top:0;width:1080px;height:1350px;z-index:7;}
+  .chips{position:absolute;left:84px;top:88px;display:flex;gap:12px;}
+  .chip{display:flex;align-items:center;gap:9px;border:1px solid rgba(168,132,80,.24);border-radius:999px;
+    padding:9px 16px;font-weight:500;font-size:15px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(231,227,216,.58);}
+  .chip svg{width:9px;height:9px;flex:0 0 auto;}
+  .save{position:absolute;right:84px;top:88px;display:flex;align-items:center;gap:9px;
+    border:1px solid rgba(168,132,80,.24);border-radius:999px;padding:9px 18px;
+    font-weight:500;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:rgba(231,227,216,.7);}
+  .save svg{width:14px;height:14px;}
+  .arraste{position:absolute;right:84px;top:1206px;display:flex;align-items:center;gap:14px;
+    font-weight:500;font-size:16px;letter-spacing:.22em;text-transform:uppercase;color:rgba(231,227,216,.58);}
+  .arraste svg{width:44px;height:12px;}
+  .cop{position:absolute;left:84px;top:1292px;font-weight:400;font-size:15px;letter-spacing:.03em;
+    color:rgba(231,227,216,.32);}
+  .idx{position:absolute;right:84px;top:1292px;font-weight:500;font-size:15px;letter-spacing:.1em;
+    color:rgba(231,227,216,.32);font-variant-numeric:tabular-nums;}
+  .savepost{position:absolute;left:84px;top:1188px;display:flex;align-items:center;gap:12px;
+    border:1px solid rgba(168,132,80,.42);border-radius:999px;padding:16px 28px;
+    font-weight:500;font-size:19px;letter-spacing:.16em;text-transform:uppercase;color:rgba(231,227,216,.92);}
+  .savepost svg{width:17px;height:17px;}
+
+  .grain{position:absolute;inset:0;z-index:9;pointer-events:none;opacity:.09;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:300px;}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="spark" viewBox="0 0 10 10"><path d="M5 0 L6.1 3.9 L10 5 L6.1 6.1 L5 10 L3.9 6.1 L0 5 L3.9 3.9 Z" fill="#A88450"/></symbol>
+  <symbol id="bkm2" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-5-6 5z" fill="none" stroke="#A88450" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="arr" viewBox="0 0 44 12"><line x1="0" y1="6" x2="38" y2="6" stroke="#A88450" stroke-width="1.5"/><path d="M33 1 L43 6 L33 11" fill="none" stroke="#A88450" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="board">
+  <div class="wave"></div>
+
+  <div class="pool" style="left:-140px;top:120px;width:640px;height:540px;background:radial-gradient(closest-side,rgba(194,146,90,.16),transparent 70%)"></div>
+  <div class="pool" style="left:760px;top:60px;width:720px;height:560px;background:radial-gradient(closest-side,rgba(92,110,118,.12),transparent 72%)"></div>
+  <div class="pool" style="left:1860px;top:180px;width:660px;height:520px;background:radial-gradient(closest-side,rgba(194,146,90,.13),transparent 70%)"></div>
+  <div class="pool" style="left:2860px;top:640px;width:740px;height:560px;background:radial-gradient(closest-side,rgba(92,110,118,.13),transparent 72%)"></div>
+  <div class="pool" style="left:4020px;top:40px;width:700px;height:560px;background:radial-gradient(closest-side,rgba(194,146,90,.16),transparent 70%)"></div>
+  <div class="pool" style="left:5080px;top:520px;width:620px;height:520px;background:radial-gradient(closest-side,rgba(92,110,118,.11),transparent 72%)"></div>
+  <div class="pool" style="left:6220px;top:400px;width:840px;height:660px;background:radial-gradient(closest-side,rgba(198,150,94,.2),transparent 70%)"></div>
+  <div class="fog" style="top:120px;"></div>
+  <div class="fog" style="top:820px;"></div>
+  <div class="floor"></div>
+
+  <div class="ph" id="phg2">
+    <img src="img/gabriel/g2.jpg" alt="">
+    <div class="ov coldtint"></div>
+    <div class="ov warmkiss"></div>
+    <div class="ov vig"></div>
+    <div class="ov settle"></div>
+  </div>
+
+  <div class="ph" id="phg4">
+    <img src="img/gabriel/g4crop.jpg" alt="">
+    <div class="ov coldtint"></div>
+    <div class="ov vig"></div>
+    <div class="ov settle"></div>
+    <div class="ov topfade"></div>
+  </div>
+
+  <div id="rimg1"></div>
+  <div class="ph" id="phg1">
+    <img src="img/gabriel/g1-cut.png" alt="">
+    <div class="ov g1-cold"></div>
+    <div class="ov g1-shadowL"></div>
+  </div>
+
+  <div class="serif" id="w-vendas">Vendas.</div>
+  <div class="serif" id="w-clareza">Clareza.</div>
+  <div class="serif" id="w-silencio">O Silêncio</div>
+  <div class="serif" id="w-minutos">Minutos.</div>
+  <div class="serif" id="w-sorte">Sorte.</div>
+  <div class="serif" id="w-processo">Processo.</div>
+  <div class="serif" id="w-previsivel">Previsível.</div>
+
+  <div class="apoio" id="a1">Toda venda é psicologia disfarçada de conversa.<br/><b>Ninguém perde um cliente por acaso.</b></div>
+  <div class="apoio" id="a2">Se o cliente não entende o valor,<br/><b>o preço vira o único critério.</b></div>
+  <div class="apoio" id="a3">Um lead sem resposta não desiste da compra.<br/><b>Desiste de você.</b><br/>O silêncio também vende. Para o concorrente.</div>
+  <div class="apoio" id="a4">Interesse é perecível.<br/><b>A venda começa a morrer</b><br/><b>no tempo da primeira resposta.</b></div>
+  <div class="apoio" id="a5">Vender bem de vez em quando<br/>não é competência.<br/><b>É sorte se repetindo. Por enquanto.</b></div>
+  <div class="apoio" id="a6">Talento fecha uma venda.<br/><b>Processo fecha todas as outras.</b></div>
+  <div class="apoio" id="a7">Venda boa não é a que emociona.<br/>É a que se repete.<br/><b>É isso que eu construo</b><br/><b>dentro das empresas.</b></div>
+  <div id="handle7">@gabriel.isidoro_</div>
+
+  <div class="vig-v"></div>
+  <div class="vig-h"></div>
+  <div class="hairline"></div>
+
+  <div class="furn" style="left:0"><div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div><div class="save"><svg><use href="#bkm2"/></svg>Salvar</div><div class="arraste">Arraste<svg><use href="#arr"/></svg></div><div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div><div class="idx">01 / 07</div></div>
+  <div class="furn" style="left:1080px"><div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div><div class="save"><svg><use href="#bkm2"/></svg>Salvar</div><div class="arraste">Arraste<svg><use href="#arr"/></svg></div><div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div><div class="idx">02 / 07</div></div>
+  <div class="furn" style="left:2160px"><div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div><div class="save"><svg><use href="#bkm2"/></svg>Salvar</div><div class="arraste">Arraste<svg><use href="#arr"/></svg></div><div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div><div class="idx">03 / 07</div></div>
+  <div class="furn" style="left:3240px"><div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div><div class="save"><svg><use href="#bkm2"/></svg>Salvar</div><div class="arraste">Arraste<svg><use href="#arr"/></svg></div><div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div><div class="idx">04 / 07</div></div>
+  <div class="furn" style="left:4320px"><div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div><div class="save"><svg><use href="#bkm2"/></svg>Salvar</div><div class="arraste">Arraste<svg><use href="#arr"/></svg></div><div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div><div class="idx">05 / 07</div></div>
+  <div class="furn" style="left:5400px"><div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div><div class="save"><svg><use href="#bkm2"/></svg>Salvar</div><div class="arraste">Arraste<svg><use href="#arr"/></svg></div><div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div><div class="idx">06 / 07</div></div>
+  <div class="furn" style="left:6480px"><div class="chips"><span class="chip"><svg><use href="#spark"/></svg>Estratégia</span><span class="chip"><svg><use href="#spark"/></svg>Autoridade</span><span class="chip"><svg><use href="#spark"/></svg>Criatividade</span></div><div class="save"><svg><use href="#bkm2"/></svg>Salvar</div><div class="savepost"><svg><use href="#bkm2"/></svg>Salvar este post</div><div class="cop">© 2026 Gabriel Isidoro. Todos os direitos reservados.</div><div class="idx">07 / 07</div></div>
+
+  <div class="grain"></div>
+</div>
+
+</body>
+</html>

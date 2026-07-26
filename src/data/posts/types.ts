@@ -9,6 +9,14 @@ export type PostBlock =
   | { type: 'h2'; text: string }
   | { type: 'ul'; items: string[] }
   | { type: 'quote'; text: string }
+  /** Tabela comparativa. Rola na horizontal no celular. */
+  | { type: 'table'; headers: string[]; rows: string[][]; caption?: string }
+
+/** Pergunta e resposta do bloco de dúvidas frequentes, vira FAQPage no JSON-LD. */
+export interface PostFaq {
+  pergunta: string
+  resposta: string
+}
 
 export interface Post {
   /** vira a URL: /blog/<slug> */
@@ -26,4 +34,6 @@ export interface Post {
   /** palavras-chave alvo do post, usadas em meta keywords e no JSON-LD */
   keywords?: string[]
   content: PostBlock[]
+  /** Dúvidas frequentes: renderizadas no fim do post e enviadas como FAQPage. */
+  faq?: PostFaq[]
 }

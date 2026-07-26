@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Copa 2026 — a copa que se ganha no celular — @gabriel.isidoro_</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --red:#E50914;      --red-deep:#B00610;   --red-soft:#ff2a36;
+    --gold:#F5B301;     --grn:#00A859;        --ylw:#FFD400;
+    --ink:#0C0C0E;      --ink-2:#15151b;      --ink-3:#222228;
+    --paper:#F4F2ED;    --paper-2:#E9E5DD;    --line:#d9d4ca;
+    --white:#ffffff;    --safe:70px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  html,body{background:#2a2a2e;}
+  body{font-family:'Inter',sans-serif;color:var(--ink);}
+
+  .slide{position:relative;width:1080px;height:1350px;overflow:hidden;margin:0 auto 46px;background:var(--paper);}
+  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;}
+
+  .topbar{position:absolute;top:var(--safe);left:var(--safe);right:var(--safe);
+    display:flex;align-items:center;justify-content:space-between;z-index:30;}
+  .brand{display:flex;align-items:center;gap:16px;}
+  .mono{width:62px;height:62px;border-radius:15px;background:var(--red);color:#fff;
+    font-family:'Anton';font-size:33px;line-height:1;display:flex;align-items:center;justify-content:center;
+    letter-spacing:.5px;box-shadow:0 10px 26px rgba(229,9,20,.42);position:relative;}
+  .mono::after{content:"";position:absolute;left:13px;right:13px;bottom:11px;height:3px;background:rgba(255,255,255,.85);border-radius:2px;}
+  .handle{font-weight:800;font-size:23px;letter-spacing:.2px;color:var(--ink);}
+  .tag{font-weight:800;font-size:18px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);opacity:.55;}
+  .topbar.on-dark .handle{color:#fff;}
+  .topbar.on-dark .tag{color:#fff;opacity:.6;}
+
+  .dots{position:absolute;left:0;right:0;bottom:50px;display:flex;gap:9px;justify-content:center;z-index:30;}
+  .dots i{width:8px;height:8px;border-radius:50%;background:rgba(12,12,14,.22);}
+  .dots i.on{background:var(--red);width:26px;border-radius:5px;}
+  .on-dark-dots i{background:rgba(255,255,255,.28);}
+  .on-dark-dots i.on{background:var(--red);}
+
+  .cta{position:absolute;left:var(--safe);right:var(--safe);bottom:104px;z-index:30;
+    background:var(--red);color:#fff;border-radius:999px;padding:24px 30px 24px 38px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 22px 46px rgba(229,9,20,.36);}
+  .cta b{font-weight:800;font-size:30px;letter-spacing:.2px;line-height:1.05;}
+  .cta .arw{flex:0 0 auto;width:56px;height:56px;border-radius:50%;border:3px solid rgba(255,255,255,.92);
+    display:flex;align-items:center;justify-content:center;}
+  .cta .arw svg{width:25px;height:25px;fill:#fff;}
+  .anton{font-family:'Anton';font-weight:400;}
+
+  /* ====================================================================== */
+  /* SLIDE 1 — CAPA                                                          */
+  /* ====================================================================== */
+  #s1{background:#08080b;}
+  #s1 .bg{position:absolute;inset:0;background:url('img/copa/abertura.jpg') center 32%/cover no-repeat;}
+  #s1 .scrim{position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(6,6,10,.55) 0%,rgba(6,6,10,.08) 24%,rgba(6,6,10,.22) 48%,rgba(6,6,10,.86) 72%,rgba(5,5,8,.99) 100%);}
+  #s1 .badge{position:absolute;top:150px;right:var(--safe);z-index:30;display:flex;align-items:center;gap:12px;
+    background:rgba(10,10,12,.55);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px);
+    padding:11px 20px;border-radius:999px;color:#fff;font-weight:800;font-size:18px;letter-spacing:1.4px;}
+  #s1 .badge .n{font-family:'Anton';font-size:24px;color:var(--gold);letter-spacing:1px;}
+  #s1 .kicker{position:absolute;left:var(--safe);top:656px;z-index:6;display:flex;align-items:center;gap:14px;
+    color:#fff;font-weight:800;font-size:21px;letter-spacing:2.6px;text-transform:uppercase;}
+  #s1 .kicker .bar{width:52px;height:6px;background:var(--red);border-radius:3px;}
+  #s1 .giant{position:absolute;left:var(--safe);top:698px;z-index:6;font-family:'Anton';color:#fff;
+    font-size:100px;line-height:1.02;letter-spacing:.5px;text-transform:uppercase;text-shadow:0 8px 40px rgba(0,0,0,.55);}
+  #s1 .giant .tarja{display:inline-block;background:var(--red);padding:2px 22px 0;border-radius:10px;
+    box-shadow:0 20px 50px rgba(229,9,20,.42);margin-top:8px;}
+  #s1 .sub{position:absolute;left:var(--safe);top:1042px;z-index:6;max-width:900px;
+    color:#e2e2e8;font-size:25px;line-height:1.42;font-weight:500;}
+  #s1 .sub b{color:#fff;font-weight:800;}
+
+  /* ====================================================================== */
+  /* SLIDE 2 — O TAMANHO (paper)                                             */
+  /* ====================================================================== */
+  #s2{background:var(--paper);}
+  #s2 .head{position:absolute;top:170px;left:var(--safe);right:var(--safe);z-index:5;}
+  #s2 .h{font-weight:900;font-size:60px;line-height:1.02;letter-spacing:-1.3px;color:var(--ink);}
+  #s2 .h .tarja{display:inline-block;background:var(--red);color:#fff;padding:0 16px 2px;border-radius:10px;}
+  #s2 .lead{margin-top:14px;font-size:25px;line-height:1.38;color:#4c4a45;font-weight:500;max-width:600px;}
+  #s2 .lead b{color:var(--ink);font-weight:800;}
+  #s2 .strip{position:absolute;left:var(--safe);right:var(--safe);top:388px;height:300px;border-radius:24px;overflow:hidden;z-index:4;
+    background:url('img/copa/fifa-crowd.jpg') center 88%/cover no-repeat;box-shadow:0 26px 54px rgba(20,18,12,.25);}
+  #s2 .strip::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55));}
+  #s2 .strip .cap{position:absolute;left:26px;bottom:18px;z-index:2;color:#fff;font-weight:800;font-size:23px;}
+  #s2 .strip .cap small{display:block;font-weight:600;font-size:17px;opacity:.85;margin-top:3px;}
+  #s2 .pol{position:absolute;right:44px;top:330px;width:300px;background:#fff;padding:12px 12px 14px;z-index:6;
+    transform:rotate(4deg);box-shadow:0 22px 44px rgba(20,18,12,.3);border-radius:6px;}
+  #s2 .pol .ph{height:200px;border-radius:4px;background:url('img/copa/fans1.jpg') center/cover no-repeat;}
+  #s2 .pol .lb{margin-top:10px;text-align:center;font-weight:700;font-size:17px;color:#3c3a35;}
+  #s2 .tape{position:absolute;width:130px;height:38px;background:rgba(229,9,20,.85);z-index:7;right:120px;top:312px;
+    transform:rotate(-6deg);border-radius:3px;display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:900;font-size:15px;letter-spacing:2px;}
+  #s2 .grid{position:absolute;left:var(--safe);right:var(--safe);top:742px;z-index:5;
+    display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  #s2 .st{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 28px 22px;
+    box-shadow:0 14px 30px rgba(20,18,12,.10);}
+  #s2 .st .n{font-family:'Anton';font-size:56px;line-height:1;color:var(--ink);}
+  #s2 .st .n em{font-style:normal;color:var(--red);}
+  #s2 .st .d{margin-top:8px;font-size:21px;line-height:1.3;color:#55524c;font-weight:600;}
+  #s2 .st .d b{color:var(--ink);font-weight:800;}
+
+  /* ====================================================================== */
+  /* SLIDE 3 — A AUDIÊNCIA (dark)                                            */
+  /* ====================================================================== */
+  #s3{background:#0b0b0f;}
+  #s3 .bg{position:absolute;inset:0;background:url('img/copa/fans2.jpg') center/cover no-repeat;opacity:.22;}
+  #s3 .scrim{position:absolute;inset:0;background:linear-gradient(180deg,#0b0b0f 4%,rgba(11,11,15,.72) 46%,#0b0b0f 88%);}
+  #s3 .head{position:absolute;top:176px;left:var(--safe);right:var(--safe);z-index:5;}
+  #s3 .h{font-weight:900;font-size:62px;line-height:1.02;letter-spacing:-1.3px;color:#fff;}
+  #s3 .h .hi{color:var(--red-soft);}
+  #s3 .lead{margin-top:16px;font-size:25px;line-height:1.4;color:#c7c7d0;font-weight:500;max-width:880px;}
+  #s3 .lead b{color:#fff;font-weight:800;}
+  #s3 .big{position:absolute;left:var(--safe);top:452px;z-index:5;display:flex;align-items:flex-end;gap:34px;}
+  #s3 .big .n{font-family:'Anton';font-size:250px;line-height:.86;color:#fff;
+    text-shadow:0 10px 60px rgba(229,9,20,.35);}
+  #s3 .big .n em{font-style:normal;color:var(--red-soft);}
+  #s3 .big .d{padding-bottom:16px;font-size:27px;line-height:1.38;color:#d9d9df;font-weight:600;max-width:340px;}
+  #s3 .big .d b{color:#fff;font-weight:800;}
+  #s3 .row{position:absolute;left:var(--safe);right:var(--safe);top:788px;z-index:5;display:flex;gap:22px;}
+  #s3 .c{flex:1;background:rgba(21,21,27,.9);border:1px solid #26262d;border-radius:20px;padding:26px 26px 22px;}
+  #s3 .c .n{font-family:'Anton';font-size:52px;line-height:1;color:#fff;}
+  #s3 .c .n em{font-style:normal;color:var(--red-soft);}
+  #s3 .c .d{margin-top:9px;font-size:20px;line-height:1.32;color:#b9b9c2;font-weight:600;}
+  #s3 .c .d b{color:#fff;font-weight:800;}
+  #s3 .note{position:absolute;left:var(--safe);right:var(--safe);bottom:246px;z-index:5;text-align:center;
+    font-weight:800;font-size:27px;color:#fff;}
+  #s3 .note b{color:var(--red-soft);}
+
+  /* ====================================================================== */
+  /* SLIDE 4 — O RECORDE BRASILEIRO / CAZÉTV (dark)                          */
+  /* ====================================================================== */
+  #s4{background:#0b0b0f;}
+  #s4 .head{position:absolute;top:170px;left:var(--safe);right:var(--safe);z-index:5;}
+  #s4 .h{font-weight:900;font-size:60px;line-height:1.02;letter-spacing:-1.3px;color:#fff;}
+  #s4 .h .tarja{display:inline-block;background:var(--red);color:#fff;padding:0 16px 2px;border-radius:10px;}
+  #s4 .lead{margin-top:14px;font-size:24px;line-height:1.38;color:#c7c7d0;font-weight:500;max-width:900px;}
+  #s4 .lead b{color:#fff;font-weight:800;}
+
+  #s4 .chart{position:absolute;left:var(--safe);top:430px;width:560px;height:570px;z-index:5;}
+  #s4 .bars{position:absolute;left:0;right:0;bottom:66px;display:flex;align-items:flex-end;gap:26px;height:460px;}
+  #s4 .bar{flex:1;position:relative;border-radius:14px 14px 6px 6px;background:linear-gradient(180deg,#2b2b33,#1c1c22);
+    border:1px solid #33333c;}
+  #s4 .bar .v{position:absolute;top:-52px;left:0;right:0;text-align:center;font-family:'Anton';font-size:37px;color:#fff;}
+  #s4 .bar.rec{background:linear-gradient(180deg,var(--red-soft),var(--red-deep));border-color:var(--red);
+    box-shadow:0 18px 44px rgba(229,9,20,.4);}
+  #s4 .bar.rec .v{color:var(--red-soft);}
+  #s4 .bar .flag{position:absolute;bottom:-56px;left:0;right:0;text-align:center;font-weight:800;font-size:19px;color:#9a9aa4;}
+  #s4 .bar.rec .flag{color:#fff;}
+  #s4 .recbadge{position:absolute;right:-24px;top:-6px;z-index:6;background:var(--gold);color:#141414;
+    font-weight:900;font-size:17px;letter-spacing:1.6px;padding:10px 18px;border-radius:999px;transform:rotate(6deg);
+    box-shadow:0 14px 30px rgba(245,179,1,.35);}
+  #s4 .axis{position:absolute;left:0;right:0;bottom:64px;height:2px;background:#33333c;}
+
+  #s4 .photo{position:absolute;right:var(--safe);top:430px;width:340px;height:226px;border-radius:20px;overflow:hidden;z-index:5;
+    background:url('img/copa/cazetv.jpg') center/cover no-repeat;border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 22px 48px rgba(0,0,0,.5);}
+  #s4 .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.62));}
+  #s4 .photo .cap{position:absolute;left:18px;bottom:12px;z-index:2;color:#fff;font-weight:800;font-size:18px;}
+  #s4 .print{position:absolute;right:64px;top:664px;width:300px;background:#fff;padding:11px 11px 13px;z-index:6;
+    transform:rotate(-4deg);box-shadow:0 24px 50px rgba(0,0,0,.55);border-radius:6px;}
+  #s4 .print .ph{height:262px;border-radius:4px;background:url('img/copa/caze.jpg') 42% center/cover no-repeat;}
+  #s4 .print .lb{margin-top:10px;text-align:center;font-weight:800;font-size:17px;color:#2b2925;}
+  #s4 .note{position:absolute;left:var(--safe);right:var(--safe);bottom:242px;z-index:5;text-align:center;
+    font-weight:800;font-size:27px;color:#fff;}
+  #s4 .note b{color:var(--red-soft);}
+
+  /* ====================================================================== */
+  /* SLIDE 5 — A SEGUNDA TELA (paper)                                        */
+  /* ====================================================================== */
+  #s5{background:var(--paper);}
+  #s5 .blob{position:absolute;right:-180px;top:-160px;width:620px;height:620px;border-radius:50%;
+    background:radial-gradient(closest-side,rgba(229,9,20,.12),transparent 72%);z-index:1;}
+  #s5 .head{position:absolute;top:170px;left:var(--safe);right:var(--safe);z-index:5;}
+  #s5 .h{font-weight:900;font-size:60px;line-height:1.02;letter-spacing:-1.3px;color:var(--ink);}
+  #s5 .h .tarja{display:inline-block;background:var(--red);color:#fff;padding:0 16px 2px;border-radius:10px;}
+  #s5 .lead{margin-top:14px;font-size:25px;line-height:1.38;color:#4c4a45;font-weight:500;max-width:860px;}
+  #s5 .lead b{color:var(--ink);font-weight:800;}
+
+  #s5 .phone{position:absolute;left:var(--safe);top:406px;width:430px;height:660px;z-index:5;border-radius:38px;
+    overflow:hidden;background:#000;border:10px solid #17171c;box-shadow:0 30px 64px rgba(20,18,12,.32);}
+  #s5 .phone .scr{position:absolute;inset:0;background:url('img/copa/brasil.jpg') 30% center/cover no-repeat;}
+  #s5 .phone .liv{position:absolute;left:18px;top:18px;z-index:3;display:flex;align-items:center;gap:9px;
+    background:rgba(229,9,20,.95);color:#fff;font-weight:900;font-size:17px;letter-spacing:1.4px;
+    padding:8px 15px;border-radius:8px;}
+  #s5 .phone .liv .d{width:9px;height:9px;border-radius:50%;background:#fff;}
+  #s5 .phone .vw{position:absolute;right:18px;top:18px;z-index:3;background:rgba(0,0,0,.62);color:#fff;
+    font-weight:800;font-size:16px;padding:8px 14px;border-radius:8px;}
+  #s5 .phone .grad{position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(0,0,0,.78));}
+  #s5 .phone .ttl{position:absolute;left:18px;right:18px;bottom:58px;z-index:3;color:#fff;font-weight:800;font-size:20px;line-height:1.3;}
+  #s5 .phone .ttl small{display:block;font-weight:600;font-size:15px;opacity:.8;margin-top:4px;}
+  #s5 .phone .pb{position:absolute;left:18px;right:18px;bottom:34px;height:6px;border-radius:3px;background:rgba(255,255,255,.28);z-index:3;}
+  #s5 .phone .pb::after{content:"";position:absolute;left:0;top:0;bottom:0;width:62%;background:var(--red);border-radius:3px;}
+
+  #s5 .facts{position:absolute;right:var(--safe);top:406px;width:450px;z-index:5;display:flex;flex-direction:column;gap:18px;}
+  #s5 .fact{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 26px 20px;
+    box-shadow:0 14px 30px rgba(20,18,12,.10);}
+  #s5 .fact .n{font-family:'Anton';font-size:52px;line-height:1;color:var(--ink);}
+  #s5 .fact .n em{font-style:normal;color:var(--red);}
+  #s5 .fact .d{margin-top:7px;font-size:20px;line-height:1.3;color:#55524c;font-weight:600;}
+  #s5 .fact .d b{color:var(--ink);font-weight:800;}
+  #s5 .foot{position:absolute;left:var(--safe);right:var(--safe);bottom:242px;z-index:5;text-align:center;
+    font-size:24px;font-weight:700;color:#403d38;}
+  #s5 .foot b{color:var(--red);}
+
+  /* ====================================================================== */
+  /* SLIDE 6 — O DINHEIRO (dark)                                             */
+  /* ====================================================================== */
+  #s6{background:#0b0b0f;}
+  #s6 .glow{position:absolute;right:-14%;top:8%;width:66%;height:44%;
+    background:radial-gradient(closest-side,rgba(245,179,1,.16),transparent 70%);filter:blur(30px);z-index:1;}
+  #s6 .head{position:absolute;top:170px;left:var(--safe);right:var(--safe);z-index:5;}
+  #s6 .h{font-weight:900;font-size:58px;line-height:1.04;letter-spacing:-1.2px;color:#fff;}
+  #s6 .h .hi{color:var(--gold);}
+  #s6 .lead{margin-top:14px;font-size:24px;line-height:1.38;color:#c7c7d0;font-weight:500;max-width:880px;}
+  #s6 .lead b{color:#fff;font-weight:800;}
+
+  #s6 .trophy{position:absolute;right:var(--safe);top:428px;width:340px;height:552px;border-radius:22px;overflow:hidden;z-index:5;
+    background:url('img/copa/trophy.jpg') center 12%/cover no-repeat;border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 26px 56px rgba(0,0,0,.55);}
+  #s6 .trophy::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(0,0,0,.9));}
+  #s6 .trophy .cap{position:absolute;left:18px;right:18px;bottom:14px;z-index:2;color:#fff;font-weight:800;font-size:19px;line-height:1.3;}
+  #s6 .trophy .cap small{display:block;font-weight:600;font-size:15px;opacity:.8;margin-top:3px;}
+
+  #s6 .money{position:absolute;left:var(--safe);top:428px;width:580px;z-index:5;display:flex;flex-direction:column;gap:18px;}
+  #s6 .m{background:#15151b;border:1px solid #26262d;border-radius:20px;padding:24px 28px 20px;}
+  #s6 .m .n{font-family:'Anton';font-size:54px;line-height:1;color:#fff;}
+  #s6 .m .n em{font-style:normal;color:var(--gold);}
+  #s6 .m .d{margin-top:7px;font-size:20px;line-height:1.3;color:#b9b9c2;font-weight:600;}
+  #s6 .m .d b{color:#fff;font-weight:800;}
+
+  #s6 .ticket{position:absolute;left:var(--safe);top:868px;width:580px;z-index:5;background:linear-gradient(135deg,#f8f5ee,#efe9dc);
+    border-radius:18px;padding:24px 28px;color:#191713;box-shadow:0 22px 46px rgba(0,0,0,.5);overflow:hidden;}
+  #s6 .ticket::before{content:"";position:absolute;top:0;bottom:0;right:118px;border-left:3px dashed #b9b2a2;}
+  #s6 .ticket::after{content:"";position:absolute;right:24px;top:22px;bottom:22px;width:56px;
+    background:repeating-linear-gradient(90deg,#191713 0 4px,transparent 4px 9px);opacity:.85;}
+  #s6 .ticket .k{font-weight:900;font-size:15px;letter-spacing:2.6px;color:#8a8272;}
+  #s6 .ticket .t{font-family:'Anton';font-size:33px;margin-top:6px;letter-spacing:.5px;max-width:300px;line-height:1.08;}
+  #s6 .ticket .r{margin-top:7px;font-weight:700;font-size:17px;color:#55503f;max-width:235px;line-height:1.3;}
+  #s6 .ticket .pr{position:absolute;right:150px;top:50%;transform:translateY(-50%);text-align:right;}
+  #s6 .ticket .pr .v{font-family:'Anton';font-size:40px;color:var(--red);}
+  #s6 .ticket .pr .l{font-weight:800;font-size:13px;letter-spacing:1.6px;color:#8a8272;margin-top:2px;}
+
+  /* ====================================================================== */
+  /* SLIDE 7 — A LIÇÃO (dark)                                                */
+  /* ====================================================================== */
+  #s7{background:#08080b;}
+  #s7 .bg{position:absolute;inset:0;background:url('img/copa/azteca.jpg') center/cover no-repeat;opacity:.16;}
+  #s7 .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,11,.6) 0%,rgba(8,8,11,.85) 55%,#08080b 100%);}
+  #s7 .glow{position:absolute;left:-12%;top:10%;width:64%;height:40%;
+    background:radial-gradient(closest-side,rgba(229,9,20,.25),transparent 70%);filter:blur(32px);z-index:1;}
+  #s7 .kicker{position:absolute;left:var(--safe);top:216px;z-index:5;display:flex;align-items:center;gap:14px;
+    color:#fff;font-weight:800;font-size:21px;letter-spacing:2.6px;text-transform:uppercase;}
+  #s7 .kicker .bar{width:52px;height:6px;background:var(--red);border-radius:3px;}
+  #s7 .giant{position:absolute;left:var(--safe);top:262px;z-index:5;font-family:'Anton';color:#fff;
+    font-size:112px;line-height:1.02;letter-spacing:.5px;text-transform:uppercase;}
+  #s7 .giant .tarja{display:inline-block;background:var(--red);padding:2px 24px 0;border-radius:10px;
+    box-shadow:0 20px 50px rgba(229,9,20,.4);margin-top:10px;}
+  #s7 .sub{position:absolute;left:var(--safe);top:586px;z-index:5;max-width:920px;
+    color:#d9d9df;font-size:27px;line-height:1.48;font-weight:500;}
+  #s7 .sub b{color:#fff;font-weight:800;}
+  #s7 .sub .rd{color:var(--red-soft);font-weight:800;}
+  #s7 .list{position:absolute;left:var(--safe);right:var(--safe);top:812px;z-index:5;display:flex;flex-direction:column;gap:18px;}
+  #s7 .it{display:flex;align-items:center;gap:20px;background:rgba(21,21,27,.92);border:1px solid #26262d;border-radius:18px;
+    padding:19px 26px;}
+  #s7 .it .num{flex:0 0 46px;width:46px;height:46px;border-radius:12px;background:var(--red);color:#fff;
+    font-family:'Anton';font-size:24px;display:flex;align-items:center;justify-content:center;}
+  #s7 .it b{font-weight:800;font-size:25px;color:#fff;}
+  #s7 .it span{font-weight:500;font-size:25px;color:#b9b9c2;}
+  #s7 .handle-line{position:absolute;left:var(--safe);right:var(--safe);bottom:216px;z-index:5;text-align:center;
+    color:#9a9aa4;font-weight:700;font-size:21px;}
+  #s7 .handle-line b{color:#fff;}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="arw" viewBox="0 0 24 24"><path fill="currentColor" d="M5 12h12.2l-4.6-4.6L14 6l7 7-7 7-1.4-1.4 4.6-4.6H5z"/></symbol>
+</svg>
+
+<!-- ====================== SLIDE 1 — CAPA ====================== -->
+<section class="slide grain" id="s1">
+  <div class="bg"></div><div class="scrim"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">Copa 2026</div>
+  </div>
+  <div class="badge"><span class="n">26</span> EUA · MÉXICO · CANADÁ</div>
+
+  <div class="kicker"><span class="bar"></span> O maior evento de mídia da história</div>
+  <div class="giant">
+    A COPA MAIS<br/>
+    <span class="tarja">GIGANTE</span> DA<br/>
+    HISTÓRIA.
+  </div>
+  <div class="sub"><b>5 milhões</b> de pessoas nos estádios, <b>bilhões de telas</b> no planeta. E o recorde mais insano não aconteceu na TV.</div>
+
+  <div class="cta"><b>Arrasta, os números são absurdos</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ====================== SLIDE 2 — O TAMANHO ====================== -->
+<section class="slide grain" id="s2">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">01 · O tamanho</div>
+  </div>
+
+  <div class="head">
+    <div class="h">Nunca existiu nada <span class="tarja">desse tamanho.</span></div>
+    <div class="lead"><b>48 seleções, 104 jogos, 3 países.</b> E olha o que virou a arquibancada.</div>
+  </div>
+
+  <div class="strip">
+    <div class="cap">4,64 milhões de torcedores só na fase de grupos
+      <small>ocupação média de 99,7% dos estádios</small>
+    </div>
+  </div>
+  <div class="pol"><div class="ph"></div><div class="lb">clima de fan fest pelos 3 países</div></div>
+  <div class="tape">RECORDE</div>
+
+  <div class="grid">
+    <div class="st"><div class="n"><em>+5 mi</em></div><div class="d">de público total, <b>superou o recorde de 1994</b> que durava 32 anos</div></div>
+    <div class="st"><div class="n">210</div><div class="d">países e territórios <b>com torcedor presente</b> nos estádios</div></div>
+    <div class="st"><div class="n">426.834</div><div class="d">pessoas em estádios <b>num único dia</b>, maior marca da FIFA</div></div>
+    <div class="st"><div class="n">99,7<em>%</em></div><div class="d">de ocupação média, <b>feito inédito</b> em Copas do Mundo</div></div>
+  </div>
+
+  <div class="cta"><b>E fora do estádio? Vem número maior</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ====================== SLIDE 3 — A AUDIÊNCIA ====================== -->
+<section class="slide grain" id="s3">
+  <div class="bg"></div><div class="scrim"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">02 · A audiência</div>
+  </div>
+
+  <div class="head">
+    <div class="h">Metade do planeta <span class="hi">de olho.</span></div>
+    <div class="lead">A projeção é a <b>maior audiência já registrada</b> num evento, qualquer evento.</div>
+  </div>
+
+  <div class="big">
+    <div class="n">5 <em>BI</em></div>
+    <div class="d">de audiência projetada <b>nos 104 jogos</b>, superando o Catar 2022</div>
+  </div>
+
+  <div class="row">
+    <div class="c"><div class="n"><em>2 bi</em></div><div class="d">podem assistir à final <b>ao mesmo tempo</b>, dia 19/07</div></div>
+    <div class="c"><div class="n">1,2 bi</div><div class="d">de alcance mundial <b>só na abertura</b> no Azteca</div></div>
+    <div class="c"><div class="n">18 mi</div><div class="d">na estreia dos EUA, <b>recorde da TV americana</b> em inglês</div></div>
+  </div>
+
+  <div class="note">E o maior recorde individual de transmissão é <b>brasileiro.</b></div>
+
+  <div class="cta"><b>O Brasil quebrou o jogo, olha isso</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ====================== SLIDE 4 — O RECORDE BR / CAZÉTV ====================== -->
+<section class="slide grain" id="s4">
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">03 · O recorde BR</div>
+  </div>
+
+  <div class="head">
+    <div class="h">O recorde mundial é <span class="tarja">brasileiro.</span></div>
+    <div class="lead">A CazéTV bateu o <b>recorde mundial de live no YouTube</b>. E depois quebrou o próprio recorde. Três vezes.</div>
+  </div>
+
+  <div class="chart">
+    <div class="axis"></div>
+    <div class="bars">
+      <div class="bar" style="height:278px"><span class="v">12,7</span><span class="flag">Marrocos</span></div>
+      <div class="bar" style="height:352px"><span class="v">16,1</span><span class="flag">Haiti</span></div>
+      <div class="bar" style="height:400px"><span class="v">18,3</span><span class="flag">Escócia</span></div>
+      <div class="bar rec" style="height:460px"><span class="v">21 mi</span><span class="flag">Japão</span>
+        <span class="recbadge">RECORDE MUNDIAL</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="photo"><div class="cap">o estúdio que venceu a TV</div></div>
+  <div class="print"><div class="ph"></div><div class="lb">até a FIFA postou sobre o feito</div></div>
+
+  <div class="note">21 milhões de aparelhos <b>ao mesmo tempo</b> em Brasil x Japão. Pelo YouTube.</div>
+
+  <div class="cta"><b>E olha o que isso vira na internet</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- ====================== SLIDE 5 — A SEGUNDA TELA ====================== -->
+<section class="slide grain" id="s5">
+  <div class="blob"></div>
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">04 · A segunda tela</div>
+  </div>
+
+  <div class="head">
+    <div class="h">O jogo real acontece <span class="tarja">no celular.</span></div>
+    <div class="lead">Cada lance vira clipe, meme e trend. Os números digitais <b>da fase de grupos</b>, segundo a FIFA:</div>
+  </div>
+
+  <div class="phone">
+    <div class="scr"></div><div class="grad"></div>
+    <div class="liv"><span class="d"></span>AO VIVO</div>
+    <div class="vw">12,7 mi assistindo</div>
+    <div class="ttl">Brasil x Marrocos, a estreia
+      <small>o jogo que abriu a era dos recordes</small>
+    </div>
+    <div class="pb"></div>
+  </div>
+
+  <div class="facts">
+    <div class="fact"><div class="n"><em>17 bi</em></div><div class="d">de impressões nas <b>plataformas digitais</b></div></div>
+    <div class="fact"><div class="n">11 bi</div><div class="d">de views de vídeo <b>somando todas as redes</b></div></div>
+    <div class="fact"><div class="n">8 bi</div><div class="d">de views só em <b>TikTok e YouTube</b></div></div>
+    <div class="fact"><div class="n">1 bi</div><div class="d">de <b>interações</b> com conteúdo do torneio</div></div>
+  </div>
+
+  <div class="foot">Isso foi <b>um mês</b> de torneio. O mata-mata está só começando.</div>
+
+  <div class="cta"><b>Quer ver o tamanho do dinheiro?</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></div>
+</section>
+
+<!-- ====================== SLIDE 6 — O DINHEIRO ====================== -->
+<section class="slide grain" id="s6">
+  <div class="glow"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">05 · O dinheiro</div>
+  </div>
+
+  <div class="head">
+    <div class="h">Atenção virou a maior <span class="hi">bilheteria do mundo.</span></div>
+    <div class="lead">O caixa que essa audiência movimenta, <b>segundo FIFA e Forbes:</b></div>
+  </div>
+
+  <div class="money">
+    <div class="m"><div class="n"><em>US$ 13 bi</em></div><div class="d">de receita da FIFA <b>no ciclo desta Copa</b></div></div>
+    <div class="m"><div class="n">US$ 3,9 bi</div><div class="d">só de <b>direitos de transmissão</b></div></div>
+    <div class="m"><div class="n">US$ 871 mi</div><div class="d">em premiação, <b>US$ 50 mi pro campeão</b></div></div>
+  </div>
+
+  <div class="ticket">
+    <div class="k">INGRESSO PREMIUM · CATEGORIA 1</div>
+    <div class="t">A FINAL · METLIFE STADIUM</div>
+    <div class="r">Nova York/Nova Jersey · 19 de julho de 2026</div>
+    <div class="pr"><div class="v">US$ 32.970</div><div class="l">VALOR DE TABELA</div></div>
+  </div>
+
+  <div class="trophy">
+    <div class="cap">o objeto mais disputado do planeta
+      <small>e o evento mais lucrativo da história do esporte</small>
+    </div>
+  </div>
+
+  <div class="cta"><b>A lição pra quem constrói marca</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div>
+</section>
+
+<!-- ====================== SLIDE 7 — A LIÇÃO ====================== -->
+<section class="slide grain" id="s7">
+  <div class="bg"></div><div class="scrim"></div><div class="glow"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">06 · A lição</div>
+  </div>
+
+  <div class="kicker"><span class="bar"></span> A lição pra quem constrói marca</div>
+  <div class="giant">
+    A COPA SE GANHA<br/>
+    <span class="tarja">NO CELULAR.</span>
+  </div>
+  <div class="sub">A Globo tem 55 jogos. Um canal que nasceu de uma live tem <b>todos os 104</b> e o <span class="rd">recorde mundial</span>. A atenção migrou e o dinheiro foi atrás. Marca que ocupa o tempo real para de disputar preço e <b>passa a disputar memória</b>.</div>
+
+  <div class="list">
+    <div class="it"><span class="num">01</span><div><b>Esteja onde a atenção está,</b> <span>não onde sua marca sempre esteve</span></div></div>
+    <div class="it"><span class="num">02</span><div><b>Tempo real vence produção perfeita,</b> <span>o meme não espera</span></div></div>
+    <div class="it"><span class="num">03</span><div><b>Construa audiência própria,</b> <span>evento só multiplica quem tem base</span></div></div>
+  </div>
+
+  <div class="handle-line">Mais análises de marketing assim: <b>@gabriel.isidoro_</b></div>
+  <div class="cta"><b>Salva pra estudar esse case depois</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i></div>
+</section>
+
+</body>
+</html>

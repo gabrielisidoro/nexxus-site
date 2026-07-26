@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Samara Trevisan — 3 Carrosséis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  img.logo-w{content:url("__LOGO_W__");}
+  img.logo-d{content:url("__LOGO_D__");}
+</style>
+<style>
+  :root{
+    --gr:#3a3a3c;
+    --grl:#8a8a8e;
+    --grxl:#c7c7cc;
+    --cream:#F5F3F0;
+    --dark:#1c1c1e;
+    --off:#fafaf8;
+    --ink:#111;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{margin:0;font-family:'Poppins',sans-serif;background:#e8e8e8;}
+
+  .slide{width:1080px;height:1350px;position:relative;overflow:hidden;display:block;}
+
+  /* ── backgrounds ── */
+  .bg-white{background:#ffffff;}
+  .bg-cream{
+    background:
+      radial-gradient(800px 560px at 10% -4%, rgba(58,58,60,.06), transparent 60%),
+      linear-gradient(180deg, #F5F3F0 0%, #EDEBE7 100%);
+  }
+  .bg-dark{
+    background:
+      radial-gradient(860px 620px at 50% -6%, rgba(255,255,255,.07), transparent 60%),
+      linear-gradient(180deg,#1c1c1e 0%, #111 100%);
+  }
+  .grid-bg::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(to right, rgba(58,58,60,.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(58,58,60,.055) 1px, transparent 1px);
+    background-size:72px 72px;
+  }
+  .bg-dark.grid-bg::before{
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+  }
+
+  /* ── logo ── */
+  .logo{position:absolute;top:62px;left:72px;height:52px;z-index:8;}
+  .logo.center{left:50%;transform:translateX(-50%);top:80px;}
+  .logo.right{left:auto;right:72px;}
+
+  /* ── highlight tarja ── */
+  .hl{background:var(--gr);color:#fff;padding:4px 20px;border-radius:12px;white-space:nowrap;}
+  .hl-cream{background:var(--cream);color:var(--dark);padding:4px 20px;border-radius:12px;white-space:nowrap;}
+
+  /* ── CTA pill ── */
+  .cta{
+    position:absolute;bottom:54px;left:50%;transform:translateX(-50%);
+    background:var(--gr);color:#fff;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;gap:26px;
+    padding:30px 54px;font-size:34px;font-weight:600;
+    width:max-content;max-width:940px;
+    box-shadow:0 18px 50px -12px rgba(30,30,32,.55);
+    z-index:9;white-space:nowrap;
+  }
+  .cta b{font-weight:800;}
+  .cta .arr{
+    flex:none;width:58px;height:58px;border-radius:50%;
+    border:3px solid rgba(255,255,255,.9);
+    display:flex;align-items:center;justify-content:center;
+    font-size:30px;font-weight:700;line-height:1;
+  }
+  .cta.light{background:#fff;color:var(--dark);box-shadow:0 18px 50px -12px rgba(30,30,32,.22);}
+  .cta.light .arr{border-color:rgba(30,30,32,.3);}
+
+  /* ── card branco ── */
+  .card{background:#fff;border-radius:26px;box-shadow:0 16px 48px -14px rgba(17,20,30,.13);}
+  .nbadge{
+    display:flex;align-items:center;justify-content:center;
+    background:var(--gr);color:#fff;font-weight:800;border-radius:14px;
+  }
+
+  /* ── frame (print de foto) ── */
+  .frame{
+    position:absolute;border-radius:22px;overflow:hidden;
+    box-shadow:0 30px 70px -20px rgba(0,0,0,.42);
+  }
+  .frame .im{position:absolute;inset:0;background-size:cover;background-position:center top;}
+
+  /* ── polaroid ── */
+  .ph{
+    position:absolute;background:#fff;
+    padding:16px;border-radius:10px;
+    box-shadow:0 28px 64px -18px rgba(17,20,30,.34);
+  }
+  .ph .win{border-radius:8px;background-size:cover;background-position:center top;}
+  .ph .cap{
+    margin-top:14px;text-align:center;
+    font-family:'Inter',sans-serif;font-style:italic;
+    font-size:22px;font-weight:500;color:#666;
+  }
+
+  /* ── stamp ── */
+  .stamp{
+    position:absolute;z-index:7;
+    background:var(--gr);color:#fff;
+    font-size:28px;font-weight:800;letter-spacing:.05em;
+    padding:14px 30px;border-radius:12px;
+    box-shadow:0 16px 40px -10px rgba(30,30,32,.5);
+    text-transform:uppercase;
+  }
+
+  /* ── clip (manchete) ── */
+  .clip{
+    position:absolute;background:#fff;border-radius:14px;
+    padding:24px 30px;z-index:6;
+    box-shadow:0 26px 60px -16px rgba(0,0,0,.42);
+  }
+  .clip .src{
+    font-family:'Inter',sans-serif;font-size:20px;font-weight:700;
+    letter-spacing:.14em;color:#9a9ba3;text-transform:uppercase;
+  }
+  .clip h3{
+    margin-top:10px;font-family:Georgia,'Times New Roman',serif;
+    font-size:28px;line-height:1.3;color:#111;font-weight:700;
+  }
+
+  /* ── handle line ── */
+  .handle-line{
+    position:absolute;bottom:206px;left:0;right:0;
+    text-align:center;z-index:10;
+    font-size:26px;font-weight:600;color:#8a8c95;
+  }
+  .handle-line b{color:var(--dark);font-weight:800;}
+
+  /* ============================================================
+     CARROSSEL A — TEASER "ALGO VEM AÍ"
+     ============================================================ */
+
+  /* A1 — CAPA dark full-bleed model5 (navy look) */
+  .a1{background:url("../motion/public/samara/model5.webp") center top / cover no-repeat #111;}
+  .a1::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(5,6,10,.68) 0%, rgba(5,6,10,0) 28%);
+  }
+  .a1::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(5,6,10,0) 38%, rgba(5,6,10,.5) 60%, rgba(5,6,10,.95) 100%);
+  }
+  .a1 .line1{
+    position:absolute;top:840px;left:0;right:0;z-index:2;text-align:center;
+    color:#d1d1d6;font-size:52px;font-weight:700;
+    text-shadow:0 6px 30px rgba(0,0,0,.6);
+  }
+  .a1 .giant{
+    position:absolute;top:904px;left:0;right:0;z-index:2;text-align:center;
+    font-family:'Anton',sans-serif;font-size:218px;line-height:1;color:#fff;
+    letter-spacing:3px;text-shadow:0 24px 70px rgba(0,0,0,.65);
+  }
+  .a1 .line2{
+    position:absolute;top:1150px;left:0;right:0;z-index:2;text-align:center;
+    color:#d1d1d6;font-size:50px;font-weight:700;
+    text-shadow:0 6px 30px rgba(0,0,0,.6);
+  }
+  .a1 .footer-hint{
+    position:absolute;bottom:48px;left:0;right:0;z-index:2;text-align:center;
+    color:#8e8e93;font-size:28px;font-weight:600;letter-spacing:.04em;
+  }
+
+  /* A2 — O TEASER (cream + fotos) */
+  .a2 .content{position:absolute;top:184px;left:72px;right:72px;}
+  .a2 h1{font-size:58px;font-weight:800;color:var(--dark);line-height:1.3;}
+  .a2 .p1{margin-top:24px;font-size:33px;line-height:1.5;color:var(--grl);font-weight:500;}
+  .a2 .p1 b{color:var(--dark);font-weight:700;}
+  /* frame grande inclinado */
+  .a2 .f-main{left:60px;top:508px;width:680px;height:460px;transform:rotate(-3deg);}
+  .a2 .f-main .im{background-image:url("../motion/public/samara/model3.webp");}
+  /* polaroid menor */
+  .a2 .ph-side{right:44px;top:694px;width:360px;transform:rotate(5deg);z-index:5;}
+  .a2 .ph-side .win{height:350px;background-image:url("../motion/public/samara/model6.webp");}
+  .a2 .stamp-a{right:76px;top:548px;transform:rotate(8deg);}
+
+  /* A3 — PROMESSAS (branco + frame direita) */
+  .a3 h1{
+    position:absolute;top:184px;left:72px;right:72px;
+    font-size:54px;font-weight:800;color:var(--dark);line-height:1.3;
+  }
+  .a3 .cards{position:absolute;top:380px;left:72px;width:580px;display:flex;flex-direction:column;gap:28px;z-index:3;}
+  .a3 .icard{
+    display:flex;align-items:center;gap:22px;
+    background:#fff;border-radius:999px;
+    padding:20px 36px;font-size:30px;font-weight:600;color:var(--dark);
+    box-shadow:0 12px 34px -10px rgba(30,30,32,.18);
+  }
+  .a3 .icard .dot{flex:none;width:14px;height:14px;border-radius:50%;background:var(--gr);}
+  .a3 .icard b{font-weight:800;}
+  /* frame lateral modelo */
+  .a3 .f-right{right:0;top:340px;width:460px;height:720px;border-radius:22px 0 0 22px;}
+  .a3 .f-right .im{background-image:url("../motion/public/samara/model1.webp");}
+  .a3 .f-right::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg, #fff 0%, transparent 35%);
+  }
+
+  /* A4 — CTA dark + polaroid */
+  .a4 .content{position:absolute;top:178px;left:72px;right:72px;}
+  .a4 h1{font-size:56px;font-weight:800;color:#fff;line-height:1.35;}
+  .a4 .p1{margin-top:24px;font-size:34px;line-height:1.5;color:#aeaeb2;font-weight:500;}
+  .a4 .p1 b{color:#fff;font-weight:700;}
+  /* frame central inclinado */
+  .a4 .f-main{left:100px;top:520px;width:860px;height:470px;transform:rotate(-1.5deg);}
+  .a4 .f-main .im{background-image:url("../motion/public/samara/model2.webp");}
+  /* clip sobreposição */
+  .a4 .clip1{right:36px;top:878px;width:500px;transform:rotate(2deg);}
+  .a4 .punch{
+    position:absolute;top:1112px;left:72px;width:580px;
+    font-size:38px;font-weight:800;color:#fff;line-height:1.5;
+  }
+
+  /* ============================================================
+     CARROSSEL B — A MARCA
+     ============================================================ */
+
+  /* B1 — CAPA cream full-bleed model6 (purple) */
+  .b1{background:url("../motion/public/samara/model6.webp") center top / cover no-repeat #F5F3F0;}
+  .b1::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(245,243,240,.85) 0%, rgba(245,243,240,0) 32%);
+  }
+  .b1::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(245,243,240,0) 44%, rgba(245,243,240,.6) 66%, rgba(245,243,240,.97) 100%);
+  }
+  .b1 .line1{
+    position:absolute;top:846px;left:0;right:0;z-index:2;text-align:center;
+    color:var(--gr);font-size:50px;font-weight:700;
+  }
+  .b1 .giant{
+    position:absolute;top:910px;left:0;right:0;z-index:2;text-align:center;
+    font-family:'Anton',sans-serif;font-size:198px;line-height:1;color:var(--dark);
+    letter-spacing:2px;
+  }
+  .b1 .line2{
+    position:absolute;top:1152px;left:0;right:0;z-index:2;text-align:center;
+    color:var(--gr);font-size:50px;font-weight:700;
+  }
+  .b1 .footer-hint{
+    position:absolute;bottom:48px;left:0;right:0;z-index:2;text-align:center;
+    color:var(--grl);font-size:28px;font-weight:600;letter-spacing:.04em;
+  }
+
+  /* B2 — IDENTIDADE (branco + fotos) */
+  .b2 .content{position:absolute;top:184px;left:72px;right:72px;}
+  .b2 h1{font-size:56px;font-weight:800;color:var(--dark);line-height:1.3;}
+  .b2 .p1{margin-top:24px;font-size:32px;line-height:1.5;color:var(--grl);font-weight:500;}
+  .b2 .p1 b{color:var(--dark);font-weight:700;}
+  /* frame principal inclinado */
+  .b2 .f-main{left:60px;top:498px;width:700px;height:480px;transform:rotate(-3.5deg);}
+  .b2 .f-main .im{background-image:url("../motion/public/samara/model4.webp");}
+  /* polaroid */
+  .b2 .ph-side{right:42px;top:688px;width:370px;transform:rotate(6deg);z-index:5;}
+  .b2 .ph-side .win{height:360px;background-image:url("../motion/public/samara/model1.webp");}
+  .b2 .stamp-b{right:74px;top:544px;transform:rotate(-7deg);}
+
+  /* B3 — COLEÇÃO (cream + frame + cards) */
+  .b3 h1{
+    position:absolute;top:184px;left:72px;right:72px;
+    font-size:52px;font-weight:800;color:var(--dark);line-height:1.28;
+  }
+  /* frame lateral esquerdo modelo */
+  .b3 .f-left{left:0;top:360px;width:440px;height:730px;border-radius:0 22px 22px 0;}
+  .b3 .f-left .im{background-image:url("../motion/public/samara/model2.webp");}
+  .b3 .f-left::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(270deg, var(--cream) 0%, transparent 35%);
+  }
+  /* lista de coleções à direita */
+  .b3 .collist{position:absolute;top:388px;right:52px;width:570px;display:flex;flex-direction:column;gap:24px;z-index:3;}
+  .b3 .colitem{
+    background:#fff;border-radius:20px;
+    padding:28px 32px;
+    box-shadow:0 12px 34px -10px rgba(30,30,32,.14);
+    display:flex;align-items:center;gap:20px;
+  }
+  .b3 .colitem .swatch{flex:none;width:46px;height:46px;border-radius:12px;}
+  .b3 .colitem .clabel{font-size:29px;font-weight:700;color:var(--dark);}
+  .b3 .colitem .csub{font-size:24px;font-weight:500;color:var(--grl);margin-top:4px;}
+  /* swatches */
+  .sw-terra{background:#6B3020;}
+  .sw-uvas{background:#7A2D7E;}
+  .sw-menta{background:#5E8267;}
+  .sw-marinho{background:#1B2A4A;}
+
+  /* B4 — CTA FINAL dark (model3 bg) */
+  .b4{background:url("../motion/public/samara/model3.webp") 20% top / cover no-repeat #111;}
+  .b4::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(5,6,10,.72) 0%, rgba(5,6,10,0) 28%);
+  }
+  .b4::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(90deg, transparent 30%, rgba(5,6,10,.75) 55%, rgba(5,6,10,.98) 100%);
+  }
+  .b4 .textblock{
+    position:absolute;right:60px;top:0;bottom:0;width:520px;z-index:2;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .b4 .overline{font-size:26px;font-weight:700;letter-spacing:.16em;color:#8e8e93;text-transform:uppercase;margin-bottom:24px;}
+  .b4 h1{font-size:58px;font-weight:800;color:#fff;line-height:1.3;}
+  .b4 .sub{margin-top:20px;font-size:32px;color:#aeaeb2;font-weight:500;line-height:1.5;}
+  .b4 .sub b{color:#fff;font-weight:700;}
+  .b4 .handle-b{
+    position:absolute;bottom:206px;left:0;right:0;
+    text-align:center;z-index:10;
+    font-size:26px;font-weight:600;color:#636366;
+  }
+  .b4 .handle-b b{color:#aeaeb2;font-weight:800;}
+
+  /* ============================================================
+     CARROSSEL C — CONVITE BAURU
+     ============================================================ */
+
+  /* C1 — CAPA dark model1 (terra) */
+  .c1{background:url("../motion/public/samara/model1.webp") center top / cover no-repeat #111;}
+  .c1::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(5,6,10,.72) 0%, rgba(5,6,10,0) 28%);
+  }
+  .c1::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(5,6,10,0) 40%, rgba(5,6,10,.52) 62%, rgba(5,6,10,.97) 100%);
+  }
+  .c1 .line1{
+    position:absolute;top:800px;left:0;right:0;z-index:2;text-align:center;
+    color:#d1d1d6;font-size:48px;font-weight:700;
+    text-shadow:0 6px 30px rgba(0,0,0,.6);
+  }
+  .c1 .giant{
+    position:absolute;top:856px;left:0;right:0;z-index:2;text-align:center;
+    font-family:'Anton',sans-serif;font-size:130px;line-height:1.05;color:#fff;
+    letter-spacing:2px;text-shadow:0 24px 70px rgba(0,0,0,.65);
+  }
+  .c1 .line2{
+    position:absolute;top:1140px;left:0;right:0;z-index:2;text-align:center;
+    color:#d1d1d6;font-size:46px;font-weight:700;
+    text-shadow:0 6px 30px rgba(0,0,0,.6);
+  }
+  .c1 .footer-hint{
+    position:absolute;bottom:48px;left:0;right:0;z-index:2;text-align:center;
+    color:#636366;font-size:28px;font-weight:600;letter-spacing:.04em;
+  }
+
+  /* C2 — O CONVITE (branco + fotos) */
+  .c2 .content{position:absolute;top:184px;left:72px;right:72px;}
+  .c2 h1{font-size:56px;font-weight:800;color:var(--dark);line-height:1.3;}
+  .c2 .p1{margin-top:24px;font-size:33px;line-height:1.5;color:var(--grl);font-weight:500;}
+  .c2 .p1 b{color:var(--dark);font-weight:700;}
+  /* frame principal */
+  .c2 .f-main{left:58px;top:494px;width:690px;height:470px;transform:rotate(-2.5deg);}
+  .c2 .f-main .im{background-image:url("../motion/public/samara/model5.webp");}
+  /* polaroid */
+  .c2 .ph-side{right:44px;top:680px;width:360px;transform:rotate(6deg);z-index:5;}
+  .c2 .ph-side .win{height:350px;background-image:url("../motion/public/samara/model4.webp");}
+  .c2 .stamp-c{right:80px;top:538px;transform:rotate(-8deg);}
+
+  /* C3 — O QUE VEM (cream + checklist + frame) */
+  .c3 h1{
+    position:absolute;top:184px;left:72px;right:72px;
+    font-size:54px;font-weight:800;color:var(--dark);line-height:1.3;
+  }
+  .c3 .checks{position:absolute;top:386px;left:72px;width:620px;display:flex;flex-direction:column;gap:26px;z-index:3;}
+  .c3 .chk{
+    display:flex;align-items:center;gap:22px;
+    background:#fff;border-radius:20px;
+    padding:24px 32px;font-size:30px;font-weight:600;color:var(--dark);
+    box-shadow:0 12px 34px -10px rgba(30,30,32,.14);
+  }
+  .c3 .chk .icon{flex:none;width:44px;height:44px;border-radius:50%;background:var(--gr);display:flex;align-items:center;justify-content:center;font-size:22px;}
+  .c3 .chk b{font-weight:800;}
+  /* frame direita */
+  .c3 .f-right{right:0;top:350px;width:430px;height:730px;border-radius:22px 0 0 22px;}
+  .c3 .f-right .im{background-image:url("../motion/public/samara/model6.webp");}
+  .c3 .f-right::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg, var(--cream) 0%, transparent 32%);
+  }
+
+  /* C4 — FINAL CONVITE (branco clean + logo central) */
+  .c4 .content{position:absolute;top:160px;left:72px;right:72px;text-align:center;}
+  .c4 .overline{font-size:26px;font-weight:700;letter-spacing:.16em;color:var(--grl);text-transform:uppercase;margin-bottom:20px;}
+  .c4 h1{font-size:60px;font-weight:800;color:var(--dark);line-height:1.3;}
+  .c4 .sub{margin-top:20px;font-size:33px;color:var(--grl);font-weight:500;line-height:1.5;}
+  .c4 .sub b{color:var(--dark);font-weight:700;}
+  /* frame grande centralizado */
+  .c4 .f-center{left:90px;top:560px;width:900px;height:520px;transform:rotate(-1.5deg);}
+  .c4 .f-center .im{background-image:url("../motion/public/samara/model2.webp");background-position:center 20%;}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     CARROSSEL A — TEASER "ALGO VEM AÍ"
+     ══════════════════════════════════════════════ -->
+
+<!-- A1 — CAPA -->
+<section class="slide a1">
+  <img class="logo center logo-w" alt="Samara Trevisan">
+  <div class="line1">algo novo está chegando</div>
+  <div class="giant">EM BREVE</div>
+  <div class="line2">em Bauru, SP</div>
+  <div class="footer-hint">continua no próximo slide &nbsp;→</div>
+</section>
+
+<!-- A2 — O TEASER -->
+<section class="slide a2 bg-cream grid-bg">
+  <img class="logo logo-d" alt="Samara Trevisan">
+  <div class="content">
+    <h1>Uma marca que nasceu<br>pra <span class="hl">fazer diferença.</span></h1>
+    <p class="p1">Moda fitness de <b>alto padrão</b> — pensada para <b>academia, corrida e vida ativa.</b></p>
+  </div>
+  <div class="frame f-main"><div class="im"></div></div>
+  <div class="stamp stamp-a">INAUGURANDO</div>
+  <div class="ph ph-side">
+    <div class="win"></div>
+    <div class="cap">a coleção chegou</div>
+  </div>
+  <div class="cta">Fica de olho no que vem <span class="arr">→</span></div>
+</section>
+
+<!-- A3 — PROMESSAS -->
+<section class="slide a3 bg-white grid-bg">
+  <img class="logo logo-d" alt="Samara Trevisan">
+  <h1>O que você vai encontrar<br>na <span class="hl">Samara Trevisan:</span></h1>
+  <div class="cards">
+    <div class="icard"><span class="dot"></span><span><b>Peças exclusivas</b> para academia</span></div>
+    <div class="icard"><span class="dot"></span><span><b>Coleção de corrida</b> de alto desempenho</span></div>
+    <div class="icard"><span class="dot"></span><span>Estilo e <b>conforto</b> no mesmo look</span></div>
+    <div class="icard"><span class="dot"></span><span><b>Bauru, SP</b> — pertinho de você</span></div>
+  </div>
+  <div class="frame f-right"><div class="im"></div></div>
+  <div class="cta">Vai querer ser a primeira <span class="arr">→</span></div>
+</section>
+
+<!-- A4 — CLIFFHANGER FINAL -->
+<section class="slide a4 bg-dark grid-bg">
+  <img class="logo logo-w" alt="Samara Trevisan">
+  <div class="content">
+    <h1>Não perde o lançamento.<br><span class="hl-cream">Segue agora.</span></h1>
+    <p class="p1">A inauguração está chegando e vai ser <b>especial</b> — ative as notificações.</p>
+  </div>
+  <div class="frame f-main"><div class="im"></div></div>
+  <div class="clip clip1">
+    <div class="src">Bauru · SP · 2025</div>
+    <h3>Moda fitness de alto padrão chega à cidade</h3>
+  </div>
+  <div class="punch">Acompanha tudo:<br><span class="hl-cream">@samaratrevisan_fitness</span></div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     CARROSSEL B — A MARCA
+     ══════════════════════════════════════════════ -->
+
+<!-- B1 — CAPA -->
+<section class="slide b1">
+  <img class="logo center logo-d" alt="Samara Trevisan">
+  <div class="line1">conheça a marca que vai</div>
+  <div class="giant">MUDAR</div>
+  <div class="line2">seu treino em Bauru</div>
+  <div class="footer-hint">a história começa aqui &nbsp;→</div>
+</section>
+
+<!-- B2 — IDENTIDADE -->
+<section class="slide b2 bg-white grid-bg">
+  <img class="logo logo-d" alt="Samara Trevisan">
+  <div class="content">
+    <h1>Design que<br><span class="hl">respeita seu corpo.</span></h1>
+    <p class="p1">Cada peça criada com <b>tecidos de performance</b> e modelagem que acompanha o movimento.</p>
+  </div>
+  <div class="frame f-main"><div class="im"></div></div>
+  <div class="stamp stamp-b">ALTO PADRÃO</div>
+  <div class="ph ph-side">
+    <div class="win"></div>
+    <div class="cap">feito para quem treina</div>
+  </div>
+  <div class="cta">A coleção vem aí <span class="arr">→</span></div>
+</section>
+
+<!-- B3 — COLEÇÃO -->
+<section class="slide b3 bg-cream grid-bg">
+  <img class="logo logo-d" alt="Samara Trevisan">
+  <h1>Coleções com<br>identidade própria:</h1>
+  <div class="frame f-left"><div class="im"></div></div>
+  <div class="collist">
+    <div class="colitem">
+      <div class="swatch sw-terra"></div>
+      <div><div class="clabel">Terra</div><div class="csub">Força e raízes</div></div>
+    </div>
+    <div class="colitem">
+      <div class="swatch sw-uvas"></div>
+      <div><div class="clabel">Uvas</div><div class="csub">Intensidade e cor</div></div>
+    </div>
+    <div class="colitem">
+      <div class="swatch sw-menta"></div>
+      <div><div class="clabel">Menta</div><div class="csub">Leveza e frescor</div></div>
+    </div>
+    <div class="colitem">
+      <div class="swatch sw-marinho"></div>
+      <div><div class="clabel">Marinho</div><div class="csub">Elegância e potência</div></div>
+    </div>
+  </div>
+  <div class="cta">Inauguração em breve <span class="arr">→</span></div>
+</section>
+
+<!-- B4 — CALL FINAL MARCA -->
+<section class="slide b4 grid-bg">
+  <img class="logo logo-w" alt="Samara Trevisan">
+  <div class="textblock">
+    <div class="overline">Bauru · SP · 2025</div>
+    <h1>A marca que<br>você esperava<br>está chegando.</h1>
+    <div class="sub">Ativa o <b>sininho</b> e não perde nenhuma novidade.</div>
+  </div>
+  <div class="handle-b"><b>@samaratrevisan_fitness</b></div>
+  <div class="cta">Segue agora <span class="arr">→</span></div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     CARROSSEL C — CONVITE BAURU
+     ══════════════════════════════════════════════ -->
+
+<!-- C1 — CAPA -->
+<section class="slide c1">
+  <img class="logo center logo-w" alt="Samara Trevisan">
+  <div class="line1">a inauguração está chegando</div>
+  <div class="giant">INAUGURA<br>EM BAURU</div>
+  <div class="line2">fique de olho &nbsp;👀</div>
+  <div class="footer-hint">você não vai querer perder &nbsp;→</div>
+</section>
+
+<!-- C2 — O CONVITE -->
+<section class="slide c2 bg-white grid-bg">
+  <img class="logo logo-d" alt="Samara Trevisan">
+  <div class="content">
+    <h1>Bauru, você<br>está <span class="hl">convidada.</span></h1>
+    <p class="p1">A Samara Trevisan vai inaugurar em breve — e <b>a abertura vai ser especial.</b></p>
+  </div>
+  <div class="frame f-main"><div class="im"></div></div>
+  <div class="stamp stamp-c">SAVE THE DATE</div>
+  <div class="ph ph-side">
+    <div class="win"></div>
+    <div class="cap">te vejo na inauguração</div>
+  </div>
+  <div class="cta">Prepara que vem muita coisa <span class="arr">→</span></div>
+</section>
+
+<!-- C3 — O QUE VEM -->
+<section class="slide c3 bg-cream grid-bg">
+  <img class="logo logo-d" alt="Samara Trevisan">
+  <h1>Tudo que vem<br>na inauguração:</h1>
+  <div class="checks">
+    <div class="chk"><span class="icon">✓</span><span><b>Coleção completa</b> disponível</span></div>
+    <div class="chk"><span class="icon">✓</span><span>Looks para <b>academia e corrida</b></span></div>
+    <div class="chk"><span class="icon">✓</span><span><b>Condições especiais</b> de lançamento</span></div>
+    <div class="chk"><span class="icon">✓</span><span>Peças <b>exclusivas</b> de alto padrão</span></div>
+  </div>
+  <div class="frame f-right"><div class="im"></div></div>
+  <div class="cta">A data vai sair em breve <span class="arr">→</span></div>
+</section>
+
+<!-- C4 — CONVITE FINAL -->
+<section class="slide c4 bg-white grid-bg">
+  <img class="logo center logo-d" alt="Samara Trevisan">
+  <div class="content">
+    <div class="overline">Bauru · SP · 2025</div>
+    <h1>Marca o calendário.<br>Ativa as notificações.<br><span class="hl">Aparece.</span></h1>
+    <div class="sub">Segue <b>@samaratrevisan_fitness</b><br>e fica por dentro de tudo.</div>
+  </div>
+  <div class="frame f-center"><div class="im"></div></div>
+  <div class="handle-line"><b>@samaratrevisan_fitness</b></div>
+  <div class="cta light">Vem com a gente <span class="arr">→</span></div>
+</section>
+
+</body>
+</html>

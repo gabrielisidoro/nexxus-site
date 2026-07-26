@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>vozinha — o poder do digital — @gabriel.isidoro_</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  /* ============ DESIGN TOKENS (V4 vermelho) ============ */
+  :root{
+    --red:#E50914;      --red-deep:#B00610;   --red-soft:#ff2a36;
+    --yellow:#FFD400;   --green:#00A859;      --green-br:#009C3B;
+    --ink:#0C0C0E;      --ink-2:#17171b;      --ink-3:#222228;
+    --paper:#F4F2ED;    --paper-2:#E9E5DD;    --line:#d9d4ca;
+    --white:#ffffff;
+    --safe:70px;
+    --yt:#FF0000;       --igblue:#0095F6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  html,body{background:#2a2a2e;}
+  body{font-family:'Inter',sans-serif;color:var(--ink);}
+
+  .slide{position:relative;width:1080px;height:1350px;overflow:hidden;margin:0 auto 46px;background:var(--paper);}
+  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;}
+
+  /* header lockup */
+  .topbar{position:absolute;top:var(--safe);left:var(--safe);right:var(--safe);
+    display:flex;align-items:center;justify-content:space-between;z-index:30;}
+  .brand{display:flex;align-items:center;gap:16px;}
+  .mono{width:62px;height:62px;border-radius:15px;background:var(--red);color:#fff;
+    font-family:'Anton';font-size:33px;line-height:1;display:flex;align-items:center;justify-content:center;
+    letter-spacing:.5px;box-shadow:0 10px 26px rgba(229,9,20,.42);position:relative;}
+  .mono::after{content:"";position:absolute;left:13px;right:13px;bottom:11px;height:3px;background:rgba(255,255,255,.85);border-radius:2px;}
+  .handle{font-weight:800;font-size:23px;letter-spacing:.2px;color:var(--ink);}
+  .tag{font-weight:800;font-size:18px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);opacity:.55;}
+  .topbar.on-dark .handle{color:#fff;}
+  .topbar.on-dark .tag{color:#fff;opacity:.6;}
+
+  /* dots + cta */
+  .dots{position:absolute;left:0;right:0;bottom:50px;display:flex;gap:11px;justify-content:center;z-index:30;}
+  .dots i{width:10px;height:10px;border-radius:50%;background:rgba(12,12,14,.22);transition:.2s;}
+  .dots i.on{background:var(--red);width:30px;border-radius:5px;}
+  .on-dark-dots i{background:rgba(255,255,255,.28);}
+  .on-dark-dots i.on{background:var(--red);}
+
+  .cta{position:absolute;left:var(--safe);right:var(--safe);bottom:108px;z-index:30;
+    background:var(--red);color:#fff;border-radius:999px;padding:24px 30px 24px 38px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+    box-shadow:0 22px 46px rgba(229,9,20,.36);}
+  .cta b{font-weight:800;font-size:32px;letter-spacing:.2px;line-height:1.05;}
+  .cta .arw{flex:0 0 auto;width:58px;height:58px;border-radius:50%;border:3px solid rgba(255,255,255,.92);
+    display:flex;align-items:center;justify-content:center;}
+  .cta .arw svg{width:26px;height:26px;fill:#fff;}
+
+  /* highlights */
+  .hi-y{background:var(--yellow);color:#101012;padding:.02em .22em;border-radius:5px;font-weight:800;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+  .hi-r{color:var(--red);font-weight:800;}
+  .box-r{background:var(--red);color:#fff;padding:.02em .2em;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+  .anton{font-family:'Anton';font-weight:400;}
+  .lg{display:inline-flex;} .lg svg{display:block;}
+
+  /* ============ INSTAGRAM PROFILE CARD (recriado) ============ */
+  .igp{width:420px;background:#0a0a0c;border:1px solid #25252b;border-radius:26px;
+    padding:30px 26px 30px;color:#fff;font-family:'Inter';position:relative;
+    box-shadow:0 30px 64px rgba(0,0,0,.30);}
+  .igp.after{border-color:rgba(229,9,20,.55);box-shadow:0 36px 80px rgba(229,9,20,.20),0 20px 50px rgba(0,0,0,.4);}
+  .igp .ribbon{position:absolute;top:-16px;left:24px;font-weight:800;font-size:16px;letter-spacing:2px;
+    text-transform:uppercase;padding:7px 14px;border-radius:8px;}
+  .igp.before .ribbon{background:#2a2a31;color:#c9c9d2;}
+  .igp.after .ribbon{background:var(--red);color:#fff;box-shadow:0 10px 22px rgba(229,9,20,.5);}
+  .igp .top{display:flex;align-items:center;gap:16px;margin-top:8px;}
+  .igp .av{width:80px;height:80px;border-radius:50%;flex:0 0 auto;
+    background:url('img/vozinha/voz-face.jpg') center 6%/180% no-repeat;border:3px solid #2a2a30;}
+  .igp.after .av{border:none;padding:3px;
+    background:url('img/vozinha/voz-face.jpg') center 6%/180% no-repeat content-box,
+      conic-gradient(from 30deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#feda75) border-box;}
+  .igp .stats{display:flex;flex:1;}
+  .igp .st{flex:1;text-align:center;}
+  .igp .st b{display:block;font-weight:800;font-size:23px;line-height:1;white-space:nowrap;}
+  .igp .st span{font-size:13px;color:#a0a0a8;font-weight:500;}
+  .igp.after .st.foll b{color:var(--red-soft);}
+  .igp .name{margin-top:18px;font-weight:700;font-size:23px;display:flex;align-items:center;gap:7px;}
+  .igp .vb{width:23px;height:23px;flex:0 0 auto;}
+  .igp .user{font-size:18px;color:#9a9aa2;font-weight:600;margin-top:3px;}
+  .igp .bio{margin-top:11px;font-size:17px;line-height:1.42;color:#dcdce2;min-height:74px;}
+  .igp .bio .em{color:#e8e8ee;}
+  .igp .btn{margin-top:18px;width:100%;border-radius:11px;padding:13px;text-align:center;font-weight:700;font-size:19px;}
+  .igp .btn.follow{background:var(--igblue);color:#fff;}
+  .igp .btn.following{background:#26262c;color:#fff;}
+
+  /* ====================================================================== */
+  /* SLIDE 1 — CAPA                                                          */
+  /* ====================================================================== */
+  #s1{background:#0a0a0c;}
+  #s1 .bg{position:absolute;inset:0;background:url('img/vozinha/voz-save.jpg') center 30%/cover no-repeat;}
+  #s1 .scrim{position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(8,8,12,.62) 0%,rgba(8,8,12,.12) 24%,rgba(8,8,12,.30) 48%,rgba(8,8,12,.84) 76%,rgba(6,6,9,.98) 100%);}
+  #s1 .glow{position:absolute;left:-10%;bottom:6%;width:80%;height:46%;z-index:1;
+    background:radial-gradient(closest-side,rgba(229,9,20,.55),transparent 70%);filter:blur(20px);opacity:.7;}
+  #s1 .live{position:absolute;top:74px;right:var(--safe);z-index:30;display:flex;align-items:center;gap:11px;
+    background:rgba(10,10,12,.55);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px);
+    padding:11px 18px 11px 14px;border-radius:999px;}
+  #s1 .live .yt{width:34px;height:24px;color:var(--yt);}
+  #s1 .live .dot{width:11px;height:11px;border-radius:50%;background:var(--red);}
+  #s1 .live span{color:#fff;font-weight:800;font-size:19px;letter-spacing:1.5px;}
+  #s1 .wrap{position:absolute;left:var(--safe);right:var(--safe);bottom:248px;z-index:20;}
+  #s1 .kick{display:inline-block;background:var(--red);color:#fff;font-weight:800;font-size:23px;
+    letter-spacing:2.4px;text-transform:uppercase;padding:9px 16px;border-radius:7px;margin-bottom:24px;}
+  #s1 .giant{font-family:'Anton';color:#fff;font-size:150px;line-height:.92;text-transform:uppercase;
+    letter-spacing:1px;text-shadow:0 8px 40px rgba(0,0,0,.55);}
+  #s1 .giant .l2{display:inline-block;background:var(--red);padding:0 18px 8px;margin-top:10px;border-radius:8px;}
+  #s1 .lead{margin-top:32px;max-width:880px;color:#f3f3f3;font-weight:500;font-size:31px;line-height:1.34;
+    text-shadow:0 2px 14px rgba(0,0,0,.6);}
+  #s1 .lead b{font-weight:800;color:#fff;}
+
+  /* ====================================================================== */
+  /* SLIDE 2 — O FATO                                                        */
+  /* ====================================================================== */
+  #s2{background:var(--paper);}
+  #s2 .head{position:absolute;top:176px;left:var(--safe);right:var(--safe);}
+  #s2 .h{font-weight:900;font-size:70px;line-height:.98;letter-spacing:-1.5px;color:var(--ink);}
+  #s2 .lead{margin-top:22px;font-size:28px;line-height:1.4;color:#3a3a40;font-weight:500;max-width:500px;}
+  #s2 .lead b{color:var(--ink);font-weight:800;}
+  /* foto recorte do vozinha */
+  #s2 .photo{position:absolute;right:54px;top:432px;width:430px;height:556px;border-radius:24px;overflow:hidden;
+    transform:rotate(2.5deg);border:8px solid #fff;box-shadow:0 36px 70px rgba(0,0,0,.28);z-index:3;
+    background:url('img/vozinha/voz-face.jpg') center 8%/cover no-repeat;}
+  #s2 .photo .tagp{position:absolute;left:0;right:0;bottom:0;padding:38px 18px 14px;
+    background:linear-gradient(180deg,transparent,rgba(0,0,0,.8));color:#fff;font-weight:700;font-size:19px;
+    display:flex;align-items:center;gap:8px;}
+  #s2 .photo .tagp .yt{width:28px;height:20px;color:#fff;}
+  /* cluster de chat ao vivo */
+  #s2 .chatwrap{position:absolute;left:70px;top:806px;z-index:5;display:flex;flex-direction:column;gap:12px;transform:rotate(-2deg);}
+  #s2 .chat{background:#fff;border:1px solid var(--line);border-radius:16px 16px 16px 4px;padding:14px 18px;
+    font-weight:600;font-size:20px;color:#26262b;box-shadow:0 16px 34px rgba(0,0,0,.12);max-width:440px;}
+  #s2 .chat b{color:var(--red);}
+  #s2 .chat .who{display:block;font-size:15px;color:#9a9aa2;font-weight:700;margin-bottom:3px;}
+  #s2 .stamp{position:absolute;right:80px;top:404px;z-index:6;background:var(--red);color:#fff;
+    font-family:'Anton';font-size:30px;letter-spacing:1px;text-transform:uppercase;padding:12px 22px;border-radius:10px;
+    transform:rotate(-5deg);box-shadow:0 16px 34px rgba(229,9,20,.45);}
+
+  /* ====================================================================== */
+  /* SLIDE 3 — O ANTES E DEPOIS (os prints)                                  */
+  /* ====================================================================== */
+  #s3{background:var(--paper);}
+  #s3 .head{position:absolute;top:170px;left:var(--safe);right:var(--safe);z-index:2;}
+  #s3 .h{font-weight:900;font-size:64px;line-height:.98;letter-spacing:-1.5px;color:var(--ink);}
+  #s3 .h .sub{display:block;font-weight:600;font-size:28px;color:#54545c;letter-spacing:0;margin-top:12px;}
+  #s3 .cards{position:absolute;top:430px;left:var(--safe);right:var(--safe);z-index:2;
+    display:flex;justify-content:space-between;align-items:center;}
+  #s3 .mult{position:absolute;top:642px;left:50%;translate:-50% -50%;z-index:8;
+    width:118px;height:118px;border-radius:50%;background:var(--red);color:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    box-shadow:0 18px 40px rgba(229,9,20,.5);border:6px solid var(--paper);}
+  #s3 .mult b{font-family:'Anton';font-size:46px;line-height:.8;}
+  #s3 .mult span{font-size:15px;font-weight:800;letter-spacing:1px;margin-top:3px;}
+  #s3 .note{position:absolute;left:var(--safe);right:var(--safe);bottom:198px;z-index:2;
+    background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 30px;
+    display:flex;align-items:center;gap:18px;box-shadow:0 18px 40px rgba(0,0,0,.08);}
+  #s3 .note .ic{flex:0 0 auto;width:54px;height:54px;border-radius:13px;background:rgba(229,9,20,.12);
+    display:flex;align-items:center;justify-content:center;font-size:30px;}
+  #s3 .note p{font-weight:600;font-size:25px;line-height:1.3;color:#33333a;}
+  #s3 .note p b{color:var(--red);font-weight:800;}
+
+  /* ====================================================================== */
+  /* SLIDE 4 — A ESCALA                                                      */
+  /* ====================================================================== */
+  #s4{background:#0b0b0f;}
+  #s4 .bg{position:absolute;inset:0;background:url('img/caze/stadium-2.jpg') center/cover no-repeat;opacity:.14;}
+  #s4 .scrim{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 0%,rgba(229,9,20,.20),transparent 55%),linear-gradient(180deg,#0b0b0f 0%,#0e0e14 55%,#0b0b0f 100%);}
+  #s4 .head{position:absolute;top:176px;left:var(--safe);right:var(--safe);z-index:5;}
+  #s4 .h{font-weight:900;font-size:64px;line-height:1.0;letter-spacing:-1.3px;color:#fff;}
+  #s4 .h .sub{display:block;font-weight:600;font-size:28px;color:#b9b9c4;margin-top:12px;letter-spacing:0;}
+  #s4 .money{position:absolute;top:392px;left:var(--safe);right:var(--safe);z-index:5;}
+  #s4 .big{display:inline-block;background:var(--red);color:#fff;font-family:'Anton';font-size:150px;line-height:.86;
+    padding:8px 26px 16px;border-radius:14px;box-shadow:0 30px 60px rgba(229,9,20,.32);letter-spacing:1px;}
+  #s4 .cap{font-weight:700;font-size:29px;color:#d6d6de;margin-top:20px;}
+  #s4 .cap b{color:var(--red-soft);}
+  #s4 .chart{position:absolute;top:690px;left:var(--safe);width:540px;background:#15151b;border:1px solid #26262d;
+    border-radius:24px;padding:28px 34px 26px;color:#fff;z-index:5;box-shadow:0 26px 56px rgba(0,0,0,.4);}
+  #s4 .chart .ct{font-weight:800;font-size:22px;}
+  #s4 .chart .cs{font-weight:500;font-size:17px;color:#a9a9b4;margin-top:3px;}
+  #s4 .bars{display:flex;align-items:flex-end;gap:40px;height:150px;margin-top:26px;padding-left:6px;}
+  #s4 .bar{flex:1;border-radius:10px 10px 0 0;position:relative;display:flex;justify-content:center;}
+  #s4 .bar span{position:absolute;top:-36px;font-family:'Anton';font-size:28px;white-space:nowrap;}
+  #s4 .bar small{position:absolute;bottom:-32px;font-weight:700;font-size:16px;color:#cfcfd6;letter-spacing:.5px;white-space:nowrap;}
+  #s4 .bar.b1{background:linear-gradient(180deg,#3a3a42,#2a2a31);height:4%;}
+  #s4 .bar.b1 span{color:#cfcfd6;}
+  #s4 .bar.b2{background:linear-gradient(180deg,var(--red-soft),var(--red));height:96%;box-shadow:0 0 30px rgba(229,9,20,.5);}
+  #s4 .stk{position:absolute;top:690px;right:var(--safe);width:344px;z-index:5;display:flex;flex-direction:column;gap:20px;}
+  #s4 .stat{background:#15151b;border:1px solid #26262d;border-radius:22px;padding:26px 28px;box-shadow:0 22px 50px rgba(0,0,0,.34);}
+  #s4 .stat .v{font-family:'Anton';font-size:64px;line-height:.9;color:#fff;}
+  #s4 .stat .v em{font-style:normal;color:var(--red-soft);}
+  #s4 .stat .l{font-weight:600;font-size:20px;color:#c4c4cc;margin-top:8px;line-height:1.3;}
+
+  /* ====================================================================== */
+  /* SLIDE 5 — A LIÇÃO / CTA                                                 */
+  /* ====================================================================== */
+  #s5{background:#08080b;}
+  #s5 .bg{position:absolute;inset:0;background:url('img/vozinha/voz-save.jpg') center 24%/cover no-repeat;opacity:.20;}
+  #s5 .scrim{position:absolute;inset:0;background:linear-gradient(180deg,#0a0a0e 0%,rgba(10,10,14,.6) 38%,#08080b 100%);}
+  #s5 .wm{position:absolute;font-family:'Anton';font-size:300px;line-height:1;color:rgba(255,255,255,.045);
+    left:-18px;top:320px;letter-spacing:6px;z-index:1;}
+  #s5 .photo{position:absolute;right:54px;top:430px;width:368px;height:460px;border-radius:24px;overflow:hidden;z-index:3;
+    background:url('img/vozinha/voz-save.jpg') center 20%/cover no-repeat;border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 40px 80px rgba(0,0,0,.55);transform:rotate(2deg);}
+  #s5 .photo .pg{position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,8,11,.88));}
+  #s5 .photo .pt{position:absolute;left:18px;bottom:16px;color:#fff;font-weight:800;font-size:19px;}
+  #s5 .photo .pt small{display:block;font-weight:600;font-size:15px;color:#c9c9d2;margin-top:2px;}
+  #s5 .head{position:absolute;top:184px;left:var(--safe);right:var(--safe);z-index:4;}
+  #s5 .h{font-weight:900;font-size:58px;line-height:1.02;letter-spacing:-1.3px;color:#fff;max-width:880px;}
+  #s5 .body{position:absolute;top:452px;left:var(--safe);z-index:4;width:512px;}
+  #s5 .body p{font-size:28px;line-height:1.42;color:#d6d6de;font-weight:500;}
+  #s5 .body p b{color:#fff;font-weight:800;}
+  #s5 .punch{margin-top:30px;font-family:'Anton';font-size:60px;line-height:.96;color:#fff;text-transform:uppercase;letter-spacing:.5px;}
+  #s5 .punch em{font-style:normal;color:#fff;background:var(--red);padding:0 14px 4px;border-radius:6px;display:inline-block;}
+  #s5 .ctabtn{position:absolute;left:var(--safe);right:var(--safe);bottom:118px;z-index:5;background:var(--red);
+    color:#fff;border-radius:20px;padding:24px 30px;display:flex;align-items:center;justify-content:space-between;gap:18px;
+    box-shadow:0 24px 52px rgba(229,9,20,.4);}
+  #s5 .ctabtn .t b{display:block;font-weight:900;font-size:30px;line-height:1.08;}
+  #s5 .ctabtn .t span{font-weight:600;font-size:20px;opacity:.92;}
+  #s5 .ctabtn .arw{flex:0 0 auto;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.16);
+    border:3px solid rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;}
+  #s5 .ctabtn .arw svg{width:28px;height:28px;fill:#fff;}
+  #s5 .handle{position:absolute;left:var(--safe);right:var(--safe);bottom:256px;z-index:5;text-align:center;
+    font-weight:600;font-size:23px;color:#9a9aa2;}
+  #s5 .handle b{color:#fff;font-weight:800;}
+</style>
+</head>
+<body>
+
+<!-- ====== SPRITE ====== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="yt" viewBox="0 0 24 24"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
+  <symbol id="vb" viewBox="0 0 24 24"><path fill="#3897F0" d="M12 1l2.9 2.1 3.5-.5 1.4 3.3 3.2 1.6-.8 3.5L24 14l-2.4 2.6.8 3.5-3.2 1.6-1.4 3.3-3.5-.5L12 23l-2.9-2.1-3.5.5-1.4-3.3L1 16.6l.8-3.5L0 10.5l2.4-2.6L1.6 4.4l3.2-1.6L6.2.5 9.7 1z"/><path fill="#fff" d="M10.6 14.6l-2.3-2.3-1.3 1.3 3.6 3.6 6.4-6.4-1.3-1.3z"/></symbol>
+  <symbol id="arw" viewBox="0 0 24 24"><path fill="currentColor" d="M5 12h12.2l-4.6-4.6L14 6l7 7-7 7-1.4-1.4 4.6-4.6H5z"/></symbol>
+</defs></svg>
+
+
+<!-- ====================== SLIDE 1 — CAPA ====================== -->
+<section class="slide grain" id="s1">
+  <div class="bg"></div><div class="scrim"></div><div class="glow"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">Poder do digital</div>
+  </div>
+  <div class="live"><span class="dot"></span><svg class="yt lg"><use href="#yt"/></svg><span>CAZÉTV</span></div>
+
+  <div class="wrap">
+    <span class="kick">A CazéTV mandou seguir um goleiro</span>
+    <div class="giant">DE 50 MIL A<br/><span class="l2">12 MILHÕES</span></div>
+    <p class="lead">Na Copa de 2026, o <b>Vozinha</b>, goleiro de Cabo Verde, saltou de 50 mil para <b>+12 milhões</b> de seguidores em poucos dias.</p>
+  </div>
+
+  <div class="cta"><b>Arrasta pra entender a jogada</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+
+<!-- ====================== SLIDE 2 — O FATO ====================== -->
+<section class="slide grain" id="s2">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">01 · O fato</div>
+  </div>
+  <div class="head">
+    <div class="h">Tudo começou<br/>com um pedido<br/>ao vivo.</div>
+    <p class="lead">Na transmissão da Copa, a <b>CazéTV</b> apontou os holofotes pro Vozinha, goleiro de <b>40 anos</b> que brilhou na estreia de Cabo Verde. O recado pra milhões: <b>"segue o cara".</b></p>
+  </div>
+
+  <div class="stamp">VIRALIZOU</div>
+  <div class="photo">
+    <div class="tagp"><svg class="yt lg"><use href="#yt"/></svg> Vozinha · Cabo Verde</div>
+  </div>
+  <div class="chatwrap">
+    <div class="chat"><span class="who">@torcedor_br</span> esse goleiro é GIGANTE, seguindo agora 🧤</div>
+    <div class="chat"><span class="who">@casimiro live</span> <b>SEGUE O VOZINHA</b> galera!!</div>
+    <div class="chat"><span class="who">@cabover.de</span> orgulho da nossa ilha 🇨🇻</div>
+  </div>
+
+  <div class="cta"><b>Olha o antes e o depois</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+</section>
+
+
+<!-- ====================== SLIDE 3 — O ANTES E DEPOIS ====================== -->
+<section class="slide grain" id="s3">
+  <div class="topbar">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">02 · O print</div>
+  </div>
+  <div class="head">
+    <div class="h">O print que<br/>parece photoshop:<span class="sub">mesma conta · poucos dias de diferença.</span></div>
+  </div>
+
+  <div class="cards">
+    <!-- ANTES -->
+    <div class="igp before">
+      <span class="ribbon">Antes</span>
+      <div class="top">
+        <div class="av"></div>
+        <div class="stats">
+          <div class="st"><b>432</b><span>posts</span></div>
+          <div class="st foll"><b>50 mil</b><span>seguidores</span></div>
+          <div class="st"><b>2.160</b><span>seguindo</span></div>
+        </div>
+      </div>
+      <div class="name">Josimar Dias</div>
+      <div class="user">@vozinha1</div>
+      <div class="bio">Jogador de futebol profissional 🌍<br/>Seleção nacional de Cabo Verde 🇨🇻</div>
+      <div class="btn following">Seguindo</div>
+    </div>
+
+    <!-- DEPOIS -->
+    <div class="igp after">
+      <span class="ribbon">Depois</span>
+      <div class="top">
+        <div class="av"></div>
+        <div class="stats">
+          <div class="st"><b>439</b><span>posts</span></div>
+          <div class="st foll"><b>12,2 mi</b><span>seguidores</span></div>
+          <div class="st"><b>2.184</b><span>seguindo</span></div>
+        </div>
+      </div>
+      <div class="name">Josimar Dias <svg class="vb"><use href="#vb"/></svg></div>
+      <div class="user">@vozinha1</div>
+      <div class="bio">Nunca esqueças quem és, e de onde vieste!<br/>Jogador profissional 🌍 · Cabo Verde 🇨🇻</div>
+      <div class="btn follow">Seguir</div>
+    </div>
+  </div>
+
+  <div class="mult"><b>244x</b><span>EM DIAS</span></div>
+
+  <div class="note">
+    <span class="ic">📈</span>
+    <p>De 50 mil pra <b>12,2 milhões</b>. É como ganhar <b>+12 milhões</b> de pessoas em uma única Copa.</p>
+  </div>
+
+  <div class="cta"><b>De onde vem esse poder?</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+</section>
+
+
+<!-- ====================== SLIDE 4 — A ESCALA ====================== -->
+<section class="slide grain" id="s4">
+  <div class="bg"></div><div class="scrim"></div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">03 · A escala</div>
+  </div>
+  <div class="head">
+    <div class="h">Isso é atenção<br/>em estado puro.<span class="sub">o que o digital faz quando aponta pra alguém.</span></div>
+  </div>
+
+  <div class="money">
+    <span class="big anton">+12 MI</span>
+    <p class="cap"><b>novos seguidores</b> sem assessoria, sem campanha paga. Só recomendação em escala.</p>
+  </div>
+
+  <div class="chart">
+    <div class="ct">Crescimento de seguidores</div>
+    <div class="cs">o salto que a TV tradicional levaria anos pra dar</div>
+    <div class="bars">
+      <div class="bar b1"><span>50 mil</span><small>ANTES</small></div>
+      <div class="bar b2"><span>12,2 mi</span><small>DEPOIS</small></div>
+    </div>
+  </div>
+
+  <div class="stk">
+    <div class="stat">
+      <div class="v">244<em>x</em></div>
+      <div class="l">mais seguidores em poucos dias</div>
+    </div>
+    <div class="stat">
+      <div class="v">40<em> anos</em></div>
+      <div class="l">a idade do Vozinha. Fenômeno não tem idade</div>
+    </div>
+  </div>
+
+  <div class="cta"><b>A lição que fica pra você</b><span class="arw"><svg><use href="#arw"/></svg></span></div>
+  <div class="dots on-dark-dots"><i></i><i></i><i></i><i class="on"></i><i></i></div>
+</section>
+
+
+<!-- ====================== SLIDE 5 — A LIÇÃO / CTA ====================== -->
+<section class="slide grain" id="s5">
+  <div class="bg"></div><div class="scrim"></div>
+  <div class="wm anton">DIGITAL</div>
+  <div class="topbar on-dark">
+    <div class="brand"><div class="mono">GI</div><div class="handle">@gabriel.isidoro_</div></div>
+    <div class="tag">04 · A lição</div>
+  </div>
+  <div class="head">
+    <div class="h">O digital não pede<br/>licença. Ele<br/>fabrica ídolos.</div>
+  </div>
+
+  <div class="photo">
+    <div class="pg"></div>
+    <div class="pt">Vozinha<small>de desconhecido a fenômeno global</small></div>
+  </div>
+
+  <div class="body">
+    <p>Um único momento certo, dentro da narrativa certa, vale mais que <b>anos de mídia comprada.</b><br/><br/>Quem entende de atenção não disputa preço. <b>Cria pauta.</b></p>
+    <div class="punch">ATENÇÃO<br/><em>VIROU MOEDA</em></div>
+  </div>
+
+  <div class="handle">Mais análises do digital assim · <b>@gabriel.isidoro_</b></div>
+  <div class="ctabtn">
+    <div class="t"><b>Salva e manda pra quem cria conteúdo</b><span>e ativa o 🔔 pra não perder</span></div>
+    <span class="arw"><svg><use href="#arw"/></svg></span>
+  </div>
+  <div class="dots on-dark-dots"><i></i><i></i><i></i><i></i><i class="on"></i></div>
+</section>
+
+</body>
+</html>

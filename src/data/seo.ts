@@ -261,6 +261,20 @@ export function blogPostingSchema(post: BlogPostingInput) {
   }
 }
 
+// ─── Schema: FAQPage do post ─────────────────────────────────────────────────
+export function postFaqSchema(slug: string, faq: { pergunta: string; resposta: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${BASE_URL}/blog/${slug}#faq`,
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.pergunta,
+      acceptedAnswer: { '@type': 'Answer', text: item.resposta },
+    })),
+  }
+}
+
 // ─── Schema: Blog (índice) ───────────────────────────────────────────────────
 export function blogIndexSchema(posts: { slug: string; title: string; date: string }[]) {
   return {

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* logos — preenchidas pelo build, não editar */
+  img.lw { content: url("__LOGO_W__"); }
+  img.ld { content: url("__LOGO_D__"); }
+
+  :root{
+    --bg:#F4F2EE; --dark:#1C1814;
+    --ch:#6B3020; --pu:#7A2D7E; --sg:#5E8267; --nv:#1B2A4A;
+    --cr:#F4F2EE;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{margin:0;font-family:'Montserrat',sans-serif;}
+  .slide{width:1080px;height:1350px;position:relative;overflow:hidden;}
+
+  /* ── backgrounds ── */
+  .bg-dark{background:var(--dark);}
+  .bg-cr{background:var(--bg);}
+  .bg-ch{background:var(--ch);}
+  .bg-pu{background:var(--pu);}
+  .bg-sg{background:var(--sg);}
+  .bg-nv{background:var(--nv);}
+
+  /* ── grid overlay ── */
+  .grid::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(to right,rgba(255,255,255,.055) 1px,transparent 1px),
+      linear-gradient(to bottom,rgba(255,255,255,.055) 1px,transparent 1px);
+    background-size:72px 72px;
+  }
+  .grid.lt::before{
+    background-image:
+      linear-gradient(to right,rgba(28,24,20,.07) 1px,transparent 1px),
+      linear-gradient(to bottom,rgba(28,24,20,.07) 1px,transparent 1px);
+  }
+
+  /* ── handle ── */
+  .hdl{position:absolute;top:50px;right:64px;z-index:10;
+    font-size:23px;font-weight:700;color:rgba(255,255,255,.48);}
+  .hdl.dk{color:rgba(28,24,20,.38);}
+
+  /* ── tag pill (top-left) ── */
+  .tag{position:absolute;top:50px;left:64px;z-index:10;
+    font-size:18px;font-weight:700;padding:10px 22px;border-radius:8px;
+    text-transform:uppercase;letter-spacing:.08em;}
+  .tag-pu{background:var(--pu);color:#fff;}
+  .tag-ch{background:var(--ch);color:#fff;}
+  .tag-sg{background:var(--sg);color:#fff;}
+  .tag-nv{background:var(--nv);color:#fff;}
+  .tag-cr{background:var(--cr);color:var(--dark);}
+  .tag-dk{background:var(--dark);color:#fff;}
+
+  /* ── highlight spans ── */
+  .hl-pu{background:var(--pu);color:#fff;padding:2px 16px;border-radius:10px;}
+  .hl-ch{background:var(--ch);color:#fff;padding:2px 16px;border-radius:10px;}
+  .hl-sg{background:var(--sg);color:#fff;padding:2px 16px;border-radius:10px;}
+  .hl-nv{background:var(--nv);color:#fff;padding:2px 16px;border-radius:10px;}
+  .hl-cr{background:var(--cr);color:var(--dark);padding:2px 16px;border-radius:10px;}
+
+  /* ── CTA pill ── */
+  .cta{
+    position:absolute;bottom:54px;left:50%;transform:translateX(-50%);
+    border-radius:999px;display:flex;align-items:center;justify-content:center;gap:24px;
+    padding:28px 50px;font-size:32px;font-weight:700;
+    width:max-content;max-width:940px;z-index:9;white-space:nowrap;
+    font-family:'Montserrat',sans-serif;
+  }
+  .cta .arr{
+    flex:none;width:54px;height:54px;border-radius:50%;
+    border:3px solid rgba(255,255,255,.9);
+    display:flex;align-items:center;justify-content:center;
+    font-size:27px;font-weight:700;line-height:1;
+  }
+  .cta-pu{background:var(--pu);color:#fff;box-shadow:0 18px 50px -12px rgba(122,45,126,.55);}
+  .cta-ch{background:var(--ch);color:#fff;box-shadow:0 18px 50px -12px rgba(107,48,32,.55);}
+  .cta-sg{background:var(--sg);color:#fff;box-shadow:0 18px 50px -12px rgba(94,130,103,.55);}
+  .cta-nv{background:var(--nv);color:#fff;box-shadow:0 18px 50px -12px rgba(27,42,74,.55);}
+  .cta-dk{background:var(--dark);color:#fff;box-shadow:0 18px 50px -12px rgba(0,0,0,.5);}
+  .cta-cr{background:var(--cr);color:var(--dark);box-shadow:0 18px 50px -12px rgba(200,196,190,.4);}
+  .cta-cr .arr{border-color:var(--dark);}
+
+  /* ── logo helpers ── */
+  .logo{position:absolute;z-index:8;}
+  .logo.center{left:50%;transform:translateX(-50%);}
+  .logo.tl{top:50px;left:64px;}
+
+  /* ── white card ── */
+  .card{background:#fff;border-radius:24px;box-shadow:0 16px 48px -14px rgba(28,24,20,.18);}
+
+  /* ── numbered badge ── */
+  .nbadge{display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:900;border-radius:12px;font-family:'Montserrat',sans-serif;}
+
+  /* ── check item ── */
+  .chk{display:flex;align-items:flex-start;gap:18px;
+    font-size:30px;font-weight:600;color:var(--dark);line-height:1.4;}
+  .chk-dot{flex:none;width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:17px;font-weight:900;color:#fff;margin-top:3px;}
+
+  /* ── vertical color bar (left accent) ── */
+  .vbar{position:absolute;left:0;top:0;bottom:0;width:12px;}
+
+  /* ══════════════════════════════════════════
+     CARROSSEL 1 — TEASER MISTERIOSO
+  ══════════════════════════════════════════ */
+
+  /* S01 — dark, giant hook */
+  .s01 .accent-bar{position:absolute;top:162px;left:72px;
+    width:72px;height:6px;background:var(--ch);border-radius:3px;}
+  .s01 .line1{position:absolute;top:186px;left:72px;right:72px;
+    font-family:'Anton',sans-serif;font-size:200px;line-height:1;
+    color:#fff;letter-spacing:2px;}
+  .s01 .line2{position:absolute;top:382px;left:72px;right:72px;
+    font-family:'Anton',sans-serif;font-size:200px;line-height:1;
+    color:var(--ch);letter-spacing:2px;}
+  .s01 .line3{position:absolute;top:598px;left:72px;right:72px;
+    font-family:'Anton',sans-serif;font-size:200px;line-height:1;
+    color:#fff;letter-spacing:2px;opacity:.18;}
+  .s01 .sub{position:absolute;top:842px;left:72px;right:120px;
+    font-size:34px;font-weight:400;color:rgba(244,242,238,.65);line-height:1.55;}
+
+  /* S02 — cream, swatches */
+  .s02 .content{position:absolute;top:176px;left:72px;right:72px;}
+  .s02 h1{font-size:56px;font-weight:900;color:var(--dark);line-height:1.18;}
+  .s02 .p1{margin-top:22px;font-size:31px;font-weight:400;
+    color:rgba(28,24,20,.62);line-height:1.55;}
+  .s02 .p1 b{font-weight:800;color:var(--dark);}
+  .s02 .swatches{
+    position:absolute;top:694px;left:72px;right:72px;height:290px;
+    display:flex;border-radius:20px;overflow:hidden;
+  }
+  .s02 .sw{flex:1;display:flex;flex-direction:column;
+    align-items:center;justify-content:flex-end;padding-bottom:26px;}
+  .s02 .sw-name{font-size:20px;font-weight:700;color:rgba(255,255,255,.82);
+    text-transform:uppercase;letter-spacing:.06em;}
+  .s02 .caption{
+    position:absolute;top:1010px;left:72px;right:72px;
+    font-size:24px;font-weight:600;color:rgba(28,24,20,.45);
+    text-transform:uppercase;letter-spacing:.07em;
+  }
+
+  /* S03 — choco, logo centrada */
+  .s03 .logo-hero{top:50%;left:50%;transform:translate(-50%,-54%);height:200px;}
+  .s03 .above{position:absolute;top:282px;left:0;right:0;text-align:center;
+    font-size:22px;font-weight:300;color:rgba(244,242,238,.65);
+    letter-spacing:10px;text-transform:uppercase;}
+  .s03 .below{position:absolute;top:790px;left:0;right:0;text-align:center;
+    font-family:'Anton',sans-serif;font-size:88px;color:rgba(244,242,238,.85);
+    letter-spacing:4px;}
+  .s03 .city{position:absolute;top:898px;left:0;right:0;text-align:center;
+    font-size:28px;font-weight:300;color:rgba(244,242,238,.55);
+    letter-spacing:8px;text-transform:uppercase;}
+
+  /* S04 — dark, CTA segue */
+  .s04 .content{position:absolute;top:220px;left:72px;right:72px;}
+  .s04 h1{font-size:72px;font-weight:900;color:#fff;line-height:1.1;}
+  .s04 h1 em{font-style:normal;color:var(--ch);}
+  .s04 .p1{margin-top:30px;font-size:34px;font-weight:400;
+    color:rgba(244,242,238,.65);line-height:1.55;}
+  .s04 .p1 b{font-weight:700;color:#fff;}
+  .s04 .logo-bottom{bottom:164px;left:50%;transform:translateX(-50%);height:72px;}
+
+  /* ══════════════════════════════════════════
+     CARROSSEL 2 — REVELAÇÃO DA MARCA
+  ══════════════════════════════════════════ */
+
+  /* S05 — dark, reveal statement */
+  .s05 .line1{position:absolute;top:154px;left:72px;
+    font-family:'Anton',sans-serif;font-size:196px;line-height:1;
+    color:#fff;letter-spacing:2px;}
+  .s05 .line2{position:absolute;top:346px;left:72px;
+    font-family:'Anton',sans-serif;font-size:196px;line-height:1;
+    color:#fff;letter-spacing:2px;}
+  .s05 .line3{position:absolute;top:538px;left:72px;
+    font-family:'Anton',sans-serif;font-size:196px;line-height:1;
+    color:var(--pu);letter-spacing:2px;}
+  .s05 .sub{position:absolute;top:772px;left:72px;right:72px;
+    font-size:34px;font-weight:400;color:rgba(244,242,238,.68);line-height:1.55;}
+  .s05 .sub b{font-weight:700;color:#fff;}
+
+  /* S06 — cream, 3 feature cards */
+  .s06 .content{position:absolute;top:172px;left:72px;right:72px;}
+  .s06 h1{font-size:56px;font-weight:900;color:var(--dark);line-height:1.18;}
+  .s06 .sub{margin-top:16px;font-size:30px;font-weight:400;
+    color:rgba(28,24,20,.58);line-height:1.5;}
+  .s06 .plays{position:absolute;top:476px;left:72px;right:72px;
+    display:flex;flex-direction:column;gap:30px;}
+  .s06 .play{position:relative;padding:34px 30px 26px;}
+  .s06 .play .nbadge{
+    position:absolute;top:-22px;left:28px;
+    width:62px;height:48px;font-size:23px;
+    box-shadow:0 8px 24px -6px rgba(28,24,20,.3);
+  }
+  .s06 .play h2{font-size:30px;font-weight:800;color:var(--dark);}
+  .s06 .play p{margin-top:8px;font-size:25px;font-weight:400;
+    color:rgba(28,24,20,.6);line-height:1.35;}
+  .s06 .play p b{color:var(--dark);font-weight:700;}
+
+  /* S07 — purple, logo grande */
+  .s07 .label-top{position:absolute;top:220px;left:0;right:0;text-align:center;
+    font-size:22px;font-weight:300;color:rgba(244,242,238,.6);
+    letter-spacing:10px;text-transform:uppercase;}
+  .s07 .logo-hero{top:310px;left:50%;transform:translateX(-50%);height:210px;}
+  .s07 .em-breve{position:absolute;top:560px;left:0;right:0;text-align:center;
+    font-family:'Anton',sans-serif;font-size:110px;line-height:1;
+    color:rgba(244,242,238,.9);letter-spacing:4px;}
+  .s07 .city{position:absolute;top:682px;left:0;right:0;text-align:center;
+    font-size:30px;font-weight:300;color:rgba(244,242,238,.55);
+    letter-spacing:8px;text-transform:uppercase;}
+
+  /* S08 — dark, be first */
+  .s08 .content{position:absolute;top:210px;left:72px;right:72px;}
+  .s08 h1{font-size:66px;font-weight:900;color:#fff;line-height:1.12;}
+  .s08 h1 em{font-style:normal;color:var(--pu);}
+  .s08 .p1{margin-top:28px;font-size:34px;font-weight:400;
+    color:rgba(244,242,238,.65);line-height:1.55;}
+  .s08 .p1 b{font-weight:700;color:#fff;}
+  .s08 .stamp{
+    position:absolute;top:796px;left:72px;z-index:6;
+    background:var(--pu);color:#fff;
+    font-size:26px;font-weight:800;letter-spacing:.04em;
+    padding:14px 30px;border-radius:10px;
+    box-shadow:0 16px 40px -10px rgba(122,45,126,.65);
+  }
+  .s08 .logo-bottom{bottom:164px;left:50%;transform:translateX(-50%);height:72px;}
+
+  /* ══════════════════════════════════════════
+     CARROSSEL 3 — AS CORES DA MARCA
+  ══════════════════════════════════════════ */
+
+  /* S09 — sage bg, tipografia em cascata */
+  .s09 .line-ch{position:absolute;top:132px;left:72px;
+    font-family:'Anton',sans-serif;font-size:222px;line-height:1;
+    color:rgba(244,242,238,.97);letter-spacing:2px;}
+  .s09 .line-pu{position:absolute;top:354px;left:72px;
+    font-family:'Anton',sans-serif;font-size:176px;line-height:1;
+    color:rgba(244,242,238,.75);letter-spacing:2px;}
+  .s09 .line-sg{position:absolute;top:546px;left:72px;
+    font-family:'Anton',sans-serif;font-size:144px;line-height:1;
+    color:rgba(244,242,238,.55);letter-spacing:2px;}
+  .s09 .line-nv{position:absolute;top:706px;left:72px;
+    font-family:'Anton',sans-serif;font-size:118px;line-height:1;
+    color:rgba(244,242,238,.38);letter-spacing:2px;}
+  .s09 .tagline{position:absolute;top:856px;left:72px;right:72px;
+    font-size:34px;font-weight:500;color:rgba(244,242,238,.75);line-height:1.5;}
+  .s09 .tagline b{font-weight:900;color:#fff;}
+
+  /* S10 — cream, split com faixa de cor vertical */
+  .s10 .color-strip{
+    position:absolute;left:0;top:0;bottom:0;width:340px;
+    display:flex;flex-direction:column;
+  }
+  .s10 .cs-ch{flex:1;background:var(--ch);}
+  .s10 .cs-pu{flex:1;background:var(--pu);}
+  .s10 .cs-sg{flex:1;background:var(--sg);}
+  .s10 .cs-nv{flex:1;background:var(--nv);}
+  .s10 .content{position:absolute;top:196px;left:388px;right:64px;}
+  .s10 h1{font-size:54px;font-weight:900;color:var(--dark);line-height:1.18;}
+  .s10 .p1{margin-top:24px;font-size:29px;font-weight:400;
+    color:rgba(28,24,20,.62);line-height:1.55;}
+  .s10 .color-pills{position:absolute;top:830px;left:388px;right:64px;
+    display:flex;flex-direction:column;gap:18px;}
+  .s10 .cpill{
+    display:flex;align-items:center;gap:20px;
+    font-size:26px;font-weight:700;color:var(--dark);
+  }
+  .s10 .cpill-dot{width:38px;height:38px;border-radius:50%;flex:none;}
+
+  /* S11 — navy bg, posicionamento */
+  .s11 .logo-top{top:100px;left:50%;transform:translateX(-50%);height:110px;}
+  .s11 .giant{position:absolute;top:284px;left:72px;right:72px;
+    font-family:'Anton',sans-serif;font-size:186px;line-height:.92;
+    color:#fff;letter-spacing:2px;}
+  .s11 .sub{position:absolute;top:940px;left:72px;right:72px;
+    font-size:34px;font-weight:400;color:rgba(244,242,238,.68);line-height:1.55;}
+  .s11 .sub b{font-weight:700;color:#fff;}
+
+  /* S12 — cream, convite final carrossel 3 */
+  .s12 .content{position:absolute;top:172px;left:72px;right:72px;}
+  .s12 h1{font-size:60px;font-weight:900;color:var(--dark);line-height:1.15;}
+  .s12 h1 em{font-style:normal;color:var(--ch);}
+  .s12 .p1{margin-top:20px;font-size:32px;font-weight:400;
+    color:rgba(28,24,20,.62);line-height:1.5;}
+  .s12 .color-tags{position:absolute;top:688px;left:72px;right:72px;
+    display:flex;gap:16px;flex-wrap:wrap;}
+  .s12 .ct{
+    padding:16px 30px;border-radius:999px;
+    font-size:26px;font-weight:700;color:#fff;
+  }
+
+  /* ══════════════════════════════════════════
+     CARROSSEL 4 — CONVITE FINAL
+  ══════════════════════════════════════════ */
+
+  /* S13 — dark, Bauru tem nova referência */
+  .s13 .line1{position:absolute;top:154px;left:72px;
+    font-family:'Anton',sans-serif;font-size:206px;line-height:1;
+    color:#fff;letter-spacing:2px;}
+  .s13 .line2{position:absolute;top:356px;left:72px;
+    font-family:'Anton',sans-serif;font-size:136px;line-height:1;
+    color:rgba(244,242,238,.85);letter-spacing:2px;}
+  .s13 .line3{position:absolute;top:498px;left:72px;
+    font-family:'Anton',sans-serif;font-size:168px;line-height:1;
+    color:var(--sg);letter-spacing:2px;}
+  .s13 .em-breve{position:absolute;top:700px;left:72px;
+    font-size:34px;font-weight:300;color:rgba(244,242,238,.55);
+    letter-spacing:6px;text-transform:uppercase;}
+
+  /* S14 — cream, checklist */
+  .s14 .content{position:absolute;top:172px;left:72px;right:72px;}
+  .s14 h1{font-size:60px;font-weight:900;color:var(--dark);line-height:1.15;}
+  .s14 .p1{margin-top:20px;font-size:31px;font-weight:400;
+    color:rgba(28,24,20,.6);line-height:1.5;}
+  .s14 .p1 b{font-weight:800;color:var(--dark);}
+  .s14 .checks{position:absolute;top:590px;left:72px;right:72px;
+    display:flex;flex-direction:column;gap:26px;}
+
+  /* S15 — choco, logo + inauguração */
+  .s15 .label-top{position:absolute;top:212px;left:0;right:0;text-align:center;
+    font-size:22px;font-weight:300;color:rgba(244,242,238,.6);
+    letter-spacing:10px;text-transform:uppercase;}
+  .s15 .logo-hero{top:308px;left:50%;transform:translateX(-50%);height:210px;}
+  .s15 .em-breve{position:absolute;top:558px;left:0;right:0;text-align:center;
+    font-family:'Anton',sans-serif;font-size:108px;line-height:1;
+    color:rgba(244,242,238,.9);letter-spacing:4px;}
+  .s15 .city{position:absolute;top:676px;left:0;right:0;text-align:center;
+    font-size:30px;font-weight:300;color:rgba(244,242,238,.55);
+    letter-spacing:8px;text-transform:uppercase;}
+  .s15 .hint{position:absolute;top:744px;left:0;right:0;text-align:center;
+    font-size:26px;font-weight:500;color:rgba(244,242,238,.4);}
+
+  /* S16 — purple, CTA final */
+  .s16 .handle-big{position:absolute;top:272px;left:0;right:0;text-align:center;
+    font-size:54px;font-weight:900;color:#fff;letter-spacing:1px;}
+  .s16 .logo-hero{top:390px;left:50%;transform:translateX(-50%);height:220px;}
+  .s16 .tagline{position:absolute;top:650px;left:72px;right:72px;text-align:center;
+    font-size:42px;font-weight:800;color:rgba(244,242,238,.85);line-height:1.35;}
+  .s16 .tagline em{font-style:normal;color:rgba(244,242,238,.45);}
+  .s16 .handle-line{
+    position:absolute;bottom:210px;left:0;right:0;text-align:center;z-index:10;
+    font-size:25px;font-weight:600;color:rgba(244,242,238,.55);}
+  .s16 .handle-line b{color:rgba(244,242,238,.9);font-weight:800;}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     CARROSSEL 1 — TEASER MISTERIOSO
+═══════════════════════════════════════════════════════ -->
+
+<!-- S01 — hook misterioso -->
+<section class="slide s01 bg-dark grid">
+  <div class="tag tag-ch">🔥 Em breve · Bauru/SP</div>
+  <div class="hdl">@samara.trevisan</div>
+  <div class="accent-bar"></div>
+  <div class="line1">ALGO</div>
+  <div class="line2">ESTÁ</div>
+  <div class="line3">CHEGANDO</div>
+  <div class="sub">e vai mudar tudo o que você usa para <b>treinar e correr</b> em Bauru.</div>
+  <div class="cta cta-ch">Fique de olho <span class="arr">→</span></div>
+</section>
+
+<!-- S02 — preview da identidade visual -->
+<section class="slide s02 bg-cr grid lt">
+  <div class="hdl dk">@samara.trevisan</div>
+  <div class="content">
+    <h1>Uma nova referência em <span class="hl-ch">moda fitness</span> chega a Bauru.</h1>
+    <p class="p1">Peças que acompanham você da academia à rua. Do treino ao dia a dia. Com estilo que é <b>só seu.</b></p>
+  </div>
+  <div class="swatches s02">
+    <div class="sw sw-ch"><span class="sw-name">Terra</span></div>
+    <div class="sw sw-pu"><span class="sw-name">Uvas</span></div>
+    <div class="sw sw-sg"><span class="sw-name">Menta</span></div>
+    <div class="sw sw-nv"><span class="sw-name">Marinho</span></div>
+  </div>
+  <div class="caption">A paleta que define a marca</div>
+  <div class="cta cta-dk">Algo diferente está chegando <span class="arr">→</span></div>
+</section>
+
+<!-- S03 — logo reveal em choco -->
+<section class="slide s03 bg-ch">
+  <div class="hdl">@samara.trevisan</div>
+  <div class="above">Inauguração</div>
+  <img class="logo lw logo-hero">
+  <div class="below">EM BREVE</div>
+  <div class="city">Bauru · São Paulo</div>
+  <div class="cta cta-cr">Ativa o sininho 🔔 <span class="arr">→</span></div>
+</section>
+
+<!-- S04 — CTA seguir -->
+<section class="slide s04 bg-dark grid">
+  <div class="tag tag-pu">📍 Bauru/SP</div>
+  <div class="hdl">@samara.trevisan</div>
+  <div class="content">
+    <h1>Uma marca está prestes a <em>mudar o jogo</em> do fitness em Bauru.</h1>
+    <p class="p1">Segue o perfil e seja uma das primeiras a saber quando <b>as portas abrirem.</b></p>
+  </div>
+  <img class="logo lw logo-bottom">
+  <div class="cta cta-pu">Segue @samara.trevisan <span class="arr">→</span></div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CARROSSEL 2 — REVELAÇÃO DA MARCA
+═══════════════════════════════════════════════════════ -->
+
+<!-- S05 — grande declaração -->
+<section class="slide s05 bg-dark grid">
+  <div class="tag tag-pu">✨ A marca chegou</div>
+  <div class="hdl">@samara.trevisan</div>
+  <div class="line1">ELA</div>
+  <div class="line2">ESTÁ</div>
+  <div class="line3">CHEGANDO.</div>
+  <div class="sub">A <b>@samara.trevisan</b> inaugura em Bauru/SP em breve. Moda fitness com identidade própria.</div>
+  <div class="cta cta-pu">A espera quase acabou <span class="arr">→</span></div>
+</section>
+
+<!-- S06 — 3 feature cards -->
+<section class="slide s06 bg-cr grid lt">
+  <div class="hdl dk">@samara.trevisan</div>
+  <div class="content">
+    <h1>O que vem aí em Bauru:</h1>
+    <p class="sub">Três pilares de uma marca que é diferente.</p>
+  </div>
+  <div class="plays">
+    <div class="play card">
+      <div class="nbadge" style="background:var(--ch)">01</div>
+      <h2>Moda fitness de qualidade.</h2>
+      <p>Peças com <b>caimento impecável</b> para academia e corrida.</p>
+    </div>
+    <div class="play card">
+      <div class="nbadge" style="background:var(--pu)">02</div>
+      <h2>Coleções para corrida.</h2>
+      <p>Do treino leve ao asfalto, <b>equipamentos certos</b> para cada ritmo.</p>
+    </div>
+    <div class="play card">
+      <div class="nbadge" style="background:var(--sg)">03</div>
+      <h2>Do treino à vida.</h2>
+      <p>Estilo que não fica na academia. <b>Segue com você</b> para onde for.</p>
+    </div>
+  </div>
+  <div class="cta cta-dk">A inauguração se aproxima <span class="arr">→</span></div>
+</section>
+
+<!-- S07 — purple, logo grande -->
+<section class="slide s07 bg-pu">
+  <div class="hdl">@samara.trevisan</div>
+  <div class="label-top">Inaugura em breve</div>
+  <img class="logo lw logo-hero">
+  <div class="em-breve">EM BREVE</div>
+  <div class="city">Bauru · São Paulo</div>
+  <div class="cta cta-cr">Segue o perfil agora <span class="arr">→</span></div>
+</section>
+
+<!-- S08 — dark, convite -->
+<section class="slide s08 bg-dark grid">
+  <div class="tag tag-sg">🎯 Fique por dentro</div>
+  <div class="hdl">@samara.trevisan</div>
+  <div class="content">
+    <h1>Seja uma das primeiras a conhecer a <em>@samara.trevisan.</em></h1>
+    <p class="p1">Segue o perfil, ativa o sininho e <b>não perde nenhuma novidade</b> da chegada da marca a Bauru.</p>
+  </div>
+  <div class="stamp">🔔 Ative as notificações</div>
+  <img class="logo lw logo-bottom">
+  <div class="cta cta-sg">Segue agora <span class="arr">→</span></div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CARROSSEL 3 — AS CORES DA MARCA
+═══════════════════════════════════════════════════════ -->
+
+<!-- S09 — sage bg, tipografia cascata -->
+<section class="slide s09 bg-sg grid">
+  <div class="tag tag-cr">🎨 A paleta</div>
+  <div class="hdl">@samara.trevisan</div>
+  <div class="line-ch">TERRA.</div>
+  <div class="line-pu">UVAS.</div>
+  <div class="line-sg">MENTA.</div>
+  <div class="line-nv">MARINHO.</div>
+  <div class="tagline"><b>Quatro cores.</b> Uma identidade que vai muito além da academia.</div>
+  <div class="cta cta-cr">Cada cor tem uma história <span class="arr">→</span></div>
+</section>
+
+<!-- S10 — cream, faixa vertical + significados -->
+<section class="slide s10 bg-cr">
+  <div class="hdl dk">@samara.trevisan</div>
+  <div class="color-strip">
+    <div class="cs-ch"></div>
+    <div class="cs-pu"></div>
+    <div class="cs-sg"></div>
+    <div class="cs-nv"></div>
+  </div>
+  <div class="content">
+    <h1>Cada cor foi escolhida com propósito.</h1>
+    <p class="p1">Não é só estética. É a personalidade de uma marca que respeita quem a usa.</p>
+  </div>
+  <div class="color-pills">
+    <div class="cpill"><span class="cpill-dot" style="background:var(--ch)"></span> <span><b>Terra</b> — raízes, força, autenticidade</span></div>
+    <div class="cpill"><span class="cpill-dot" style="background:var(--pu)"></span> <span><b>Uvas</b> — elegância, intensidade, ousadia</span></div>
+    <div class="cpill"><span class="cpill-dot" style="background:var(--sg)"></span> <span><b>Menta</b> — frescor, equilíbrio, movimento</span></div>
+    <div class="cpill"><span class="cpill-dot" style="background:var(--nv)"></span> <span><b>Marinho</b> — profundidade, confiança, firmeza</span></div>
+  </div>
+  <div class="cta cta-dk">Uma identidade que te representa <span class="arr">→</span></div>
+</section>
+
+<!-- S11 — navy, posicionamento -->
+<section class="slide s11 bg-nv grid">
+  <div class="hdl">@samara.trevisan</div>
+  <img class="logo lw logo-top">
+  <div class="giant">PARA<br>QUEM<br>NÃO<br>PARA.</div>
+  <div class="sub">Moda fitness feita para a mulher em movimento. <b>Em breve em Bauru.</b></div>
+  <div class="cta cta-sg">Inaugura em breve <span class="arr">→</span></div>
+</section>
+
+<!-- S12 — cream, CTA carrossel 3 -->
+<section class="slide s12 bg-cr grid lt">
+  <div class="hdl dk">@samara.trevisan</div>
+  <div class="content">
+    <h1>A coleção que chegou para <em>Bauru</em> mudar.</h1>
+    <p class="p1">Quatro cores. Peças para academia, corrida e para o dia a dia. Em breve nas suas mãos.</p>
+  </div>
+  <div class="color-tags">
+    <span class="ct" style="background:var(--ch)">Terra</span>
+    <span class="ct" style="background:var(--pu)">Uvas</span>
+    <span class="ct" style="background:var(--sg)">Menta</span>
+    <span class="ct" style="background:var(--nv)">Marinho</span>
+  </div>
+  <div class="cta cta-ch">Segue pra não perder <span class="arr">→</span></div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CARROSSEL 4 — CONVITE FINAL
+═══════════════════════════════════════════════════════ -->
+
+<!-- S13 — dark, declaração Bauru -->
+<section class="slide s13 bg-dark grid">
+  <div class="tag tag-sg">📍 Bauru/SP</div>
+  <div class="hdl">@samara.trevisan</div>
+  <div class="line1">BAURU</div>
+  <div class="line2">TEM NOVA</div>
+  <div class="line3">REFERÊNCIA.</div>
+  <div class="em-breve">Em breve. Fique de olho.</div>
+  <div class="cta cta-sg">O que vem aí <span class="arr">→</span></div>
+</section>
+
+<!-- S14 — cream, checklist -->
+<section class="slide s14 bg-cr grid lt">
+  <div class="hdl dk">@samara.trevisan</div>
+  <div class="content">
+    <h1>Seja uma das primeiras a saber.</h1>
+    <p class="p1">A <b>@samara.trevisan</b> inaugura em Bauru/SP em breve. Aqui está o que vem por aí:</p>
+  </div>
+  <div class="checks">
+    <div class="chk">
+      <span class="chk-dot" style="background:var(--ch)">✓</span>
+      <span>Moda fitness com <b>qualidade e identidade</b></span>
+    </div>
+    <div class="chk">
+      <span class="chk-dot" style="background:var(--pu)">✓</span>
+      <span>Peças exclusivas para <b>corrida e treino</b></span>
+    </div>
+    <div class="chk">
+      <span class="chk-dot" style="background:var(--sg)">✓</span>
+      <span>Estilo que vai <b>do treino à vida</b></span>
+    </div>
+    <div class="chk">
+      <span class="chk-dot" style="background:var(--nv)">✓</span>
+      <span>Uma marca com <b>propósito para a mulher</b></span>
+    </div>
+  </div>
+  <div class="cta cta-dk">Ativa o sino e segue <span class="arr">→</span></div>
+</section>
+
+<!-- S15 — choco, logo inauguração -->
+<section class="slide s15 bg-ch">
+  <div class="hdl">@samara.trevisan</div>
+  <div class="label-top">Inauguração</div>
+  <img class="logo lw logo-hero">
+  <div class="em-breve">EM BREVE</div>
+  <div class="city">Bauru · São Paulo</div>
+  <div class="hint">Acompanhe o Instagram para saber a data exata</div>
+  <div class="cta cta-cr">Segue o perfil agora <span class="arr">→</span></div>
+</section>
+
+<!-- S16 — purple, CTA final -->
+<section class="slide s16 bg-pu">
+  <div class="hdl">@samara.trevisan</div>
+  <div class="handle-big">@samara.trevisan</div>
+  <img class="logo lw logo-hero">
+  <div class="tagline">Segue. Ativa o sino.<br><em>Não perde.</em></div>
+  <div class="handle-line">Inauguração em breve em <b>Bauru/SP</b></div>
+  <div class="cta cta-cr">💜 Segue agora <span class="arr">→</span></div>
+</section>
+
+</body>
+</html>
