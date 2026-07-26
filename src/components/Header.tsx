@@ -42,7 +42,9 @@ export function Header() {
     <header
       className={cn(
         'sticky top-0 z-50 transition-all duration-300',
-        scrolled ? 'border-b border-ink-100 bg-white/85 backdrop-blur-lg' : 'border-b border-transparent bg-white/0',
+        scrolled
+          ? 'border-b border-ink-900/10 bg-paper/90 backdrop-blur-lg'
+          : 'border-b border-transparent bg-transparent',
       )}
     >
       <div className="container-nx flex h-16 items-center justify-between lg:h-20">
@@ -72,7 +74,7 @@ export function Header() {
           onClick={() => setOpen((o) => !o)}
           aria-label={open ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={open}
-          className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-ink-100 bg-white text-ink-700 lg:hidden"
+          className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-ink-900/10 bg-paper text-ink-700 lg:hidden"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -80,7 +82,7 @@ export function Header() {
 
       {/* Menu mobile */}
       {open && (
-        <div className="fixed inset-0 z-0 bg-white lg:hidden">
+        <div className="fixed inset-0 z-0 bg-paper lg:hidden">
           <div className="container-nx flex h-full flex-col pb-10 pt-24">
             <nav className="flex flex-col gap-1">
               {navLinks.map((l) => (

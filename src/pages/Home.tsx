@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import { motion } from 'framer-motion'
 import { SEO } from '@/components/SEO'
 import { organizationSchema, localBusinessSchema, websiteSchema, homeFaqSchema, pageKeywords } from '@/data/seo'
 import { Button } from '@/components/Button'
@@ -14,7 +13,7 @@ import { Counter } from '@/components/Counter'
 import { BlogCard } from '@/components/BlogCard'
 import { MediaPlaceholder } from '@/components/MediaPlaceholder'
 import { CTASection } from '@/components/CTASection'
-import { HeroGlow } from '@/components/HeroGlow'
+import { HeroHome } from '@/components/HeroHome'
 import { iconMap } from '@/components/iconMap'
 import { office } from '@/assets/escritorio'
 import { services } from '@/data/services'
@@ -35,111 +34,12 @@ export default function Home() {
       />
 
       {/* ===================== HERO ===================== */}
-      <section className="relative flex flex-col overflow-hidden bg-ink-950">
-        {/* Linha de topo */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-500/40 to-transparent" />
+      <HeroHome />
 
-        {/* Fundo: orbs de gradiente */}
-        <HeroGlow />
-
-        {/* Conteúdo principal */}
-        <div className="relative container-nx grid items-center gap-10 py-20 lg:grid-cols-[1fr_400px] lg:gap-20 lg:py-32">
-
-          {/* ── Coluna esquerda: copy ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {/* Eyebrow editorial */}
-            <div className="mb-7 flex items-center gap-3">
-              <span className="h-px w-7 bg-brand-400" />
-              <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-400">
-                Estruturação Comercial Completa
-              </span>
-            </div>
-
-            {/* Headline — grande, peso black */}
-            <h1 className="font-display font-black text-5xl leading-[1.0] tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Pare de vender<br />
-              no{' '}
-              <span className="text-red-400">improviso</span>.<br />
-              Escale com{' '}
-              <span className="text-gradient">método</span>.
-            </h1>
-
-            {/* Descrição */}
-            <p className="mt-8 max-w-lg text-lg leading-relaxed text-white/55">
-              A Nexxus estrutura e opera o comercial da sua empresa com método, dados e um time
-              pronto — sem você precisar montar tudo sozinho.
-            </p>
-
-            {/* CTAs */}
-            <div className="mt-10 flex flex-wrap items-center gap-5">
-              <Button to="/contato" size="lg">
-                Solicitar diagnóstico gratuito
-                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </Button>
-              <Link
-                to="/servicos"
-                className="group inline-flex items-center gap-2 text-base font-semibold text-white/60 transition-colors duration-300 hover:text-white"
-              >
-                Ver os serviços
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </div>
-
-            {/* Diferenciais */}
-            <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/[0.08] pt-8">
-              <span className="text-[10px] font-semibold uppercase tracking-widest text-white/30">Inclui</span>
-              {['Operação em 20 dias', 'Escritório em SP', 'Resposta em 12h'].map((item) => (
-                <span key={item} className="flex items-center gap-2 text-sm text-white/50">
-                  <span className="h-1 w-1 rounded-full bg-brand-500" />
-                  {item}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* ── Coluna direita: foto + cards ── */}
-          <motion.div
-            className="relative hidden lg:block"
-            initial={{ opacity: 0, y: 24, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {/* Foto */}
-            <div className="relative overflow-hidden rounded-[2rem] ring-1 ring-white/10">
-              {/* Gradiente interno para fundir com o fundo */}
-              <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-ink-950/50 via-transparent to-transparent" />
-              <MediaPlaceholder
-                src={office.equipeOperacao}
-                alt="Equipe Nexxus em operação no escritório em São Paulo"
-                label="foto do escritório"
-                ratio="portrait"
-                rounded="rounded-[2rem]"
-              />
-            </div>
-
-            {/* Card KPI — dark glass, canto inferior esquerdo */}
-            <div className="absolute -bottom-5 -left-7 z-20 rounded-2xl border border-white/10 bg-ink-900/80 p-5 shadow-glow backdrop-blur-md">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-white/40">Cadência D1–D12</p>
-              <p className="mt-1.5 font-display text-3xl font-black text-white">
-                <Counter value={80} suffix="%" />
-              </p>
-              <p className="mt-0.5 text-xs text-white/40">das vendas acima do 5º contato</p>
-            </div>
-
-            {/* Tag squad — brand glass, topo direito */}
-            <div className="absolute -right-4 top-7 z-20 rounded-xl border border-brand-500/25 bg-brand-500/12 px-4 py-2.5 backdrop-blur-md">
-              <p className="text-xs font-bold tracking-wider text-brand-300">SDR · Hunter · Closer</p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Faixa de ferramentas/parceiros */}
-        <div className="relative container-nx pb-12 pt-2">
-          <p className="mb-5 text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30">
+      {/* ============ MÉTODO E TECNOLOGIA ============ */}
+      <section className="bg-ink-950 py-9">
+        <div className="container-nx">
+          <p className="mb-5 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-white/35">
             Método e tecnologia que sustentam a operação
           </p>
           <ToolsMarquee />

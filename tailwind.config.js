@@ -24,6 +24,9 @@ export default {
           900: '#112d75',
           950: '#0b1c47',
         },
+        // Fundo "papel": off-white quente. Tira o ar de template SaaS que o
+        // branco puro e os fundos escuros com brilho azul carregam.
+        paper: '#f4f3ef',
         ink: {
           50: '#f6f6f7',
           100: '#e7e7e8',
