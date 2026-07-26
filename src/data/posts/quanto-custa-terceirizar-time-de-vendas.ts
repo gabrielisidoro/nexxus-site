@@ -31,7 +31,7 @@ export const post: Post = {
     { type: 'h2', text: 'A conta que ninguém publica: quanto custa de verdade um vendedor CLT' },
     {
       type: 'p',
-      text: 'O primeiro erro de quase toda planilha comercial é usar o salário como custo. O salário é a menor parte. Levantamentos de calculadoras trabalhistas brasileiras atualizadas para 2026, como as da Contaja, da CalculaBrasil e do Cálculo Jurídico, convergem no mesmo intervalo: um funcionário CLT custa para a empresa entre 1,65 e 1,85 vez o salário bruto. Um vendedor com salário de R$ 3.000 custa, na prática, de R$ 4.950 a R$ 5.550 por mês.',
+      text: 'O primeiro erro de quase toda planilha comercial é usar o salário como custo. O salário é a menor parte. Levantamentos de calculadoras trabalhistas brasileiras atualizadas para 2026, como as da [Contaja](https://contaja.com.br/blog/quanto-custa-um-funcionario-para-empresa/), da [CalculaBrasil](https://calculabrasil.com/blog/custo-funcionario-clt-2026) e do [Cálculo Jurídico](https://calculojuridico.com.br/calculadora-custo-funcionario-clt/), convergem no mesmo intervalo: um funcionário CLT custa para a empresa entre 1,65 e 1,85 vez o salário bruto. Um vendedor com salário de R$ 3.000 custa, na prática, de R$ 4.950 a R$ 5.550 por mês.',
     },
     {
       type: 'p',
@@ -109,6 +109,10 @@ export const post: Post = {
         'O tempo do dono: se você gasta 8 horas por semana cobrando follow-up, revisando pipeline e recrutando, isso tem um preço. Calcule quanto vale a sua hora e multiplique por 32 horas por mês. Para a maioria dos donos, essa linha sozinha é maior que o salário do SDR.',
       ],
     },
+    {
+      type: 'p',
+      text: 'Esses três itens são o assunto de um texto inteiro à parte, se você quiser se aprofundar: [os custos ocultos de montar a estrutura comercial própria](/blog/por-que-terceirizar-operacao-comercial).',
+    },
 
     { type: 'h2', text: 'A partir de que ponto a conta fecha' },
     {
@@ -118,6 +122,10 @@ export const post: Post = {
     {
       type: 'p',
       text: 'A razão é aritmética. Se o seu ticket médio é R$ 800 e a operação terceirizada custa R$ 15.000 por mês, você precisa de quase 19 vendas novas por mês só para empatar, antes de qualquer margem. Com ticket de R$ 8.000, bastam 2. Ticket baixo e volume alto pedem outro desenho, geralmente inbound, autoatendimento ou canal, não squad de prospecção ativa.',
+    },
+    {
+      type: 'p',
+      text: 'Se a dúvida não é preço e sim modelo, a comparação entre montar em casa e contratar fora está detalhada em [terceirizar ou estruturar o comercial interno](/blog/terceirizar-ou-estruturar-comercial-interno).',
     },
 
     { type: 'h2', text: 'Quatro cenários em que terceirizar não compensa' },
@@ -169,7 +177,7 @@ export const post: Post = {
     { type: 'h2', text: 'Como a Nexxus trabalha' },
     {
       type: 'p',
-      text: 'Na Nexxus, terceirização comercial significa assumir a operação com método, dados e governança, não alugar um vendedor. Antes de qualquer pessoa entrar em campo, desenhamos a arquitetura comercial do seu negócio: ICP, oferta, canal e funil. Depois montamos a squad com os papéis certos, configuramos as ferramentas e colocamos a cadência para rodar, com reunião semanal e acompanhamento contínuo.',
+      text: 'Na Nexxus, [terceirização comercial](/servicos) significa assumir a operação com método, dados e governança, não alugar um vendedor. Antes de qualquer pessoa entrar em campo, desenhamos a arquitetura comercial do seu negócio: ICP, oferta, canal e funil. Depois montamos a squad com os papéis certos, configuramos as ferramentas e colocamos a cadência para rodar, com reunião semanal e acompanhamento contínuo.',
     },
     {
       type: 'p',

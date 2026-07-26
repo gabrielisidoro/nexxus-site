@@ -264,6 +264,9 @@ export function blogPostingSchema(post: BlogPostingInput) {
 }
 
 // ─── Schema: FAQPage do post ─────────────────────────────────────────────────
+/** Remove a sintaxe `[âncora](destino)` e mantém só a âncora, para o JSON-LD. */
+const semMarcacao = (texto: string) => texto.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+
 export function postFaqSchema(slug: string, faq: { pergunta: string; resposta: string }[]) {
   return {
     '@context': 'https://schema.org',
@@ -271,8 +274,8 @@ export function postFaqSchema(slug: string, faq: { pergunta: string; resposta: s
     '@id': `${BASE_URL}/blog/${slug}#faq`,
     mainEntity: faq.map((item) => ({
       '@type': 'Question',
-      name: item.pergunta,
-      acceptedAnswer: { '@type': 'Answer', text: item.resposta },
+      name: semMarcacao(item.pergunta),
+      acceptedAnswer: { '@type': 'Answer', text: semMarcacao(item.resposta) },
     })),
   }
 }

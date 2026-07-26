@@ -97,12 +97,96 @@ entre 1.200 e 1.500, então o alvo é superar com folga sem encher linguiça.
 
 ---
 
-## 3b. Dois passes obrigatórios antes de publicar
+## 3b. Os cinco passes obrigatórios
 
 A rubrica sozinha não pega tudo. Em 26/07/2026 um artigo passou pela rubrica e
 foi ao ar com a capa cortada em todos os cards, porque a rubrica avaliava o
-texto e os campos, nunca o resultado renderizado. Estes dois passes existem
-para fechar esse buraco. Nenhum post publica sem os dois.
+texto e os campos, nunca o resultado renderizado. Cada passe abaixo tem um
+mandato próprio e **poder de veto**: qualquer um deles reprovando, o post não
+publica. Rodam nesta ordem.
+
+### Passe 1: editor-chefe de blog
+
+Responde por uma pergunta só: **este artigo merece existir?**
+
+- A pauta resolve um problema real de quem decide comprar, ou é conteúdo de
+  preencher calendário?
+- A promessa do título é cumprida no corpo? Se o título diz "quanto custa" e o
+  texto não dá número, o artigo mentiu.
+- O ângulo é diferente do que já existe na primeira página, ou é a mesma lista
+  de vantagens e desvantagens com outras palavras?
+- Tem prova própria? Aplicar o teste do apagamento: trocar "Nexxus" por
+  qualquer concorrente. Se o texto continuar válido, qualquer um poderia ter
+  escrito, e não vale publicar.
+- A profundidade é de quem opera ou de quem pesquisou na véspera? Um dono lê
+  três parágrafos e sabe dizer a diferença.
+- Corta o que sobra. Parágrafo que não entrega informação sai.
+
+### Passe 2: especialista de SEO
+
+Responde por: **este artigo tem chance real de ranquear?**
+
+- Palavra-chave principal com intenção clara e concorrência compatível com um
+  site de baixa autoridade. Guia amplo disputando com RD Station, Agendor e
+  Meetime não tem chance no curto prazo; cauda longa tem.
+- Abrir os 3 primeiros orgânicos do termo e listar o que cobrem. O artigo
+  precisa de no mínimo 2 blocos de informação que nenhum deles tem.
+- On-page: termo no title (primeiros 60 caracteres), no H1, no primeiro
+  parágrafo, em ao menos um H2 e na meta description. Secundárias distribuídas
+  de forma natural.
+- H2 em forma de pergunta respondido nas duas primeiras frases seguintes. É o
+  que ganha featured snippet.
+- Dados estruturados: BlogPosting, BreadcrumbList, FAQPage e Organization na
+  mesma página (o publisher do BlogPosting referencia a Organization por `@id`,
+  e `@id` só resolve dentro do grafo da própria página).
+- **Rede de links.** Mínimo de 3 internos com âncora descritiva, sendo ao menos
+  1 para página de serviço e 1 para outro post, e 3 externos para as fontes
+  citadas. Sintaxe suportada no corpo, na lista e no FAQ:
+  `[âncora descritiva](/destino)`. Nunca usar "leia mais" ou "clique aqui".
+  Todo post novo precisa receber ao menos 1 link vindo de página já indexada,
+  senão vira órfão e cai em "Descoberta, mas não indexada".
+- Canibalização: nenhum post existente disputa o mesmo termo. Se disputa,
+  atualizar o antigo em vez de criar um novo.
+- Peso da página: capa em WebP ou JPG otimizado, `width` e `height` explícitos,
+  imagem do topo sem `loading=lazy`.
+
+### Passe 3: especialista de Google Search e indexação
+
+Responde por: **este artigo vai entrar no índice, e os anteriores estão
+melhorando?** Este passe roda **antes** de escrever o artigo novo, porque
+manutenção rende mais que volume num site de baixa autoridade.
+
+Rotina de manutenção, toda execução, no Search Console:
+
+1. **Indexação dos posts anteriores.** Inspecionar a URL de cada post publicado
+   nas últimas 4 semanas. Estados e ação:
+   - *Indexada*: nada a fazer, seguir para o desempenho.
+   - *Descoberta, atualmente não indexada*: link interno fraco. Adicionar links
+     de páginas já indexadas apontando para ela e solicitar indexação de novo.
+   - *Rastreada, atualmente não indexada*: o Google achou o conteúdo fraco ou
+     redundante. Reescrever com informação que não existe na SERP, atualizar o
+     campo `updated` e ressubmeter.
+   - *Página com redirecionamento* ou *404*: erro técnico. Escalar.
+2. **Consultas em posição 8 a 30** no relatório de Desempenho. É demanda
+   comprovada com entrega fraca, o alvo mais barato que existe. Melhorar o
+   artigo que já ranqueia vale mais que publicar um novo. Se houver uma
+   consulta nessa faixa, **ela vira a pauta da semana** em vez de tema novo.
+3. **Consultas com impressão e zero clique.** Title e meta description não
+   estão vendendo o clique. Reescrever os dois e registrar a data.
+4. **Cobertura do sitemap.** Páginas descobertas no Search Console tem que bater
+   com o número de URLs do sitemap. Divergiu, investigar.
+
+Depois de publicar: reenviar o sitemap, solicitar indexação da URL nova, e
+**voltar a inspecionar em 3 a 5 dias** para confirmar o estado. Só aí o ciclo
+fecha.
+
+Expectativa realista, para não perseguir promessa falsa: uma página nova
+raramente chega ao topo em semanas. O trabalho é acumulativo e o que move o
+ponteiro é consistência, links internos e melhorar o que já tem impressão.
+Prometer primeiro lugar é o que o mercado faz; medir posição e agir é o que
+funciona.
+
+### Passe 4: design (QA visual)
 
 ### Passe de design (QA visual)
 
@@ -130,7 +214,7 @@ Reprova se encontrar qualquer um destes:
   inteira (a tabela rola dentro do próprio bloco, a página não), contraste
   insuficiente sobre foto, faixa branca sobrando abaixo de alguma seção.
 
-### Passe de copy
+### Passe 5: copy
 
 Ler o artigo inteiro do começo ao fim, como leitor, não como autor. Reprova se:
 - Existir travessão. Regra de marca, sem exceção.
@@ -151,8 +235,9 @@ O artigo só conta como entregue quando **todos** os itens abaixo estiverem
 verificados, nesta ordem:
 
 1. Nota do verificador maior ou igual a 85.
-2. Passe de design e passe de copy aprovados (seção 3b). Sem screenshot, não
-   conta como aprovado.
+2. Os cinco passes da seção 3b aprovados: editor-chefe, SEO, Google Search,
+   design e copy. Cada um tem poder de veto. O passe de design sem screenshot
+   real não conta como aprovado.
 3. Arquivo do post criado e registrado em `src/data/posts/index.ts`.
 4. Duas imagens geradas com foto real do escritório, nunca banco nem IA:
    `cover` em 3/2 sem texto e `ogImage` em 1200x630 com o título gravado.
@@ -173,6 +258,11 @@ Depois do passo 10 não há mais nada a fazer: a URL entra na fila de rastreio
 prioritário do Google e a indexação leva de dias a semanas. Voltar a inspecionar
 a URL em 3 a 5 dias para confirmar o estado, e só então considerar o ciclo
 encerrado.
+
+**Limite diário do Search Console:** a solicitação de indexação tem cota. Em
+uma execução que precise ressubmeter vários posts antigos, priorizar nesta
+ordem: post novo, depois os que estão em "Descoberta, atualmente não indexada",
+depois os reescritos. O resto fica para a execução seguinte.
 
 ---
 

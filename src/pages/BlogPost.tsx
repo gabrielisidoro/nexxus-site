@@ -19,6 +19,48 @@ function contarPalavras(blocks: PostBlock[]): number {
   }, 0)
 }
 
+/**
+ * Renderiza texto do post com links em sintaxe markdown: `[âncora](/destino)`.
+ * Link interno vira <Link> do router (não recarrega a página e passa autoridade
+ * entre as matérias); link externo abre em nova aba com rel de segurança.
+ * Sem isto não dá para cumprir o critério de rede de links internos da rubrica.
+ */
+function Texto({ children }: { children: string }) {
+  const partes = children.split(/(\[[^\]]+\]\([^)]+\))/g)
+  return (
+    <>
+      {partes.map((parte, i) => {
+        const achou = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(parte)
+        if (!achou) return parte
+        const [, ancora, destino] = achou
+        const externo = /^https?:/.test(destino)
+        if (externo) {
+          return (
+            <a
+              key={i}
+              href={destino}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-brand-600 underline decoration-brand-600/30 underline-offset-2 transition-colors hover:decoration-brand-600"
+            >
+              {ancora}
+            </a>
+          )
+        }
+        return (
+          <Link
+            key={i}
+            to={destino}
+            className="font-medium text-brand-600 underline decoration-brand-600/30 underline-offset-2 transition-colors hover:decoration-brand-600"
+          >
+            {ancora}
+          </Link>
+        )
+      })}
+    </>
+  )
+}
+
 function Block({ block }: { block: PostBlock }) {
   switch (block.type) {
     case 'h2':
@@ -26,14 +68,20 @@ function Block({ block }: { block: PostBlock }) {
         <h2 className="heading mt-10 text-2xl sm:text-[1.7rem]">{block.text}</h2>
       )
     case 'p':
-      return <p className="mt-5 leading-[1.8] text-ink-600">{block.text}</p>
+      return (
+        <p className="mt-5 leading-[1.8] text-ink-600">
+          <Texto>{block.text}</Texto>
+        </p>
+      )
     case 'ul':
       return (
         <ul className="mt-5 space-y-3">
           {block.items.map((item, i) => (
             <li key={i} className="flex items-start gap-3 leading-relaxed text-ink-600">
               <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
-              <span>{item}</span>
+              <span>
+                <Texto>{item}</Texto>
+              </span>
             </li>
           ))}
         </ul>
@@ -179,7 +227,9 @@ export default function BlogPost() {
                 {post.faq.map((item) => (
                   <div key={item.pergunta} className="py-5 first:pt-0">
                     <dt className="font-display text-lg font-bold text-ink-900">{item.pergunta}</dt>
-                    <dd className="mt-2 leading-[1.8] text-ink-600">{item.resposta}</dd>
+                    <dd className="mt-2 leading-[1.8] text-ink-600">
+                      <Texto>{item.resposta}</Texto>
+                    </dd>
                   </div>
                 ))}
               </dl>
