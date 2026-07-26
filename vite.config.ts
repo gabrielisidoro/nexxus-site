@@ -98,7 +98,7 @@ function metaDeCadaRota(): MetaRota[] {
     path: `/blog/${post.slug}`,
     title: `${post.title} | Nexxus`,
     description: post.excerpt,
-    image: post.cover ? `${BASE}${post.cover}` : OG_PADRAO,
+    image: (post.ogImage ?? post.cover) ? `${BASE}${post.ogImage ?? post.cover}` : OG_PADRAO,
     type: 'article' as const,
     publicado: post.date,
     atualizado: post.updated ?? post.date,
