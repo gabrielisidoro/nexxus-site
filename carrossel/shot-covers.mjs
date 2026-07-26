@@ -20,8 +20,9 @@ await page.goto('file:///' + path.join(dir, htmlFile).replace(/\\/g, '/'), {
 await page.evaluate(() => document.fonts.ready)
 await new Promise((r) => setTimeout(r, 600))
 
-// Cada .cover precisa do atributo data-slug: vira o nome do arquivo.
-const covers = await page.$$('.cover')
+// Cada .cover (capa do site, 3/2) e cada .og (cartão social, 1200x630) precisa
+// do atributo data-slug: ele vira o nome do arquivo.
+const covers = await page.$$('.cover, .og')
 for (const cover of covers) {
   const slug = await cover.evaluate((el) => el.dataset.slug)
   const box = await cover.boundingBox()

@@ -10,62 +10,97 @@
   body { background:#111; font-family:'Inter',sans-serif; }
   img.logo { content:url("__LOGO_URI__"); }
 
+  /* ========================================================================
+     CAPA DO SITE (.cover) — 1500x1000, proporção 3/2, a MESMA do componente
+     PostCover. Sem título e sem chip: o card já mostra os dois, e texto
+     gravado na imagem quebra em qualquer recorte. Só foto real, filete azul
+     e assinatura discreta.
+     ===================================================================== */
   .cover {
-    width:1600px; height:900px; position:relative; overflow:hidden;
-    background:#060a16; color:#fff; display:flex; flex-direction:column;
-    justify-content:space-between; padding:64px 72px;
+    width:1500px; height:1000px; position:relative; overflow:hidden; background:#060a16;
   }
-  /* Cartão social padrão do site: 1200x630, o formato que o Google e as redes esperam */
-  .cover.og { width:1200px; height:630px; padding:56px 60px; }
-  .cover.og h1 { font-size:60px; }
-  .cover.og .meta, .cover.og .site { font-size:20px; }
-  /* Capa com foto mais clara, para ambientes escuros do escritório */
-  .cover.clara .shade {
-    background:
-      linear-gradient(100deg, rgba(6,10,22,.92) 0%, rgba(6,10,22,.8) 36%, rgba(6,10,22,.42) 66%, rgba(6,10,22,.28) 100%),
-      linear-gradient(0deg, rgba(6,10,22,.8) 0%, transparent 46%);
-  }
-
-  /* foto real de fundo */
   .cover .photo { position:absolute; inset:0; background-size:cover; background-position:center; }
-  /* leitura garantida: escurece a esquerda e a base, mantém a foto viva à direita */
-  .cover .shade {
+  .cover .grade {
     position:absolute; inset:0;
     background:
-      linear-gradient(100deg, rgba(6,10,22,.95) 0%, rgba(6,10,22,.88) 34%, rgba(6,10,22,.55) 62%, rgba(6,10,22,.42) 100%),
-      linear-gradient(0deg, rgba(6,10,22,.85) 0%, transparent 46%);
+      linear-gradient(180deg, rgba(6,10,22,.30) 0%, rgba(6,10,22,.05) 30%, rgba(6,10,22,.08) 62%, rgba(6,10,22,.55) 100%);
   }
-  /* filete azul de marca no topo */
-  .cover .edge { position:absolute; left:0; right:0; top:0; height:6px; background:#175eff; }
-
-  header, footer, .body { position:relative; z-index:2; }
-  header { display:flex; align-items:center; justify-content:space-between; }
-  header img.logo { height:42px; filter:brightness(0) invert(1); }
-  .chip {
-    font-size:19px; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
-    color:#fff; background:#175eff; border-radius:999px; padding:12px 26px;
+  .cover .edge { position:absolute; left:0; right:0; top:0; height:7px; background:#175eff; }
+  .cover img.logo {
+    position:absolute; right:56px; bottom:48px; height:34px;
+    filter:brightness(0) invert(1); opacity:.62;
   }
 
-  .body { max-width:1080px; }
-  .rule { width:76px; height:5px; background:#175eff; border-radius:3px; margin-bottom:30px; }
-  h1 {
+  /* ========================================================================
+     CARTÃO SOCIAL (.og) — 1200x630. Aqui o título GRAVADO faz sentido,
+     porque no WhatsApp e no LinkedIn não existe card com texto ao lado.
+     ===================================================================== */
+  .og {
+    width:1200px; height:630px; position:relative; overflow:hidden;
+    background:#060a16; color:#fff; display:flex; flex-direction:column;
+    justify-content:space-between; padding:52px 60px;
+  }
+  .og .photo { position:absolute; inset:0; background-size:cover; background-position:center; }
+  .og .shade {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(100deg, rgba(6,10,22,.94) 0%, rgba(6,10,22,.86) 36%, rgba(6,10,22,.52) 68%, rgba(6,10,22,.38) 100%),
+      linear-gradient(0deg, rgba(6,10,22,.8) 0%, transparent 46%);
+  }
+  .og.clara .shade {
+    background:
+      linear-gradient(100deg, rgba(6,10,22,.95) 0%, rgba(6,10,22,.88) 38%, rgba(6,10,22,.6) 70%, rgba(6,10,22,.45) 100%),
+      linear-gradient(0deg, rgba(6,10,22,.82) 0%, transparent 48%);
+  }
+  .og .edge { position:absolute; left:0; right:0; top:0; height:6px; background:#175eff; }
+  .og header, .og .body, .og footer { position:relative; z-index:2; }
+  .og header { display:flex; align-items:center; justify-content:space-between; }
+  .og img.logo { height:36px; filter:brightness(0) invert(1); }
+  .og .chip {
+    font-size:16px; font-weight:800; letter-spacing:.15em; text-transform:uppercase;
+    color:#fff; background:#175eff; border-radius:999px; padding:10px 22px;
+  }
+  .og .rule { width:64px; height:5px; background:#175eff; border-radius:3px; margin-bottom:24px; }
+  .og h1 {
     font-family:'Poppins',sans-serif; font-weight:900;
-    font-size:78px; line-height:1.08; letter-spacing:-.025em;
-    text-shadow:0 3px 26px rgba(0,0,0,.6);
+    font-size:56px; line-height:1.1; letter-spacing:-.025em;
+    text-shadow:0 3px 24px rgba(0,0,0,.6);
   }
-  h1.sm { font-size:66px; }
-  h1 .hl { color:#5c8aff; }
-
-  footer { display:flex; align-items:center; justify-content:space-between; }
-  .meta { font-size:22px; font-weight:600; color:rgba(255,255,255,.6); letter-spacing:.02em; }
-  .meta b { color:#fff; font-weight:700; }
-  .site { font-size:22px; font-weight:700; color:rgba(255,255,255,.45); }
+  .og h1.sm { font-size:48px; }
+  .og h1 .hl { color:#5c8aff; }
+  .og footer { display:flex; align-items:center; justify-content:space-between; }
+  .og .meta { font-size:19px; font-weight:600; color:rgba(255,255,255,.6); }
+  .og .meta b { color:#fff; font-weight:700; }
+  .og .site { font-size:19px; font-weight:700; color:rgba(255,255,255,.45); }
 </style>
 </head>
 <body>
 
-<!-- 1 · Por que terceirizar -->
+<!-- ══════════ CAPAS DO SITE (3/2, sem texto) ══════════ -->
+
 <div class="cover" data-slug="terceirizacao">
+  <div class="photo" style="background-image:url('img/global/equipe-operacao.webp'); background-position:center 34%;"></div>
+  <div class="grade"></div><div class="edge"></div><img class="logo" alt="">
+</div>
+
+<div class="cover" data-slug="terceirizar-ou-estruturar">
+  <div class="photo" style="background-image:url('img/global/estudio.webp'); background-position:center 56%;"></div>
+  <div class="grade"></div><div class="edge"></div><img class="logo" alt="">
+</div>
+
+<div class="cover" data-slug="tendencias-b2b">
+  <div class="photo" style="background-image:url('img/global/varanda-skyline.webp'); background-position:center 40%;"></div>
+  <div class="grade"></div><div class="edge"></div><img class="logo" alt="">
+</div>
+
+<div class="cover" data-slug="quanto-custa-terceirizar">
+  <div class="photo" style="background-image:url('img/global/varanda-sofa.webp'); background-position:center 58%;"></div>
+  <div class="grade"></div><div class="edge"></div><img class="logo" alt="">
+</div>
+
+<!-- ══════════ CARTÕES SOCIAIS (1200x630, com título) ══════════ -->
+
+<div class="og" data-slug="og-terceirizacao">
   <div class="photo" style="background-image:url('img/global/equipe-operacao.webp'); background-position:center 34%;"></div>
   <div class="shade"></div><div class="edge"></div>
   <header><img class="logo" alt="Nexxus"><span class="chip">Terceirização</span></header>
@@ -73,14 +108,10 @@
     <div class="rule"></div>
     <h1>Por que sua empresa deveria<br>terceirizar a <span class="hl">operação comercial</span></h1>
   </div>
-  <footer>
-    <span class="meta">Blog Nexxus · <b>6 min de leitura</b></span>
-    <span class="site">nexxusagencia.com.br</span>
-  </footer>
+  <footer><span class="meta">Blog Nexxus · <b>6 min de leitura</b></span><span class="site">nexxusagencia.com.br</span></footer>
 </div>
 
-<!-- 2 · Terceirizar ou estruturar -->
-<div class="cover" data-slug="terceirizar-ou-estruturar">
+<div class="og clara" data-slug="og-terceirizar-ou-estruturar">
   <div class="photo" style="background-image:url('img/global/estudio.webp'); background-position:center 56%;"></div>
   <div class="shade"></div><div class="edge"></div>
   <header><img class="logo" alt="Nexxus"><span class="chip">Estratégia</span></header>
@@ -88,14 +119,10 @@
     <div class="rule"></div>
     <h1 class="sm">Terceirizar ou estruturar o<br>comercial interno? <span class="hl">Como decidir</span></h1>
   </div>
-  <footer>
-    <span class="meta">Blog Nexxus · <b>7 min de leitura</b></span>
-    <span class="site">nexxusagencia.com.br</span>
-  </footer>
+  <footer><span class="meta">Blog Nexxus · <b>7 min de leitura</b></span><span class="site">nexxusagencia.com.br</span></footer>
 </div>
 
-<!-- 3 · Tendências B2B -->
-<div class="cover" data-slug="tendencias-b2b">
+<div class="og" data-slug="og-tendencias-b2b">
   <div class="photo" style="background-image:url('img/global/varanda-skyline.webp'); background-position:center 40%;"></div>
   <div class="shade"></div><div class="edge"></div>
   <header><img class="logo" alt="Nexxus"><span class="chip">Mercado B2B</span></header>
@@ -103,29 +130,22 @@
     <div class="rule"></div>
     <h1 class="sm">Tendências do mercado comercial B2B:<br>o que muda na <span class="hl">forma de vender</span></h1>
   </div>
-  <footer>
-    <span class="meta">Blog Nexxus · <b>7 min de leitura</b></span>
-    <span class="site">nexxusagencia.com.br</span>
-  </footer>
+  <footer><span class="meta">Blog Nexxus · <b>7 min de leitura</b></span><span class="site">nexxusagencia.com.br</span></footer>
 </div>
 
-<!-- 4 · Quanto custa terceirizar -->
-<div class="cover clara" data-slug="quanto-custa-terceirizar">
-  <div class="photo" style="background-image:url('img/global/varanda-sofa.webp'); background-position:center 62%;"></div>
+<div class="og clara" data-slug="og-quanto-custa-terceirizar">
+  <div class="photo" style="background-image:url('img/global/varanda-sofa.webp'); background-position:center 58%;"></div>
   <div class="shade"></div><div class="edge"></div>
   <header><img class="logo" alt="Nexxus"><span class="chip">Custos e Investimento</span></header>
   <div class="body">
     <div class="rule"></div>
     <h1 class="sm">Quanto custa terceirizar o<br>time de vendas <span class="hl">em 2026</span></h1>
   </div>
-  <footer>
-    <span class="meta">Blog Nexxus · <b>9 min de leitura</b></span>
-    <span class="site">nexxusagencia.com.br</span>
-  </footer>
+  <footer><span class="meta">Blog Nexxus · <b>9 min de leitura</b></span><span class="site">nexxusagencia.com.br</span></footer>
 </div>
 
-<!-- 5 · Cartão social padrão do site (og-image) -->
-<div class="cover og" data-slug="og-site">
+<!-- Cartão social padrão do site -->
+<div class="og" data-slug="og-site">
   <div class="photo" style="background-image:url('img/global/equipe-operacao.webp'); background-position:center 34%;"></div>
   <div class="shade"></div><div class="edge"></div>
   <header><img class="logo" alt="Nexxus"><span class="chip">São Paulo · Brasil</span></header>
@@ -133,10 +153,7 @@
     <div class="rule"></div>
     <h1>Terceirização e estruturação<br><span class="hl">comercial B2B</span></h1>
   </div>
-  <footer>
-    <span class="meta">Squad SDR, Hunter e Closer · <b>operação no ar em 20 dias</b></span>
-    <span class="site">nexxusagencia.com.br</span>
-  </footer>
+  <footer><span class="meta">Squad SDR, Hunter e Closer · <b>operação no ar em 20 dias</b></span><span class="site">nexxusagencia.com.br</span></footer>
 </div>
 
 </body>

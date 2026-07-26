@@ -9,6 +9,7 @@ export const post: Post = {
   readingMinutes: 6,
   category: 'Terceirização',
   cover: '/blog/cover-terceirizacao.jpg',
+  ogImage: '/blog/og-terceirizacao.jpg',
   keywords: [
     'terceirização comercial',
     'BPO de vendas',

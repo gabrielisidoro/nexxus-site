@@ -114,7 +114,7 @@ export default function BlogPost() {
         keywords={post.keywords?.join(', ')}
         path={`/blog/${post.slug}`}
         type="article"
-        image={post.cover ? `${site.url}${post.cover}` : undefined}
+        image={(post.ogImage ?? post.cover) ? `${site.url}${post.ogImage ?? post.cover}` : undefined}
         publishedTime={post.date}
         modifiedTime={post.updated}
         section={post.category}

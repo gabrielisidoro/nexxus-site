@@ -29,8 +29,18 @@ export interface Post {
   updated?: string
   readingMinutes: number
   category: string
-  /** caminho da imagem de capa ou null para usar o placeholder de marca */
+  /**
+   * Capa exibida no site, proporção 3/2, a mesma do componente PostCover.
+   * Deve ser só foto: o card já mostra título e categoria, e texto gravado na
+   * imagem quebra em qualquer recorte. Use null para o placeholder de marca.
+   */
   cover: string | null
+  /**
+   * Cartão social 1200x630 com o título gravado, usado em og:image. Aqui o
+   * texto na imagem faz sentido, porque no WhatsApp e no LinkedIn não existe
+   * card com texto ao lado. Sem isto, cai para `cover`.
+   */
+  ogImage?: string
   /** palavras-chave alvo do post, usadas em meta keywords e no JSON-LD */
   keywords?: string[]
   content: PostBlock[]

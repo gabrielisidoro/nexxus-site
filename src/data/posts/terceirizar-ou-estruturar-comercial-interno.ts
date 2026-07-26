@@ -9,6 +9,7 @@ export const post: Post = {
   readingMinutes: 7,
   category: 'Estratégia',
   cover: '/blog/cover-terceirizar-ou-estruturar.jpg',
+  ogImage: '/blog/og-terceirizar-ou-estruturar.jpg',
   keywords: [
     'terceirizar ou contratar vendedor',
     'time de vendas interno ou terceirizado',

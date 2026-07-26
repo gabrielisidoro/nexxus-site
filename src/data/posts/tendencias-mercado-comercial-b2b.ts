@@ -9,6 +9,7 @@ export const post: Post = {
   readingMinutes: 7,
   category: 'Mercado B2B',
   cover: '/blog/cover-tendencias-b2b.jpg',
+  ogImage: '/blog/og-tendencias-b2b.jpg',
   keywords: [
     'tendências vendas B2B',
     'mercado comercial B2B',

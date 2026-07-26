@@ -9,6 +9,7 @@ export const post: Post = {
   readingMinutes: 9,
   category: 'Custos e Investimento',
   cover: '/blog/cover-quanto-custa-terceirizar.jpg',
+  ogImage: '/blog/og-quanto-custa-terceirizar.jpg',
   keywords: [
     'quanto custa terceirizar o time de vendas',
     'terceirização comercial preço',

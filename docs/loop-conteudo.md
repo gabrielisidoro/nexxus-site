@@ -97,14 +97,65 @@ entre 1.200 e 1.500, então o alvo é superar com folga sem encher linguiça.
 
 ---
 
+## 3b. Dois passes obrigatórios antes de publicar
+
+A rubrica sozinha não pega tudo. Em 26/07/2026 um artigo passou pela rubrica e
+foi ao ar com a capa cortada em todos os cards, porque a rubrica avaliava o
+texto e os campos, nunca o resultado renderizado. Estes dois passes existem
+para fechar esse buraco. Nenhum post publica sem os dois.
+
+### Passe de design (QA visual)
+
+Roda **sempre**, com screenshot de verdade, nunca por leitura de código.
+Ferramenta: `carrossel/check-post.mjs <url> <prefixo> <scrollY>`, que já captura
+desktop (1440) e mobile (390).
+
+Capturar e olhar, no mínimo:
+1. Card do post em `/blog`, desktop e mobile
+2. Topo do artigo com a capa, desktop e mobile
+3. Cada tabela do artigo, desktop e mobile
+4. Home, se o post aparecer na prévia de recentes
+
+Reprova se encontrar qualquer um destes:
+- **Imagem cortada.** A capa do site é 3/2 e o componente `PostCover` usa
+  `aspect-[3/2]`. Se a proporção da imagem gerada não for exatamente essa, o
+  `object-cover` corta as laterais.
+- **Texto gravado na capa do site.** A capa do card é só foto. Título e
+  categoria já são desenhados pelo card. Texto na imagem duplica a informação e
+  quebra em qualquer recorte. Texto gravado só no `ogImage`, que é 1200x630 e
+  serve ao WhatsApp e ao LinkedIn, onde não existe card com texto ao lado.
+- **Elemento duplicado.** Chip de categoria aparecendo duas vezes, logo
+  aparecendo duas vezes.
+- Texto estourando o container, tabela forçando rolagem horizontal da página
+  inteira (a tabela rola dentro do próprio bloco, a página não), contraste
+  insuficiente sobre foto, faixa branca sobrando abaixo de alguma seção.
+
+### Passe de copy
+
+Ler o artigo inteiro do começo ao fim, como leitor, não como autor. Reprova se:
+- Existir travessão. Regra de marca, sem exceção.
+- Existir clichê da lista da rubrica ("no mundo de hoje", "não é apenas",
+  "mergulhe", "em suma", "é importante ressaltar", "vamos explorar").
+- Existir parágrafo que só anuncia o que vem depois em vez de entregar.
+- O primeiro parágrafo puder abrir o artigo de qualquer concorrente.
+- A promessa do título não for cumprida no corpo. Se o título diz "quanto
+  custa" e o texto não dá número, reprova.
+- O excerpt não fizer sentido sozinho, fora de contexto, no card e no Google.
+- Houver adjetivo no lugar de dado. Trocar "muito caro" por o número.
+
+---
+
 ## 4. Definição de pronto
 
 O artigo só conta como entregue quando **todos** os itens abaixo estiverem
 verificados, nesta ordem:
 
 1. Nota do verificador maior ou igual a 85.
-2. Arquivo do post criado e registrado em `src/data/posts/index.ts`.
-3. Capa gerada com foto real do escritório, nunca imagem de banco ou de IA.
+2. Passe de design e passe de copy aprovados (seção 3b). Sem screenshot, não
+   conta como aprovado.
+3. Arquivo do post criado e registrado em `src/data/posts/index.ts`.
+4. Duas imagens geradas com foto real do escritório, nunca banco nem IA:
+   `cover` em 3/2 sem texto e `ogImage` em 1200x630 com o título gravado.
 4. `npm run build` sem erro. O build regenera o sitemap e pré-renderiza o
    `<head>` de cada rota automaticamente.
 5. Commit e push na `main`. O GitHub Actions publica na `gh-pages`.
@@ -158,6 +209,9 @@ Registradas porque já custaram tempo:
 - **Cache do Cloudflare com TTL de 1 hora e a zona ignorando query string.**
   Verificar deploy sempre pelo `raw.githubusercontent.com` no branch
   `gh-pages`, nunca pelo domínio.
+- **Capa cortada no card.** O card usa `aspect-[3/2]` com `object-cover`.
+  Imagem 16/9 perde as laterais e come o texto gravado. Capa do site sempre em
+  3/2 e sempre sem texto.
 - **Sitemap divergindo dos slugs reais.** Já aconteceu: as 3 matérias ficaram
   meses entregando 404 e redirecionamento ao Google. Hoje o sitemap é gerado no
   build a partir de `allPosts`, então não pode mais divergir. Não editar

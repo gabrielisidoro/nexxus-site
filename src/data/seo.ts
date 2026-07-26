@@ -229,6 +229,8 @@ export interface BlogPostingInput {
   category: string
   readingMinutes: number
   cover: string | null
+  /** cartão social 1200x630; tem precedência sobre `cover` na imagem do artigo */
+  ogImage?: string
   /** total de palavras do corpo, para o campo wordCount */
   wordCount?: number
   keywords?: string[]
@@ -247,7 +249,7 @@ export function blogPostingSchema(post: BlogPostingInput) {
     url,
     headline: post.title.slice(0, 110),
     description: post.excerpt,
-    image: [post.cover ? `${BASE_URL}${post.cover}` : OG_IMAGE],
+    image: [(post.ogImage ?? post.cover) ? `${BASE_URL}${post.ogImage ?? post.cover}` : OG_IMAGE],
     datePublished: publicado,
     dateModified: atualizado,
     author: { '@type': 'Organization', name: 'Nexxus', url: BASE_URL },
