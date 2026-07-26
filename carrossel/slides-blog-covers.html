@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#111; font-family:'Inter',sans-serif; }
+  img.logo { content:url("__LOGO_URI__"); }
+
+  .cover {
+    width:1600px; height:900px; position:relative; overflow:hidden;
+    background:#060a16; color:#fff; display:flex; flex-direction:column;
+    justify-content:space-between; padding:64px 72px;
+  }
+
+  /* foto real de fundo */
+  .cover .photo { position:absolute; inset:0; background-size:cover; background-position:center; }
+  /* leitura garantida: escurece a esquerda e a base, mantém a foto viva à direita */
+  .cover .shade {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(100deg, rgba(6,10,22,.95) 0%, rgba(6,10,22,.88) 34%, rgba(6,10,22,.55) 62%, rgba(6,10,22,.42) 100%),
+      linear-gradient(0deg, rgba(6,10,22,.85) 0%, transparent 46%);
+  }
+  /* filete azul de marca no topo */
+  .cover .edge { position:absolute; left:0; right:0; top:0; height:6px; background:#175eff; }
+
+  header, footer, .body { position:relative; z-index:2; }
+  header { display:flex; align-items:center; justify-content:space-between; }
+  header img.logo { height:42px; filter:brightness(0) invert(1); }
+  .chip {
+    font-size:19px; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+    color:#fff; background:#175eff; border-radius:999px; padding:12px 26px;
+  }
+
+  .body { max-width:1080px; }
+  .rule { width:76px; height:5px; background:#175eff; border-radius:3px; margin-bottom:30px; }
+  h1 {
+    font-family:'Poppins',sans-serif; font-weight:900;
+    font-size:78px; line-height:1.08; letter-spacing:-.025em;
+    text-shadow:0 3px 26px rgba(0,0,0,.6);
+  }
+  h1.sm { font-size:66px; }
+  h1 .hl { color:#5c8aff; }
+
+  footer { display:flex; align-items:center; justify-content:space-between; }
+  .meta { font-size:22px; font-weight:600; color:rgba(255,255,255,.6); letter-spacing:.02em; }
+  .meta b { color:#fff; font-weight:700; }
+  .site { font-size:22px; font-weight:700; color:rgba(255,255,255,.45); }
+</style>
+</head>
+<body>
+
+<!-- 1 · Por que terceirizar -->
+<div class="cover" data-slug="terceirizacao">
+  <div class="photo" style="background-image:url('img/global/equipe-operacao.webp'); background-position:center 34%;"></div>
+  <div class="shade"></div><div class="edge"></div>
+  <header><img class="logo" alt="Nexxus"><span class="chip">Terceirização</span></header>
+  <div class="body">
+    <div class="rule"></div>
+    <h1>Por que sua empresa deveria<br>terceirizar a <span class="hl">operação comercial</span></h1>
+  </div>
+  <footer>
+    <span class="meta">Blog Nexxus · <b>6 min de leitura</b></span>
+    <span class="site">nexxusagencia.com.br</span>
+  </footer>
+</div>
+
+<!-- 2 · Terceirizar ou estruturar -->
+<div class="cover" data-slug="terceirizar-ou-estruturar">
+  <div class="photo" style="background-image:url('img/global/estudio.webp'); background-position:center 56%;"></div>
+  <div class="shade"></div><div class="edge"></div>
+  <header><img class="logo" alt="Nexxus"><span class="chip">Estratégia</span></header>
+  <div class="body">
+    <div class="rule"></div>
+    <h1 class="sm">Terceirizar ou estruturar o<br>comercial interno? <span class="hl">Como decidir</span></h1>
+  </div>
+  <footer>
+    <span class="meta">Blog Nexxus · <b>7 min de leitura</b></span>
+    <span class="site">nexxusagencia.com.br</span>
+  </footer>
+</div>
+
+<!-- 3 · Tendências B2B -->
+<div class="cover" data-slug="tendencias-b2b">
+  <div class="photo" style="background-image:url('img/global/varanda-skyline.webp'); background-position:center 40%;"></div>
+  <div class="shade"></div><div class="edge"></div>
+  <header><img class="logo" alt="Nexxus"><span class="chip">Mercado B2B</span></header>
+  <div class="body">
+    <div class="rule"></div>
+    <h1 class="sm">Tendências do mercado comercial B2B:<br>o que muda na <span class="hl">forma de vender</span></h1>
+  </div>
+  <footer>
+    <span class="meta">Blog Nexxus · <b>7 min de leitura</b></span>
+    <span class="site">nexxusagencia.com.br</span>
+  </footer>
+</div>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 import { SEO } from '@/components/SEO'
-import { breadcrumbSchema, pageKeywords } from '@/data/seo'
+import { breadcrumbSchema, blogIndexSchema, pageKeywords } from '@/data/seo'
 import { Reveal } from '@/components/Reveal'
 import { BlogCard } from '@/components/BlogCard'
 import { CTASection } from '@/components/CTASection'
@@ -13,10 +13,13 @@ export default function Blog() {
         description="Artigos práticos sobre terceirização comercial, SDR, Hunter e Closer, prospecção outbound, CRM, playbook e como escalar vendas B2B com método. Conteúdo da equipe Nexxus."
         keywords={pageKeywords.blog}
         path="/blog"
-        schema={[breadcrumbSchema([
-          { name: 'Início', url: 'https://nexxusagencia.com.br' },
-          { name: 'Blog', url: 'https://nexxusagencia.com.br/blog' },
-        ])]}
+        schema={[
+          blogIndexSchema(allPosts),
+          breadcrumbSchema([
+            { name: 'Início', url: 'https://nexxusagencia.com.br' },
+            { name: 'Blog', url: 'https://nexxusagencia.com.br/blog' },
+          ]),
+        ]}
       />
 
       <section className="relative overflow-hidden">

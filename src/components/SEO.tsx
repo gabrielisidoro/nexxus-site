@@ -16,6 +16,12 @@ interface SEOProps {
   noindex?: boolean
   /** JSON-LD schema(s) — passe um objeto ou array de objetos */
   schema?: object | object[]
+  /** artigos: data de publicação AAAA-MM-DD */
+  publishedTime?: string
+  /** artigos: data da última atualização AAAA-MM-DD */
+  modifiedTime?: string
+  /** artigos: editoria/categoria */
+  section?: string
 }
 
 export function SEO({
@@ -27,6 +33,9 @@ export function SEO({
   image,
   noindex,
   schema,
+  publishedTime,
+  modifiedTime,
+  section,
 }: SEOProps) {
   const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`
   const url      = `${site.url}${path}`
@@ -60,7 +69,20 @@ export function SEO({
       <meta property="og:image"         content={ogImage} />
       <meta property="og:image:width"   content="1200" />
       <meta property="og:image:height"  content="630" />
-      <meta property="og:image:alt"     content={`${site.name} — ${site.tagline}`} />
+      <meta property="og:image:alt"     content={`${site.name} · ${site.tagline}`} />
+
+      {/* ── Artigo (Open Graph) ───────────────────────────────────────────── */}
+      {type === 'article' && publishedTime && (
+        <meta property="article:published_time" content={`${publishedTime}T09:00:00-03:00`} />
+      )}
+      {type === 'article' && (modifiedTime || publishedTime) && (
+        <meta
+          property="article:modified_time"
+          content={`${modifiedTime ?? publishedTime}T09:00:00-03:00`}
+        />
+      )}
+      {type === 'article' && section && <meta property="article:section" content={section} />}
+      {type === 'article' && <meta property="article:publisher" content={site.url} />}
 
       {/* ── Twitter Card ──────────────────────────────────────────────────── */}
       <meta name="twitter:card"         content="summary_large_image" />

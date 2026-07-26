@@ -5,6 +5,16 @@ import { BlogCard } from '@/components/BlogCard'
 import { CTASection } from '@/components/CTASection'
 import { PostCover } from '@/components/PostCover'
 import { getPost, relatedPosts, formatDate, type PostBlock } from '@/data/posts'
+import { blogPostingSchema, breadcrumbSchema } from '@/data/seo'
+import { site } from '@/data/site'
+
+/** Conta as palavras do corpo do post, para o campo wordCount do JSON-LD. */
+function contarPalavras(blocks: PostBlock[]): number {
+  return blocks.reduce((total, bloco) => {
+    const texto = bloco.type === 'ul' ? bloco.items.join(' ') : bloco.text
+    return total + texto.trim().split(/\s+/).filter(Boolean).length
+  }, 0)
+}
 
 function Block({ block }: { block: PostBlock }) {
   switch (block.type) {
@@ -45,14 +55,28 @@ export default function BlogPost() {
   }
 
   const related = relatedPosts(post.slug, 2)
+  const wordCount = contarPalavras(post.content)
 
   return (
     <>
       <SEO
         title={post.title}
         description={post.excerpt}
+        keywords={post.keywords?.join(', ')}
         path={`/blog/${post.slug}`}
         type="article"
+        image={post.cover ? `${site.url}${post.cover}` : undefined}
+        publishedTime={post.date}
+        modifiedTime={post.updated}
+        section={post.category}
+        schema={[
+          blogPostingSchema({ ...post, wordCount }),
+          breadcrumbSchema([
+            { name: 'Início', url: site.url },
+            { name: 'Blog', url: `${site.url}/blog` },
+            { name: post.title, url: `${site.url}/blog/${post.slug}` },
+          ]),
+        ]}
       />
 
       <article className="container-nx py-12 sm:py-16">

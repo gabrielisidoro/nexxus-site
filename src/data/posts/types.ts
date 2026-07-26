@@ -17,9 +17,13 @@ export interface Post {
   excerpt: string
   /** data de publicação, formato AAAA-MM-DD */
   date: string
+  /** data da última revisão, formato AAAA-MM-DD (opcional) */
+  updated?: string
   readingMinutes: number
   category: string
   /** caminho da imagem de capa ou null para usar o placeholder de marca */
   cover: string | null
+  /** palavras-chave alvo do post, usadas em meta keywords e no JSON-LD */
+  keywords?: string[]
   content: PostBlock[]
 }

@@ -8,7 +8,14 @@ export const post: Post = {
   date: '2026-06-02',
   readingMinutes: 7,
   category: 'Mercado B2B',
-  cover: '/blog/cover-tendencias-b2b.webp',
+  cover: '/blog/cover-tendencias-b2b.jpg',
+  keywords: [
+    'tendências vendas B2B',
+    'mercado comercial B2B',
+    'venda consultiva',
+    'SPIN Selling',
+    'social selling B2B',
+  ],
   content: [
     {
       type: 'p',

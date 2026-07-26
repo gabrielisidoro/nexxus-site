@@ -8,7 +8,14 @@ export const post: Post = {
   date: '2026-05-26',
   readingMinutes: 7,
   category: 'Estratégia',
-  cover: '/blog/cover-terceirizar-ou-estruturar.webp',
+  cover: '/blog/cover-terceirizar-ou-estruturar.jpg',
+  keywords: [
+    'terceirizar ou contratar vendedor',
+    'time de vendas interno ou terceirizado',
+    'como montar equipe comercial',
+    'estruturação comercial interna',
+    'decisão terceirização de vendas',
+  ],
   content: [
     {
       type: 'p',

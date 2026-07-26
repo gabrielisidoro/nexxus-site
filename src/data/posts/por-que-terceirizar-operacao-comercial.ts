@@ -8,7 +8,14 @@ export const post: Post = {
   date: '2026-05-12',
   readingMinutes: 6,
   category: 'Terceirização',
-  cover: '/blog/cover-terceirizacao.webp',
+  cover: '/blog/cover-terceirizacao.jpg',
+  keywords: [
+    'terceirização comercial',
+    'BPO de vendas',
+    'terceirizar time de vendas',
+    'custo de montar equipe comercial',
+    'outsourcing comercial B2B',
+  ],
   content: [
     {
       type: 'p',

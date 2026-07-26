@@ -216,6 +216,73 @@ export const mentoriaServiceSchema = {
   areaServed: { '@type': 'Country', name: 'Brasil' },
 }
 
+// ─── Schema: BlogPosting — matérias do blog ──────────────────────────────────
+// Sem isto o Google trata o post como página comum e não gera rich result.
+export interface BlogPostingInput {
+  slug: string
+  title: string
+  excerpt: string
+  /** AAAA-MM-DD */
+  date: string
+  /** AAAA-MM-DD; usa `date` quando ausente */
+  updated?: string
+  category: string
+  readingMinutes: number
+  cover: string | null
+  /** total de palavras do corpo, para o campo wordCount */
+  wordCount?: number
+  keywords?: string[]
+}
+
+export function blogPostingSchema(post: BlogPostingInput) {
+  const url = `${BASE_URL}/blog/${post.slug}`
+  const publicado = `${post.date}T09:00:00-03:00`
+  const atualizado = `${post.updated ?? post.date}T09:00:00-03:00`
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    url,
+    headline: post.title.slice(0, 110),
+    description: post.excerpt,
+    image: [post.cover ? `${BASE_URL}${post.cover}` : OG_IMAGE],
+    datePublished: publicado,
+    dateModified: atualizado,
+    author: { '@type': 'Organization', name: 'Nexxus', url: BASE_URL },
+    publisher: { '@id': `${BASE_URL}/#organization` },
+    articleSection: post.category,
+    inLanguage: 'pt-BR',
+    isAccessibleForFree: true,
+    timeRequired: `PT${post.readingMinutes}M`,
+    ...(post.wordCount ? { wordCount: post.wordCount } : {}),
+    ...(post.keywords?.length ? { keywords: post.keywords.join(', ') } : {}),
+  }
+}
+
+// ─── Schema: Blog (índice) ───────────────────────────────────────────────────
+export function blogIndexSchema(posts: { slug: string; title: string; date: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': `${BASE_URL}/blog#blog`,
+    name: 'Blog da Nexxus',
+    description:
+      'Conteúdo prático sobre terceirização comercial, estruturação de vendas B2B e crescimento previsível.',
+    url: `${BASE_URL}/blog`,
+    inLanguage: 'pt-BR',
+    publisher: { '@id': `${BASE_URL}/#organization` },
+    blogPost: posts.map((p) => ({
+      '@type': 'BlogPosting',
+      '@id': `${BASE_URL}/blog/${p.slug}#article`,
+      headline: p.title,
+      url: `${BASE_URL}/blog/${p.slug}`,
+      datePublished: `${p.date}T09:00:00-03:00`,
+    })),
+  }
+}
+
 // ─── Schema: BreadcrumbList ──────────────────────────────────────────────────
 export function breadcrumbSchema(items: { name: string; url: string }[]) {
   return {
