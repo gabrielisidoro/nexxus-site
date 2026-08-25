@@ -5,10 +5,16 @@ import path from 'node:path'
 const dir = path.dirname(fileURLToPath(import.meta.url))
 const htmlFile = process.argv[2] || 'slides-blog-covers.build.html'
 
+// No Windows do Gabriel é o Chrome instalado; em qualquer outro ambiente
+// (container do loop, CI) aponte CHROME_PATH para o binário disponível.
+const chrome = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+// Container roda como root e o Chrome recusa sandbox nesse caso.
+const semSandbox = process.env.CHROME_NO_SANDBOX ? ['--no-sandbox', '--disable-dev-shm-usage'] : []
+
 const browser = await puppeteer.launch({
-  executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  executablePath: chrome,
   headless: 'new',
-  args: ['--force-device-scale-factor=1', '--hide-scrollbars'],
+  args: ['--force-device-scale-factor=1', '--hide-scrollbars', ...semSandbox],
 })
 
 const page = await browser.newPage()

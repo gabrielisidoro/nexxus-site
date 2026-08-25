@@ -1,4 +1,4 @@
-import { Rocket, Target, LineChart, Newspaper, type LucideIcon } from 'lucide-react'
+import { Rocket, Target, LineChart, Newspaper, Gauge, type LucideIcon } from 'lucide-react'
 import type { Post } from '@/data/posts'
 import { cn } from '@/lib/cn'
 
@@ -11,6 +11,7 @@ const categoryIcon: Record<string, LucideIcon> = {
   Terceirização: Rocket,
   Estratégia: Target,
   'Mercado B2B': LineChart,
+  'Métricas e Metas': Gauge,
 }
 
 interface PostCoverProps {
@@ -18,21 +19,35 @@ interface PostCoverProps {
   ratio?: keyof typeof ratioClass
   rounded?: string
   className?: string
+  /**
+   * Capa acima da dobra (topo do artigo). Carrega sem `lazy` para não atrasar o
+   * LCP: a imagem do topo é justamente o elemento que o Google cronometra.
+   */
+  priority?: boolean
 }
 
 /**
  * Capa da matéria: usa a imagem real (`post.cover`) quando existir; senão,
  * gera uma capa de marca (gradiente + ícone da categoria + marca Nexxus).
  */
-export function PostCover({ post, ratio = 'wide', rounded = 'rounded-none', className }: PostCoverProps) {
+export function PostCover({
+  post,
+  ratio = 'wide',
+  rounded = 'rounded-none',
+  className,
+  priority = false,
+}: PostCoverProps) {
   if (post.cover) {
     return (
       <div className={cn('relative overflow-hidden', ratioClass[ratio], rounded, className)}>
         <img
           src={post.cover}
           alt={post.title}
-          loading="lazy"
-          decoding="async"
+          width={1500}
+          height={1000}
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : undefined}
+          decoding={priority ? 'sync' : 'async'}
           className="absolute inset-0 h-full w-full object-cover"
         />
       </div>

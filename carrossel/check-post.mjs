@@ -7,10 +7,16 @@ const url = process.argv[2]
 const prefixo = process.argv[3] || 'post'
 const scrollY = Number(process.argv[4] || 2100)
 
+// No Windows do Gabriel é o Chrome instalado; em qualquer outro ambiente
+// (container do loop, CI) aponte CHROME_PATH para o binário disponível.
+const chrome = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+// Container roda como root e o Chrome recusa sandbox nesse caso.
+const semSandbox = process.env.CHROME_NO_SANDBOX ? ['--no-sandbox', '--disable-dev-shm-usage'] : []
+
 const browser = await puppeteer.launch({
-  executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  executablePath: chrome,
   headless: 'new',
-  args: ['--hide-scrollbars'],
+  args: ['--hide-scrollbars', ...semSandbox],
 })
 
 const vistas = [

@@ -6,6 +6,7 @@ export const post: Post = {
   excerpt:
     'Montar e manter um time de vendas custa muito mais do que o salário. Entenda os custos ocultos da estrutura própria e por que terceirizar pode ser o caminho mais rápido para vender com previsibilidade.',
   date: '2026-05-12',
+  updated: '2026-08-25',
   readingMinutes: 6,
   category: 'Terceirização',
   cover: '/blog/cover-terceirizacao.jpg',
@@ -56,7 +57,7 @@ export const post: Post = {
     },
     {
       type: 'p',
-      text: 'Some tudo isso e o custo de “fazer sozinho” fica muito acima do esperado, especialmente quando se considera o custo de oportunidade dos meses perdidos em tentativa e erro, aumentando despesa sem aumentar venda.',
+      text: 'Some tudo isso e o custo de “fazer sozinho” fica muito acima do esperado, especialmente quando se considera o custo de oportunidade dos meses perdidos em tentativa e erro, aumentando despesa sem aumentar venda. A conta aberta, com os encargos separados por regime tributário e a comparação linha a linha com uma squad terceirizada, está em [quanto custa terceirizar o time de vendas](/blog/quanto-custa-terceirizar-time-de-vendas).',
     },
     { type: 'h2', text: 'O que muda quando você terceiriza' },
     {
@@ -66,7 +67,7 @@ export const post: Post = {
     {
       type: 'ul',
       items: [
-        'Previsibilidade: com funil, cadência e indicadores claros, você passa a enxergar quanto entra, quanto avança e quanto fecha, e a planejar com base em dados, não em torcida.',
+        'Previsibilidade: com funil, cadência e indicadores claros, você passa a enxergar quanto entra, quanto avança e quanto fecha, e a planejar com base em dados, não em torcida. O primeiro indicador a acompanhar costuma ser [quantas reuniões um SDR deve agendar por mês](/blog/quantas-reunioes-sdr-por-mes), com a meta calculada a partir da receita e não copiada de benchmark.',
         'Time pronto: em vez de meses de recrutamento e rampa, você ganha SDR, Hunter e Closer atuando cada um no papel certo, desde o início.',
         'Foco no core business: o dono sai do operacional do dia a dia e volta a cuidar do que só ele pode fazer: produto, estratégia e crescimento.',
         'Escala mais rápida: a estrutura já existe, então crescer vira uma questão de ajustar a máquina, não de reconstruí-la do zero a cada novo patamar.',
@@ -92,7 +93,7 @@ export const post: Post = {
     },
     {
       type: 'p',
-      text: 'O resultado é uma operação comercial previsível, com time pronto e processo claro, e um dono livre para crescer o negócio em vez de apagar incêndio. Se você se identificou com as dores deste texto, talvez o próximo passo não seja contratar mais uma pessoa, e sim estruturar a operação de uma vez. Vale começar por um diagnóstico.',
+      text: 'O resultado é uma operação comercial previsível, com time pronto e processo claro, e um dono livre para crescer o negócio em vez de apagar incêndio. Se você se identificou com as dores deste texto, talvez o próximo passo não seja contratar mais uma pessoa, e sim estruturar a operação de uma vez. Comece entendendo o que entra na [terceirização da operação comercial](/servicos), e se a dúvida ainda for de modelo, compare os dois caminhos em [terceirizar ou estruturar o comercial interno](/blog/terceirizar-ou-estruturar-comercial-interno).',
     },
   ],
 }

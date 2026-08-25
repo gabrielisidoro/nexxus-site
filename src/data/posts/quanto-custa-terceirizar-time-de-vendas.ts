@@ -6,6 +6,7 @@ export const post: Post = {
   excerpt:
     'Ninguém no setor publica número. Aqui está a conta aberta dos dois lados: o custo real de um time comercial CLT em 2026, o que muda conforme o regime tributário, os três modelos de cobrança da terceirização e os cenários em que terceirizar não compensa.',
   date: '2026-07-26',
+  updated: '2026-08-25',
   readingMinutes: 9,
   category: 'Custos e Investimento',
   cover: '/blog/cover-quanto-custa-terceirizar.jpg',
@@ -121,7 +122,7 @@ export const post: Post = {
     },
     {
       type: 'p',
-      text: 'A razão é aritmética. Se o seu ticket médio é R$ 800 e a operação terceirizada custa R$ 15.000 por mês, você precisa de quase 19 vendas novas por mês só para empatar, antes de qualquer margem. Com ticket de R$ 8.000, bastam 2. Ticket baixo e volume alto pedem outro desenho, geralmente inbound, autoatendimento ou canal, não squad de prospecção ativa.',
+      text: 'A razão é aritmética. Se o seu ticket médio é R$ 800 e a operação terceirizada custa R$ 15.000 por mês, você precisa de quase 19 vendas novas por mês só para empatar, antes de qualquer margem. Com ticket de R$ 8.000, bastam 2. Ticket baixo e volume alto pedem outro desenho, geralmente inbound, autoatendimento ou canal, não squad de prospecção ativa. Vale entender antes o que mudou no comportamento de compra, porque parte dessa escolha de canal vem das [tendências do mercado comercial B2B](/blog/tendencias-mercado-comercial-b2b), não do seu orçamento.',
     },
     {
       type: 'p',
@@ -160,7 +161,7 @@ export const post: Post = {
     {
       type: 'ul',
       items: [
-        'Qual é o critério escrito de reunião qualificada, e o que acontece quando uma reunião não atende a esse critério?',
+        'Qual é o critério escrito de reunião qualificada, e o que acontece quando uma reunião não atende a esse critério? Antes de aceitar qualquer meta, compare com o que o mercado entrega em [quantas reuniões um SDR deve agendar por mês](/blog/quantas-reunioes-sdr-por-mes).',
         'Quem exatamente vai trabalhar na minha conta, e essa pessoa atende quantos clientes ao mesmo tempo?',
         'Em quanto tempo a operação está no ar, e o que precisa de mim para esse prazo valer?',
         'Quais indicadores eu recebo, com que frequência, e eu tenho acesso direto ao CRM?',
@@ -203,7 +204,7 @@ export const post: Post = {
     {
       pergunta: 'Quantas reuniões um SDR entrega por mês?',
       resposta:
-        'A média de mercado no Brasil fica entre 15 e 25 reuniões qualificadas por SDR por mês, variando conforme canal, ICP e maturidade do processo. Esse número isolado diz pouco: se a taxa de reunião para oportunidade está abaixo de 50%, o problema é de qualificação, não de volume, e aumentar a meta piora o resultado.',
+        'As referências públicas brasileiras ficam entre 12 e 20 reuniões qualificadas por SDR por mês, variando conforme canal, ICP e maturidade do processo. Esse número isolado diz pouco, porque a meta útil sai da meta de receita e é limitada pela agenda do closer que recebe as reuniões. A conta completa, com no-show e custo por reunião, está em [quantas reuniões um SDR deve agendar por mês](/blog/quantas-reunioes-sdr-por-mes).',
     },
     {
       pergunta: 'Terceirizar o comercial significa perder o controle da operação?',

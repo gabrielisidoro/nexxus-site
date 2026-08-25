@@ -6,6 +6,7 @@ export const post: Post = {
   excerpt:
     'Os dois caminhos podem funcionar, mas em momentos diferentes. Veja os prós e contras de cada um, em que situação cada modelo faz sentido e como evitar o erro mais caro: escolher por impulso.',
   date: '2026-05-26',
+  updated: '2026-08-25',
   readingMinutes: 7,
   category: 'Estratégia',
   cover: '/blog/cover-terceirizar-ou-estruturar.jpg',
@@ -80,6 +81,8 @@ export const post: Post = {
       type: 'ul',
       items: [
         'Qual a urgência? Se você precisa de resultado em semanas, terceirizar acelera; se pode investir meses construindo, o interno se justifica.',
+        'Quanto custa cada caminho, de verdade? Antes de decidir, monte a conta dos dois lados com encargos e ferramentas, como está detalhado em [quanto custa terceirizar o time de vendas](/blog/quanto-custa-terceirizar-time-de-vendas).',
+        'Você sabe qual meta vai cobrar? Se ainda não sabe [quantas reuniões um SDR deve agendar por mês](/blog/quantas-reunioes-sdr-por-mes) na sua operação, o time interno vai começar sem régua e a terceirização vai ser contratada sem critério.',
         'Quanto o dono pode (ou quer) se envolver no operacional? Quanto menos disponível, mais a terceirização compensa.',
         'Vendas são o core do seu modelo? Se o motor do negócio é comercial, faz sentido transformá-lo em ativo interno em algum momento.',
         'Você já tem método e gestão? Sem isso, montar um time interno só multiplica o caos. Estrutura primeiro, pessoas depois.',
@@ -96,7 +99,7 @@ export const post: Post = {
     },
     {
       type: 'p',
-      text: 'É exatamente aqui que a Nexxus atua como parceira estratégica, não como simples fornecedora. Conseguimos assumir a operação para você (terceirização), montar a arquitetura comercial para o seu time operar (estruturação interna) ou treinar e acompanhar a equipe que já existe (mentoria). A decisão certa depende do seu momento, e o melhor primeiro passo é um diagnóstico que mostre, com clareza, qual caminho gera mais resultado para o seu negócio agora.',
+      text: 'É exatamente aqui que a Nexxus atua como parceira estratégica, não como simples fornecedora. Conseguimos assumir a operação para você (terceirização), montar a arquitetura comercial para o seu time operar (estruturação interna) ou treinar e acompanhar a equipe que já existe (mentoria). Veja o que está incluso em cada [frente da operação comercial](/servicos). A decisão certa depende do seu momento, e o melhor primeiro passo é um diagnóstico que mostre, com clareza, qual caminho gera mais resultado para o seu negócio agora.',
     },
   ],
 }

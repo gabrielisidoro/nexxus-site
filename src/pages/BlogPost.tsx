@@ -210,7 +210,7 @@ export default function BlogPost() {
 
         {/* Capa */}
         <div className="mx-auto mt-10 max-w-4xl">
-          <PostCover post={post} ratio="wide" rounded="rounded-3xl" />
+          <PostCover post={post} ratio="wide" rounded="rounded-3xl" priority />
         </div>
 
         {/* Conteúdo */}

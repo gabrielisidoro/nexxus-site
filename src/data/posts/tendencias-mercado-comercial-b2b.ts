@@ -6,6 +6,7 @@ export const post: Post = {
   excerpt:
     'Vendas consultivas, dados no centro da decisão e processos bem definidos. O improviso está perdendo espaço, e quem estrutura a operação sai na frente. Veja o que está mudando no comercial B2B.',
   date: '2026-06-02',
+  updated: '2026-08-25',
   readingMinutes: 7,
   category: 'Mercado B2B',
   cover: '/blog/cover-tendencias-b2b.jpg',
@@ -44,7 +45,7 @@ export const post: Post = {
       type: 'ul',
       items: [
         'Visibilidade do funil: saber exatamente quantos leads entram, quantos avançam em cada etapa e onde estão os gargalos.',
-        'Decisão orientada a métricas: taxas de conversão, ciclo de venda e custo de aquisição guiando onde investir energia.',
+        'Decisão orientada a métricas: taxas de conversão, ciclo de venda e custo de aquisição guiando onde investir energia. O ponto de partida costuma ser definir [quantas reuniões um SDR deve agendar por mês](/blog/quantas-reunioes-sdr-por-mes) a partir da meta de receita, e não copiando benchmark.',
         'Previsão de receita: com histórico e funil organizados, a meta deixa de ser torcida e vira projeção.',
       ],
     },
@@ -86,7 +87,7 @@ export const post: Post = {
     },
     {
       type: 'p',
-      text: 'É esse o trabalho da Nexxus: transformar a operação de vendas em uma máquina previsível, com método, dados e governança. Seja assumindo o comercial da sua empresa, seja estruturando e treinando o seu time, o objetivo é o mesmo: colocar a sua operação no lado certo dessas tendências, vendendo com método enquanto a concorrência ainda improvisa. Se faz sentido para o seu momento, comece por um diagnóstico.',
+      text: 'É esse o trabalho da Nexxus: transformar a operação de vendas em uma máquina previsível, com método, dados e governança. Seja assumindo o comercial da sua empresa por meio da [terceirização da operação comercial](/servicos), seja estruturando e treinando o seu time, o objetivo é o mesmo: colocar a sua operação no lado certo dessas tendências, vendendo com método enquanto a concorrência ainda improvisa. Se a dúvida for qual dos dois caminhos seguir, a comparação está em [terceirizar ou estruturar o comercial interno](/blog/terceirizar-ou-estruturar-comercial-interno), e o custo de cada um em [quanto custa terceirizar o time de vendas](/blog/quanto-custa-terceirizar-time-de-vendas).',
     },
   ],
 }
