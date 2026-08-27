@@ -37,11 +37,14 @@ export function BlogCard({ post, className }: BlogCardProps) {
         <h3 className="mt-3 font-display text-lg font-bold leading-snug text-ink-900 transition-colors duration-300 group-hover:text-brand-600">
           {post.title}
         </h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-500 line-clamp-3">
+        {/* Sem flex-1 aqui: o flex-grow estica a caixa do line-clamp e uma quarta
+            linha aparece embaixo das reticências. O "Ler matéria" desce sozinho
+            com mt-auto, que era o motivo do flex-1. */}
+        <p className="mt-2 text-sm leading-relaxed text-ink-500 line-clamp-3">
           {post.excerpt}
         </p>
 
-        <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600">
+        <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-brand-600">
           Ler matéria
           <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>
