@@ -299,6 +299,14 @@ Registradas porque já custaram tempo:
 - **Cache do Cloudflare com TTL de 1 hora e a zona ignorando query string.**
   Verificar deploy sempre pelo `raw.githubusercontent.com` no branch
   `gh-pages`, nunca pelo domínio.
+- **Pagina branca depois de publicar (incidente de 27/08/2026).** Cada build
+  troca o hash dos bundles. O deploy usava `force_orphan`, que apagava os
+  antigos, e o Cloudflare segura HTML por ate dias alem do TTL declarado: o
+  HTML velho pedia um bundle que ja nao existia e o site abria em branco.
+  Corrigido com `keep_files: true` no workflow (assets antigos continuam
+  publicados; limpar acumulo 1x por ano). Se acontecer de novo: rebuildar o
+  commit da geracao quebrada num worktree (o hash reproduz identico) e copiar
+  os assets para o branch gh-pages.
 - **Capa cortada no card.** O card usa `aspect-[3/2]` com `object-cover`.
   Imagem 16/9 perde as laterais e come o texto gravado. Capa do site sempre em
   3/2 e sempre sem texto.
