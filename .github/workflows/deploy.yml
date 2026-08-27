@@ -36,4 +36,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          force_orphan: true
+          # Mantem os arquivos ja publicados: cada build troca o hash dos bundles,
+          # e apagar os antigos quebra (pagina branca) todo HTML ainda servido do
+          # cache do Cloudflare. Custo: acumulo lento de assets, limpar 1x por ano.
+          keep_files: true
