@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balner Academy | A universidade corporativa da sua empresa, ativa em 48 horas</title>
+<meta name="description" content="Sua empresa cresce quando as suas pessoas crescem. O Balner Academy entrega trilhas por cargo, gamificação, painéis de gestão e o Selo Empresa Amiga da Educação. Ativo em 48 horas, com a marca da sua empresa.">
+<meta property="og:title" content="Balner Academy | A universidade corporativa da sua empresa">
+<meta property="og:description" content="Estrutura completa de desenvolvimento do seu time, com a sua marca, ativa em 48 horas. Por menos do que custa uma rescisão.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23032023'/%3E%3Cpath d='M32 12c-8.3 0-15 6.7-15 15 0 5.4 2.9 10.2 7.2 12.8V44a3 3 0 0 0 3 3h9.6a3 3 0 0 0 3-3v-4.2C44.1 37.2 47 32.4 47 27c0-8.3-6.7-15-15-15Z' fill='%232FB5A8'/%3E%3Crect x='26' y='50' width='12' height='3.4' rx='1.7' fill='%232FB5A8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700;800&family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     RASTREAMENTO (preencher antes de publicar)
+     1. Meta Pixel: colar o snippet do pixel aqui.
+     2. Google Analytics 4 / Google Ads: colar o gtag aqui.
+     Eventos ja disparados pelo script da pagina:
+       - "lead_form_start"  (custom) quando o usuario avanca da etapa 1
+       - "lead_form_submit" (custom) + "Lead" (evento PADRAO do Meta,
+         que a campanha otimiza) quando o formulario e enviado com sucesso
+     Google Ads: apos colar o gtag, preencha AW-XXXXXXXXX/label na funcao
+     track() (procure por "send_to") para registrar a conversao.
+     ============================================================ -->
+
+<style>
+:root{
+  --ink:#0B1E24;            /* texto principal em fundo claro */
+  --ink-soft:#41565E;       /* texto secundario */
+  --deep:#02191D;           /* fundo escuro principal */
+  --deep-2:#032023;         /* fundo escuro elevado */
+  --teal:#18736F;           /* cor da marca */
+  --teal-dark:#0F5450;
+  --teal-bright:#2FB5A8;    /* acento em fundo escuro */
+  --teal-ghost:#E3F1EF;     /* lavagem clara da marca */
+  --gold:#E3B458;           /* acento do selo */
+  --gold-soft:#F4DDAE;
+  --paper:#F6FAF9;          /* fundo claro alternado */
+  --white:#FFFFFF;
+  --line:rgba(11,30,36,.1);
+  --line-dark:rgba(255,255,255,.12);
+  --radius:20px;
+  --shadow:0 20px 50px -22px rgba(3,32,35,.28);
+  --font-display:"Roboto Condensed",Arial,sans-serif;
+  --font-body:"Mulish",Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+button{font-family:inherit}
+::selection{background:var(--teal);color:#fff}
+
+.container{width:min(1120px,92%);margin:0 auto}
+.section{padding:clamp(72px,9vw,120px) 0}
+.section-head{max-width:720px;margin-bottom:clamp(40px,5vw,64px)}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center}
+
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--teal);border-radius:2px}
+.eyebrow.on-dark{color:var(--teal-bright)}
+.eyebrow.on-dark::before{background:var(--teal-bright)}
+.eyebrow.gold{color:var(--gold)}
+.eyebrow.gold::before{background:var(--gold)}
+
+h1,h2,h3{font-family:var(--font-display);line-height:1.08;letter-spacing:-.01em}
+h1{font-size:clamp(2.5rem,5.6vw,4.3rem);font-weight:800}
+h2{font-size:clamp(1.9rem,3.8vw,2.9rem);font-weight:800}
+h3{font-size:1.22rem;font-weight:700;font-family:var(--font-body)}
+.lead{font-size:clamp(1.02rem,1.4vw,1.18rem);color:var(--ink-soft);margin-top:18px}
+.on-dark .lead,.lead.on-dark{color:rgba(255,255,255,.78)}
+
+.accent{color:var(--teal)}
+.accent-bright{color:var(--teal-bright)}
+.accent-gold{color:var(--gold)}
+.underline-swipe{position:relative;white-space:nowrap}
+.underline-swipe::after{content:"";position:absolute;left:0;bottom:.04em;height:.14em;width:100%;background:var(--teal-bright);opacity:.55;border-radius:3px;transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.22,1,.36,1) .5s}
+.in .underline-swipe::after,.underline-swipe.in::after{transform:scaleX(1)}
+
+/* ---------- botoes ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:17px 30px;border-radius:14px;border:0;cursor:pointer;text-decoration:none;font-weight:800;font-size:1rem;font-family:var(--font-body);transition:transform .25s ease,box-shadow .25s ease,background .25s ease;will-change:transform}
+.btn svg{transition:transform .25s ease}
+.btn:hover svg{transform:translateX(4px)}
+.btn-primary{background:var(--teal);color:#fff;box-shadow:0 14px 30px -12px rgba(24,115,111,.55)}
+.btn-primary:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 20px 38px -12px rgba(24,115,111,.6)}
+.btn-gold{background:linear-gradient(135deg,#EFC26B,#D9A441);color:#2A1F06;box-shadow:0 14px 30px -12px rgba(227,180,88,.55)}
+.btn-gold:hover{transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn-ghost:hover{border-color:#fff;transform:translateY(-2px)}
+.btn-ghost.dark{color:var(--ink);border-color:rgba(11,30,36,.25)}
+.btn-ghost.dark:hover{border-color:var(--ink)}
+.btn-block{width:100%}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--teal-bright);outline-offset:3px}
+
+/* ---------- header ---------- */
+.header{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .3s ease,box-shadow .3s ease;padding:18px 0}
+.header.scrolled{background:rgba(2,25,29,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 30px -18px rgba(0,0,0,.6);padding:12px 0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo img{height:44px;width:auto}
+.header.scrolled .logo img{height:38px}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{color:rgba(255,255,255,.75);text-decoration:none;font-weight:700;font-size:.92rem;transition:color .2s}
+.nav a:hover{color:#fff}
+.nav .btn{padding:12px 22px;font-size:.92rem}
+.nav-links{display:flex;gap:28px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:radial-gradient(1200px 600px at 78% -10%,rgba(24,115,111,.5),transparent 60%),radial-gradient(900px 500px at -10% 110%,rgba(24,115,111,.35),transparent 55%),linear-gradient(160deg,#02191D 0%,#032023 55%,#04292C 100%);color:#fff;padding:170px 0 110px;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% 115%,rgba(47,181,168,.16),transparent 70%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;position:relative;z-index:2}
+.hero h1{margin-top:14px}
+.hero .lead{max-width:560px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:16px;margin-top:34px}
+.hero-microcopy{margin-top:16px;font-size:.86rem;font-weight:600;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:8px}
+.hero-microcopy::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal-bright);box-shadow:0 0 0 4px rgba(47,181,168,.2);flex:none}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid var(--line-dark);font-size:.84rem;font-weight:700;color:rgba(255,255,255,.85)}
+.chip svg{flex:none}
+
+/* visual do hero */
+.hero-visual{position:relative;min-height:460px}
+.float-card{position:absolute;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:18px;padding:18px 20px;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);animation:floaty 7s ease-in-out infinite}
+.float-card .fc-title{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:10px}
+.card-rank{top:8%;left:0;width:250px;animation-delay:.8s}
+.rank-row{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:.86rem;font-weight:700;color:rgba(255,255,255,.9)}
+.rank-pos{width:24px;height:24px;border-radius:8px;background:rgba(47,181,168,.2);color:var(--teal-bright);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex:none}
+.rank-row:first-of-type .rank-pos{background:rgba(227,180,88,.25);color:var(--gold)}
+.rank-bar{margin-left:auto;width:64px;height:6px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
+.rank-bar i{display:block;height:100%;border-radius:3px;background:var(--teal-bright)}
+.card-trilha{bottom:6%;left:12%;width:264px;animation-delay:2s}
+.trilha-line{display:flex;justify-content:space-between;font-size:.86rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.9)}
+.trilha-line span:last-child{color:var(--teal-bright)}
+.progress{height:8px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,var(--teal),var(--teal-bright));transition:width 1.4s cubic-bezier(.22,1,.36,1) .4s}
+.in .progress i{width:var(--w,70%)}
+.trilha-meta{margin-top:10px;font-size:.76rem;color:rgba(255,255,255,.55)}
+.hero-badge{position:absolute;top:16%;right:0;width:min(300px,72%);filter:drop-shadow(0 30px 50px rgba(0,0,0,.45));animation:floaty 8s ease-in-out infinite reverse}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.spin-slow{transform-origin:center;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- faixa de segmentos ---------- */
+.marquee{background:var(--deep);border-top:1px solid var(--line-dark);padding:20px 0;overflow:hidden}
+.marquee-track{display:flex;gap:0;width:max-content;animation:marquee 30s linear infinite}
+.marquee-track span{display:inline-flex;align-items:center;gap:20px;padding:0 20px;color:rgba(255,255,255,.55);font-weight:800;font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.marquee-track span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal-bright);opacity:.7}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ---------- problema ---------- */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stat-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.stat-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--teal-bright))}
+.stat-num{font-family:var(--font-display);font-size:clamp(2.3rem,3.4vw,3rem);font-weight:800;color:var(--teal);line-height:1;display:flex;align-items:baseline}
+.stat-num small{font-size:.55em}
+.stat-pre{font-size:.42em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-right:.5em;align-self:center;transform:translateY(-.08em)}
+.stat-label{margin-top:12px;font-size:.94rem;color:var(--ink-soft);font-weight:600}
+.stat-src{margin-top:10px;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(11,30,36,.38)}
+.provoca{margin-top:56px;background:linear-gradient(150deg,var(--deep),#053A38);border-radius:calc(var(--radius) + 6px);padding:clamp(34px,4.5vw,56px);color:#fff;display:grid;grid-template-columns:1.5fr 1fr;gap:36px;align-items:center;position:relative;overflow:hidden}
+.provoca::after{content:"";position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(47,181,168,.25),transparent 70%)}
+.provoca h3{font-family:var(--font-display);font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:800;line-height:1.15}
+.provoca p{margin-top:14px;color:rgba(255,255,255,.75)}
+.provoca .btn{position:relative;z-index:2}
+
+/* ---------- solucao ---------- */
+.concept{background:var(--deep);color:#fff;padding:clamp(60px,7vw,90px) 0;text-align:center;position:relative;overflow:hidden}
+.concept::before{content:"";position:absolute;inset:0;background:radial-gradient(800px 380px at 50% -40%,rgba(24,115,111,.45),transparent 65%)}
+.concept p.big{position:relative;font-family:var(--font-display);font-weight:800;font-size:clamp(1.7rem,3.6vw,2.8rem);line-height:1.15;max-width:880px;margin:0 auto}
+.concept p.big .no{color:rgba(255,255,255,.42);text-decoration:line-through;text-decoration-color:rgba(227,90,90,.7);text-decoration-thickness:3px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+.compare-col{border-radius:var(--radius);padding:34px 30px;border:1px solid var(--line)}
+.compare-col.bad{background:var(--paper)}
+.compare-col.good{background:linear-gradient(160deg,#053A38,var(--deep));color:#fff;border-color:transparent;box-shadow:var(--shadow)}
+.compare-col h3{font-family:var(--font-display);font-size:1.35rem;font-weight:800;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.compare-col ul{list-style:none;display:grid;gap:14px}
+.compare-col li{display:flex;gap:12px;font-size:.96rem;font-weight:600;color:var(--ink-soft);align-items:flex-start}
+.compare-col.good li{color:rgba(255,255,255,.85)}
+.compare-col li svg{flex:none;margin-top:3px}
+
+/* ---------- estrutura (pilares) ---------- */
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pillar{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.pillar:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(24,115,111,.35)}
+.pillar-icon{width:52px;height:52px;border-radius:14px;background:var(--teal-ghost);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.pillar h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
+.pillar p{font-size:.9rem;color:var(--ink-soft)}
+.pillar.gold-card{background:linear-gradient(160deg,#FDF6E7,#FAEED2);border-color:rgba(217,164,65,.4)}
+.pillar.gold-card .pillar-icon{background:rgba(227,180,88,.22)}
+.cert-show{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,56px);align-items:center;margin-top:clamp(40px,5vw,64px);background:var(--white);border:1px solid var(--line);border-radius:calc(var(--radius) + 6px);padding:clamp(24px,3.4vw,44px);box-shadow:var(--shadow)}
+.cert-img img{border-radius:12px;box-shadow:0 24px 50px -18px rgba(3,32,35,.35);transform:rotate(-1.6deg);transition:transform .4s ease}
+.cert-show:hover .cert-img img{transform:rotate(0)}
+.cert-copy h3{font-family:var(--font-display);font-size:clamp(1.4rem,2.2vw,1.8rem);font-weight:800;margin-bottom:12px}
+.cert-copy p{color:var(--ink-soft);font-size:.98rem}
+
+/* ---------- selo ---------- */
+.selo{background:radial-gradient(1000px 500px at 85% 0%,rgba(227,180,88,.14),transparent 60%),linear-gradient(160deg,#02191D,#04292C);color:#fff;overflow:hidden}
+.selo-grid{display:grid;grid-template-columns:1fr .9fr;gap:64px;align-items:center}
+.selo-badge-wrap{display:flex;justify-content:center}
+.selo-badge-wrap img{width:min(380px,80vw);height:auto;filter:drop-shadow(0 30px 60px rgba(0,0,0,.55));animation:floaty 8s ease-in-out infinite}
+.selo-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+.selo-card{background:rgba(255,255,255,.05);border:1px solid var(--line-dark);border-radius:16px;padding:20px}
+.selo-card b{display:block;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.selo-card p{font-size:.92rem;color:rgba(255,255,255,.82);font-weight:600;font-style:italic}
+.selo-note{margin-top:30px;display:flex;gap:14px;align-items:flex-start;background:rgba(227,180,88,.08);border:1px solid rgba(227,180,88,.3);border-radius:16px;padding:18px 20px;font-size:.94rem;color:rgba(255,255,255,.85)}
+.selo-note svg{flex:none;margin-top:2px}
+
+/* ---------- como funciona ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:step}
+.step{position:relative;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:34px 28px;box-shadow:0 14px 34px -24px rgba(3,32,35,.25)}
+.step-num{font-family:var(--font-display);font-weight:800;font-size:3.4rem;line-height:1;color:transparent;-webkit-text-stroke:2px rgba(24,115,111,.4);margin-bottom:16px}
+.step h3{margin-bottom:10px}
+.step p{font-size:.95rem;color:var(--ink-soft)}
+.step-badge{position:absolute;top:26px;right:24px;background:var(--teal-ghost);color:var(--teal);font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+
+/* ---------- investimento ---------- */
+.invest{background:var(--paper)}
+.invest-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:32px;align-items:stretch}
+.price-card{background:linear-gradient(165deg,#053A38,var(--deep));color:#fff;border-radius:calc(var(--radius) + 6px);padding:clamp(34px,4vw,48px);position:relative;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.price-card::after{content:"";position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(47,181,168,.3),transparent 70%)}
+.price-tag{font-size:.8rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-bright)}
+.price-value{display:flex;align-items:baseline;gap:8px;margin:18px 0 4px}
+.price-value .cur{font-weight:800;font-size:1.3rem;color:rgba(255,255,255,.7)}
+.price-value .num{font-family:var(--font-display);font-weight:800;font-size:clamp(3.4rem,6vw,4.6rem);line-height:1}
+.price-value .per{font-weight:700;color:rgba(255,255,255,.65)}
+.price-sub{color:rgba(255,255,255,.72);font-weight:700;margin-bottom:26px}
+.price-list{list-style:none;display:grid;gap:13px;margin-bottom:30px}
+.price-list li{display:flex;gap:12px;font-size:.95rem;font-weight:600;color:rgba(255,255,255,.88);align-items:flex-start}
+.price-list li svg{flex:none;margin-top:3px}
+.price-foot{margin-top:auto;font-size:.84rem;color:rgba(255,255,255,.55)}
+.anchors{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.anchor-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px}
+.anchor-card .a-num{font-family:var(--font-display);font-weight:800;font-size:1.9rem;color:var(--teal);line-height:1.1}
+.anchor-card p{margin-top:8px;font-size:.9rem;color:var(--ink-soft);font-weight:600}
+.why-card{grid-column:1/-1;background:var(--white);border:1.5px dashed rgba(24,115,111,.4);border-radius:var(--radius);padding:30px 28px}
+.why-card h3{font-family:var(--font-display);font-size:1.4rem;font-weight:800;margin-bottom:10px}
+.why-card p{color:var(--ink-soft);font-size:.96rem;margin-bottom:20px}
+
+/* ---------- por que a balner ---------- */
+.cred{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
+.cred-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cred-stat{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;text-align:center}
+.cred-stat b{display:block;font-family:var(--font-display);font-weight:800;font-size:2.2rem;color:var(--teal)}
+.cred-stat span{font-size:.86rem;color:var(--ink-soft);font-weight:700}
+
+/* ---------- formulario ---------- */
+.form-section{background:radial-gradient(900px 500px at 15% 0%,rgba(24,115,111,.4),transparent 60%),linear-gradient(160deg,#02191D,#04292C);color:#fff}
+.form-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}
+.form-side .lead{color:rgba(255,255,255,.75)}
+.form-points{list-style:none;display:grid;gap:16px;margin-top:34px}
+.form-points li{display:flex;gap:14px;align-items:flex-start;font-size:.98rem;font-weight:600;color:rgba(255,255,255,.85)}
+.form-points li svg{flex:none;margin-top:2px}
+.form-card{background:var(--white);color:var(--ink);border-radius:calc(var(--radius) + 6px);padding:clamp(28px,3.4vw,42px);box-shadow:0 40px 90px -30px rgba(0,0,0,.55)}
+.form-progress{display:flex;align-items:center;gap:10px;margin-bottom:26px}
+.fp-step{display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:800;color:rgba(11,30,36,.4)}
+.fp-step .dot{width:26px;height:26px;border-radius:50%;background:rgba(11,30,36,.08);display:flex;align-items:center;justify-content:center;font-size:.74rem;transition:all .3s}
+.fp-step.active{color:var(--teal)}
+.fp-step.active .dot{background:var(--teal);color:#fff}
+.fp-step.done .dot{background:var(--teal-ghost);color:var(--teal)}
+.fp-line{flex:1;height:2px;background:rgba(11,30,36,.1);border-radius:1px;position:relative;overflow:hidden}
+.fp-line i{position:absolute;inset:0;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.fp-line.filled i{transform:scaleX(1)}
+.form-step{display:none}
+.form-step.active{display:block;animation:stepIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes stepIn{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+.form-title{font-family:var(--font-display);font-weight:800;font-size:1.4rem;margin-bottom:4px}
+.form-sub{font-size:.9rem;color:var(--ink-soft);margin-bottom:24px}
+.field{margin-bottom:18px}
+.field>label{display:block;font-weight:800;font-size:.88rem;margin-bottom:9px}
+.field input[type=text],.field input[type=email],.field input[type=tel],.field select{width:100%;padding:14px 16px;border:1.5px solid rgba(11,30,36,.18);border-radius:12px;font-family:inherit;font-size:.98rem;font-weight:600;color:var(--ink);background:#fff;transition:border-color .2s,box-shadow .2s;appearance:none}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%2341565E' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:44px}
+.field input:focus,.field select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px rgba(24,115,111,.14)}
+.field.error input,.field.error select{border-color:#C2564B}
+.field .err-msg{display:none;font-size:.78rem;color:#C2564B;font-weight:700;margin-top:6px}
+.field.error .err-msg{display:block}
+.chip-group{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chip-opt input{position:absolute;opacity:0;pointer-events:none}
+.chip-opt span{display:flex;align-items:center;justify-content:center;text-align:center;padding:13px 10px;border:1.5px solid rgba(11,30,36,.18);border-radius:12px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;min-height:50px}
+.chip-opt input:checked+span{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 10px 22px -10px rgba(24,115,111,.6)}
+.chip-opt input:focus-visible+span{outline:3px solid var(--teal-bright);outline-offset:2px}
+.chip-opt span:hover{border-color:var(--teal)}
+.form-nav{display:flex;gap:12px;margin-top:26px}
+.btn-back{background:transparent;border:1.5px solid rgba(11,30,36,.2);color:var(--ink-soft);padding:17px 22px;border-radius:14px;font-weight:800;cursor:pointer;transition:border-color .2s}
+.btn-back:hover{border-color:var(--ink)}
+.form-secure{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;font-size:.78rem;color:rgba(11,30,36,.5);font-weight:600}
+.form-success{display:none;text-align:center;padding:30px 6px}
+.form-success.show{display:block;animation:stepIn .5s cubic-bezier(.22,1,.36,1)}
+.success-icon{width:84px;height:84px;border-radius:50%;background:var(--teal-ghost);display:flex;align-items:center;justify-content:center;margin:0 auto 22px}
+.form-success h3{font-family:var(--font-display);font-size:1.6rem;font-weight:800;margin-bottom:10px}
+.form-success p{color:var(--ink-soft);max-width:380px;margin:0 auto}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
+
+/* ---------- faq ---------- */
+.faq-list{max-width:820px;margin:0 auto;display:grid;gap:14px}
+.faq-item{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:box-shadow .3s}
+.faq-item.open{box-shadow:var(--shadow);border-color:rgba(24,115,111,.3)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:22px 26px;background:none;border:0;cursor:pointer;text-align:left;font-weight:800;font-size:1.02rem;color:var(--ink)}
+.faq-q .faq-ico{flex:none;width:30px;height:30px;border-radius:10px;background:var(--teal-ghost);display:flex;align-items:center;justify-content:center;transition:transform .35s ease}
+.faq-item.open .faq-ico{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.22,1,.36,1)}
+.faq-a p{padding:0 26px 24px;color:var(--ink-soft);font-size:.96rem}
+
+/* ---------- cta final ---------- */
+.final{background:radial-gradient(900px 460px at 50% -20%,rgba(24,115,111,.5),transparent 65%),var(--deep);color:#fff;text-align:center}
+.final h2{max-width:860px;margin:0 auto;font-size:clamp(2rem,4.4vw,3.3rem)}
+.final .lead{max-width:620px;margin-left:auto;margin-right:auto}
+.final-ctas{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-top:38px}
+
+/* ---------- footer ---------- */
+.footer{background:#01110F;color:rgba(255,255,255,.6);padding:54px 0 38px;font-size:.88rem}
+.footer-grid{display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap;margin-bottom:30px}
+.footer .logo img{height:40px}
+.footer a{color:rgba(255,255,255,.75);text-decoration:none;font-weight:700}
+.footer a:hover{color:#fff}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap}
+.footer-legal{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;font-size:.78rem;color:rgba(255,255,255,.4);display:grid;gap:6px}
+
+/* ---------- barra fixa mobile ---------- */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(2,25,29,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:none;transform:translateY(110%);transition:transform .4s cubic-bezier(.22,1,.36,1);box-shadow:0 -14px 34px -20px rgba(0,0,0,.6)}
+.sticky-cta.show{transform:translateY(0)}
+.sticky-cta .btn{width:100%;padding:15px 20px}
+
+/* ---------- animacao de entrada ---------- */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- responsivo ---------- */
+@media (max-width:1020px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .pillars{grid-template-columns:1fr 1fr}
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .hero-visual{min-height:420px;max-width:520px;margin:0 auto;width:100%}
+  .selo-grid,.form-grid,.cred,.cert-show{grid-template-columns:1fr;gap:44px}
+  .cert-show{gap:28px}
+  .invest-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@media (max-width:640px){
+  .section{padding:64px 0}
+  .hero{padding:130px 0 80px}
+  .stats-grid,.pillars,.compare,.steps,.anchors,.selo-cards{grid-template-columns:1fr}
+  .provoca{grid-template-columns:1fr}
+  .hero-ctas .btn{width:100%}
+  .final-ctas .btn{width:100%}
+  .form-nav{flex-direction:column-reverse}
+  .form-nav .btn,.form-nav .btn-back{width:100%}
+  .chip-group{grid-template-columns:1fr 1fr}
+  .sticky-cta{display:block}
+  .hero-visual{min-height:400px}
+  .card-rank{left:-4px;width:228px}
+  .card-trilha{left:auto;right:0;width:240px}
+  .hero-badge{width:200px;top:34%;right:2%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a class="logo" href="#" aria-label="Balner Academy: voltar ao topo">
+      <img src="logo-balner.png" alt="Balner Plataforma Educacional" width="158" height="44">
+    </a>
+    <nav class="nav" aria-label="Navegação principal">
+      <div class="nav-links">
+        <a href="#problema">O custo invisível</a>
+        <a href="#estrutura">A estrutura</a>
+        <a href="#selo">O Selo</a>
+        <a href="#investimento">Investimento</a>
+        <a href="#faq">Dúvidas</a>
+      </div>
+      <a class="btn btn-primary" href="#formulario">Agendar demonstração</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="topo">
+  <div class="container hero-grid">
+    <div class="reveal in">
+      <span class="eyebrow on-dark">Balner Academy · Universidade corporativa</span>
+      <h1>Sua empresa cresce quando as suas <span class="underline-swipe in">pessoas crescem</span>.</h1>
+      <p class="lead">O Balner Academy entrega a estrutura completa de desenvolvimento do seu time, pronta em 48 horas e com a marca da sua empresa: trilhas por cargo, gamificação, painéis de gestão e um selo que posiciona sua marca no mercado. Por menos do que custa uma rescisão.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#formulario">Quero construir um time forte
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-7 7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#investimento">Como funciona</a>
+      </div>
+      <p class="hero-microcopy">Primeiro passo: uma demonstração de 15 minutos, sem compromisso.</p>
+      <div class="hero-chips">
+        <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Ativo em 48 horas</span>
+        <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Sem equipe de TI</span>
+        <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Plano único para até 30 colaboradores</span>
+        <span class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#E3B458" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Selo Empresa Amiga da Educação</span>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal in" aria-hidden="true">
+      <div class="float-card card-rank">
+        <div class="fc-title">Ranking de engajamento</div>
+        <div class="rank-row"><span class="rank-pos">1</span> Equipe Comercial <span class="rank-bar"><i style="width:92%"></i></span></div>
+        <div class="rank-row"><span class="rank-pos">2</span> Logística <span class="rank-bar"><i style="width:78%"></i></span></div>
+        <div class="rank-row"><span class="rank-pos">3</span> Administrativo <span class="rank-bar"><i style="width:64%"></i></span></div>
+      </div>
+      <img class="hero-badge" src="selo-balner-educacao.webp" alt="Selo Balner Empresa Amiga da Educação" width="300" height="300">
+      <div class="float-card card-trilha">
+        <div class="fc-title">Trilha de Liderança</div>
+        <div class="trilha-line"><span>Progresso da equipe</span><span>78%</span></div>
+        <div class="progress"><i style="--w:78%"></i></div>
+        <div class="trilha-meta">12 colaboradores em desenvolvimento</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- faixa de segmentos -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Feito para Indústrias</span><span>Logística e Transporte</span><span>Supermercados e Atacarejo</span><span>Agronegócio</span><span>Comércio e Varejo</span><span>Serviços</span><span>Feito para Indústrias</span><span>Logística e Transporte</span><span>Supermercados e Atacarejo</span><span>Agronegócio</span><span>Comércio e Varejo</span><span>Serviços</span>
+  </div>
+</div>
+
+<!-- ================= DOBRA 2: PROBLEMA ================= -->
+<section class="section" id="problema">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">O custo invisível</span>
+      <h2>Você já perdeu um bom profissional para um concorrente que oferecia crescimento?</h2>
+      <p class="lead">Salário não é o único motivo que faz talentos irem embora. Quando o colaborador não enxerga evolução, ele começa a procurar. E leva junto o conhecimento que custou caro construir. Enquanto isso, quem fica repete os mesmos erros e a operação inteira depende de você.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal" data-delay="0">
+        <div class="stat-num"><span class="stat-pre">até</span><span class="count" data-to="200">0</span>%</div>
+        <p class="stat-label">do salário anual: é o custo real de substituir um profissional que pediu demissão</p>
+      </div>
+      <div class="stat-card reveal" data-delay="100">
+        <div class="stat-num"><span class="stat-pre">até</span><span class="count" data-to="30">0</span>%</div>
+        <p class="stat-label">do tempo produtivo da equipe se perde em retrabalho por falta de treinamento</p>
+      </div>
+      <div class="stat-card reveal" data-delay="200">
+        <div class="stat-num"><span class="stat-pre">até</span>-<span class="count" data-to="21">0</span>%</div>
+        <p class="stat-label">de produtividade em times desengajados, sem perspectiva de desenvolvimento</p>
+        <p class="stat-src">Fonte: Gallup</p>
+      </div>
+      <div class="stat-card reveal" data-delay="300">
+        <div class="stat-num"><span class="stat-pre">até</span>+<span class="count" data-to="60">0</span>%</div>
+        <p class="stat-label">de rotatividade quando quem foi promovido não foi preparado para liderar</p>
+      </div>
+    </div>
+    <div class="provoca reveal">
+      <div>
+        <h3>Faça a conta que quase nenhum empresário faz.</h3>
+        <p>Quanto custou, nos últimos 12 meses, substituir as pessoas que saíram da sua empresa? Some as rescisões, o recrutamento, o treinamento de cada novato e os meses até ele render de verdade. Quem faz essa conta pela primeira vez costuma ficar em choque.</p>
+      </div>
+      <a class="btn btn-primary" href="#formulario">Quero parar de pagar esse custo
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-7 7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONCEITO ================= -->
+<section class="concept">
+  <div class="container reveal">
+    <p class="big">Você não está assinando <span class="no">mais uma plataforma</span>.<br>Você está construindo uma <span class="accent-bright">cultura de aprendizagem</span>.</p>
+  </div>
+</section>
+
+<!-- ================= DOBRA 3: SOLUCAO ================= -->
+<section class="section" id="solucao">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">A virada</span>
+      <h2>A estrutura de desenvolvimento que sua empresa precisa. Pronta, sem montar nada do zero.</h2>
+      <p class="lead">Treinamento avulso é evento: empolga na primeira semana e morre no mês seguinte. O Balner Academy transforma desenvolvimento em rotina, com estrutura, engajamento e reconhecimento.</p>
+    </div>
+    <div class="compare">
+      <div class="compare-col bad reveal" data-delay="0">
+        <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#C2564B" stroke-width="2"/><path d="m9 9 6 6m0-6-6 6" stroke="#C2564B" stroke-width="2" stroke-linecap="round"/></svg>Treinamento avulso</h3>
+        <ul>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12m0-12L6 18" stroke="#C2564B" stroke-width="2.6" stroke-linecap="round"/></svg>Curso solto, cada um aprende por si</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12m0-12L6 18" stroke="#C2564B" stroke-width="2.6" stroke-linecap="round"/></svg>O foco é o conteúdo, não o resultado do negócio</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12m0-12L6 18" stroke="#C2564B" stroke-width="2.6" stroke-linecap="round"/></svg>Engajamento despenca depois da primeira semana</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12m0-12L6 18" stroke="#C2564B" stroke-width="2.6" stroke-linecap="round"/></svg>Relatório de acesso, e nada além disso</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12m0-12L6 18" stroke="#C2564B" stroke-width="2.6" stroke-linecap="round"/></svg>Visto como custo: é o primeiro corte na crise</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12m0-12L6 18" stroke="#C2564B" stroke-width="2.6" stroke-linecap="round"/></svg>Nenhum reconhecimento para a sua marca</li>
+        </ul>
+      </div>
+      <div class="compare-col good reveal" data-delay="150">
+        <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#2FB5A8" stroke-width="2"/><path d="m8 12.5 3 3 5.5-6.5" stroke="#2FB5A8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Balner Academy</h3>
+        <ul>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Trilhas alinhadas aos objetivos da empresa</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>O foco é a transformação do colaborador e do negócio</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Gamificação que sustenta a participação no longo prazo</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Painéis mostram evolução real, não só acessos</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Tratado como estratégia de retenção e crescimento</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#E3B458" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Sua marca reconhecida com o Selo Empresa Amiga da Educação</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA 4: ESTRUTURA ================= -->
+<section class="section" id="estrutura" style="background:var(--paper)">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">O que sua empresa recebe</span>
+      <h2>Tudo isso em operação em 48 horas, com a sua marca</h2>
+      <p class="lead">A plataforma trabalha nos bastidores. Quem aparece é a sua empresa: nos certificados, no ambiente de aprendizagem e no reconhecimento do mercado.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal" data-delay="0">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 21h8m-4-4v4M6 3h12v6a6 6 0 0 1-12 0V3Z" stroke="#18736F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 5H3v2a4 4 0 0 0 3 3.87M18 5h3v2a4 4 0 0 1-3 3.87" stroke="#18736F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Plataforma gamificada</h3>
+        <p>Ranking, conquistas e certificados criam engajamento espontâneo. Seu time evolui sem você precisar cobrar.</p>
+      </div>
+      <div class="pillar reveal" data-delay="60">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h13v14H6a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h13" stroke="#18736F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 7h6M9 11h4" stroke="#18736F" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Trilhas por área, cargo e nível</h3>
+        <p>Do operacional ao estratégico: conteúdos organizados por função para acelerar cada área da sua empresa.</p>
+      </div>
+      <div class="pillar reveal" data-delay="120">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16" stroke="#18736F" stroke-width="1.8" stroke-linecap="round"/><path d="M7 14v3m5-8v8m5-5v5" stroke="#18736F" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Painéis e relatórios do gestor</h3>
+        <p>Você enxerga quem está evoluindo, quem parou e onde investir. Decisão com dado, não com achismo.</p>
+      </div>
+      <div class="pillar reveal" data-delay="180">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#18736F" stroke-width="1.8"/><circle cx="12" cy="12" r="5" stroke="#18736F" stroke-width="1.8"/><circle cx="12" cy="12" r="1.4" fill="#18736F"/></svg></div>
+        <h3>Radar de competências</h3>
+        <p>Os pontos fortes e as lacunas de cada colaborador em uma única tela.</p>
+      </div>
+      <div class="pillar reveal" data-delay="0">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 17 6-6 4 4 7-8" stroke="#18736F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7h6v6" stroke="#18736F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Comparativo de evolução</h3>
+        <p>Compare pessoas, equipes e áreas. Identifique talentos antes do concorrente.</p>
+      </div>
+      <div class="pillar reveal" data-delay="60">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="4" stroke="#18736F" stroke-width="1.8"/><path d="M4 21c1.2-3.5 4.3-5.5 8-5.5s6.8 2 8 5.5" stroke="#18736F" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Painel do colaborador</h3>
+        <p>Cada pessoa acompanha o próprio progresso. Pertencimento gera motivação para evoluir.</p>
+      </div>
+      <div class="pillar reveal" data-delay="120">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="6" stroke="#18736F" stroke-width="1.8"/><path d="m9.5 13.5-2 7 4.5-2.6 4.5 2.6-2-7" stroke="#18736F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Certificados com a sua marca</h3>
+        <p>Emitidos com a identidade visual da sua empresa. Cultura organizacional que aparece.</p>
+      </div>
+      <div class="pillar gold-card reveal" data-delay="180">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9L9.5 8Z" stroke="#B8842B" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <h3>Selo Empresa Amiga da Educação</h3>
+        <p>O reconhecimento que posiciona sua empresa no mercado e atrai os melhores talentos.</p>
+      </div>
+    </div>
+    <div class="cert-show reveal">
+      <div class="cert-img">
+        <img src="certificado-balner.webp" alt="Certificado oficial Balner emitido a cada trilha concluída" width="880" height="622">
+      </div>
+      <div class="cert-copy">
+        <span class="eyebrow">Reconhecimento que aparece</span>
+        <h3>Certificação oficial a cada conquista</h3>
+        <p>Cada trilha concluída gera um certificado oficial, assinado pela Balner e personalizado com a identidade da sua empresa. O colaborador sente o reconhecimento. A sua marca assina cada evolução.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA 5: O SELO ================= -->
+<section class="section selo" id="selo">
+  <div class="container selo-grid">
+    <div class="reveal">
+      <span class="eyebrow gold">O movimento</span>
+      <h2>Torne sua empresa o lugar onde os melhores profissionais <span class="accent-gold">querem trabalhar</span>.</h2>
+      <p class="lead on-dark">Assim como os grandes selos de mercado marcaram uma geração de empresas, o Selo Empresa Amiga da Educação nasce para reconhecer quem investe em gente. Ao ativar o Academy, sua empresa entra para o movimento e recebe o selo digital para usar no site, nas vagas, nas propostas comerciais e nas redes sociais.</p>
+      <div class="selo-cards">
+        <div class="selo-card reveal" data-delay="0">
+          <b>Para candidatos</b>
+          <p>"Essa empresa investe em quem trabalha nela. Eu quero trabalhar aqui."</p>
+        </div>
+        <div class="selo-card reveal" data-delay="80">
+          <b>Para clientes</b>
+          <p>"Quem desenvolve o próprio time atende melhor. Posso confiar."</p>
+        </div>
+        <div class="selo-card reveal" data-delay="160">
+          <b>Para o seu time</b>
+          <p>"Minha empresa acredita no meu potencial. Aqui eu tenho futuro."</p>
+        </div>
+        <div class="selo-card reveal" data-delay="240">
+          <b>Para o mercado</b>
+          <p>"Um empregador de referência na região."</p>
+        </div>
+      </div>
+      <div class="selo-note reveal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9L9.5 8Z" stroke="#E3B458" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span>O selo é da sua empresa para usar na fachada, nas vagas, nas propostas e nas redes.</span>
+      </div>
+    </div>
+    <div class="selo-badge-wrap reveal" data-delay="150">
+      <img class="selo-real" src="selo-balner-educacao.webp" alt="Selo Balner Empresa Amiga da Educação: valoriza, apoia, transforma" width="360" height="360">
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA 6: COMO FUNCIONA ================= -->
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Como funciona</span>
+      <h2>Do contrato ao time treinando em 3 passos</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal" data-delay="0">
+        <span class="step-badge">48 horas</span>
+        <div class="step-num">01</div>
+        <h3>Você ativa</h3>
+        <p>A Balner configura a plataforma com a sua marca, seus certificados e as trilhas certas para o seu segmento. Sem TI, sem projeto de meses.</p>
+      </div>
+      <div class="step reveal" data-delay="120">
+        <div class="step-num">02</div>
+        <h3>Seu time acessa</h3>
+        <p>Cada colaborador recebe o acesso e entra na trilha do próprio cargo. Ranking e conquistas fazem o engajamento acontecer sozinho.</p>
+      </div>
+      <div class="step reveal" data-delay="240">
+        <div class="step-num">03</div>
+        <h3>Você acompanha</h3>
+        <p>Painéis mostram a evolução por pessoa, equipe e área. Você acompanha o desenvolvimento como acompanha o resultado comercial.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA 7: INVESTIMENTO ================= -->
+<section class="section invest" id="investimento">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Investimento</span>
+      <h2>Menos do que custa uma rescisão. Bem menos.</h2>
+      <p class="lead">Montar uma estrutura própria de treinamento e desenvolvimento custaria de R$ 150 a 300 mil. O Academy entrega essa estrutura pronta, por uma assinatura mensal que cabe no caixa de uma PME. O valor exato é apresentado na conversa, ajustado ao tamanho do seu time.</p>
+    </div>
+    <div class="invest-grid">
+      <div class="price-card reveal">
+        <span class="price-tag">Balner Academy · Plano empresa</span>
+        <div class="price-value"><span class="num">Tudo incluso.</span></div>
+        <p class="price-sub">Um plano simples, para até 30 colaboradores.</p>
+        <ul class="price-list">
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Plataforma completa com a identidade da sua empresa</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Trilhas por cargo, do operacional ao estratégico</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Painéis de gestão, radar de competências e relatórios</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Certificados personalizados com a sua marca</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#E3B458" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Selo digital Empresa Amiga da Educação</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Ativação em 48 horas com onboarding assistido</li>
+        </ul>
+        <a class="btn btn-gold btn-block" href="#formulario">Quero receber minha proposta
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-7 7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <p class="price-foot" style="margin-top:18px">Mais de 30 colaboradores? Preencha o formulário: existem planos sob medida para o tamanho do seu time.</p>
+      </div>
+      <div>
+        <div class="anchors">
+          <div class="anchor-card reveal" data-delay="0">
+            <div class="a-num">R$ 3.750 a 7.500</div>
+            <p>é o custo de uma única rescisão de um colaborador com salário de R$ 2.500. E ela nunca vem sozinha.</p>
+          </div>
+          <div class="anchor-card reveal" data-delay="80">
+            <div class="a-num">R$ 150 a 300 mil</div>
+            <p>é o custo estimado de montar uma estrutura própria de T&amp;D. O Academy entrega pronta.</p>
+          </div>
+          <div class="anchor-card reveal" data-delay="160">
+            <div class="a-num">1 rescisão evitada</div>
+            <p>já paga meses de Academy. O investimento se defende sozinho na primeira retenção.</p>
+          </div>
+          <div class="anchor-card reveal" data-delay="240">
+            <div class="a-num">48 horas</div>
+            <p>entre a ativação e o seu time treinando com a marca da sua empresa.</p>
+          </div>
+          <div class="why-card reveal" data-delay="120">
+            <h3>Por que o valor não está na página?</h3>
+            <p>Porque a proposta é apresentada na conversa de 15 minutos, ajustada ao tamanho e ao momento do seu time. Sem tabela inflada, sem pegadinha: um valor único, transparente e menor do que uma rescisão.</p>
+            <a class="btn btn-ghost dark" href="#formulario">Agendar a conversa de 15 minutos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= POR QUE A BALNER ================= -->
+<section class="section" id="balner">
+  <div class="container cred">
+    <div class="reveal">
+      <span class="eyebrow">Quem entrega</span>
+      <h2>Por trás do Academy está a Balner, plataforma que respira educação</h2>
+      <p class="lead">A Balner é uma plataforma educacional com catálogo de mais de 500 cursos, liderada por quem trabalha com educação há mais de 25 anos. O Academy é a evolução natural dessa história: levar estrutura de desenvolvimento de gente grande para empresas de todos os tamanhos, com suporte humano no onboarding e no dia a dia.</p>
+    </div>
+    <div class="cred-stats">
+      <div class="cred-stat reveal" data-delay="0"><b>+500</b><span>cursos e trilhas disponíveis</span></div>
+      <div class="cred-stat reveal" data-delay="80"><b>48h</b><span>para ativar com a sua marca</span></div>
+      <div class="cred-stat reveal" data-delay="160"><b>25+</b><span>anos de experiência em educação</span></div>
+      <div class="cred-stat reveal" data-delay="240"><b>100%</b><span>online, sem equipe de TI</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FORMULARIO ================= -->
+<section class="section form-section" id="formulario">
+  <div class="container form-grid">
+    <div class="form-side reveal">
+      <span class="eyebrow on-dark">Demonstração gratuita</span>
+      <h2>Vamos conhecer a universidade corporativa da <span class="accent-bright">sua empresa</span>?</h2>
+      <p class="lead">Preencha em menos de 1 minuto. Nossa equipe entra em contato para uma conversa de 15 minutos, sem compromisso, para entender o momento do seu time e mostrar o Academy na prática.</p>
+      <ul class="form-points">
+        <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Conversa de 15 minutos, direto ao ponto</li>
+        <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Demonstração guiada da plataforma na prática</li>
+        <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Proposta transparente, ajustada ao tamanho do seu time</li>
+        <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#2FB5A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Onboarding assistido incluso na ativação</li>
+      </ul>
+    </div>
+
+    <div class="form-card reveal" data-delay="120">
+      <form id="leadForm" novalidate>
+        <div class="form-progress" aria-hidden="true">
+          <div class="fp-step active" id="fpStep1"><span class="dot">1</span> Sua empresa</div>
+          <div class="fp-line" id="fpLine"><i></i></div>
+          <div class="fp-step" id="fpStep2"><span class="dot">2</span> Seus dados</div>
+        </div>
+
+        <!-- honeypot anti-spam -->
+        <div class="hp-field" aria-hidden="true">
+          <label>Não preencha este campo<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <!-- ETAPA 1: qualificacao -->
+        <div class="form-step active" id="step1">
+          <p class="form-title">Sobre a sua empresa</p>
+          <p class="form-sub">Essas respostas ajudam a preparar uma proposta certeira para o seu cenário.</p>
+
+          <div class="field" id="f-func">
+            <label>Quantos colaboradores sua empresa tem hoje?</label>
+            <div class="chip-group" role="radiogroup" aria-label="Quantidade de colaboradores">
+              <label class="chip-opt"><input type="radio" name="funcionarios" value="Até 10"><span>Até 10</span></label>
+              <label class="chip-opt"><input type="radio" name="funcionarios" value="11 a 30"><span>11 a 30</span></label>
+              <label class="chip-opt"><input type="radio" name="funcionarios" value="31 a 100"><span>31 a 100</span></label>
+              <label class="chip-opt"><input type="radio" name="funcionarios" value="Mais de 100"><span>Mais de 100</span></label>
+            </div>
+            <p class="err-msg">Selecione o tamanho do seu time.</p>
+          </div>
+
+          <div class="field" id="f-segmento">
+            <label for="segmento">Qual é o segmento da empresa?</label>
+            <select id="segmento" name="segmento" required>
+              <option value="" selected disabled>Selecione o segmento</option>
+              <option>Indústria</option>
+              <option>Logística e Transporte</option>
+              <option>Supermercado e Atacarejo</option>
+              <option>Agronegócio</option>
+              <option>Comércio e Varejo</option>
+              <option>Saúde</option>
+              <option>Serviços</option>
+              <option>Outro</option>
+            </select>
+            <p class="err-msg">Selecione o segmento.</p>
+          </div>
+
+          <div class="field" id="f-cargo">
+            <label for="cargo">Qual é o seu cargo?</label>
+            <select id="cargo" name="cargo" required>
+              <option value="" selected disabled>Selecione o seu cargo</option>
+              <option>Sócio(a) ou CEO</option>
+              <option>Diretor(a)</option>
+              <option>Gerente ou Coordenador(a) de RH</option>
+              <option>Analista de RH ou T&amp;D</option>
+              <option>Outro</option>
+            </select>
+            <p class="err-msg">Selecione o seu cargo.</p>
+          </div>
+
+          <div class="field" id="f-desafio">
+            <label for="desafio">Qual é o principal desafio do seu time hoje?</label>
+            <select id="desafio" name="desafio" required>
+              <option value="" selected disabled>Selecione o desafio</option>
+              <option>Reter talentos e reduzir a rotatividade</option>
+              <option>Aumentar a produtividade e reduzir erros</option>
+              <option>Formar líderes internos</option>
+              <option>Engajar e motivar a equipe</option>
+              <option>Fortalecer a marca empregadora</option>
+            </select>
+            <p class="err-msg">Selecione o principal desafio.</p>
+          </div>
+
+          <div class="form-nav">
+            <button type="button" class="btn btn-primary btn-block" id="toStep2">Continuar
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-7 7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ETAPA 2: contato -->
+        <div class="form-step" id="step2">
+          <p class="form-title">Quase lá</p>
+          <p class="form-sub">Para onde enviamos o convite da demonstração?</p>
+
+          <div class="field" id="f-nome">
+            <label for="nome">Seu nome</label>
+            <input type="text" id="nome" name="nome" autocomplete="name" placeholder="Como você quer ser chamado(a)" required>
+            <p class="err-msg">Digite o seu nome.</p>
+          </div>
+          <div class="field" id="f-email">
+            <label for="email">E-mail corporativo</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@suaempresa.com.br" required>
+            <p class="err-msg">Digite um e-mail válido.</p>
+          </div>
+          <div class="field" id="f-whats">
+            <label for="whatsapp">WhatsApp</label>
+            <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="numeric" placeholder="(00) 00000-0000" required>
+            <p class="err-msg">Digite um WhatsApp válido com DDD.</p>
+          </div>
+          <div class="field" id="f-empresa">
+            <label for="empresa">Nome da empresa</label>
+            <input type="text" id="empresa" name="empresa" autocomplete="organization" placeholder="Razão social ou nome fantasia" required>
+            <p class="err-msg">Digite o nome da empresa.</p>
+          </div>
+
+          <!-- UTMs capturadas automaticamente -->
+          <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_content"><input type="hidden" name="utm_term"><input type="hidden" name="pagina" value="lp-balner-academy">
+
+          <div class="form-nav">
+            <button type="button" class="btn-back" id="backTo1">Voltar</button>
+            <button type="submit" class="btn btn-gold btn-block" id="submitBtn">Quero agendar minha demonstração
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-7 7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <p class="form-secure">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2.5" stroke="#41565E" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#41565E" stroke-width="1.8"/></svg>
+            Seus dados estão protegidos e são usados apenas para este contato. Nada de spam.
+          </p>
+        </div>
+
+        <!-- SUCESSO -->
+        <div class="form-success" id="formSuccess" role="status">
+          <div class="success-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#18736F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Recebido! Agora é com a gente.</h3>
+          <p>Nossa equipe entra em contato em breve para agendar a conversa de 15 minutos e mostrar o Academy na prática, com foco no seu cenário.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA 8: FAQ ================= -->
+<section class="section" id="faq" style="background:var(--paper)">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Perguntas diretas, respostas diretas</span>
+      <h2>O que todo gestor pergunta antes de ativar</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button" aria-expanded="false">E se a minha equipe não usar?
+          <span class="faq-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#18736F" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Esse é exatamente o problema que a gamificação resolve. Ranking, conquistas e certificados criam competição saudável e reconhecimento, e o painel do gestor mostra em tempo real quem está engajado e quem precisa de um empurrão. O engajamento deixa de depender de cobrança e vira parte da rotina.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button" aria-expanded="false">Não tenho tempo para implantar mais uma ferramenta.
+          <span class="faq-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#18736F" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Você não implanta nada. A Balner configura a plataforma com a sua marca e as trilhas do seu segmento em até 48 horas, com onboarding assistido. Depois disso, o Academy roda sozinho: seu papel é acompanhar os painéis, não administrar a ferramenta.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button" aria-expanded="false">Minha empresa é pequena. Faz sentido para mim?
+          <span class="faq-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#18736F" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Quanto menor o time, mais caro sai cada erro e cada saída. Um único desligamento evitado paga meses de Academy. O plano base cobre até 30 colaboradores, e a proposta é apresentada de acordo com o tamanho e o momento da sua empresa: pensada para caber no caixa de uma PME.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button" aria-expanded="false">Já tentei treinamento e não funcionou.
+          <span class="faq-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#18736F" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Provavelmente foi um evento: um curso, uma palestra, um fim de semana. O Academy é diferente porque é contínuo e estruturado: trilhas por cargo, evolução acompanhada em painel e reconhecimento a cada conquista. É a diferença entre fazer dieta por uma semana e mudar o hábito.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button" aria-expanded="false">Preciso de equipe de TI ou de servidor?
+          <span class="faq-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#18736F" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Não. A plataforma é 100% online e roda na estrutura da Balner. Sua empresa só precisa de acesso à internet. Configuração, atualização e suporte são por nossa conta.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button" aria-expanded="false">Como funciona o Selo Empresa Amiga da Educação?
+          <span class="faq-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#18736F" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Ao ativar o Academy e colocar o time em desenvolvimento, sua empresa passa a integrar o movimento e recebe o selo digital para usar no site, nas vagas, nas propostas comerciais e nas redes sociais. É reputação de marca empregadora trabalhando a seu favor.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button" aria-expanded="false">Tenho mais de 30 colaboradores. E agora?
+          <span class="faq-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#18736F" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Ótimo sinal: quanto maior o time, maior o retorno da estrutura. Existem planos sob medida para empresas acima de 30 colaboradores. Preencha o formulário com o tamanho do seu time e a proposta já vem ajustada para o seu cenário.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA 9: CTA FINAL ================= -->
+<section class="section final">
+  <div class="container reveal">
+    <span class="eyebrow on-dark" style="justify-content:center;display:inline-flex">A decisão</span>
+    <h2>A pergunta não é quanto custa investir no desenvolvimento do seu time.<br>É <span class="accent-bright">quanto está custando não investir</span>.</h2>
+    <p class="lead on-dark">Cada mês sem desenvolvimento é um mês em que a concorrência forma os profissionais que amanhã podem estar atendendo os seus clientes.</p>
+    <div class="final-ctas">
+      <a class="btn btn-primary" href="#formulario">Quero conhecer o Academy na prática
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-7 7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#formulario">Quero falar com um especialista primeiro</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <a class="logo" href="#topo" aria-label="Balner: voltar ao topo">
+        <img src="logo-balner.png" alt="Balner Plataforma Educacional" width="144" height="40">
+      </a>
+      <div class="footer-links">
+        <a href="https://balner.com.br" target="_blank" rel="noopener">balner.com.br</a>
+        <a href="https://www.instagram.com/balneroficial" target="_blank" rel="noopener">@balneroficial</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>Balner Academy é a universidade corporativa da Balner Plataforma Educacional.</span>
+      <span>Respeitamos a LGPD: seus dados são usados apenas para contato comercial sobre o Balner Academy e nunca são compartilhados com terceiros.</span>
+      <span>© 2026 Balner. Todos os direitos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- barra fixa de CTA no mobile -->
+<div class="sticky-cta" id="stickyCta">
+  <a class="btn btn-primary" href="#formulario">Quero construir um time forte</a>
+</div>
+
+<script>
+/* ============================================================
+   CONFIGURACAO DO FORMULARIO
+   FORM_ENDPOINT: URL do webhook que recebe o lead em JSON via POST
+   (RD Station, Kommo, Make, Zapier ou endpoint proprio).
+   Enquanto estiver vazio, o envio é simulado para aprovação visual
+   e o lead é registrado no console do navegador.
+   ============================================================ */
+const FORM_ENDPOINT = "";
+
+(function(){
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- header ---------- */
+  const header = document.getElementById("header");
+  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 40);
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- reveal on scroll ---------- */
+  const revealEls = document.querySelectorAll(".reveal");
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealEls.forEach(el => el.classList.add("in"));
+  } else {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const delay = e.target.dataset.delay || 0;
+          e.target.style.transitionDelay = delay + "ms";
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:.15, rootMargin:"0px 0px -40px 0px"});
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  /* ---------- contadores ---------- */
+  const counters = document.querySelectorAll(".count");
+  const runCounter = el => {
+    const to = parseInt(el.dataset.to, 10);
+    if (reduceMotion) { el.textContent = to; return; }
+    const dur = 1600, t0 = performance.now();
+    const tick = now => {
+      const p = Math.min((now - t0) / dur, 1);
+      el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const cio = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); cio.unobserve(e.target); } });
+    }, {threshold:.6});
+    counters.forEach(c => cio.observe(c));
+  } else {
+    counters.forEach(runCounter);
+  }
+
+  /* ---------- faq ---------- */
+  document.querySelectorAll(".faq-item").forEach(item => {
+    const btn = item.querySelector(".faq-q");
+    const panel = item.querySelector(".faq-a");
+    btn.addEventListener("click", () => {
+      const open = item.classList.contains("open");
+      document.querySelectorAll(".faq-item.open").forEach(o => {
+        o.classList.remove("open");
+        o.querySelector(".faq-a").style.maxHeight = null;
+        o.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+      });
+      if (!open) {
+        item.classList.add("open");
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  /* ---------- barra fixa mobile ---------- */
+  const sticky = document.getElementById("stickyCta");
+  const hero = document.querySelector(".hero");
+  const formSection = document.getElementById("formulario");
+  if (sticky && "IntersectionObserver" in window) {
+    let pastHero = false, formVisible = false;
+    const refresh = () => sticky.classList.toggle("show", pastHero && !formVisible);
+    new IntersectionObserver(e => { pastHero = !e[0].isIntersecting; refresh(); }, {threshold:0}).observe(hero);
+    new IntersectionObserver(e => { formVisible = e[0].isIntersecting; refresh(); }, {threshold:.12}).observe(formSection);
+  }
+
+  /* ---------- utms ---------- */
+  const params = new URLSearchParams(location.search);
+  ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(k => {
+    const input = document.querySelector(`input[name="${k}"]`);
+    if (input && params.get(k)) input.value = params.get(k);
+  });
+
+  /* ---------- mascara whatsapp ---------- */
+  const whats = document.getElementById("whatsapp");
+  whats.addEventListener("input", () => {
+    let d = whats.value.replace(/\D/g, "").slice(0, 11);
+    if (d.length > 7) whats.value = `(${d.slice(0,2)}) ${d.slice(2, d.length === 11 ? 7 : 6)}-${d.slice(d.length === 11 ? 7 : 6)}`;
+    else if (d.length > 2) whats.value = `(${d.slice(0,2)}) ${d.slice(2)}`;
+    else if (d.length > 0) whats.value = `(${d}`;
+  });
+
+  /* ---------- eventos de rastreamento ----------
+     name     = evento custom, util para montar o funil (ex.: lead_form_start)
+     standard = evento PADRAO do Meta que a campanha otimiza (ex.: "Lead").
+                So o evento padrao alimenta a otimizacao de campanhas de Leads;
+                o trackCustom sozinho nao vira meta de otimizacao automatica. */
+  const track = (name, standard) => {
+    try {
+      if (typeof fbq === "function") {
+        fbq("trackCustom", name);
+        if (standard) fbq("track", standard);
+      }
+      if (typeof gtag === "function") {
+        gtag("event", name);
+        // Conversao do Google Ads: preencha AW-XXXXXXXXX/label e descomente
+        // if (standard === "Lead") gtag("event", "conversion", { send_to: "AW-XXXXXXXXX/label" });
+      }
+    } catch (e) { /* rastreamento indisponivel */ }
+  };
+
+  /* ---------- formulario em 2 etapas ---------- */
+  const form = document.getElementById("leadForm");
+  const step1 = document.getElementById("step1");
+  const step2 = document.getElementById("step2");
+  const fpStep1 = document.getElementById("fpStep1");
+  const fpStep2 = document.getElementById("fpStep2");
+  const fpLine = document.getElementById("fpLine");
+
+  const setError = (fieldId, hasError) =>
+    document.getElementById(fieldId).classList.toggle("error", hasError);
+
+  const validStep1 = () => {
+    let ok = true;
+    const radioOk = !!form.querySelector('input[name="funcionarios"]:checked');
+    setError("f-func", !radioOk); ok = ok && radioOk;
+    [["segmento","f-segmento"],["cargo","f-cargo"],["desafio","f-desafio"]].forEach(([id, wrap]) => {
+      const filled = !!document.getElementById(id).value;
+      setError(wrap, !filled); ok = ok && filled;
+    });
+    return ok;
+  };
+
+  document.getElementById("toStep2").addEventListener("click", () => {
+    if (!validStep1()) return;
+    step1.classList.remove("active");
+    step2.classList.add("active");
+    fpStep1.classList.remove("active"); fpStep1.classList.add("done");
+    fpStep2.classList.add("active");
+    fpLine.classList.add("filled");
+    track("lead_form_start");
+    document.getElementById("nome").focus();
+  });
+
+  document.getElementById("backTo1").addEventListener("click", () => {
+    step2.classList.remove("active");
+    step1.classList.add("active");
+    fpStep2.classList.remove("active");
+    fpStep1.classList.add("active"); fpStep1.classList.remove("done");
+    fpLine.classList.remove("filled");
+  });
+
+  // limpa o erro assim que o campo é corrigido
+  form.addEventListener("input", e => {
+    const wrap = e.target.closest(".field");
+    if (wrap) wrap.classList.remove("error");
+  });
+  form.addEventListener("change", e => {
+    const wrap = e.target.closest(".field");
+    if (wrap) wrap.classList.remove("error");
+  });
+
+  const validStep2 = () => {
+    let ok = true;
+    const nome = document.getElementById("nome").value.trim().length >= 2;
+    setError("f-nome", !nome); ok = ok && nome;
+    const email = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(document.getElementById("email").value.trim());
+    setError("f-email", !email); ok = ok && email;
+    const fone = whats.value.replace(/\D/g, "").length >= 10;
+    setError("f-whats", !fone); ok = ok && fone;
+    const empresa = document.getElementById("empresa").value.trim().length >= 2;
+    setError("f-empresa", !empresa); ok = ok && empresa;
+    return ok;
+  };
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!validStep2()) return;
+    if (form.querySelector('input[name="website"]').value) return; // honeypot
+
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true;
+    btn.style.opacity = ".7";
+    btn.firstChild.textContent = "Enviando... ";
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    delete data.website;
+    data.data_envio = new Date().toISOString();
+
+    let sent = false;
+    if (FORM_ENDPOINT) {
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(data)
+        });
+        sent = res.ok;
+      } catch (err) { sent = false; }
+    } else {
+      // modo de aprovação: sem endpoint configurado
+      console.info("LEAD CAPTURADO (configure FORM_ENDPOINT):", data);
+      await new Promise(r => setTimeout(r, 700));
+      sent = true;
+    }
+
+    if (sent) {
+      track("lead_form_submit", "Lead");
+      step2.classList.remove("active");
+      form.querySelector(".form-progress").style.display = "none";
+      document.getElementById("formSuccess").classList.add("show");
+    } else {
+      btn.disabled = false;
+      btn.style.opacity = "1";
+      btn.firstChild.textContent = "Quero agendar minha demonstração ";
+      alert("Não foi possível enviar agora. Tente novamente em instantes ou fale com a gente pelo site balner.com.br.");
+    }
+  });
+})();
+</script>
+</body>
+</html>

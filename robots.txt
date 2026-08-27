@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Bloquear rotas que não devem ser indexadas
+Disallow: /obrigado
+Disallow: /lp
+
+Sitemap: https://nexxusagencia.com.br/sitemap.xml

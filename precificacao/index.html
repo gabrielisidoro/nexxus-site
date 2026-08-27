@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<title>Precificação Inteligente · Quanto cobrar por cada peça | Usual Digital</title>
+<meta name="description" content="Descubra o preço ideal de venda de cada peça da sua loja, considerando custo do produto, impostos, taxas, aluguel, água, luz, internet, funcionário e tráfego pago. Tudo editável.">
+<style>
+@font-face{font-family:'Montserrat';src:url('Montserrat.ttf') format('truetype');font-weight:100 900;font-display:swap}
+:root{--or:#fb5a2d;--ord:#e8430f;--ink:#2e2e33;--inks:#1c1c20;--mut:#8c8c93;--mist:#f7f6f3;--line:#ecebe8;--soft:#fff1ea;--ok:#16a06b;--loss:#e0564a;--warn:#c4791a;--card:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--mist));line-height:1.45;padding-bottom:96px}
+.wrap{max-width:680px;margin:0 auto;padding:18px 16px}
+.top{display:flex;align-items:center;justify-content:space-between;padding:6px 0 14px}
+.logo{display:flex;align-items:center;gap:10px}
+.rk{width:40px;height:40px;border-radius:11px;background:linear-gradient(160deg,#ff6a3d,#e8430f);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.wm{font-weight:800;font-size:20px;color:var(--inks)}.wm small{font-weight:600;font-size:11px;color:var(--or)}
+.tg{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.kx{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--or)}
+h1{font-size:30px;font-weight:800;color:var(--inks);letter-spacing:-.01em;margin:8px 0 8px;line-height:1.1}
+h1 .or{color:var(--or)}
+.lead{font-size:15.5px;color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:16px;box-shadow:0 8px 26px rgba(40,25,15,.05)}
+.sh{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.sn{width:26px;height:26px;border-radius:50%;background:var(--soft);color:var(--ord);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.st{font-size:18px;font-weight:800;color:var(--inks)}
+.hint{font-size:13px;color:var(--mut);margin:2px 0 14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chip{font-size:13px;font-weight:700;color:var(--ink);background:var(--mist);border:1px solid var(--line);border-radius:30px;padding:8px 14px;cursor:pointer;user-select:none}
+.chip.on{background:var(--or);border-color:var(--or);color:#fff}
+.field{margin-bottom:12px}
+.field>label{display:block;font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.inwrap{display:flex;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.inwrap:focus-within{border-color:var(--or)}
+.inwrap .pre{padding:0 0 0 13px;font-weight:800;color:var(--mut);font-size:15px}
+.inwrap .suf{padding:0 13px 0 0;font-weight:800;color:var(--mut);font-size:15px}
+.inwrap input{flex:1;border:0;outline:0;padding:13px 10px;font-family:inherit;font-size:16px;font-weight:700;color:var(--inks);background:transparent;width:100%}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fixrow{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.fixrow .flbl{flex:1;border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;font-family:inherit;font-size:14px;font-weight:600;color:var(--inks);outline:0;min-width:0}
+.fixrow .flbl:focus{border-color:var(--or)}
+.fixrow .fwrap{display:flex;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:10px;width:135px;flex:0 0 auto}
+.fixrow .fwrap:focus-within{border-color:var(--or)}
+.fixrow .fwrap .pre{padding-left:11px;font-weight:800;color:var(--mut);font-size:14px}
+.fixrow .fwrap input{border:0;outline:0;padding:11px 8px;font-family:inherit;font-size:15px;font-weight:700;color:var(--inks);width:100%;background:transparent}
+.frm{width:34px;height:40px;border:0;background:transparent;color:var(--mut);font-size:20px;cursor:pointer;flex:0 0 auto;border-radius:8px}
+.frm:hover{color:var(--loss);background:#fbeae8}
+.addbtn{width:100%;border:1.5px dashed var(--line);background:#fff;color:var(--or);font-weight:800;font-size:14px;padding:11px;border-radius:12px;cursor:pointer;margin-top:4px}
+.addbtn:hover{border-color:var(--or);background:var(--soft)}
+.sub{display:flex;align-items:center;justify-content:space-between;background:var(--mist);border-radius:12px;padding:11px 14px;margin-top:8px;font-size:14px;font-weight:700;color:var(--ink)}
+.sub b{color:var(--inks);font-size:16px}
+.slwrap{margin-top:6px}
+.slhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.slhead .sv{display:flex;align-items:center;background:#fff;border:1.5px solid var(--or);border-radius:10px}
+.slhead .sv input{border:0;outline:0;width:62px;text-align:right;padding:8px 4px 8px 10px;font-family:inherit;font-size:17px;font-weight:800;color:var(--ord);background:transparent}
+.slhead .sv .suf{padding:0 11px 0 1px;font-weight:800;color:var(--ord)}
+input[type=range]{-webkit-appearance:none;width:100%;height:7px;border-radius:6px;background:var(--line);outline:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--or);cursor:pointer;box-shadow:0 3px 8px rgba(232,67,15,.4)}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radius:50%;background:var(--or);cursor:pointer}
+/* result */
+.result{background:linear-gradient(160deg,#fff,#fff6f1);border:1.5px solid var(--or-soft,#ffd9c9);border-color:#ffd9c9}
+.rtop{text-align:center;padding:6px 0 4px}
+.rlbl{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--or)}
+.price{font-size:62px;font-weight:900;color:var(--inks);line-height:1;letter-spacing:-.02em;margin:8px 0 4px}
+.psug{font-size:15px;font-weight:700;color:var(--mut)}
+.psug b{color:var(--ok)}
+.kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 8px;text-align:center}
+.kpi b{display:block;font-size:20px;font-weight:900;color:var(--inks)}
+.kpi span{font-size:11.5px;font-weight:600;color:var(--mut)}
+.bar{display:flex;height:30px;border-radius:8px;overflow:hidden;margin-top:18px;border:1px solid var(--line)}
+.bar i{height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px}
+.lg{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--ink)}
+.lg .dot{width:11px;height:11px;border-radius:3px;flex:0 0 auto}
+.lg b{color:var(--inks)}
+.warn{background:#fdeedf;border:1px solid #f3cda0;color:#9a5a12;font-size:13.5px;font-weight:600;border-radius:12px;padding:12px 14px;margin-top:14px;display:none}
+.minp{text-align:center;font-size:13.5px;color:var(--mut);margin-top:14px;font-weight:600}
+.minp b{color:var(--ink)}
+.revout{background:var(--mist);border-radius:12px;padding:13px 15px;margin-top:10px;font-size:14.5px;font-weight:700;color:var(--ink);display:none}
+.revout b{color:var(--inks)}
+.cta{background:linear-gradient(150deg,#ff6a3d,var(--or) 55%,var(--ord));border-radius:18px;padding:24px 20px;margin-top:18px;color:#fff;text-align:center}
+.cta h3{font-size:21px;font-weight:800;margin-bottom:6px}
+.cta p{font-size:14.5px;opacity:.95;margin-bottom:14px}
+.wabtn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ord);font-weight:800;font-size:15.5px;padding:14px 24px;border-radius:12px;text-decoration:none}
+.foot{text-align:center;font-size:12px;color:var(--mut);font-weight:600;margin:22px 0 6px}
+/* sticky bar */
+.sticky{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(40,25,15,.08);padding:11px 16px;z-index:30}
+.sticky .in{max-width:680px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sticky .sl{font-size:11.5px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.08em}
+.sticky .sp{font-size:24px;font-weight:900;color:var(--inks);line-height:1}
+.sticky a{background:var(--or);color:#fff;font-weight:800;font-size:14px;padding:11px 18px;border-radius:12px;text-decoration:none;white-space:nowrap}
+@media(min-width:560px){h1{font-size:36px}.price{font-size:74px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="logo"><span class="rk"><svg width="26" height="26" viewBox="0 0 120 120"><path d="M60 22c12 7 17 20 17 35l-4 15H51l-4-15c0-15 5-28 17-35z" fill="#fff"/><circle cx="60" cy="48" r="8" fill="#e8430f"/><path d="M51 66c-8 2-12 8-12 16l10-4z" fill="#fff"/><path d="M73 66c8 2 12 8 12 16l-10-4z" fill="#fff"/><path d="M54 84c0 4-1 8-3 11M60 85c0 5-1 10-3 14M66 84c0 4 1 8 3 11" stroke="#fff" stroke-width="3.6" stroke-linecap="round" fill="none"/></svg></span>
+    <span class="wm">USUAL <small>digital</small></span></div>
+    <span class="tg">Precificação</span>
+  </div>
+
+  <span class="kx">Pare de chutar o preço</span>
+  <h1>Quanto cobrar por <span class="or">cada peça</span>?</h1>
+  <p class="lead">Descubra o preço ideal de venda da sua roupa considerando <b>todos</b> os custos: produto, impostos, taxas, aluguel, luz, água, internet, funcionário e tráfego pago. Tudo editável, é só ajustar pra sua realidade.</p>
+
+  <!-- 1. PEÇA -->
+  <div class="card">
+    <div class="sh"><span class="sn">1</span><span class="st">A peça que você quer precificar</span></div>
+    <p class="hint">Escolha um exemplo pra já preencher, ou edite os valores na mão.</p>
+    <div class="chips" id="presets">
+      <span class="chip" data-c="25" data-n="Camiseta">Camiseta</span>
+      <span class="chip" data-c="55" data-n="Calça">Calça</span>
+      <span class="chip" data-c="70" data-n="Vestido">Vestido</span>
+      <span class="chip" data-c="120" data-n="Casaco">Casaco</span>
+      <span class="chip" data-c="18" data-n="Acessório">Acessório</span>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Custo da peça (quanto você paga)</label>
+        <div class="inwrap"><span class="pre">R$</span><input id="custoPeca" inputmode="decimal" value="25"></div></div>
+      <div class="field"><label>Embalagem / etiqueta por peça</label>
+        <div class="inwrap"><span class="pre">R$</span><input id="custoEmb" inputmode="decimal" value="2"></div></div>
+    </div>
+    <div class="field"><label>Quantas peças você vende por mês? (pra ratear os custos fixos)</label>
+      <div class="inwrap"><input id="pecasMes" inputmode="decimal" value="300"><span class="suf">peças</span></div></div>
+  </div>
+
+  <!-- 2. CUSTOS FIXOS -->
+  <div class="card">
+    <div class="sh"><span class="sn">2</span><span class="st">Custos fixos do mês</span></div>
+    <p class="hint">Tudo que você paga todo mês, vendendo ou não. Edite os nomes e valores, e adicione o que faltar.</p>
+    <div id="fixlist"></div>
+    <button class="addbtn" id="addFix">+ adicionar custo fixo</button>
+    <div class="sub"><span>Total de custos fixos / mês</span><b id="totalFixo">R$ 0</b></div>
+    <div class="sub"><span>Custo fixo rateado por peça</span><b id="fixoPeca">R$ 0</b></div>
+  </div>
+
+  <!-- 3. CUSTOS POR VENDA -->
+  <div class="card">
+    <div class="sh"><span class="sn">3</span><span class="st">Custos por venda (%)</span></div>
+    <p class="hint">Percentuais que saem de cada venda. Incidem sobre o preço final, por isso entram no cálculo certo.</p>
+    <div class="row2">
+      <div class="field"><label>Imposto (Simples / nota)</label><div class="inwrap"><input id="imposto" inputmode="decimal" value="6"><span class="suf">%</span></div></div>
+      <div class="field"><label>Taxa de cartão / maquininha</label><div class="inwrap"><input id="cartao" inputmode="decimal" value="3.5"><span class="suf">%</span></div></div>
+      <div class="field"><label>Comissão de vendedor</label><div class="inwrap"><input id="comissao" inputmode="decimal" value="0"><span class="suf">%</span></div></div>
+      <div class="field"><label>Marketplace / plataforma</label><div class="inwrap"><input id="marketplace" inputmode="decimal" value="0"><span class="suf">%</span></div></div>
+    </div>
+    <p class="hint" style="margin:2px 0 0">O <b>tráfego pago / anúncios</b> agora é um custo do mês (em R$), lá no item 2. Assim você informa o valor real que gasta por mês.</p>
+  </div>
+
+  <!-- 4. MARGEM -->
+  <div class="card">
+    <div class="sh"><span class="sn">4</span><span class="st">Margem de lucro que você quer</span></div>
+    <p class="hint">Quanto de lucro líquido você quer em cada venda. É esse número que define o seu ganho.</p>
+    <div class="slwrap">
+      <div class="slhead"><span style="font-size:14px;font-weight:700;color:var(--ink)">Lucro desejado</span>
+        <span class="sv"><input id="margemN" inputmode="decimal" value="15"><span class="suf">%</span></span></div>
+      <input type="range" id="margemS" min="0" max="80" step="1" value="15">
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="card result">
+    <div class="rtop">
+      <div class="rlbl">Preço ideal de venda</div>
+      <div class="price" id="preco">R$ 0</div>
+      <div class="psug">Sugestão psicológica: <b id="precoSug">R$ 0</b></div>
+    </div>
+    <div class="warn" id="warn"></div>
+    <div class="kpis">
+      <div class="kpi"><b id="markup">0x</b><span>markup<br>sobre o custo</span></div>
+      <div class="kpi"><b id="lucroPeca">R$ 0</b><span>lucro<br>por peça</span></div>
+      <div class="kpi"><b id="margemReal">0%</b><span>margem<br>líquida</span></div>
+    </div>
+    <div class="bar" id="bar"></div>
+    <div class="legend" id="legend"></div>
+    <div class="minp">Preço mínimo pra não ter prejuízo (lucro zero): <b id="precoMin">R$ 0</b></div>
+  </div>
+
+  <!-- REVERSE -->
+  <div class="card">
+    <div class="sh"><span class="sn">↺</span><span class="st">Já tem um preço em mente?</span></div>
+    <p class="hint">Digite o preço que você cobra (ou quer cobrar) e veja o lucro e a margem reais.</p>
+    <div class="field"><label>Preço de venda a testar</label><div class="inwrap"><span class="pre">R$</span><input id="testar" inputmode="decimal" placeholder="ex.: 79,90"></div></div>
+    <div class="revout" id="revout"></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h3>Quer estruturar a precificação e o comercial da sua loja?</h3>
+    <p>Em uma conversa rápida eu te mostro onde a sua loja está perdendo margem e como vender com previsibilidade.</p>
+    <a class="wabtn" id="wa" href="#" target="_blank" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8430f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l1-3a8 8 0 1 1 3 3z"/></svg>
+      Falar no WhatsApp (14) 99876-0335
+    </a>
+  </div>
+
+  <div class="foot">Usual Digital · Ferramenta gratuita de precificação · Estruturação comercial de alta performance</div>
+</div>
+
+<div class="sticky">
+  <div class="in">
+    <div><div class="sl">Preço ideal da peça</div><div class="sp" id="stickyPrice">R$ 0</div></div>
+    <a href="#" id="stickyWa" target="_blank" rel="noopener">Falar com especialista</a>
+  </div>
+</div>
+
+<script>
+var WA="https://wa.me/5514998760335?text="+encodeURIComponent("Oi Gabriel! Usei a calculadora de precificação da Usual e quero ajuda pra estruturar a precificação e o comercial da minha loja.");
+document.getElementById('wa').href=WA; document.getElementById('stickyWa').href=WA;
+
+var $=function(id){return document.getElementById(id);};
+function pnum(s){s=(''+s).trim().replace(/\s/g,'');if(s.indexOf(',')>-1){s=s.replace(/\./g,'').replace(',','.');}var v=parseFloat(s);return isNaN(v)?0:v;}
+function brl(v){return 'R$ '+(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function brl0(v){return 'R$ '+Math.round(v||0).toLocaleString('pt-BR');}
+
+/* custos fixos editaveis */
+var FIX=[['Aluguel',2500],['Água',120],['Luz / energia',350],['Internet',150],['Funcionário',1800],['Pró-labore (você)',2500],['Tráfego pago / anúncios',800],['Sistema / ERP / apps',200]];
+var fixlist=$('fixlist');
+function fixRow(nome,val){
+  var d=document.createElement('div');d.className='fixrow';
+  d.innerHTML='<input class="flbl" value="'+(nome||'').replace(/"/g,'&quot;')+'" placeholder="Nome do custo">'+
+   '<div class="fwrap"><span class="pre">R$</span><input class="fval" inputmode="decimal" value="'+(val||'')+'"></div>'+
+   '<button class="frm" title="remover">&times;</button>';
+  d.querySelector('.frm').onclick=function(){d.remove();calc();};
+  d.querySelectorAll('input').forEach(function(i){i.addEventListener('input',calc);});
+  fixlist.appendChild(d);
+}
+FIX.forEach(function(f){fixRow(f[0],f[1]);});
+$('addFix').onclick=function(){fixRow('',''); calc();};
+
+/* presets */
+$('presets').querySelectorAll('.chip').forEach(function(c){
+  c.onclick=function(){
+    $('presets').querySelectorAll('.chip').forEach(function(x){x.classList.remove('on');});
+    c.classList.add('on'); $('custoPeca').value=c.dataset.c; calc();
+  };
+});
+
+/* margem slider <-> number */
+function linkMargem(){
+  $('margemS').addEventListener('input',function(){$('margemN').value=$('margemS').value;calc();});
+  $('margemN').addEventListener('input',function(){var v=Math.max(0,Math.min(95,pnum($('margemN').value)));$('margemS').value=v;calc();});
+}
+linkMargem();
+
+['custoPeca','custoEmb','pecasMes','imposto','cartao','comissao','marketplace','testar'].forEach(function(id){
+  $(id).addEventListener('input',calc);
+});
+
+function sugPsi(p){ if(p<=0)return 0; var s=Math.ceil(p/10)*10-0.10; if(s<p)s+=10; if(p<10){s=Math.ceil(p)-0.10; if(s<p)s+=1;} return s; }
+
+function calc(){
+  var custoPeca=pnum($('custoPeca').value), emb=pnum($('custoEmb').value), pecas=pnum($('pecasMes').value);
+  var totalFixo=0; fixlist.querySelectorAll('.fval').forEach(function(i){totalFixo+=pnum(i.value);});
+  var fixoPeca= pecas>0? totalFixo/pecas : 0;
+  $('totalFixo').textContent=brl0(totalFixo);
+  $('fixoPeca').textContent=brl(fixoPeca);
+
+  var imp=pnum($('imposto').value),car=pnum($('cartao').value),com=pnum($('comissao').value),mkp=pnum($('marketplace').value);
+  var Vtax=imp+car+com+mkp; // taxas
+  var Vtotal=Vtax; // todos os % por venda (trafego agora eh custo fixo em R$)
+  var L=pnum($('margemN').value);
+  var C=custoPeca+emb+fixoPeca; // custos em R$ por peca
+
+  var warn=$('warn');
+  var div=1-(Vtotal+L)/100;
+  var preco, viavel = div>0.001;
+  if(!viavel){
+    warn.style.display='block';
+    warn.innerHTML='⚠️ Seus custos em % (<b>'+(Vtotal).toFixed(1)+'%</b>) + a margem desejada (<b>'+L+'%</b>) passam de 100%. Impossível precificar assim. Reduza a margem ou os custos por venda.';
+    preco=0;
+  }else{
+    warn.style.display='none';
+    preco=C/div;
+  }
+
+  $('preco').textContent= viavel? brl(preco):'—';
+  $('precoSug').textContent= viavel? brl(sugPsi(preco)):'—';
+  $('stickyPrice').textContent= viavel? brl(preco):'—';
+  $('precoMin').textContent = (1-Vtotal/100)>0.001 ? brl(C/(1-Vtotal/100)) : '—';
+
+  var lucro= preco*L/100;
+  var markup= custoPeca>0? preco/custoPeca : 0;
+  $('markup').textContent= viavel? (markup.toFixed(markup<10?2:1)+'x'):'—';
+  $('lucroPeca').textContent= viavel? brl(lucro):'—';
+  $('margemReal').textContent= viavel? (L.toFixed(0)+'%'):'—';
+
+  // breakdown
+  var segProduto=custoPeca+emb, segFixo=fixoPeca, segTax=preco*Vtax/100, segLucro=preco*L/100;
+  var parts=[['Produto + embalagem',segProduto,'#1c1c20'],['Custos do mês (inclui tráfego)',segFixo,'#fb5a2d'],['Impostos + taxas',segTax,'#c4791a'],['Seu lucro',segLucro,'#16a06b']];
+  var bar=$('bar'), legend=$('legend'); bar.innerHTML=''; legend.innerHTML='';
+  if(viavel && preco>0){
+    parts.forEach(function(p){
+      var pct=p[1]/preco*100;
+      var i=document.createElement('i'); i.style.width=pct+'%'; i.style.background=p[2]; bar.appendChild(i);
+      var l=document.createElement('div'); l.className='lg';
+      l.innerHTML='<span class="dot" style="background:'+p[2]+'"></span>'+p[0]+': <b>&nbsp;'+brl(p[1])+' ('+pct.toFixed(0)+'%)</b>';
+      legend.appendChild(l);
+    });
+  }
+
+  // reverso
+  var tp=pnum($('testar').value), rev=$('revout');
+  if(tp>0){
+    rev.style.display='block';
+    var lucroR= tp*(1-Vtotal/100) - C;
+    var margR= tp>0? lucroR/tp*100 : 0;
+    var cls= margR<0?'var(--loss)':(margR<8?'var(--warn)':'var(--ok)');
+    var dif= viavel? (tp>=preco?'no/acima do ideal ✓':'abaixo do ideal'):'';
+    rev.innerHTML='Cobrando <b>'+brl(tp)+'</b> você teria <b style="color:'+cls+'">'+brl(lucroR)+'</b> de lucro por peça '+
+      '(<b style="color:'+cls+'">'+margR.toFixed(1)+'%</b> de margem)'+(dif?' · '+dif:'')+'.';
+  }else{ rev.style.display='none'; }
+}
+calc();
+</script>
+</body>
+</html>

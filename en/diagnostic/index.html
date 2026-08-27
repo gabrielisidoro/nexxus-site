@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales Diagnostic · Usual Digital</title>
+<meta name="description" content="Find out in 3 minutes where your sales operation loses money and how much you can grow. Maturity diagnostic + revenue forecast.">
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:'Montserrat';src:url('Montserrat.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
+:root{
+  --or:#fb5a2d; --or-deep:#e8430f; --or-soft:#fff1ea; --or-soft2:#ffe7da;
+  --ink:#2e2e33; --ink-strong:#1c1c20; --mut:#8c8c93;
+  --paper:#ffffff; --mist:#f7f6f3; --line:#ececea;
+  --loss:#d2483a; --warn:#e8a13a; --ok:#16a06b;
+  --shadow:0 10px 40px rgba(40,30,25,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',system-ui,Arial,sans-serif;color:var(--ink);background:var(--mist);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:22px 18px 60px}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer;border:none}
+
+.top{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 18px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo .rk{width:40px;height:40px;border-radius:11px;background:linear-gradient(160deg,#ff6a3d,var(--or-deep));display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.logo .wm{font-weight:800;font-size:21px;letter-spacing:.01em;color:var(--ink-strong);line-height:1}
+.logo .wm small{font-weight:600;font-size:11px;color:var(--or);margin-left:2px}
+.top .tagk{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:34px 34px 30px}
+@media(max-width:600px){.card{padding:24px 18px}.wrap{padding:16px 12px 50px}}
+
+.chip{display:inline-block;background:var(--or-soft);color:var(--or-deep);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:7px 14px;border-radius:40px}
+h1{font-size:38px;font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--ink-strong)}
+@media(max-width:600px){h1{font-size:28px}}
+h2{font-size:24px;font-weight:800;color:var(--ink-strong);line-height:1.1}
+h3{font-size:15px;font-weight:800;color:var(--ink-strong)}
+p.lead{font-size:17px;color:var(--ink)}
+.muted{color:var(--mut)}
+.or{color:var(--or)}
+
+.prog{height:7px;background:var(--mist);border-radius:10px;overflow:hidden;margin:0 0 22px}
+.prog>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--or),var(--or-deep));border-radius:10px;transition:width .35s ease}
+.steplbl{font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--mut);margin-bottom:7px;display:flex;justify-content:space-between}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--or);color:#fff;font-weight:800;font-size:16px;padding:15px 26px;border-radius:14px;transition:.2s;box-shadow:0 8px 22px rgba(251,90,45,.32)}
+.btn:hover{background:var(--or-deep);transform:translateY(-1px)}
+.btn:disabled{background:#e7c6ba;box-shadow:none;cursor:not-allowed;transform:none}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:none;border:1.5px solid var(--line);font-size:15px;padding:13px 20px}
+.btn.ghost:hover{background:var(--mist);transform:none}
+.btn.wide{width:100%}
+.btn.lg{font-size:18px;padding:17px 30px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:26px}
+
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:700;color:var(--ink-strong);margin-bottom:6px}
+.field input,.field select{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:15px;font-family:inherit;color:var(--ink);background:#fff;transition:.15s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--or);box-shadow:0 0 0 3px var(--or-soft)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+
+.qblock{margin-bottom:24px}
+.qblock>.qh{font-size:17px;font-weight:800;color:var(--ink-strong);margin-bottom:12px;display:flex;gap:10px}
+.qblock>.qh .qn{color:var(--or)}
+.opt{display:flex;align-items:center;gap:13px;border:1.5px solid var(--line);border-radius:13px;padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:.15s;background:#fff}
+.opt:hover{border-color:var(--or-soft2);background:var(--or-soft)}
+.opt .dot{width:21px;height:21px;border-radius:50%;border:2px solid #cfcdc9;flex:0 0 auto;transition:.15s;position:relative}
+.opt.sel{border-color:var(--or);background:var(--or-soft)}
+.opt.sel .dot{border-color:var(--or)}
+.opt.sel .dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--or)}
+.opt .ot{font-size:14.5px;font-weight:600;color:var(--ink)}
+.pillartag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--or);margin-bottom:4px}
+
+.gauge-wrap{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.ring{position:relative;width:170px;height:170px;flex:0 0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring .ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .ctr b{font-size:44px;font-weight:800;color:var(--ink-strong);line-height:1}
+.ring .ctr span{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.classbadge{display:inline-block;font-weight:800;font-size:15px;padding:8px 16px;border-radius:30px}
+.bars{margin-top:10px}
+.bar{margin-bottom:13px}
+.bar .bl{display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;margin-bottom:5px}
+.bar .bl .pct{font-weight:800}
+.bar .track{height:11px;background:var(--mist);border-radius:8px;overflow:hidden}
+.bar .track>i{display:block;height:100%;border-radius:8px;transition:width .8s ease}
+
+.section{margin-top:30px}
+.section .sh{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--or);margin-bottom:10px}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
+@media(max-width:700px){.kpis{grid-template-columns:1fr 1fr}}
+.kpi{background:var(--mist);border:1px solid var(--line);border-radius:14px;padding:14px}
+.kpi b{display:block;font-size:24px;font-weight:800;color:var(--ink-strong);line-height:1}
+.kpi span{font-size:11.5px;font-weight:600;color:var(--mut)}
+.kpi .st{font-size:11px;font-weight:800;margin-top:5px;display:inline-block}
+
+.fcast{background:var(--mist);border:1px solid var(--line);border-radius:18px;padding:20px}
+.slider{margin-bottom:15px}
+.slider .sl{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:6px}
+.slider .sl b{color:var(--or-deep)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:var(--or-soft2);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--or);cursor:pointer;box-shadow:0 2px 6px rgba(251,90,45,.5)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border:none;border-radius:50%;background:var(--or);cursor:pointer}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+.compare .cc{border-radius:14px;padding:16px;text-align:center}
+.compare .atual{background:#fff;border:1.5px solid var(--line)}
+.compare .pot{background:var(--or);color:#fff}
+.compare .cc small{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.compare .cc b{display:block;font-size:27px;font-weight:800;margin-top:4px;line-height:1}
+.uplift{margin-top:14px;background:var(--or-soft);border:1px dashed var(--or);border-radius:14px;padding:14px 16px;text-align:center;font-weight:700;color:var(--or-deep)}
+.uplift b{font-size:22px}
+
+.rec{display:flex;gap:14px;background:var(--mist);border:1px solid var(--line);border-left:5px solid var(--or);border-radius:0 14px 14px 0;padding:15px 17px;margin-bottom:12px}
+.rec .rn{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--or);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.rec h4{font-size:15px;font-weight:800;color:var(--ink-strong);margin-bottom:3px}
+.rec p{font-size:13.5px;color:var(--ink)}
+.rec .ch{font-size:11.5px;font-weight:800;color:var(--or);text-transform:uppercase;letter-spacing:.06em;margin-top:5px;display:block}
+
+.cta{margin-top:30px;background:linear-gradient(150deg,#ff6a3d,var(--or) 55%,var(--or-deep));border-radius:20px;padding:28px;color:#fff;text-align:center}
+.cta h2{color:#fff}
+.cta p{color:#fff;opacity:.95;margin:10px auto 18px;max-width:520px;font-size:15px}
+.cta .btn{background:#fff;color:var(--or-deep);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.cta .btn:hover{background:#fff;color:var(--or-deep);transform:translateY(-1px)}
+
+.foot{text-align:center;color:var(--mut);font-size:12px;margin-top:26px;line-height:1.6}
+.hidden{display:none!important}
+.fade{animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+@media print{
+  body{background:#fff}
+  .noprint{display:none!important}
+  .card{box-shadow:none;border:none;padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="logo">
+      <span class="rk">
+        <svg width="24" height="24" viewBox="0 0 120 120" aria-hidden="true">
+          <path d="M60 22c12 7 17 20 17 35l-4 15H51l-4-15c0-15 5-28 17-35z" fill="#fff"/>
+          <circle cx="60" cy="48" r="8" fill="#e8430f"/>
+          <path d="M51 66c-8 2-12 8-12 16l10-4z" fill="#fff"/>
+          <path d="M73 66c8 2 12 8 12 16l-10-4z" fill="#fff"/>
+          <path d="M54 84c0 4-1 8-3 11M60 85c0 5-1 10-3 14M66 84c0 4 1 8 3 11" stroke="#fff" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+        </svg>
+      </span>
+      <span class="wm">USUAL<small>digital</small></span>
+    </div>
+    <div class="tagk">Sales Diagnostic</div>
+  </div>
+
+  <div id="app"></div>
+
+  <div class="foot noprint">
+    Educational tool. Results are estimates based on the data you enter.
+  </div>
+</div>
+
+<script>
+const SALES = "../";
+
+const PILLARS = [
+  {id:"aq", name:"Acquisition & Marketing", chapter:"Ch. 5 — Acquisition funnels"},
+  {id:"pv", name:"Pre-sales", chapter:"Ch. 6 — Pre-sales (SDR)"},
+  {id:"vd", name:"Sales", chapter:"Ch. 7 — Sales (Closer)"},
+  {id:"of", name:"Offer & Product", chapter:"Ch. 2-4 — ICP, ladder & offer"},
+  {id:"gm", name:"Management & Metrics", chapter:"Ch. 11-12 — CRM & management"},
+  {id:"pp", name:"Post-sale & People", chapter:"Ch. 8-9 — Post-sale & team"},
+];
+
+const QUESTIONS = [
+  {p:"aq", q:"How do your leads come in today?", o:[
+    ["Only referrals and luck",0],["I depend on a single channel",1],
+    ["I have 1 or 2 predictable channels",2],["Marketing AND sales funnels running together",3]]},
+  {p:"aq", q:"Do you know how many new leads you'll generate next month?", o:[
+    ["No idea",0],["Just a rough guess",1],
+    ["A historical average",2],["A forecast based on spend and conversion rates",3]]},
+  {p:"pv", q:"How long does it take for a new lead to be contacted?", o:[
+    ["Sometimes it never is",0],["Hours or days",1],
+    ["Same day",2],["Within minutes, with a defined process",3]]},
+  {p:"pv", q:"Is there a defined follow-up cadence?", o:[
+    ["I reach out once or twice and give up",0],["I follow up, but with no pattern",1],
+    ["I have a basic cadence",2],["A multichannel cadence of 8 to 12 touches",3]]},
+  {p:"vd", q:"Does your sales meeting follow a process?", o:[
+    ["Every sale is improvised",0],["I have a mental script",1],
+    ["I have a basic script",2],["A full protocol: discovery, anchoring, closing",3]]},
+  {p:"vd", q:"Do you use diagnostic questions (like SPIN) before presenting?", o:[
+    ["No, I go straight to the pitch",0],["I ask a few things",1],
+    ["I have key questions",2],["Structured discovery that guides the sale",3]]},
+  {p:"of", q:"Are you clear on your ideal customer (ICP)?", o:[
+    ["I sell to anyone",0],["I have a vague idea",1],
+    ["ICP defined",2],["ICP + minimum ideal customer + qualification criteria",3]]},
+  {p:"of", q:"What's your offer like when it's time to close?", o:[
+    ["Price on the spot, no standard",0],["I have a fixed price sheet",1],
+    ["Price sheet + a promo condition",2],["Offer engineering: anchoring, bonuses, last-chance condition",3]]},
+  {p:"of", q:"Do you have a product ladder (entry → core → high ticket)?", o:[
+    ["Just one product",0],["Two products with no connection",1],
+    ["A ladder just starting",2],["A value ladder with clear ascension",3]]},
+  {p:"gm", q:"Do you track sales metrics (rates, CAC, ROAS)?", o:[
+    ["I track nothing",0],["I only look at revenue",1],
+    ["I track a few rates",2],["A dashboard with KPIs and goals",3]]},
+  {p:"gm", q:"Is there an organized CRM with a stage-by-stage pipeline?", o:[
+    ["It's in my head / inbox / a messy sheet",0],["An organized spreadsheet",1],
+    ["I have a CRM, but underused",2],["A CRM with pipelines and automations",3]]},
+  {p:"gm", q:"How often do you review the numbers and adjust course?", o:[
+    ["Never / only when there's a problem",0],["Once in a while",1],
+    ["Monthly",2],["A weekly metrics routine",3]]},
+  {p:"pp", q:"Is there a post-sale process (onboarding, repeat, referrals)?", o:[
+    ["Sale's done, it's over",0],["I help when the customer reaches out",1],
+    ["I have some follow-up",2],["A structured post-sale driving LTV and referrals",3]]},
+  {p:"pp", q:"Does sales run without you in the day-to-day?", o:[
+    ["Everything stops if I step away",0],["It depends heavily on me",1],
+    ["It partly runs without me",2],["It runs on its own, managed by metrics",3]]},
+];
+
+const REC = {
+  aq:{tip:"Build at least one marketing funnel (VSL) and one sales funnel (social selling/outbound) so you stop depending on referrals."},
+  pv:{tip:"Set up a cadence of 8 to 12 touches and reply to every lead within 5 minutes. 80% of sales happen between the 5th and the 12th touch."},
+  vd:{tip:"Standardize the call with the 5-step protocol and use diagnostic (SPIN) questions before presenting the solution."},
+  of:{tip:"Define your ICP, build the value ladder and structure your offer engineering (anchoring, bonuses, last-chance condition)."},
+  gm:{tip:"Put in a CRM with pipelines, track your KPIs on a dashboard and create a weekly metrics routine."},
+  pp:{tip:"Structure your post-sale (onboarding, repeat, referrals) and start documenting processes so sales runs without you."},
+};
+
+const BENCH = {ag:0.20, comp:0.70, conv:0.28};
+
+let state = {
+  step:0,
+  answers:{},
+  name:"", seg:"",
+  fc:{leads:600, ag:12, comp:55, conv:18, ticket:5000, cpl:0, verba:0},
+  liveBench:false
+};
+
+const app = document.getElementById('app');
+const money = v => "$" + Math.round(v).toLocaleString('en-US');
+const TOTALSTEPS = 8;
+
+function pillarQuestions(pid){ return QUESTIONS.map((q,i)=>({...q,i})).filter(q=>q.p===pid); }
+
+function pillarScore(pid){
+  const qs = pillarQuestions(pid);
+  let s=0, m=0;
+  qs.forEach(q=>{ m+=3; if(state.answers[q.i]!==undefined) s+=state.answers[q.i]; });
+  return m? Math.round(s/m*100):0;
+}
+function overallScore(){
+  let s=0,m=0;
+  QUESTIONS.forEach((q,i)=>{ m+=3; if(state.answers[i]!==undefined)s+=state.answers[i]; });
+  return m? Math.round(s/m*100):0;
+}
+function classify(p){
+  if(p<40) return {t:"Sales on guesswork", c:"var(--loss)", bg:"#fbe9e6"};
+  if(p<65) return {t:"Getting structured", c:"#c4791a", bg:"#fdf2e2"};
+  if(p<85) return {t:"Structured", c:"var(--ok)", bg:"#e6f6ef"};
+  return {t:"High performance", c:"var(--ok)", bg:"#e6f6ef"};
+}
+function barColor(p){ return p<40?"var(--loss)":p<65?"var(--warn)":"var(--ok)"; }
+
+/* ---------- forecast math ---------- */
+function calc(fc, useBench){
+  const ag = useBench? Math.max(fc.ag/100, BENCH.ag) : fc.ag/100;
+  const comp = useBench? Math.max(fc.comp/100, BENCH.comp) : fc.comp/100;
+  const conv = useBench? Math.max(fc.conv/100, BENCH.conv) : fc.conv/100;
+  const agend = fc.leads*ag;
+  const reun = agend*comp;
+  const vendas = reun*conv;
+  const fat = vendas*fc.ticket;
+  const invest = fc.verba||0;
+  let cpl = fc.cpl||0;
+  if(!cpl && invest>0 && fc.leads>0) cpl = invest/fc.leads;
+  const cac = vendas? invest/vendas : 0;
+  const roas = invest? fat/invest : 0;
+  return {agend,reun,vendas,fat,cac,roas,cpl,invest};
+}
+
+/* ---------- render ---------- */
+function setStep(s){ state.step=Math.max(0,Math.min(TOTALSTEPS,s)); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+function render(){
+  const s=state.step;
+  if(s===0) return renderIntro();
+  if(s>=1 && s<=6) return renderPillar(s);
+  if(s===7) return renderForecast();
+  if(s===8) return renderResults();
+}
+
+function progressBar(frac, label){
+  return `<div class="steplbl noprint"><span>${label}</span><span>${Math.round(frac*100)}%</span></div>
+  <div class="prog noprint"><i style="width:${frac*100}%"></i></div>`;
+}
+
+function renderIntro(){
+  app.innerHTML = `<div class="card fade">
+    <span class="chip">For founders who want predictability</span>
+    <h1 style="margin-top:16px">X-ray your<br><span class="or">sales engine</span>.</h1>
+    <p class="lead" style="margin-top:16px;max-width:560px">In under 3 minutes, discover the maturity of your sales operation, how much you leave on the table today, and your revenue potential with the right structure.</p>
+    <div class="grid2" style="margin-top:22px">
+      <div class="field"><label>Your name (optional)</label><input id="f_name" placeholder="What should we call you?" value="${state.name}"></div>
+      <div class="field"><label>Industry (optional)</label><input id="f_seg" placeholder="e.g., agency, clinic, SaaS..." value="${state.seg}"></div>
+    </div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap;margin:10px 0 4px">
+      <div class="muted" style="font-size:13px">✓ 15 quick questions</div>
+      <div class="muted" style="font-size:13px">✓ Revenue forecast</div>
+      <div class="muted" style="font-size:13px">✓ Personalized action plan</div>
+    </div>
+    <div class="nav">
+      <span></span>
+      <button class="btn lg" onclick="startQuiz()">Start the diagnostic →</button>
+    </div>
+  </div>`;
+}
+function startQuiz(){
+  state.name=(document.getElementById('f_name').value||"").trim();
+  state.seg=(document.getElementById('f_seg').value||"").trim();
+  setStep(1);
+}
+
+function renderPillar(s){
+  const pillar=PILLARS[s-1];
+  const qs=pillarQuestions(pillar.id);
+  const frac=(s)/TOTALSTEPS;
+  let html=`<div class="card fade">${progressBar(frac, `Step ${s} of 7 · ${pillar.name}`)}
+    <div class="pillartag">${dot()} ${pillar.name}</div>`;
+  qs.forEach((q,k)=>{
+    html+=`<div class="qblock"><div class="qh"><span class="qn">${k+1}.</span><span>${q.q}</span></div>`;
+    q.o.forEach((opt,oi)=>{
+      const sel=state.answers[q.i]===opt[1] && state.answers[q.i]!==undefined && selIndex(q.i)===oi;
+      html+=`<div class="opt ${sel?'sel':''}" onclick="pick(${q.i},${oi},${opt[1]})"><span class="dot"></span><span class="ot">${opt[0]}</span></div>`;
+    });
+    html+=`</div>`;
+  });
+  const answered=qs.every(q=>state.answers[q.i]!==undefined);
+  html+=`<div class="nav">
+    <button class="btn ghost" onclick="setStep(${s-1})">← Back</button>
+    <button class="btn" id="nextbtn" ${answered?'':'disabled'} onclick="setStep(${s+1})">${s===6?'Go to the forecast →':'Next →'}</button>
+  </div></div>`;
+  app.innerHTML=html;
+}
+let chosenIndex={};
+function selIndex(qi){ return chosenIndex[qi]; }
+function pick(qi,oi,score){
+  state.answers[qi]=score; chosenIndex[qi]=oi;
+  render();
+}
+function dot(){return '<svg width="14" height="14" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3.4" fill="#fb5a2d"/></svg>';}
+
+function renderForecast(){
+  const f=state.fc;
+  app.innerHTML=`<div class="card fade">${progressBar(7/TOTALSTEPS,"Step 7 of 7 · Your numbers")}
+    <h2>Your current numbers</h2>
+    <p class="muted" style="margin:6px 0 18px;font-size:14px">Fill in what you have today. Not sure? Use an estimate, you can adjust the results later.</p>
+    <div class="grid2">
+      <div class="field"><label>New leads per month</label><input type="number" id="i_leads" value="${f.leads}" min="0"></div>
+      <div class="field"><label>Average deal size ($)</label><input type="number" id="i_ticket" value="${f.ticket}" min="0"></div>
+      <div class="field"><label>Booking rate (%)</label><input type="number" id="i_ag" value="${f.ag}" min="0" max="100"></div>
+      <div class="field"><label>Show-up rate (%)</label><input type="number" id="i_comp" value="${f.comp}" min="0" max="100"></div>
+      <div class="field"><label>Close rate (%)</label><input type="number" id="i_conv" value="${f.conv}" min="0" max="100"></div>
+      <div class="field"><label>Ad spend / month ($)</label><input type="number" id="i_verba" value="${f.verba}" min="0" placeholder="0 if you don't run ads"></div>
+      <div class="field"><label>Cost per lead ($)</label><input type="number" id="i_cpl" value="${f.cpl}" min="0" step="0.01" placeholder="0 if you don't run ads"></div>
+    </div>
+    <p style="font-size:12.5px;color:var(--mut);margin-top:2px">Running paid ads? Enter your <b>ad spend</b> and <b>cost per lead</b> — we use them to calculate your leads, CAC and ROAS. If you don't run ads, leave them at 0.</p>
+    <div class="nav">
+      <button class="btn ghost" onclick="saveForecast(6)">← Back</button>
+      <button class="btn lg" onclick="saveForecast(8)">Generate my diagnostic →</button>
+    </div>
+  </div>`;
+}
+function saveForecast(go){
+  const g=id=>parseFloat(document.getElementById(id).value)||0;
+  let leads=g('i_leads'), cpl=g('i_cpl'), verba=g('i_verba');
+  if(verba>0 && cpl>0) leads=Math.round(verba/cpl);
+  else if(cpl>0) verba=Math.round(leads*cpl);
+  else if(verba>0 && leads>0) cpl=+(verba/leads).toFixed(2);
+  state.fc={leads, ticket:g('i_ticket'), ag:g('i_ag'), comp:g('i_comp'), conv:g('i_conv'), cpl, verba};
+  setStep(go);
+}
+
+function renderResults(){
+  const score=overallScore();
+  const cls=classify(score);
+  const C=2*Math.PI*72;
+  const off=C*(1-score/100);
+  const hi=state.name? `, ${state.name}`:"";
+
+  const pscores=PILLARS.map(p=>({...p,score:pillarScore(p.id)}));
+  const lowest=[...pscores].sort((a,b)=>a.score-b.score).slice(0,3);
+
+  const cur=calc(state.fc,false);
+  const pot=calc(state.fc,true);
+  const uplift=pot.fat-cur.fat;
+  const upPct=cur.fat? Math.round(uplift/cur.fat*100):0;
+
+  const prev=Math.round(pillarScore('gm')*0.4 + pillarScore('pv')*0.35 + pillarScore('vd')*0.25);
+  const prevTxt = prev<40?"Low":prev<70?"Medium":"High";
+  const prevC = prev<40?"var(--loss)":prev<70?"var(--warn)":"var(--ok)";
+
+  let html=`<div class="card fade">
+    <div class="pillartag noprint">${dot()} Your result${hi}</div>
+    <div class="gauge-wrap">
+      <div class="ring">
+        <svg width="170" height="170">
+          <circle cx="85" cy="85" r="72" fill="none" stroke="#f0eeea" stroke-width="15"/>
+          <circle cx="85" cy="85" r="72" fill="none" stroke="${cls.c}" stroke-width="15" stroke-linecap="round"
+            stroke-dasharray="${C}" stroke-dashoffset="${off}"/>
+        </svg>
+        <div class="ctr"><b>${score}<span style="font-size:20px">%</span></b><span>Maturity</span></div>
+      </div>
+      <div style="flex:1;min-width:240px">
+        <span class="classbadge" style="color:${cls.c};background:${cls.bg}">${cls.t}</span>
+        <h2 style="margin-top:12px">${diagSentence(score)}</h2>
+        <p class="muted" style="margin-top:8px;font-size:14px">Operation predictability:
+          <b style="color:${prevC}">${prevTxt}</b> (${prev}/100)</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sh">Maturity by pillar</div>
+      <div class="bars">
+        ${pscores.map(p=>`<div class="bar"><div class="bl"><span>${p.name}</span><span class="pct" style="color:${barColor(p.score)}">${p.score}%</span></div>
+          <div class="track"><i style="width:${p.score}%;background:${barColor(p.score)}"></i></div></div>`).join('')}
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sh">Your operation today</div>
+      <div class="kpis">
+        ${kpi(cur.vendas.toFixed(0),"sales / month")}
+        ${kpi(money(cur.fat),"estimated revenue")}
+        ${kpi(cur.invest?money(cur.invest):"—","ad spend")}
+        ${kpi(cur.cpl?money(cur.cpl):"—","cost per lead")}
+        ${kpi(cur.invest?money(cur.cac):"—","CAC", cur.invest?cacStatus(cur.cac,state.fc.ticket):"")}
+        ${kpi(cur.invest?cur.roas.toFixed(1):"—","ROAS", cur.invest?roasStatus(cur.roas):"")}
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sh">Revenue forecast · simulator</div>
+      <div class="fcast">
+        <p style="font-size:14px;font-weight:700;margin-bottom:4px">Drag to see the impact of improving each stage of your funnel:</p>
+        <p style="font-size:12px;color:var(--mut);margin-bottom:14px">Ad spend and cost per lead define your leads (leads = spend ÷ cost per lead). Lowering cost per lead, with the same spend, generates more leads.</p>
+        ${slider('s_verba','Ad spend / month',state.fc.verba,0,50000,500,'$')}
+        ${slider('s_cpl','Cost per lead',state.fc.cpl,0,200,1,'$')}
+        ${slider('s_leads','Leads / month',state.fc.leads,0,3000,10,'')}
+        ${slider('s_ag','Booking rate',state.fc.ag,0,60,1,'%')}
+        ${slider('s_comp','Show-up rate',state.fc.comp,0,100,1,'%')}
+        ${slider('s_conv','Close rate',state.fc.conv,0,60,1,'%')}
+        ${slider('s_ticket','Average deal size',state.fc.ticket,0,50000,500,'$')}
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;font-weight:700;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 15px;margin-bottom:14px">
+          <span>Leads generated: <b class="or" id="sim_leads">—</b></span>
+          <span>CAC: <b class="or" id="sim_cac">—</b></span>
+          <span>ROAS: <b class="or" id="sim_roas">—</b></span>
+        </div>
+        <div class="compare">
+          <div class="cc atual"><small>Current revenue</small><b id="r_atual">${money(cur.fat)}</b></div>
+          <div class="cc pot"><small>Simulated</small><b id="r_sim">${money(cur.fat)}</b></div>
+        </div>
+        <div class="uplift">Hitting the ideal market KPIs, your potential is
+          <b id="r_pot">${money(pot.fat)}</b><br>
+          <span id="r_up">${uplift>0?`+ ${money(uplift)} per month (${upPct}% more)`:'you\'re already above the benchmark rates — focus on volume and deal size'}</span>
+          <div style="margin-top:10px"><button class="btn ghost noprint" style="font-size:13px;padding:9px 16px" onclick="applyBench()">Apply ideal KPIs ↑</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sh">Your action plan · 3 priorities</div>
+      ${lowest.map((p,i)=>`<div class="rec"><div class="rn">${i+1}</div><div>
+        <h4>${p.name} <span class="muted" style="font-weight:700">· ${p.score}%</span></h4>
+        <p>${REC[p.id].tip}</p><span class="ch">${p.chapter} — Usual ebook</span></div></div>`).join('')}
+    </div>
+
+    <div class="cta noprint">
+      <h2>Want the complete system to fix these gaps?</h2>
+      <p>Take this result and get the full sales system: the method, spreadsheets, scripts and CRM to build, step by step, the predictable operation your numbers point to.</p>
+      <a class="btn lg" href="${SALES}">Get the complete system →</a>
+    </div>
+
+    <div class="nav noprint">
+      <button class="btn ghost" onclick="window.print()">Save / print result</button>
+      <button class="btn ghost" onclick="restart()">Restart diagnostic</button>
+    </div>
+  </div>`;
+  app.innerHTML=html;
+  ['s_verba','s_cpl','s_leads','s_ag','s_comp','s_conv','s_ticket'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.addEventListener('input',()=>onSlider(id));
+  });
+  updateSim();
+}
+function onSlider(changed){
+  const g=id=>{const e=document.getElementById(id);return e?parseFloat(e.value):0;};
+  let verba=g('s_verba'), cpl=g('s_cpl'), leads=g('s_leads');
+  if(changed==='s_cpl' || changed==='s_verba'){ if(cpl>0) leads=Math.round(verba/cpl); }
+  else if(changed==='s_leads'){ verba=Math.round(leads*cpl); }
+  if(changed!=='s_leads'){ const e=document.getElementById('s_leads'); if(e) e.value=leads; }
+  if(changed==='s_leads'){ const e=document.getElementById('s_verba'); if(e) e.value=verba; }
+  updateSim();
+}
+
+function diagSentence(score){
+  if(score<40) return "Your sales still depend on improvisation and luck.";
+  if(score<65) return "You've started structuring, but there are gaps holding back growth.";
+  if(score<85) return "Solid structured base. Now it's about optimizing and scaling.";
+  return "Mature operation. Focus on scale and efficiency.";
+}
+function kpi(big,lbl,st){ return `<div class="kpi"><b>${big}</b><span>${lbl}</span>${st?`<div class="st">${st}</div>`:''}</div>`; }
+function cacStatus(cac,ticket){ if(!ticket)return ''; const r=cac/ticket; return r<0.3?'<span style="color:var(--ok)">healthy</span>':r<0.6?'<span style="color:var(--warn)">watch</span>':'<span style="color:var(--loss)">high</span>'; }
+function roasStatus(r){ return r>=7?'<span style="color:var(--ok)">great</span>':r>=3?'<span style="color:var(--warn)">fair</span>':'<span style="color:var(--loss)">low</span>'; }
+
+function slider(id,label,val,min,max,step,unit){
+  const disp = unit==='$'? money(val) : (unit==='%'? val+'%' : val);
+  return `<div class="slider"><div class="sl"><span>${label}</span><b id="${id}_v">${disp}</b></div>
+    <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${val}"></div>`;
+}
+function updateSim(){
+  const g=id=>{const e=document.getElementById(id);return e?parseFloat(e.value):0;};
+  const fc={leads:g('s_leads'),ag:g('s_ag'),comp:g('s_comp'),conv:g('s_conv'),ticket:g('s_ticket'),cpl:g('s_cpl'),verba:g('s_verba')};
+  setTxt('s_verba_v',money(fc.verba)); setTxt('s_cpl_v',money(fc.cpl)); setTxt('s_leads_v',fc.leads);
+  setTxt('s_ag_v',fc.ag+'%'); setTxt('s_comp_v',fc.comp+'%');
+  setTxt('s_conv_v',fc.conv+'%'); setTxt('s_ticket_v',money(fc.ticket));
+  const sim=calc(fc,false);
+  setTxt('r_sim',money(sim.fat));
+  setTxt('sim_leads',fc.leads);
+  setTxt('sim_cac',sim.invest?money(sim.cac):'—');
+  setTxt('sim_roas',sim.invest?sim.roas.toFixed(1):'—');
+}
+function setTxt(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function applyBench(){
+  state.fc.ag=Math.max(state.fc.ag,BENCH.ag*100);
+  state.fc.comp=Math.max(state.fc.comp,BENCH.comp*100);
+  state.fc.conv=Math.max(state.fc.conv,BENCH.conv*100);
+  render();
+}
+function restart(){ state={step:0,answers:{},name:state.name,seg:state.seg,fc:state.fc,liveBench:false}; chosenIndex={}; setStep(0); }
+
+render();
+</script>
+</body>
+</html>
