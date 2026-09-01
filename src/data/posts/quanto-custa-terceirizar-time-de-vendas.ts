@@ -128,6 +128,10 @@ export const post: Post = {
       type: 'p',
       text: 'Se a dúvida não é preço e sim modelo, a comparação entre montar em casa e contratar fora está detalhada em [terceirizar ou estruturar o comercial interno](/blog/terceirizar-ou-estruturar-comercial-interno).',
     },
+    {
+      type: 'p',
+      text: 'Falta um dado que o preço mensal sozinho não mostra: por quantos meses você paga antes da primeira receita entrar. O custo do contrato começa no dia 1, a primeira reunião cai entre a semana 3 e a 6, e a primeira venda só aparece depois de somar o seu ciclo de vendas a essa data. A linha do tempo completa, com o critério de corte de cada mês, está em [em quanto tempo a terceirização comercial dá resultado](/blog/quanto-tempo-terceirizacao-comercial-da-resultado).',
+    },
 
     { type: 'h2', text: 'Quatro cenários em que terceirizar não compensa' },
     {

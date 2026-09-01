@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Mail, MapPin, Instagram, Linkedin } from 'lucide-react'
 import { Logo } from './Logo'
 import { site, navLinks, mailtoLink } from '@/data/site'
+import { allPosts } from '@/data/posts'
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -10,7 +11,7 @@ export function Footer() {
     <footer className="bg-ink-950 text-white/70">
       <div className="container-nx grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         {/* Marca */}
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-4">
           <Link to="/" aria-label="Nexxus - início">
             <Logo variant="white" className="h-8" />
           </Link>
@@ -41,7 +42,7 @@ export function Footer() {
         </div>
 
         {/* Navegação */}
-        <div className="lg:col-span-3 lg:col-start-7">
+        <div className="lg:col-span-2">
           <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-white">
             Navegação
           </h4>
@@ -50,6 +51,32 @@ export function Footer() {
               <li key={l.to}>
                 <Link to={l.to} className="text-white/60 transition-colors hover:text-white">
                   {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/*
+          Matérias do blog no rodapé. Isto existe por SEO, não por navegação: o
+          rodapé aparece em toda página do site, então cada matéria recebe um
+          link interno vindo da home e das páginas de serviço, que são as mais
+          rastreadas. Sem isso, o post que sai da prévia de recentes da home
+          fica sem nenhuma entrada e cai em "Descoberta, mas não indexada".
+          A âncora é o título do post, que já é descritivo.
+        */}
+        <div className="lg:col-span-3">
+          <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-white">
+            No blog
+          </h4>
+          <ul className="mt-4 flex flex-col gap-2.5 text-sm">
+            {allPosts.map((post) => (
+              <li key={post.slug}>
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="text-white/60 transition-colors hover:text-white"
+                >
+                  {post.title}
                 </Link>
               </li>
             ))}
