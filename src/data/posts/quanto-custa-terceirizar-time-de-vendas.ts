@@ -6,7 +6,7 @@ export const post: Post = {
   excerpt:
     'Ninguém no setor publica número. Aqui está a conta aberta dos dois lados: o custo real de um time comercial CLT em 2026, o que muda conforme o regime tributário, os três modelos de cobrança da terceirização e os cenários em que terceirizar não compensa.',
   date: '2026-07-26',
-  updated: '2026-08-25',
+  updated: '2026-09-03',
   readingMinutes: 9,
   category: 'Custos e Investimento',
   cover: '/blog/cover-quanto-custa-terceirizar.jpg',
@@ -165,7 +165,7 @@ export const post: Post = {
     {
       type: 'ul',
       items: [
-        'Qual é o critério escrito de reunião qualificada, e o que acontece quando uma reunião não atende a esse critério? Antes de aceitar qualquer meta, compare com o que o mercado entrega em [quantas reuniões um SDR deve agendar por mês](/blog/quantas-reunioes-sdr-por-mes).',
+        'Qual é o critério escrito de reunião qualificada, e o que acontece quando uma reunião não atende a esse critério? Os seis itens que essa cláusula precisa ter estão em [o que conta como reunião qualificada](/blog/o-que-conta-como-reuniao-qualificada). Antes de aceitar qualquer meta, compare com o que o mercado entrega em [quantas reuniões um SDR deve agendar por mês](/blog/quantas-reunioes-sdr-por-mes).',
         'Quem exatamente vai trabalhar na minha conta, e essa pessoa atende quantos clientes ao mesmo tempo?',
         'Em quanto tempo a operação está no ar, e o que precisa de mim para esse prazo valer?',
         'Quais indicadores eu recebo, com que frequência, e eu tenho acesso direto ao CRM?',

@@ -6,7 +6,7 @@ export const post: Post = {
   excerpt:
     'Terceirizar ou montar time de vendas interno: um diagnóstico com nota de corte, o custo da janela de rampa e a cláusula de saída que quase ninguém exige.',
   date: '2026-05-26',
-  updated: '2026-08-27',
+  updated: '2026-09-03',
   readingMinutes: 8,
   category: 'Estratégia',
   cover: '/blog/cover-terceirizar-ou-estruturar.jpg',
@@ -147,7 +147,7 @@ export const post: Post = {
     },
     {
       type: 'p',
-      text: 'A inversão está na segunda fase. A maioria contrata o vendedor primeiro e o gestor depois, quando o vendedor já não bateu meta duas vezes. Contratar gestor antes de vendedor é o que muda a taxa de acerto da internalização, porque alguém precisa saber o que cobrar antes de existir de quem cobrar. A conta financeira dos dois lados, com encargos, ferramentas e o efeito do regime tributário, está aberta em [quanto custa terceirizar o time de vendas](/blog/quanto-custa-terceirizar-time-de-vendas). A régua para cobrar o time depois de montado, interno ou externo, está em [quantas reuniões um SDR deve agendar por mês](/blog/quantas-reunioes-sdr-por-mes).',
+      text: 'A inversão está na segunda fase. A maioria contrata o vendedor primeiro e o gestor depois, quando o vendedor já não bateu meta duas vezes. Contratar gestor antes de vendedor é o que muda a taxa de acerto da internalização, porque alguém precisa saber o que cobrar antes de existir de quem cobrar. A conta financeira dos dois lados, com encargos, ferramentas e o efeito do regime tributário, está aberta em [quanto custa terceirizar o time de vendas](/blog/quanto-custa-terceirizar-time-de-vendas). A régua para cobrar o time depois de montado, interno ou externo, está em [quantas reuniões um SDR deve agendar por mês](/blog/quantas-reunioes-sdr-por-mes), e o calendário até a primeira venda, em [em quanto tempo a terceirização comercial dá resultado](/blog/quanto-tempo-terceirizacao-comercial-da-resultado).',
     },
 
     { type: 'h2', text: 'Turnover: o risco que troca de dono conforme o caminho' },

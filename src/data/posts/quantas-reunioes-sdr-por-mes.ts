@@ -6,6 +6,7 @@ export const post: Post = {
   excerpt:
     'Quantas reuniões um SDR deve agendar por mês? O benchmark fica entre 12 e 20. Veja como chegar ao seu número pela meta de receita, no-show e teto do closer.',
   date: '2026-08-25',
+  updated: '2026-09-03',
   readingMinutes: 10,
   category: 'Métricas e Metas',
   cover: '/blog/cover-quantas-reunioes-sdr.jpg',
@@ -64,7 +65,7 @@ export const post: Post = {
     },
     {
       type: 'p',
-      text: 'A consequência prática é aritmética. Se o closer precisa de 20 reuniões acontecendo no mês, a meta do SDR não é 20: com 19% de no-show, é 25 agendamentos. Definir a meta em agendada e cobrar o resultado em realizada é a forma mais comum de o time bater a meta e a receita não vir.',
+      text: 'A consequência prática é aritmética. Se o closer precisa de 20 reuniões acontecendo no mês, a meta do SDR não é 20: com 19% de no-show, é 25 agendamentos. Definir a meta em agendada e cobrar o resultado em realizada é a forma mais comum de o time bater a meta e a receita não vir. A terceira contagem, a da reunião que o closer aceita como oportunidade, derruba o número de novo, e o critério que separa as três está em [o que conta como reunião qualificada](/blog/o-que-conta-como-reuniao-qualificada).',
     },
     {
       type: 'quote',
@@ -82,7 +83,7 @@ export const post: Post = {
     },
     {
       type: 'p',
-      text: 'Quando a meta do SDR passa do teto do closer, o efeito não é mais receita. É fila. A reunião marcada para 12 dias depois do primeiro contato chega fria, o lead já falou com dois concorrentes, e o no-show sobe justamente porque o intervalo entre agendar e acontecer aumentou. A operação parece mais produtiva no relatório do SDR e converte menos no fim do mês.',
+      text: 'Quando a meta do SDR passa do teto do closer, o efeito não é mais receita. É fila. A reunião marcada para 12 dias depois do primeiro contato chega fria, o lead já falou com dois concorrentes, e o no-show sobe justamente porque o intervalo entre agendar e acontecer aumentou. A operação parece mais produtiva no relatório do SDR e converte menos no fim do mês. Em operação recém-implantada esse efeito se soma à curva de estabilização da cadência, detalhada em [em quanto tempo a terceirização comercial dá resultado](/blog/quanto-tempo-terceirizacao-comercial-da-resultado).',
     },
 
     { type: 'h2', text: 'Como calcular a sua meta de reuniões de trás para frente' },

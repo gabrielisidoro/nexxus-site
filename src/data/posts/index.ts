@@ -13,10 +13,11 @@ import { post as p3 } from './tendencias-mercado-comercial-b2b'
 import { post as p4 } from './quanto-custa-terceirizar-time-de-vendas'
 import { post as p5 } from './quantas-reunioes-sdr-por-mes'
 import { post as p6 } from './quanto-tempo-terceirizacao-comercial-da-resultado'
+import { post as p7 } from './o-que-conta-como-reuniao-qualificada'
 
 export type { Post, PostBlock, PostFaq } from './types'
 
-const registered: Post[] = [p1, p2, p3, p4, p5, p6]
+const registered: Post[] = [p1, p2, p3, p4, p5, p6, p7]
 
 /** Todos os posts, ordenados do mais recente para o mais antigo */
 export const allPosts: Post[] = [...registered].sort(
