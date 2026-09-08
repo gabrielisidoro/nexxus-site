@@ -1,4 +1,5 @@
 import { ArrowRight, Check, Users } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { SEO } from '@/components/SEO'
 import { terceirizacaoServiceSchema, estruturacaoServiceSchema, mentoriaServiceSchema, breadcrumbSchema, pageKeywords, paginasSeo } from '@/data/seo'
 import { Button } from '@/components/Button'
@@ -10,6 +11,52 @@ import { iconMap } from '@/components/iconMap'
 import { services } from '@/data/services'
 import { roles, onboarding } from '@/data/metodo'
 import { cn } from '@/lib/cn'
+
+/** Âncoras descritivas para as matérias do blog. Nunca usar "leia mais". */
+const leiturasAntesDeContratar = [
+  {
+    to: '/blog/quanto-custa-terceirizar-time-de-vendas',
+    titulo: 'Quanto custa terceirizar o time de vendas',
+    resumo:
+      'A conta aberta dos dois lados, o que muda conforme o regime tributário e os três modelos de cobrança do mercado.',
+  },
+  {
+    to: '/blog/terceirizar-ou-estruturar-comercial-interno',
+    titulo: 'Terceirizar ou montar time de vendas interno',
+    resumo: 'Os critérios de corte que decidem entre assumir em casa e contratar fora.',
+  },
+  {
+    to: '/blog/quanto-tempo-terceirizacao-comercial-da-resultado',
+    titulo: 'Em quanto tempo a terceirização comercial dá resultado',
+    resumo: 'A linha do tempo mês a mês, com o que precisa estar pronto em cada etapa.',
+  },
+  {
+    to: '/blog/terceirizacao-comercial-nao-deu-resultado',
+    titulo: 'Terceirização comercial não deu resultado: como diagnosticar',
+    resumo:
+      'Os quatro números que separam responsabilidade do fornecedor da responsabilidade da sua empresa.',
+  },
+  {
+    to: '/blog/o-que-conta-como-reuniao-qualificada',
+    titulo: 'O que conta como reunião qualificada',
+    resumo: 'Os seis itens que o critério de aceite precisa ter escrito em contrato.',
+  },
+  {
+    to: '/blog/por-que-terceirizar-operacao-comercial',
+    titulo: 'Por que terceirizar a operação comercial',
+    resumo: 'Os custos ocultos de montar a estrutura comercial própria, item por item.',
+  },
+  {
+    to: '/blog/quantas-reunioes-sdr-por-mes',
+    titulo: 'Quantas reuniões um SDR deve agendar por mês',
+    resumo: 'Como sair da meta de receita para o número de reuniões que a agenda comporta.',
+  },
+  {
+    to: '/blog/tendencias-mercado-comercial-b2b',
+    titulo: 'Tendências do mercado comercial B2B',
+    resumo: 'O que mudou no comportamento de compra e o efeito disso na escolha de canal.',
+  },
+]
 
 export default function Servicos() {
   return (
@@ -243,6 +290,38 @@ export default function Servicos() {
                   ))}
                 </ul>
               </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Perguntas que o dono faz antes de contratar. Também é a rede de links
+          internos que leva autoridade desta página para as matérias do blog. */}
+      <section className="container-nx pb-16 sm:pb-24">
+        <Reveal>
+          <SectionHeading
+            eyebrow="Antes de contratar"
+            title="As contas que o dono faz antes de assinar"
+            subtitle="As dúvidas que aparecem em toda reunião de diagnóstico, respondidas com número e fonte no blog da Nexxus."
+          />
+        </Reveal>
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {leiturasAntesDeContratar.map((leitura, i) => (
+            <Reveal key={leitura.to} delay={i * 0.06}>
+              <Link
+                to={leitura.to}
+                className="card card-hover group flex h-full items-start gap-4 p-6"
+              >
+                <span className="flex-1">
+                  <span className="block font-display text-base font-bold leading-snug text-ink-900">
+                    {leitura.titulo}
+                  </span>
+                  <span className="mt-2 block text-sm leading-relaxed text-ink-500">
+                    {leitura.resumo}
+                  </span>
+                </span>
+                <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-brand-500 transition-transform group-hover:translate-x-1" />
+              </Link>
             </Reveal>
           ))}
         </div>
