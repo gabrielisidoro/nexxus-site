@@ -42,6 +42,12 @@ const leiturasAntesDeContratar = [
     resumo: 'Os seis itens que o critério de aceite precisa ter escrito em contrato.',
   },
   {
+    to: '/blog/quem-fecha-a-venda-prospeccao-terceirizada',
+    titulo: 'Quem fecha a venda quando a prospecção é terceirizada',
+    resumo:
+      'A conta de quantas reuniões o seu time absorve por mês e os três desenhos de operação possíveis.',
+  },
+  {
     to: '/blog/por-que-terceirizar-operacao-comercial',
     titulo: 'Por que terceirizar a operação comercial',
     resumo: 'Os custos ocultos de montar a estrutura comercial própria, item por item.',

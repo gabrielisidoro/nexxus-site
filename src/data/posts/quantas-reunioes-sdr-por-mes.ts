@@ -6,7 +6,7 @@ export const post: Post = {
   excerpt:
     'Quantas reuniões um SDR deve agendar por mês? O benchmark fica entre 12 e 20. Veja como chegar ao seu número pela meta de receita, no-show e teto do closer.',
   date: '2026-08-25',
-  updated: '2026-09-03',
+  updated: '2026-09-10',
   readingMinutes: 10,
   category: 'Métricas e Metas',
   cover: '/blog/cover-quantas-reunioes-sdr.jpg',
@@ -140,13 +140,13 @@ export const post: Post = {
       items: [
         'A taxa de reunião para oportunidade caiu. O SDR continua batendo a meta, mas o closer passa a recusar mais reuniões. É qualificação sendo sacrificada por volume, e o custo aparece na agenda de quem fecha.',
         'O no-show passou de 20%. Acima dessa marca, a referência do The Bridge Group trata como problema de processo. Costuma ser intervalo grande demais entre o agendamento e a reunião, ou lead que aceitou a reunião só para encerrar a ligação.',
-        'A fila do closer cresceu. Se a reunião marcada hoje só acontece na semana que vem, o gargalo mudou de lugar e mais prospecção não resolve.',
+        'A fila do closer cresceu. Se a reunião marcada hoje só acontece na semana que vem, o gargalo mudou de lugar e mais prospecção não resolve. A conta que dimensiona esse teto está em [quem fecha a venda quando a prospecção é terceirizada](/blog/quem-fecha-a-venda-prospeccao-terceirizada).',
         'A base está queimando. O mesmo contato sendo abordado a cada 45 dias por causa da meta destrói a lista que sustentaria os próximos trimestres.',
       ],
     },
     {
       type: 'p',
-      text: 'Nenhum desses quatro sinais aparece no relatório de reuniões agendadas, que é justamente o relatório que a maioria das operações olha. Todos aparecem cruzando reunião agendada com reunião aceita pelo closer, que é o cruzamento mais barato de montar em qualquer CRM.',
+      text: 'Nenhum desses quatro sinais aparece no relatório de reuniões agendadas, que é justamente o relatório que a maioria das operações olha. Todos aparecem cruzando reunião agendada com reunião aceita pelo closer, que é o cruzamento mais barato de montar em qualquer CRM. Quando os quatro aparecem juntos e a conclusão interna já é a de que o contrato falhou, vale percorrer antes o [diagnóstico de terceirização comercial que não deu resultado](/blog/terceirizacao-comercial-nao-deu-resultado), porque três dos quatro sinais têm causa fora da prospecção.',
     },
 
     { type: 'h2', text: 'Como a Nexxus define a meta de reuniões' },

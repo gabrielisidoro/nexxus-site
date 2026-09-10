@@ -6,7 +6,7 @@ export const post: Post = {
   excerpt:
     'Ninguém no setor publica número. Aqui está a conta aberta dos dois lados: o custo real de um time comercial CLT em 2026, o que muda conforme o regime tributário, os três modelos de cobrança da terceirização e os cenários em que terceirizar não compensa.',
   date: '2026-07-26',
-  updated: '2026-09-03',
+  updated: '2026-09-10',
   readingMinutes: 9,
   category: 'Custos e Investimento',
   cover: '/blog/cover-quanto-custa-terceirizar.jpg',
@@ -166,10 +166,10 @@ export const post: Post = {
       type: 'ul',
       items: [
         'Qual é o critério escrito de reunião qualificada, e o que acontece quando uma reunião não atende a esse critério? Os seis itens que essa cláusula precisa ter estão em [o que conta como reunião qualificada](/blog/o-que-conta-como-reuniao-qualificada). Antes de aceitar qualquer meta, compare com o que o mercado entrega em [quantas reuniões um SDR deve agendar por mês](/blog/quantas-reunioes-sdr-por-mes).',
-        'Quem exatamente vai trabalhar na minha conta, e essa pessoa atende quantos clientes ao mesmo tempo?',
+        'Quem exatamente vai trabalhar na minha conta, e essa pessoa atende quantos clientes ao mesmo tempo? Defina na mesma conversa quem conduz a reunião depois de agendada, porque a resposta muda o escopo do contrato: o assunto está em [quem fecha a venda quando a prospecção é terceirizada](/blog/quem-fecha-a-venda-prospeccao-terceirizada).',
         'Em quanto tempo a operação está no ar, e o que precisa de mim para esse prazo valer?',
         'Quais indicadores eu recebo, com que frequência, e eu tenho acesso direto ao CRM?',
-        'Se em 90 dias o resultado não vier, o que muda no plano? Existe algo contratualizado nesse sentido?',
+        'Se em 90 dias o resultado não vier, o que muda no plano? Existe algo contratualizado nesse sentido? A régua para separar falha de execução de falha de desenho está em [como diagnosticar uma terceirização comercial que não deu resultado](/blog/terceirizacao-comercial-nao-deu-resultado).',
         'A licença das ferramentas está inclusa ou é cobrada à parte?',
         'Ao fim do contrato, o que fica comigo: a base, as gravações, o playbook?',
       ],
