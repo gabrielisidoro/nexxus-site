@@ -6,6 +6,7 @@ export const post: Post = {
   excerpt:
     'Em quanto tempo a terceirização comercial dá resultado? A primeira reunião cai entre a semana 3 e a 6. A primeira venda depende do seu ciclo. Veja a conta.',
   date: '2026-09-01',
+  updated: '2026-09-15',
   readingMinutes: 9,
   category: 'Implantação',
   cover: '/blog/cover-quanto-tempo-resultado.jpg',
@@ -228,7 +229,7 @@ export const post: Post = {
     {
       pergunta: 'Qual prazo mínimo de contrato faz sentido para avaliar o resultado?',
       resposta:
-        'O prazo mínimo tem que cobrir pelo menos um ciclo de vendas completo depois da primeira reunião, mais um mês para o segundo lote de oportunidades. Com ticket até R$ 5 mil isso dá quatro meses; entre R$ 5 mil e R$ 25 mil, seis meses; acima de R$ 25 mil, sete meses. Contrato mais curto que isso encerra antes de existir dado suficiente para decidir, e a empresa paga o setup sem colher a parte que justifica o setup.',
+        'O prazo mínimo tem que cobrir pelo menos um ciclo de vendas completo depois da primeira reunião, mais um mês para o segundo lote de oportunidades. Com ticket até R$ 5 mil isso dá quatro meses; entre R$ 5 mil e R$ 25 mil, seis meses; acima de R$ 25 mil, sete meses. Contrato mais curto que isso encerra antes de existir dado suficiente para decidir, e a empresa paga o setup sem colher a parte que justifica o setup. Antes de discutir prazo, vale conferir se o ticket e o mercado sustentam a conta, em [por que terceirizar a operação comercial, e quando não](/blog/por-que-terceirizar-operacao-comercial).',
     },
     {
       pergunta: 'Como sei se o atraso é do fornecedor ou da minha empresa?',

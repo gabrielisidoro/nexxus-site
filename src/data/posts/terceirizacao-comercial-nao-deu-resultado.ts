@@ -6,6 +6,7 @@ export const post: Post = {
   excerpt:
     'Terceirização comercial não deu resultado? Antes de trocar de fornecedor, veja o prazo mínimo para julgar e os quatro números que apontam o culpado.',
   date: '2026-09-08',
+  updated: '2026-09-15',
   readingMinutes: 9,
   category: 'Diagnóstico',
   cover: '/blog/cover-nao-deu-resultado.jpg',
@@ -199,7 +200,7 @@ export const post: Post = {
     },
     {
       type: 'p',
-      text: 'No diagnóstico inicial, a resposta pode ser que terceirizar não é o próximo passo do seu caso. Quando o gargalo está em oferta, preço ou entrega, colocar volume no topo do funil piora o quadro, e dizer isso antes do contrato é mais barato para os dois lados do que descobrir no mês seis.',
+      text: 'No diagnóstico inicial, a resposta pode ser que terceirizar não é o próximo passo do seu caso. Quando o gargalo está em oferta, preço ou entrega, colocar volume no topo do funil piora o quadro, e dizer isso antes do contrato é mais barato para os dois lados do que descobrir no mês seis. Os cortes de ticket, mercado endereçável e ICP que levam a essa conclusão estão abertos em [por que terceirizar a operação comercial, e quando não](/blog/por-que-terceirizar-operacao-comercial).',
     },
   ],
   faq: [
