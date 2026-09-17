@@ -158,6 +158,10 @@ manutenção rende mais que volume num site de baixa autoridade.
 
 Rotina de manutenção, toda execução, no Search Console:
 
+0. **O rastreador está recebendo conteúdo?** Antes de qualquer diagnóstico de
+   link, `curl -s <url no gh-pages> | wc -c` num post. Menos de 5 KB significa
+   que o corpo não está no HTML e nenhum link interno vai resolver nada. Ver a
+   armadilha correspondente na seção 6.
 1. **Indexação dos posts anteriores.** Inspecionar a URL de cada post publicado
    nas últimas 4 semanas. Estados e ação:
    - *Indexada*: nada a fazer, seguir para o desempenho.
@@ -310,6 +314,19 @@ Registradas porque já custaram tempo:
 - **Capa cortada no card.** O card usa `aspect-[3/2]` com `object-cover`.
   Imagem 16/9 perde as laterais e come o texto gravado. Capa do site sempre em
   3/2 e sempre sem texto.
+- **HTML cru sem corpo, a SPA invisível para o rastreador (achado de
+  17/09/2026).** Por semanas o loop tratou "8 de 9 posts não indexados" como
+  link interno fraco e foi adicionando link a cada ciclo. Não era isso. O
+  `prerenderHeadPlugin` montava só o `<head>`: o HTML servido tinha 4,3 KB e o
+  corpo era `<div id="root"></div>`. O Googlebot enfileira renderização de
+  JavaScript, e em site de baixa autoridade essa fila demora, então ele indexava
+  uma página sem texto e, pior, sem um único `<a href>`. A rede de links
+  internos só existia depois da hidratação, ou seja, não existia para o rastreio.
+  Corrigido: o plugin passou a escrever o corpo estático dentro de `#root`, a
+  partir de `allPosts`, e o `createRoot` limpa os filhos ao montar, então o React
+  segue dono da página. **Antes de culpar link interno, cheque o HTML cru:**
+  `curl -s <url no gh-pages> | wc -c`. Menos de 5 KB num post significa que o
+  rastreador não está recebendo conteúdo nenhum.
 - **Sitemap divergindo dos slugs reais.** Já aconteceu: as 3 matérias ficaram
   meses entregando 404 e redirecionamento ao Google. Hoje o sitemap é gerado no
   build a partir de `allPosts`, então não pode mais divergir. Não editar
@@ -324,10 +341,22 @@ Registradas porque já custaram tempo:
 
 ---
 
-## 7. Estado atual (26/07/2026)
+## 7. Estado atual (17/09/2026)
 
-- Indexadas no Google: 1 página. Não indexadas: 8. A causa principal (sitemap
-  com slug errado) foi corrigida neste ciclo.
-- Sitemap: 9 URLs, lido pelo Google em 26/07/2026.
-- Próxima pauta pronta: "Quantas reuniões um SDR deve agendar por mês?",
-  informacional, para a quinta-feira.
+- 9 posts publicados. Presença confirmada na busca por
+  `site:nexxusagencia.com.br/blog/<slug>`: apenas
+  `quanto-custa-terceirizar-time-de-vendas`. Os outros 8 não aparecem.
+- Causa identificada neste ciclo e corrigida: o HTML cru não tinha corpo nem
+  links (ver seção 6). Cada post passou de 4,3 KB e zero link para cerca de
+  22 KB com texto, tabelas, FAQ e a rede de links interna inteira.
+- Sitemap: 14 URLs (9 posts e 5 páginas), gerado no build, sem divergência.
+- Pendente com o Gabriel, nesta ordem: purge do Cloudflare, reenvio do sitemap
+  no Search Console e solicitação de indexação dos 8 posts, do mais recente
+  para o mais antigo, respeitando a cota diária.
+- **Próximo ciclo:** repetir as buscas `site:` antes de qualquer outra coisa. Se
+  os posts entrarem no índice, a correção pegou e o loop volta a publicar pauta
+  nova. Se continuarem fora depois de 2 a 3 semanas com o HTML já correto, o
+  problema é outro e vale escalar em vez de seguir publicando.
+- Ferramenta nova de QA: `carrossel/check-tabelas.mjs <url> <prefixo>`, que
+  enquadra cada tabela em desktop e mobile e compara `scrollWidth` com
+  `clientWidth` para provar que a página não rola na horizontal.
