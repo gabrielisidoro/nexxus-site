@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
-import { allPosts } from './src/data/posts'
+import { allPosts, relatedPosts, formatDate } from './src/data/posts'
+import type { Post, PostBlock } from './src/data/posts'
 import { paginasSeo } from './src/data/seo'
 
 const BASE = 'https://nexxusagencia.com.br'
@@ -81,7 +82,167 @@ interface MetaRota {
   publicado?: string
   atualizado?: string
   secao?: string
+  /** Conteúdo estático do corpo, para quem lê a página sem executar JavaScript. */
+  corpo: string
 }
+
+/* ── Corpo estático ─────────────────────────────────────────────────────────
+ * O Googlebot enfileira a renderização de JavaScript e, em site de baixa
+ * autoridade, essa fila demora. Enquanto isso ele indexa o HTML cru. Até
+ * 17/09/2026 esse HTML era só `<div id="root"></div>`: nenhum texto e, pior,
+ * nenhum <a href>, então a rede de links internos das matérias não existia
+ * para o rastreador e os posts ficavam em "Descoberta, mas não indexada".
+ *
+ * Estas funções escrevem o mesmo conteúdo que o React monta, a partir da mesma
+ * fonte (`allPosts`), direto dentro de `#root`. Não é cloaking: o texto é
+ * idêntico ao que o usuário vê. O `createRoot` limpa os filhos do container ao
+ * montar, então o React continua dono da página no navegador.
+ * ------------------------------------------------------------------------ */
+
+const NAV: { path: string; label: string }[] = [
+  { path: '/', label: 'Terceirização comercial B2B com a Nexxus' },
+  { path: '/servicos', label: 'Serviços de terceirização e estruturação comercial' },
+  { path: '/blog', label: 'Blog de vendas B2B' },
+  { path: '/sobre', label: 'Sobre a Nexxus' },
+  { path: '/contato', label: 'Diagnóstico comercial gratuito' },
+]
+
+/** Converte `[âncora](/destino)` em <a> de verdade e escapa todo o resto. */
+function textoComLinks(texto: string): string {
+  return texto
+    .split(/(\[[^\]]+\]\([^)]+\))/g)
+    .map((parte) => {
+      const achou = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(parte)
+      if (!achou) return escapar(parte)
+      const [, ancora, destino] = achou
+      const externo = /^https?:/.test(destino)
+      const extra = externo ? ' target="_blank" rel="noopener noreferrer"' : ''
+      return `<a href="${escapar(destino)}"${extra}>${escapar(ancora)}</a>`
+    })
+    .join('')
+}
+
+function blocoHtml(bloco: PostBlock): string {
+  switch (bloco.type) {
+    case 'h2':
+      return `<h2>${escapar(bloco.text)}</h2>`
+    case 'p':
+      return `<p>${textoComLinks(bloco.text)}</p>`
+    case 'ul':
+      return `<ul>${bloco.items.map((item) => `<li>${textoComLinks(item)}</li>`).join('')}</ul>`
+    case 'quote':
+      return `<blockquote><p>${escapar(bloco.text)}</p></blockquote>`
+    case 'table': {
+      const cabecalho = bloco.headers.map((h) => `<th scope="col">${escapar(h)}</th>`).join('')
+      const linhas = bloco.rows
+        .map((row) => `<tr>${row.map((cell) => `<td>${escapar(cell)}</td>`).join('')}</tr>`)
+        .join('')
+      const legenda = bloco.caption ? `<caption>${escapar(bloco.caption)}</caption>` : ''
+      return `<table>${legenda}<thead><tr>${cabecalho}</tr></thead><tbody>${linhas}</tbody></table>`
+    }
+    default:
+      return ''
+  }
+}
+
+/** Links de rodapé, para o rastreador alcançar as outras rotas de qualquer página. */
+function navHtml(atual: string): string {
+  const itens = NAV.filter((n) => n.path !== atual)
+    .map((n) => `<li><a href="${n.path}">${escapar(n.label)}</a></li>`)
+    .join('')
+  return `<nav aria-label="Navegação do site"><ul>${itens}</ul></nav>`
+}
+
+function corpoDoPost(post: Post): string {
+  const capa = post.cover
+    ? `<img src="${post.cover}" width="1500" height="1000" alt="${escapar(post.title)}" />`
+    : ''
+  const faq = post.faq?.length
+    ? `<section><h2>Perguntas frequentes</h2><dl>${post.faq
+        .map(
+          (item) =>
+            `<dt>${escapar(item.pergunta)}</dt><dd>${textoComLinks(item.resposta)}</dd>`,
+        )
+        .join('')}</dl></section>`
+    : ''
+  const relacionados = relatedPosts(post.slug, 2)
+  const continueLendo = relacionados.length
+    ? `<section><h2>Continue lendo</h2><ul>${relacionados
+        .map((p) => `<li><a href="/blog/${p.slug}">${escapar(p.title)}</a></li>`)
+        .join('')}</ul></section>`
+    : ''
+
+  return [
+    '<div class="nx-pre">',
+    '<a href="/blog">Voltar para o blog</a>',
+    '<article>',
+    `<p>${escapar(post.category)} &middot; <time datetime="${post.date}">${escapar(
+      formatDate(post.date),
+    )}</time> &middot; ${post.readingMinutes} min de leitura</p>`,
+    `<h1>${escapar(post.title)}</h1>`,
+    `<p>${escapar(post.excerpt)}</p>`,
+    capa,
+    post.content.map(blocoHtml).join(''),
+    faq,
+    '</article>',
+    continueLendo,
+    navHtml(`/blog/${post.slug}`),
+    '</div>',
+  ].join('')
+}
+
+function corpoDaListagem(): string {
+  const itens = allPosts
+    .map(
+      (post) =>
+        `<li><h2><a href="/blog/${post.slug}">${escapar(post.title)}</a></h2>` +
+        `<p>${escapar(post.category)} &middot; <time datetime="${post.date}">${escapar(
+          formatDate(post.date),
+        )}</time></p>` +
+        `<p>${escapar(post.excerpt)}</p></li>`,
+    )
+    .join('')
+  return [
+    '<div class="nx-pre">',
+    `<h1>${escapar(paginasSeo['/blog'].title.replace(' | Nexxus', ''))}</h1>`,
+    `<p>${escapar(paginasSeo['/blog'].description)}</p>`,
+    `<ul>${itens}</ul>`,
+    navHtml('/blog'),
+    '</div>',
+  ].join('')
+}
+
+function corpoInstitucional(path: string, title: string, description: string): string {
+  // A home também lista as matérias recentes: é de lá que sai boa parte do
+  // rastreio para o blog.
+  const recentes =
+    path === '/'
+      ? `<section><h2>Últimas do blog</h2><ul>${allPosts
+          .slice(0, 3)
+          .map((p) => `<li><a href="/blog/${p.slug}">${escapar(p.title)}</a></li>`)
+          .join('')}</ul></section>`
+      : ''
+  return [
+    '<div class="nx-pre">',
+    `<h1>${escapar(title.replace(/ \| Nexxus$/, ''))}</h1>`,
+    `<p>${escapar(description)}</p>`,
+    recentes,
+    navHtml(path),
+    '</div>',
+  ].join('')
+}
+
+/** Folha mínima para o conteúdo estático ficar legível no instante antes do React montar. */
+const ESTILO_PRE = [
+  '<style>',
+  '#root .nx-pre{max-width:46rem;margin:0 auto;padding:2.5rem 1.25rem;',
+  'font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;line-height:1.7;color:#27303f}',
+  '#root .nx-pre img{max-width:100%;height:auto}',
+  '#root .nx-pre table{width:100%;border-collapse:collapse;font-size:.9rem;margin:1.5rem 0}',
+  '#root .nx-pre th,#root .nx-pre td{border-bottom:1px solid #e5e7eb;padding:.5rem .75rem;text-align:left}',
+  '#root .nx-pre ul{padding-left:1.25rem}',
+  '</style>',
+].join('')
 
 function metaDeCadaRota(): MetaRota[] {
   const estaticas: MetaRota[] = Object.entries(paginasSeo)
@@ -92,6 +253,10 @@ function metaDeCadaRota(): MetaRota[] {
       description: dados.description,
       image: OG_PADRAO,
       type: 'website' as const,
+      corpo:
+        path === '/blog'
+          ? corpoDaListagem()
+          : corpoInstitucional(path, dados.title, dados.description),
     }))
 
   const posts: MetaRota[] = allPosts.map((post) => ({
@@ -103,6 +268,7 @@ function metaDeCadaRota(): MetaRota[] {
     publicado: post.date,
     atualizado: post.updated ?? post.date,
     secao: post.category,
+    corpo: corpoDoPost(post),
   }))
 
   return [...estaticas, ...posts]
@@ -170,7 +336,8 @@ function prerenderHeadPlugin(): Plugin {
           .filter(Boolean)
           .join('\n    ')
 
-        html = html.replace('</head>', `    ${extras}\n  </head>`)
+        html = html.replace('</head>', `    ${extras}\n    ${ESTILO_PRE}\n  </head>`)
+        html = html.replace('<div id="root"></div>', `<div id="root">${rota.corpo}</div>`)
 
         const semBarra = rota.path.replace(/^\//, '')
         for (const destino of [join(dist, `${semBarra}.html`), join(dist, semBarra, 'index.html')]) {
@@ -179,9 +346,21 @@ function prerenderHeadPlugin(): Plugin {
         }
       }
 
+      // A home fica de fora da lista porque ela já é o próprio index.html, mas
+      // precisa do corpo estático igual às outras: é a página com mais chance de
+      // ser rastreada e é dela que saem os links para as matérias recentes.
+      const home = paginasSeo['/']
+      const indexHtml = template
+        .replace('</head>', `    ${ESTILO_PRE}\n  </head>`)
+        .replace(
+          '<div id="root"></div>',
+          `<div id="root">${corpoInstitucional('/', home.title, home.description)}</div>`,
+        )
+      writeFileSync(indexPath, indexHtml, 'utf8')
+
       // O GitHub Pages precisa disto para não processar o build com Jekyll.
       writeFileSync(join(dist, '.nojekyll'), '', 'utf8')
-      console.log(`[prerender] <head> estático de ${lista.length} rotas`)
+      console.log(`[prerender] <head> + corpo estático de ${lista.length + 1} rotas`)
     },
   }
 }
