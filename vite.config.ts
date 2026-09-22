@@ -245,8 +245,10 @@ const ESTILO_PRE = [
 ].join('')
 
 function metaDeCadaRota(): MetaRota[] {
+  // A home entra na mesma lista que as outras rotas. Ficou de fora até
+  // 22/09/2026 e era a única página do domínio sem canonical, sem og:title e
+  // com a description velha do index.html em vez da de `paginasSeo`.
   const estaticas: MetaRota[] = Object.entries(paginasSeo)
-    .filter(([p]) => p !== '/')
     .map(([path, dados]) => ({
       path,
       title: dados.title,
@@ -258,6 +260,8 @@ function metaDeCadaRota(): MetaRota[] {
           ? corpoDaListagem()
           : corpoInstitucional(path, dados.title, dados.description),
     }))
+    // A home primeiro: é a página com mais chance de ser rastreada.
+    .sort((a, b) => (a.path === '/' ? -1 : b.path === '/' ? 1 : 0))
 
   const posts: MetaRota[] = allPosts.map((post) => ({
     path: `/blog/${post.slug}`,
@@ -339,28 +343,25 @@ function prerenderHeadPlugin(): Plugin {
         html = html.replace('</head>', `    ${extras}\n    ${ESTILO_PRE}\n  </head>`)
         html = html.replace('<div id="root"></div>', `<div id="root">${rota.corpo}</div>`)
 
-        const semBarra = rota.path.replace(/^\//, '')
-        for (const destino of [join(dist, `${semBarra}.html`), join(dist, semBarra, 'index.html')]) {
+        // A home é o próprio index.html: não gera `.html` nem subpasta, senão
+        // viraria /index/index.html e uma URL duplicada para o Google.
+        const destinos =
+          rota.path === '/'
+            ? [indexPath]
+            : [
+                join(dist, `${rota.path.replace(/^\//, '')}.html`),
+                join(dist, rota.path.replace(/^\//, ''), 'index.html'),
+              ]
+
+        for (const destino of destinos) {
           mkdirSync(dirname(destino), { recursive: true })
           writeFileSync(destino, html, 'utf8')
         }
       }
 
-      // A home fica de fora da lista porque ela já é o próprio index.html, mas
-      // precisa do corpo estático igual às outras: é a página com mais chance de
-      // ser rastreada e é dela que saem os links para as matérias recentes.
-      const home = paginasSeo['/']
-      const indexHtml = template
-        .replace('</head>', `    ${ESTILO_PRE}\n  </head>`)
-        .replace(
-          '<div id="root"></div>',
-          `<div id="root">${corpoInstitucional('/', home.title, home.description)}</div>`,
-        )
-      writeFileSync(indexPath, indexHtml, 'utf8')
-
       // O GitHub Pages precisa disto para não processar o build com Jekyll.
       writeFileSync(join(dist, '.nojekyll'), '', 'utf8')
-      console.log(`[prerender] <head> + corpo estático de ${lista.length + 1} rotas`)
+      console.log(`[prerender] <head> + corpo estático de ${lista.length} rotas`)
     },
   }
 }

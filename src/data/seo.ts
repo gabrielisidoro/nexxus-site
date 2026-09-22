@@ -22,7 +22,7 @@ export const organizationSchema = {
   },
   image: OG_IMAGE,
   description:
-    'A Nexxus estrutura e opera o comercial de empresas B2B com método, dados e time dedicado — terceirização comercial, estruturação de vendas e mentoria.',
+    'A Nexxus estrutura e opera o comercial de empresas B2B com método, dados e time dedicado: terceirização comercial, estruturação de vendas e mentoria.',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Edifício Capital Corporate Office',
@@ -59,7 +59,7 @@ export const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   '@id': `${BASE_URL}/#local`,
-  name: 'Nexxus — Terceirização e Estruturação Comercial',
+  name: 'Nexxus: Terceirização e Estruturação Comercial',
   image: OG_IMAGE,
   url: BASE_URL,
   telephone: '',
@@ -165,7 +165,7 @@ export const terceirizacaoServiceSchema = {
   name: 'Terceirização Comercial',
   alternateName: ['BPO de Vendas', 'Outsourcing Comercial', 'BPO Comercial'],
   description:
-    'Squad completa de SDR, Hunter e Closer operando como time de vendas dedicado da sua empresa. ICP, funil, CRM, playbook e gestão — tudo pronto em 20 dias.',
+    'Squad completa de SDR, Hunter e Closer operando como time de vendas dedicado da sua empresa. ICP, funil, CRM, playbook e gestão, tudo pronto em 20 dias.',
   url: `${BASE_URL}/servicos`,
   provider: { '@id': `${BASE_URL}/#organization` },
   areaServed: { '@type': 'Country', name: 'Brasil' },

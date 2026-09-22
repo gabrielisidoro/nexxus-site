@@ -327,6 +327,23 @@ Registradas porque já custaram tempo:
   segue dono da página. **Antes de culpar link interno, cheque o HTML cru:**
   `curl -s <url no gh-pages> | wc -c`. Menos de 5 KB num post significa que o
   rastreador não está recebendo conteúdo nenhum.
+- **A home fora do laço de pré-renderização (achado de 22/09/2026).** O
+  `prerenderHeadPlugin` montava as outras 13 rotas num laço e tratava a home
+  num bloco separado no fim, que injetava só o corpo estático. Resultado: a
+  home era a única página do domínio sem `canonical`, sem `og:title`,
+  `og:description`, `og:url` e sem as tags do Twitter, e servia a description
+  velha do `index.html` em vez da de `paginasSeo` (com travessão e com "e
+  torcendo" no lugar de "e torcer"). É a página com mais chance de ser
+  rastreada e a que distribui autoridade para o resto. Corrigido colocando `/`
+  na mesma lista das demais, com o destino apontando para `dist/index.html` em
+  vez de `dist/index/index.html`, que criaria URL duplicada. **Ao mexer no
+  plugin, confira que as 14 rotas têm canonical:** `grep -rl 'rel="canonical"'
+  dist --include=index.html | wc -l`.
+- **Rede de links internos não é mais a explicação para não indexar.** Em
+  22/09/2026 a contagem de links internos recebidos por post, lida do HTML cru
+  do `gh-pages`, ficou entre 4 e 10 para os 9 posts. A rede está saturada.
+  Adicionar mais link não move indexação e já custou semanas ao loop. Antes de
+  culpar link, rode a contagem e olhe o que está pendente com o Gabriel.
 - **Sitemap divergindo dos slugs reais.** Já aconteceu: as 3 matérias ficaram
   meses entregando 404 e redirecionamento ao Google. Hoje o sitemap é gerado no
   build a partir de `allPosts`, então não pode mais divergir. Não editar
@@ -341,7 +358,46 @@ Registradas porque já custaram tempo:
 
 ---
 
-## 7. Estado atual (17/09/2026)
+## 7. Estado atual (22/09/2026)
+
+- **Nada mudou na indexação, e a razão é que a correção nunca chegou ao
+  Google.** As três ações pendentes com o Gabriel desde 17/09 (purge do
+  Cloudflare, reenvio do sitemap, solicitação de indexação) não foram
+  executadas. Enquanto o Cloudflare servir o HTML velho, o Googlebot continua
+  recebendo a página sem corpo, e os 5 dias desde a correção não valem como
+  teste. O relógio de 2 a 3 semanas para escalar só começa a contar depois do
+  purge.
+- Busca `site:` em 22/09: segue **1 de 9 posts** no índice
+  (`quanto-custa-terceirizar-time-de-vendas`). A busca por
+  `site:nexxusagencia.com.br` sem caminho devolve **essa mesma única página**,
+  ou seja, home, `/servicos`, `/sobre`, `/contato` e `/blog` também estão fora.
+  São 13 das 14 URLs do sitemap fora do índice, não só os posts.
+- HTML cru no `gh-pages` conferido e correto: posts entre 22 e 26 KB, com 17 a
+  21 `<a href>` cada. A correção de 17/09 está publicada e funcionando.
+- Links internos recebidos por post: de 4 a 10. A rede está saturada, ver a
+  armadilha na seção 6. **Não adicionar mais link como tentativa de resolver
+  indexação.**
+- Corrigido neste ciclo: a home entrou no laço de pré-renderização e ganhou
+  canonical e tags sociais, que não tinha. As 14 rotas agora têm canonical.
+  Removido o travessão de 4 textos publicados (description da home no
+  `index.html`, `organizationSchema.description`, `localBusinessSchema.name` e
+  `terceirizacaoServiceSchema.description`).
+- **Não foi publicado artigo novo neste ciclo.** O ambiente de execução tem
+  egresso bloqueado por política: só `raw.githubusercontent.com` responde. Sem
+  conseguir abrir os 3 primeiros orgânicos, o passe 2 não fecha, e sem
+  conseguir abrir as fontes, o critério de 20 pontos da rubrica ("qualquer
+  número sem fonte, sem negociação") não tem como ser cumprido. Publicar com
+  número tirado de resumo de busca, com nome de fonte que não foi lida, é
+  exatamente o que a rubrica proíbe. Fica para o ciclo seguinte, num ambiente
+  com egresso aberto.
+- Pendências herdadas do ciclo anterior seguem valendo, na mesma ordem.
+- Pendência nova, menor: `precificacao`, `calculadora`, `diagnostico`,
+  `en/calculator` e `en/diagnostic` são páginas soltas em `public/` com
+  travessão no texto e fora do sitemap. Não foram tocadas neste ciclo por
+  estarem fora da pauta do loop. Decidir se entram no sitemap ou se recebem
+  `noindex`.
+
+## 7b. Estado anterior (17/09/2026)
 
 - 9 posts publicados. Presença confirmada na busca por
   `site:nexxusagencia.com.br/blog/<slug>`: apenas
