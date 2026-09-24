@@ -358,7 +358,78 @@ Registradas porque já custaram tempo:
 
 ---
 
-## 7. Estado atual (22/09/2026)
+## 7. Estado atual (24/09/2026)
+
+- **A correção chegou ao Google, e a home entrou no índice.** Esta é a novidade
+  do ciclo e derruba a hipótese registrada em 22/09. O snippet que o Google
+  exibe hoje para a home é a description nova, a de `paginasSeo` ("Pare de
+  contratar vendedor CLT ou PJ e torcer... com a operação no ar em 20 dias"),
+  publicada só em 22/09. Se o Google mostra o texto novo, ele rastreou depois do
+  deploy, ou seja, o Cloudflare não está mais servindo HTML velho ao Googlebot.
+  O pressuposto de que "o relógio só começa depois do purge" não vale mais: o
+  relógio está correndo desde 17/09.
+- Busca `site:` em 24/09: **2 de 14 URLs no índice**, a home e
+  `quanto-custa-terceirizar-time-de-vendas`. Em 22/09 era só o post. A home saiu
+  de fora do índice para dentro em 2 dias, logo após ganhar canonical.
+- **Caminho de rastreio conferido e íntegro.** A home tem corpo estático com 7
+  `<a href>`, sendo 3 para posts. O `/blog` tem 8,4 KB e linka os 9 posts. Todo
+  post recebe ao menos 1 link de página estática já rastreável. Não há post
+  órfão. Confirma de novo a armadilha da seção 6: link interno não é mais a
+  variável, e não adianta adicionar mais.
+- Nada na faixa de posição 8 a 30 para resgatar. Só 1 post está indexado e ele
+  aparece entre os 3 primeiros para o termo de cabeça dele, então não existe
+  artigo com demanda comprovada e entrega fraca para melhorar neste ciclo. A
+  maior lacuna da SERP do nicho segue sendo a faixa de investimento aberta, que
+  está parada na condição de escalar 1, aguardando decisão do Gabriel.
+- **Não foi publicado artigo novo, segundo ciclo seguido, e a causa é de
+  ambiente.** A política de egresso desta sessão libera só GitHub: qualquer
+  outro host devolve 403 no CONNECT. O `WebSearch` funciona, porque roda do lado
+  do servidor, mas `WebFetch` e `curl` não abrem nem concorrente nem fonte. Sem
+  abrir os 3 primeiros orgânicos, o passe 2 não fecha e o critério de 12 pontos
+  ("superação verificada da SERP") não tem como ser medido. Sem abrir as fontes,
+  o critério de 20 pontos reprova por definição, porque ele diz "qualquer número
+  sem fonte, sem negociação". São 32 pontos inalcançáveis: o teto vira 68, abaixo
+  do corte de 85. Não é questão de caprichar no texto, é aritmética da rubrica.
+  Citar número lido em resumo de busca, com fonte que não foi aberta, é
+  exatamente o que a rubrica proíbe.
+- **Achado novo: 4 páginas indexáveis de outras marcas no domínio.**
+  `/precificacao` e `/usual` são da Usual Digital, `/academy` é da Balner
+  Academy, e `/en` é a versão em inglês do sistema comercial. Nenhuma tem
+  `noindex`, nenhuma tem canonical e nenhuma está no sitemap. As irmãs diretas
+  delas (`/calculadora`, `/diagnostico`, `/usual/membros`, `/usual/obrigado`,
+  `/en/calculator`, `/en/diagnostic`, `/en/members`, `/usual/comunidade`,
+  `/usual/diagnostico`, `/usual/diagnostico-express`) **têm** `noindex`, o que
+  sugere que a intenção era manter a família inteira fora do índice e estas
+  quatro escaparam. Busca `site:` não encontra nenhuma delas hoje, então é risco
+  latente, não incêndio. Por que importa: num domínio de baixa autoridade que não
+  consegue indexar 9 posts, servir página indexável de outra marca sobre
+  precificação de peça de roupa gasta rastreio e embaralha o tema do site.
+  **Não foi alterado neste ciclo**, porque `/usual` e `/en` vendem um produto e
+  colocar `noindex` numa página de oferta é decisão de oferta, condição de
+  escalar 2. Decisão do Gabriel, com recomendação abaixo.
+- Sitemap conferido: 14 URLs, batendo com os slugs reais. As 5 rotas principais
+  têm canonical correto e autorreferente.
+- Pendências herdadas seguem valendo. A de purge do Cloudflare perdeu urgência
+  diante da evidência de que o Google já rastreou o conteúdo novo, mas continua
+  valendo para o resto do site.
+
+**Recomendação sobre as 4 páginas de outra marca**, para o Gabriel decidir:
+`/precificacao` e `/academy` não têm relação com a oferta da Nexxus e o padrão
+das páginas irmãs indica que deveriam ter `noindex`, como as outras da mesma
+família. `/usual` e `/en` são decisão comercial: se o produto está sendo vendido
+e a página precisa ranquear, o certo é o contrário, dar canonical e entrar no
+sitemap, não esconder. O que não faz sentido é o estado atual, indexável sem
+canonical e fora do sitemap, que é o pior dos dois mundos.
+
+**Próximo ciclo:** se o egresso continuar restrito a GitHub, o loop não publica
+artigo de novo, e aí o problema deixa de ser de conteúdo e passa a ser de
+configuração do ambiente. Repetir as buscas `site:` antes de tudo: se os posts
+começarem a entrar no índice como a home entrou, a correção de 17/09 pegou e o
+loop volta ao ritmo normal. Se continuarem fora até o começo de outubro, com o
+HTML correto desde 17/09 e com prova de rastreio recente, aí sim o problema é
+outro e vale escalar.
+
+## 7b. Estado anterior (22/09/2026)
 
 - **Nada mudou na indexação, e a razão é que a correção nunca chegou ao
   Google.** As três ações pendentes com o Gabriel desde 17/09 (purge do
@@ -397,7 +468,7 @@ Registradas porque já custaram tempo:
   estarem fora da pauta do loop. Decidir se entram no sitemap ou se recebem
   `noindex`.
 
-## 7b. Estado anterior (17/09/2026)
+## 7c. Estado anterior (17/09/2026)
 
 - 9 posts publicados. Presença confirmada na busca por
   `site:nexxusagencia.com.br/blog/<slug>`: apenas
