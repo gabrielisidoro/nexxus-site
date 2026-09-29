@@ -58,8 +58,12 @@ issue ou commit.
    O arquivo baixa sozinho.
 5. Search Console > propriedade `nexxusagencia.com.br` > **Configurações >
    Usuários e permissões > Adicionar usuário**: o e-mail da conta de serviço
-   (termina em `iam.gserviceaccount.com`), permissão **Completa**. Enviar
-   sitemap exige Completa; Restrita só lê.
+   (termina em `iam.gserviceaccount.com`), permissão **Completa**. É o menor
+   privilégio que a API de sitemap aceita pela documentação dela. Se o sitemap
+   falhar com HTTP 403 mesmo assim, promova a conta a proprietário delegado:
+   três pontos ao lado do seu próprio usuário > **Gerenciar proprietários da
+   propriedade > Adicionar proprietário**. A ajuda do Google exige proprietário
+   para a tela de Sitemaps, e os relatos sobre a API divergem.
 6. Crie o secret `GSC_SERVICE_ACCOUNT_JSON` colando o conteúdo inteiro do
    arquivo JSON. Depois apague o arquivo do seu computador.
 
@@ -74,7 +78,8 @@ Substituir a política do pai > Desativada**, só no projeto `nexxus-site`.
 
 Actions > **Pos-deploy (cache e Search Console)** > Run workflow. Na execução,
 a aba Summary mostra cada etapa como feita, pulada ou falha, e a tabela de
-indexação. Se o sitemap falhar com HTTP 403, falta o passo 5 ou o passo 2.
+indexação. Se o sitemap falhar com HTTP 403, veja o fim do passo 5, ou a API
+não foi ativada (passo 2).
 
 ## Por que o relatório não traz consultas e cliques
 

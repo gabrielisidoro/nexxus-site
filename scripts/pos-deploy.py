@@ -39,6 +39,7 @@ INSPECAO = 'https://searchconsole.googleapis.com/v1/urlInspection/index:inspect'
 
 ESPERA_MAXIMA_PAGES = 15 * 60
 INTERVALO_PAGES = 15
+COMMIT_JA_PUBLICADO = 60 * 60
 TIMEOUT_HTTP = 30
 
 
@@ -81,23 +82,62 @@ def _run_do_pages(sha):
     return None
 
 
-def aguardar_pages(agora=time.monotonic, dormir=time.sleep):
-    sha = _github('/git/ref/heads/gh-pages')['object']['sha']
-    log('gh-pages em ' + sha[:7] + ', esperando o GitHub Pages publicar esse commit')
+def _ref_gh_pages():
+    return _github('/git/ref/heads/gh-pages')['object']['sha']
+
+
+def _commit_antigo(sha, agora_utc):
+    """True se o commit do gh-pages tem mais de 1 hora: o Pages ja o publicou faz tempo."""
+    data = _github('/git/commits/' + sha)['committer']['date']
+    quando = datetime.datetime.fromisoformat(data.replace('Z', '+00:00'))
+    return (agora_utc - quando).total_seconds() > COMMIT_JA_PUBLICADO
+
+
+def aguardar_pages(agora=time.monotonic, dormir=time.sleep,
+                   agora_utc=lambda: datetime.datetime.now(datetime.timezone.utc)):
+    """
+    Espera o 'pages build and deployment' do commit atual do gh-pages terminar.
+
+    Rele o gh-pages a cada volta: se um push mais novo substituir o build que
+    estava sendo esperado, passa a esperar o novo. Erro passageiro da API do
+    GitHub nao derruba a espera. Nenhum caminho devolve 0 sem publicacao.
+    """
     limite = agora() + ESPERA_MAXIMA_PAGES
+    sha = None
+    antigo = {}
     while True:
-        run = _run_do_pages(sha)
-        if run and run.get('status') == 'completed':
-            if run.get('conclusion') == 'success':
-                log('Pages publicado: ' + run.get('html_url', ''))
-                return 0
-            log('O build do Pages terminou como "' + str(run.get('conclusion')) + '". '
-                'Sem publicacao nova, nao purgo o cache: ' + run.get('html_url', ''))
-            return 1
+        try:
+            atual = _ref_gh_pages()
+            if atual != sha:
+                sha = atual
+                log('gh-pages em ' + sha[:7] + ', esperando o GitHub Pages publicar esse commit')
+            run = _run_do_pages(sha)
+            if run is None:
+                # Deploy sem mudanca no site nao cria commit no gh-pages, e o run
+                # do commit antigo some com a retencao do Actions. Commit com
+                # mais de 1 hora ja foi publicado: um build atrasado apareceria
+                # aqui como run em fila.
+                if sha not in antigo:
+                    antigo[sha] = _commit_antigo(sha, agora_utc())
+                if antigo[sha]:
+                    log('gh-pages sem commit novo (' + sha[:7] + ' tem mais de 1 hora): '
+                        'a versao servida ja e esta.')
+                    return 0
+            elif run.get('status') == 'completed':
+                if run.get('conclusion') == 'success':
+                    log('Pages publicado: ' + run.get('html_url', ''))
+                    return 0
+                if _ref_gh_pages() == sha:
+                    log('O build do Pages terminou como "' + str(run.get('conclusion')) + '". '
+                        'Sem publicacao nova, nao purgo o cache: ' + run.get('html_url', ''))
+                    return 1
+                log('O build de ' + sha[:7] + ' foi substituido por um push mais novo no gh-pages.')
+        except requests.RequestException as erro:
+            log('Erro passageiro na API do GitHub, tento de novo: ' + str(erro)[:200])
         if agora() >= limite:
-            log('O Pages nao publicou ' + sha[:7] + ' em ' + str(ESPERA_MAXIMA_PAGES // 60) + ' minutos. '
-                'Nao purgo antes da publicacao, porque o Cloudflare recachearia a versao velha. '
-                'Rode este workflow de novo pela aba Actions quando o Pages terminar.')
+            log('O Pages nao publicou ' + (sha or '?')[:7] + ' em ' + str(ESPERA_MAXIMA_PAGES // 60)
+                + ' minutos. Nao purgo antes da publicacao, porque o Cloudflare recachearia a '
+                'versao velha. Rode este workflow de novo pela aba Actions quando o Pages terminar.')
             return 1
         dormir(INTERVALO_PAGES)
 
@@ -153,9 +193,9 @@ def _cabecalho(token):
 
 def _explicar_403(resp):
     if resp.status_code == 403:
-        return (' A conta de servico precisa estar em Search Console > Configuracoes > '
-                'Usuarios e permissoes da propriedade ' + PROPRIEDADE + ', com permissao Completa, '
-                'e a Google Search Console API precisa estar ativada no projeto do Google Cloud.')
+        return (' Confira se a Google Search Console API esta ativada no projeto do Google '
+                'Cloud e se a conta de servico e usuaria Completa da propriedade ' + PROPRIEDADE
+                + '. Se ja for, promova-a a proprietaria delegada. Ver docs/pos-deploy.md, passo 5.')
     return ''
 
 
