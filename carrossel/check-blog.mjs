@@ -5,10 +5,15 @@ import path from 'node:path'
 const dir = path.dirname(fileURLToPath(import.meta.url))
 const base = process.argv[2] || 'http://localhost:5173'
 
+// Mesmo contrato do check-post.mjs: no Windows do Gabriel é o Chrome instalado;
+// no container do loop, aponte CHROME_PATH para o binário disponível.
+const chrome = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+// Container roda como root e o Chrome recusa sandbox nesse caso.
+const semSandbox = process.env.CHROME_NO_SANDBOX ? ['--no-sandbox', '--disable-dev-shm-usage'] : []
 const browser = await puppeteer.launch({
-  executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  executablePath: chrome,
   headless: 'new',
-  args: ['--hide-scrollbars'],
+  args: ['--hide-scrollbars', ...semSandbox],
 })
 
 const alvos = [

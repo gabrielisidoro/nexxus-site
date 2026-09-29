@@ -1,10 +1,15 @@
 import puppeteer from 'puppeteer-core'
 const url = process.argv[2]
 const out = process.argv[3]
+// Mesmo contrato do check-post.mjs: no Windows do Gabriel é o Chrome instalado;
+// no container do loop, aponte CHROME_PATH para o binário disponível.
+const chrome = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+// Container roda como root e o Chrome recusa sandbox nesse caso.
+const semSandbox = process.env.CHROME_NO_SANDBOX ? ['--no-sandbox', '--disable-dev-shm-usage'] : []
 const browser = await puppeteer.launch({
-  executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
+  executablePath: chrome,
   headless: 'new',
-  args: ['--hide-scrollbars', '--no-sandbox', '--disable-dev-shm-usage'],
+  args: ['--hide-scrollbars', ...semSandbox],
 })
 for (const v of [{ n: 'desktop', w: 1440, h: 1100 }, { n: 'mobile', w: 390, h: 800 }]) {
   const page = await browser.newPage()

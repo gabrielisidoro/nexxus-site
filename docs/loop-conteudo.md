@@ -353,12 +353,94 @@ Registradas porque já custaram tempo:
 - **PowerShell corrompendo acento.** `Get-Content` sem `-Encoding UTF8` lê como
   ANSI e destrói os acentos ao regravar. Editar arquivo de código sempre com a
   ferramenta de edição, nunca reescrevendo o arquivo por script.
+- **Verificar head num `serve -s dist` local dá falso negativo (achado de
+  29/09/2026).** O `-s` liga o fallback de SPA: qualquer `/blog/<slug>` recebe o
+  `dist/index.html` da home, não o `dist/blog/<slug>/index.html` que o build
+  pré-renderizou. Como o `index.html` traz tags estáticas antes das do
+  react-helmet, o `querySelector` lê a canonical e o `og:image` da home e o
+  `og:type` como `website`, e parece que o post está errado. Não está: conferido
+  no arquivo gerado e no `gh-pages`, a canonical é a do post e o `og:type` é
+  `article`. Screenshot desse servidor vale, leitura de head não. Para head,
+  ler o arquivo em `dist/blog/<slug>/index.html` ou o `gh-pages` cru.
+- **Chromium no container do loop.** Não existe o Chrome do Windows aqui.
+  Exportar `CHROME_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome` e
+  `CHROME_NO_SANDBOX=1`, servir com `npx serve -s dist -l 4173` e apontar as
+  capturas para `http://localhost:4173`.
 - **Here-string do PowerShell quebra com aspas na mensagem de commit.** Usar
   `git commit -F arquivo.txt`.
 
 ---
 
-## 7. Estado atual (24/09/2026)
+## 7. Estado atual (29/09/2026)
+
+- **Terceiro ciclo seguido sem artigo novo, e a causa continua sendo o egresso
+  de rede.** A política desta sessão libera só GitHub. O `curl` devolve
+  "CONNECT tunnel failed, response 403" para google.com, rdstation.com.br e
+  meetime.com.br, e o `WebFetch` devolve `EGRESS_BLOCKED` por host. O
+  `WebSearch` funciona, porque roda do lado do servidor, mas ele entrega
+  resumo, não a página. Sem abrir os 3 primeiros orgânicos, o critério de 12
+  pontos não tem como ser medido; sem abrir as fontes, o de 20 pontos reprova
+  por definição. Teto de 68 contra corte de 85, aritmética da rubrica e não
+  falta de capricho. **É o item a resolver antes do próximo ciclo:** a correção
+  é liberar o egresso na configuração do ambiente (Network access, no menu do
+  ambiente, em Edit), não afrouxar o processo.
+- Novidade boa: **existe Chromium no container**, em
+  `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`. O passe 4 rodou com
+  screenshot de verdade pela primeira vez em container.
+- Busca `site:` em 29/09: **2 de 14 URLs no índice**, as mesmas de 24/09, a home
+  e `quanto-custa-terceirizar-time-de-vendas`. Os 9 posts foram consultados um a
+  um. Cinco dias sem mudança.
+- HTML cru no `gh-pages` conferido: 8 posts entre 19 e 26 KB, com 17 a 25
+  `<a href>` cada. A exceção é `tendencias-mercado-comercial-b2b`, com 11 KB e
+  12 links, cerca de metade dos demais. Nada perto do limiar de 5 KB, ou seja, o
+  rastreador está recebendo conteúdo.
+- Nada na faixa de 8 a 30 para resgatar. O único post indexado aparece em 2º
+  lugar orgânico para o termo de cabeça dele, à frente de Agendor e Wesow, então
+  não existe artigo com demanda comprovada e entrega fraca neste ciclo.
+- **Achado novo: `tendencias-mercado-comercial-b2b` é o ativo mais fraco do site
+  e reprovaria na rubrica hoje.** Zero tabela e zero FAQ, o que reprova direto no
+  critério de 12 pontos de formato, e é o único post sem `FAQPage` no JSON-LD,
+  confirmado na captura. Tem cerca de 1.000 palavras contra o alvo de 1.500 a
+  2.200, e carrega uma afirmação sem fonte e sem número ("a maioria das empresas
+  desiste após poucos contatos, enquanto a maior parte das vendas acontece a
+  partir do quinto"), que é adjetivo no lugar de dado. **Vira a pauta do primeiro
+  ciclo com egresso aberto**, como reescrita e não como post novo: ele já ocupa o
+  termo, e criar outro canibaliza.
+- **Achado novo, decisão do Gabriel: o site já publica número próprio da Nexxus,
+  enquanto o loop está proibido de usar qualquer um deles em artigo.** Em
+  `/servicos`, via `roles` em `src/data/metodo.ts`: SDR de 15 a 25 reuniões por
+  mês e conversão de agendamento de 10 a 25%, Hunter de 50 a 150 abordagens por
+  dia e conversão de 5 a 12,5%, Closer de 3 a 4 reuniões por dia e conversão de
+  venda de 15 a 30%. Na home, via `resultStats`: mais de 600 empresas
+  estruturadas e 60% de aumento médio em vendas. A condição de escalar 1 nomeia
+  justamente "número real de reuniões por SDR". Ou esses números já estão
+  autorizados, e aí a trava que segura a faixa de investimento merece ser
+  revista, ou escaparam, e aí o certo é retirá-los. O que não se sustenta é a
+  assimetria: a maior lacuna da SERP do nicho segue fechada por uma regra que a
+  própria home não cumpre. **Nada foi alterado**, é decisão de posicionamento.
+- Passe 4 rodado com screenshot real, sem reprovação: `/blog` em desktop e
+  mobile (capa 3/2, só foto, chip único, excerpt cortando limpo), topo de artigo
+  com capa em desktop e mobile, as tabelas do post de custo e do post de reunião
+  qualificada em desktop e mobile (`scrollWidth` igual a `clientWidth` nos dois,
+  a tabela rola dentro do bloco e a página não), topo do post de tendências e a
+  home. JSON-LD conferido na captura: 4 tipos nos posts completos, 3 no de
+  tendências.
+- Build íntegro: 14 rotas pré-renderizadas, 14 com `canonical`, sitemap com 14
+  URLs batendo com os slugs reais.
+- Corrigido neste ciclo: `check-blog.mjs` estava cravado no caminho do Chrome do
+  Windows e `check-tabelas.mjs` no caminho do container, então cada um só rodava
+  de um lado. Os dois passaram a usar o mesmo contrato do `check-post.mjs`,
+  `CHROME_PATH` e `CHROME_NO_SANDBOX`.
+- Pendências herdadas seguem valendo, e as 4 páginas de outra marca
+  (`/precificacao`, `/usual`, `/academy`, `/en`) continuam sem alteração,
+  aguardando decisão.
+
+**Próximo ciclo:** conferir primeiro se o egresso foi liberado. Se foi, a pauta
+já está escolhida: reescrever `tendencias-mercado-comercial-b2b` com tabela, FAQ
+e fontes abertas. Se não foi, não adianta rodar o loop de conteúdo. São três
+ciclos parados na mesma configuração, e o gargalo não é de pauta.
+
+## 7b. Estado anterior (24/09/2026)
 
 - **A correção chegou ao Google, e a home entrou no índice.** Esta é a novidade
   do ciclo e derruba a hipótese registrada em 22/09. O snippet que o Google
@@ -429,7 +511,7 @@ loop volta ao ritmo normal. Se continuarem fora até o começo de outubro, com o
 HTML correto desde 17/09 e com prova de rastreio recente, aí sim o problema é
 outro e vale escalar.
 
-## 7b. Estado anterior (22/09/2026)
+## 7c. Estado anterior (22/09/2026)
 
 - **Nada mudou na indexação, e a razão é que a correção nunca chegou ao
   Google.** As três ações pendentes com o Gabriel desde 17/09 (purge do
@@ -468,7 +550,7 @@ outro e vale escalar.
   estarem fora da pauta do loop. Decidir se entram no sitemap ou se recebem
   `noindex`.
 
-## 7c. Estado anterior (17/09/2026)
+## 7d. Estado anterior (17/09/2026)
 
 - 9 posts publicados. Presença confirmada na busca por
   `site:nexxusagencia.com.br/blog/<slug>`: apenas
