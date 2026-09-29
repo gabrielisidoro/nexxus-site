@@ -1,0 +1,20 @@
+{
+  "_leia": "Cadastro das fotos reais do escritorio usadas nas capas do blog. O checar-fotos.mjs le este arquivo e o slides-blog-covers.html e reprova capa com foto repetida. Foto nova entra aqui com o ambiente dela antes de ir para uma capa. Duas fotos do mesmo ambiente ainda leem como repeticao no /blog, entao prefira o ambiente com menos capas.",
+  "fotos": {
+    "corredor.webp": { "ambiente": "corredor de vidro", "descricao": "Corredor com divisorias de vidro e ripado de madeira, luz de LED na parede." },
+    "equipe-operacao.webp": { "ambiente": "sala escura da operacao", "descricao": "Time de camiseta preta Nexxus em estacoes com monitores, logo grande na parede." },
+    "estudio.webp": { "ambiente": "estudio de teto ripado", "descricao": "Estudio de gravacao com softbox, cameras e tres pessoas na mesa." },
+    "estudio-mesa.webp": { "ambiente": "estudio de teto ripado", "descricao": "O mesmo estudio sem equipamento: mesa escura, duas cadeiras brancas, TV na parede ripada, cortina cinza." },
+    "sala-reuniao.webp": { "ambiente": "sala de reuniao do anel de luz", "descricao": "Sala de reuniao com luminaria de anel, TV, mesa escura e cadeiras pretas." },
+    "sala-reuniao-tijolo.webp": { "ambiente": "sala de reuniao do anel de luz", "descricao": "A mesma sala de reuniao por outro angulo, mostrando a parede de tijolo aparente." },
+    "varanda-skyline.webp": { "ambiente": "varanda", "descricao": "Varanda com vista para predios espelhados." },
+    "varanda-sofa.webp": { "ambiente": "varanda", "descricao": "Varanda com sofa, mesa de centro e vista da avenida." },
+    "equipe-janela.webp": { "ambiente": "sala da equipe (banner e neon)", "descricao": "Quatro pessoas trabalhando de costas, janela com vista da cidade, banner Nexxus e neon amarelo. A dobra do banner faz a marca ler 'rexxus' em alguns recortes; mochila com logo NIKE embaixo." },
+    "equipe-banner.webp": { "ambiente": "sala da equipe (banner e neon)", "descricao": "A mesma sala da equipe de frente para o banner Nexxus, pessoas de rosto trabalhando." }
+  },
+  "repeticoes_conhecidas": {
+    "equipe-operacao.webp": 2,
+    "estudio.webp": 2,
+    "sala-reuniao.webp": 2
+  }
+}
