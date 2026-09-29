@@ -270,6 +270,38 @@ depois os reescritos. O resto fica para a execução seguinte.
 
 ---
 
+## 4b. Pós-deploy automático (desde 29/09/2026)
+
+O workflow `.github/workflows/pos-deploy.yml` roda depois de cada deploy e faz,
+pelo runner do GitHub, os passos 7 e 9 da definição de pronto: espera o Pages
+publicar, purga o cache do Cloudflare e reenvia o sitemap. Também inspeciona
+cada URL do sitemap no Search Console e escreve o estado de indexação no
+Summary da execução. Roda sozinho terça e quinta às 06:17, antes do loop.
+Setup e limites em `docs/pos-deploy.md`.
+
+Como o loop usa isso, a cada ciclo:
+
+- **Antes do passe 3**, abrir a execução mais recente do workflow
+  "Pos-deploy (cache e Search Console)" pelas ferramentas do GitHub (lista de
+  execuções do workflow `pos-deploy.yml` e log do job). Se a etapa "Relatorio
+  de indexacao" rodou de verdade (não "pulado"), **ela substitui a busca
+  `site:`** como fonte do estado de cada URL, e traz o estado exato ("Descoberta,
+  atualmente não indexada" contra "Rastreada, atualmente não indexada"), que a
+  busca `site:` não distingue e que decide a ação da seção 3b.
+- **Depois do push**, conferir a execução disparada pelo deploy. Se as etapas
+  de purge e sitemap aparecem como feitas, **tirar os itens a) e b) da checklist
+  do Gabriel**. Se aparecem como puladas, os secrets ainda não foram
+  cadastrados e os itens continuam na checklist. Se falharam, reportar o erro
+  do log.
+- **Solicitar indexação continua manual.** Não existe API para página comum.
+  Listar na checklist as URLs que o relatório marcou como não indexadas, na
+  ordem de prioridade acima.
+- Consultas, impressões e cliques **não** saem no relatório do Actions, porque
+  o repositório é público e o Summary também. Desempenho vem pelo conector de
+  Search Console do Windsor.ai, quando estiver conectado.
+
+---
+
 ## 5. Condição de escalar
 
 Parar e perguntar ao Gabriel, sem decidir sozinho:

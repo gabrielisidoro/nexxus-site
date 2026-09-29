@@ -36,3 +36,6 @@ Thumbs.db
 .frames/
 motion/node_modules/
 motion/out/
+
+# Python do pos-deploy
+__pycache__/

@@ -1,0 +1,66 @@
+name: Pos-deploy (cache e Search Console)
+
+# Faz pelo runner do GitHub o que o loop de conteudo nao consegue fazer do
+# container dele, que so enxerga o GitHub: purgar o cache do Cloudflare,
+# reenviar o sitemap e ler o estado de indexacao no Search Console.
+# Cada etapa pula sozinha, sem erro, enquanto o secret dela nao existir.
+# Setup dos secrets: docs/pos-deploy.md.
+
+on:
+  workflow_run:
+    workflows: ['Deploy to GitHub Pages']
+    types: [completed]
+  schedule:
+    # 06:17 de Brasilia, terca e quinta: o relatorio fica pronto antes do loop
+    # das 07:00, que le o estado de indexacao daqui.
+    - cron: '17 9 * * 2,4'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: pos-deploy
+  cancel-in-progress: false
+
+jobs:
+  pos-deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+      GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install 'requests>=2.31,<3' 'google-auth>=2.29,<3'
+
+      # Purgar antes de o Pages publicar faz o Cloudflare recachear a versao
+      # velha por mais uma hora. Por isso purga e sitemap dependem desta etapa.
+      - name: Esperar o GitHub Pages publicar
+        id: pages
+        if: github.event_name != 'schedule'
+        run: python scripts/pos-deploy.py aguardar-pages
+
+      - name: Purgar cache do Cloudflare
+        if: ${{ !cancelled() && steps.pages.outcome == 'success' }}
+        run: python scripts/pos-deploy.py purgar
+
+      - name: Reenviar sitemap no Search Console
+        if: ${{ !cancelled() && steps.pages.outcome == 'success' }}
+        run: python scripts/pos-deploy.py sitemap
+
+      - name: Relatorio de indexacao
+        if: ${{ !cancelled() }}
+        run: python scripts/pos-deploy.py relatorio
