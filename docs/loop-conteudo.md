@@ -302,6 +302,47 @@ Como o loop usa isso, a cada ciclo:
 
 ---
 
+## 4c. Fotos e capas sem repetir (desde 29/09/2026)
+
+O blog chegou a 9 posts com só 6 fotos, e três delas saíram em duas capas cada
+(equipe-operacao, estudio e sala-reuniao). No `/blog` isso aparece como o mesmo
+card duas vezes. O Gabriel mandou 4 fotos novas em 29/09. Regras a partir daqui:
+
+- **Toda foto do banco está cadastrada em `carrossel/img/global/fotos.json`,
+  com o ambiente dela.** Foto nova entra no cadastro antes de ir para capa.
+- **Antes de escolher a foto, rodar `node carrossel/checar-fotos.mjs`.** Ele
+  lista as fotos livres e as capas por ambiente. Duas fotos do mesmo ambiente
+  ainda leem como repetição no card, então vale o ambiente com menos capas.
+- **A ordem dos próximos posts já está decidida em `fotos.json`, chave
+  `proximos_posts`:** primeiro `equipe-banner.webp` a 44% (og da
+  `equipe-janela.webp` a 66%), depois `sala-reuniao-tijolo.webp` a 38% (og da
+  mesma a 40%). Os dois recortes foram escolhidos olhando uma grade simulada do
+  `/blog` contra as 9 capas. `equipe-janela` não serve de capa (o banner lê
+  "rexxus" pela dobra do tecido, ou o logo NIKE de uma mochila fica no centro)
+  e `estudio-mesa` também não (lê como mais uma sala vazia com mesa e TV).
+- **Do terceiro post novo em diante, não há capa sem foto nova.** Nenhum outro
+  recorte da sala de reunião nem do estúdio passa. Se faltar foto, pedir ao
+  Gabriel antes de repetir: é condição de escalar, não decisão do loop.
+- **Foto nova sem recorte aprovado:** rodar
+  `node carrossel/testar-enquadramento.mjs img/global/<foto>.webp`, que gera a
+  folha com todas as faixas 3/2 e og rotuladas pelo y% do `background-position`,
+  olhar a folha, escolher, e registrar em `fotos.json`.
+- **O passe 4 inclui `node carrossel/checar-fotos.mjs` sem erro.** Ele reprova
+  capa que repita foto além do limite ou use foto fora do cadastro.
+- **Gerar as imagens sempre com `node carrossel/montar-capas.mjs` antes do
+  `shot-covers.mjs`.** As fontes do cartão social agora ficam em
+  `carrossel/fontes/`, e o montar embute fontes e logo no `.build.html`. Nunca
+  voltar a puxar Google Fonts: o container não alcança, e o título sai com fonte
+  de sistema sem erro nenhum.
+
+Pedido de fotos para o Gabriel, quando chegar a hora: **na horizontal, e
+enviadas como arquivo, não como foto do WhatsApp.** A capa é 3/2 e aproveita só
+37% da altura de uma foto vertical, e o WhatsApp reduz tudo para 900x1600.
+Ambientes que ainda não aparecem em capa nenhuma: recepção, fachada, copa,
+alguém em ligação de fone, quadro com o funil.
+
+---
+
 ## 5. Condição de escalar
 
 Parar e perguntar ao Gabriel, sem decidir sozinho:

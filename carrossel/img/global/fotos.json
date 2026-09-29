@@ -1,20 +1,83 @@
 {
   "_leia": "Cadastro das fotos reais do escritorio usadas nas capas do blog. O checar-fotos.mjs le este arquivo e o slides-blog-covers.html e reprova capa com foto repetida. Foto nova entra aqui com o ambiente dela antes de ir para uma capa. Duas fotos do mesmo ambiente ainda leem como repeticao no /blog, entao prefira o ambiente com menos capas.",
   "fotos": {
-    "corredor.webp": { "ambiente": "corredor de vidro", "descricao": "Corredor com divisorias de vidro e ripado de madeira, luz de LED na parede." },
-    "equipe-operacao.webp": { "ambiente": "sala escura da operacao", "descricao": "Time de camiseta preta Nexxus em estacoes com monitores, logo grande na parede." },
-    "estudio.webp": { "ambiente": "estudio de teto ripado", "descricao": "Estudio de gravacao com softbox, cameras e tres pessoas na mesa." },
-    "estudio-mesa.webp": { "ambiente": "estudio de teto ripado", "descricao": "O mesmo estudio sem equipamento: mesa escura, duas cadeiras brancas, TV na parede ripada, cortina cinza." },
-    "sala-reuniao.webp": { "ambiente": "sala de reuniao do anel de luz", "descricao": "Sala de reuniao com luminaria de anel, TV, mesa escura e cadeiras pretas." },
-    "sala-reuniao-tijolo.webp": { "ambiente": "sala de reuniao do anel de luz", "descricao": "A mesma sala de reuniao por outro angulo, mostrando a parede de tijolo aparente." },
-    "varanda-skyline.webp": { "ambiente": "varanda", "descricao": "Varanda com vista para predios espelhados." },
-    "varanda-sofa.webp": { "ambiente": "varanda", "descricao": "Varanda com sofa, mesa de centro e vista da avenida." },
-    "equipe-janela.webp": { "ambiente": "sala da equipe (banner e neon)", "descricao": "Quatro pessoas trabalhando de costas, janela com vista da cidade, banner Nexxus e neon amarelo. A dobra do banner faz a marca ler 'rexxus' em alguns recortes; mochila com logo NIKE embaixo." },
-    "equipe-banner.webp": { "ambiente": "sala da equipe (banner e neon)", "descricao": "A mesma sala da equipe de frente para o banner Nexxus, pessoas de rosto trabalhando." }
+    "corredor.webp": {
+      "ambiente": "corredor de vidro",
+      "descricao": "Corredor com divisorias de vidro e ripado de madeira, luz de LED na parede."
+    },
+    "equipe-operacao.webp": {
+      "ambiente": "sala escura da operacao",
+      "descricao": "Time de camiseta preta Nexxus em estacoes com monitores, logo grande na parede."
+    },
+    "estudio.webp": {
+      "ambiente": "estudio de teto ripado",
+      "descricao": "Estudio de gravacao com softbox, cameras e tres pessoas na mesa."
+    },
+    "estudio-mesa.webp": {
+      "ambiente": "estudio de teto ripado",
+      "descricao": "O mesmo estudio sem equipamento: mesa escura, duas cadeiras brancas, TV na parede ripada, cortina cinza."
+    },
+    "sala-reuniao.webp": {
+      "ambiente": "sala de reuniao do anel de luz",
+      "descricao": "Sala de reuniao com luminaria de anel, TV, mesa escura e cadeiras pretas."
+    },
+    "sala-reuniao-tijolo.webp": {
+      "ambiente": "sala de reuniao do anel de luz",
+      "descricao": "A mesma sala de reuniao por outro angulo, mostrando a parede de tijolo aparente."
+    },
+    "varanda-skyline.webp": {
+      "ambiente": "varanda",
+      "descricao": "Varanda com vista para predios espelhados."
+    },
+    "varanda-sofa.webp": {
+      "ambiente": "varanda",
+      "descricao": "Varanda com sofa, mesa de centro e vista da avenida."
+    },
+    "equipe-janela.webp": {
+      "ambiente": "sala da equipe (banner e neon)",
+      "descricao": "Quatro pessoas trabalhando de costas, janela com vista da cidade, banner Nexxus e neon amarelo. A dobra do banner faz a marca ler 'rexxus' em alguns recortes; mochila com logo NIKE embaixo."
+    },
+    "equipe-banner.webp": {
+      "ambiente": "sala da equipe (banner e neon)",
+      "descricao": "A mesma sala da equipe de frente para o banner Nexxus, pessoas de rosto trabalhando."
+    }
   },
   "repeticoes_conhecidas": {
     "equipe-operacao.webp": 2,
     "estudio.webp": 2,
     "sala-reuniao.webp": 2
+  },
+  "proximos_posts": {
+    "_leia": "Enquadramentos aprovados em 29/09/2026 por analise visual com folha de recortes e grade simulada do /blog contra as 9 capas publicadas. Use nesta ordem, um por post. Depois destes dois, so ha capa nova com foto nova: nenhum outro recorte da sala de reuniao nem do estudio passa, porque le como repeticao no card.",
+    "ordem": [
+      {
+        "capa": {
+          "foto": "equipe-banner.webp",
+          "y": 44
+        },
+        "og": {
+          "foto": "equipe-janela.webp",
+          "y": 66,
+          "classe": "og clara"
+        },
+        "cuidados": "Capa com margem de 1 ponto: 45 ou mais mostra o celular na mao da mulher em primeiro plano, 43 ou menos corta o queixo dela. O og usa outra foto da mesma sala; com categoria de mais de 11 caracteres o chip encosta na cabeca do rapaz de fone, confira no render e, se encostar, encurte o texto do chip no og."
+      },
+      {
+        "capa": {
+          "foto": "sala-reuniao-tijolo.webp",
+          "y": 38
+        },
+        "og": {
+          "foto": "sala-reuniao-tijolo.webp",
+          "y": 40,
+          "classe": "og clara"
+        },
+        "cuidados": "Nao pode ser o post imediatamente seguinte a quem-fecha-a-venda nem a quantas-reunioes-sdr no /blog, que sao da mesma sala. Na ordem acima, fica separado delas pelo post da equipe-banner."
+      }
+    ],
+    "reprovadas": {
+      "equipe-janela.webp (capa)": "Entre 20% e 70% o banner le 'rexxus' pela dobra do tecido; de 60% para baixo o logo NIKE da mochila fica no centro do card. So serviria com retoque, e mesmo assim repetiria a sala da equipe-banner. Fica so como og.",
+      "estudio-mesa.webp (capa e og)": "No tamanho do card le como mais uma sala vazia com mesa escura e TV, igual a quem-fecha-a-venda e quantas-reunioes-sdr, e o fundo ripado e o mesmo das duas capas do estudio."
+    }
   }
 }
