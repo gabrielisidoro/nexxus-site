@@ -441,10 +441,118 @@ Registradas porque já custaram tempo:
   capturas para `http://localhost:4173`.
 - **Here-string do PowerShell quebra com aspas na mensagem de commit.** Usar
   `git commit -F arquivo.txt`.
+- **A busca `site:` dá falso negativo neste domínio (achado de 01/10/2026).**
+  `site:nexxusagencia.com.br` devolve zero resultado do domínio e cai em outras
+  marcas "Nexxus", o que lê como "saiu do índice" e aciona a condição de escalar
+  4 sem motivo. A ferramenta de busca do loop é um índice americano, não o
+  `google.com.br`. O operador em si funciona: o controle
+  `site:agendor.com.br/blog/terceirizacao-de-vendas` devolve aquela página exata e
+  só o próprio domínio. **A sonda confiável é o título exato entre aspas mais
+  "Nexxus"**, e com ela as páginas indexadas aparecem normalmente. Antes de
+  declarar qualquer página fora do índice, repetir pela sonda de título e rodar o
+  controle num domínio de terceiro para provar que o operador está funcionando
+  naquela execução. Posição de SERP não se mede com esta ferramenta de jeito
+  nenhum: ela devolve cerca de 9 resultados e de outro país, então a faixa de 8 a
+  30 da seção 3b só sai do Search Console.
 
 ---
 
-## 7. Estado atual (29/09/2026)
+## 7. Estado atual (01/10/2026)
+
+- **Quarto ciclo seguido sem artigo novo, e a causa continua sendo o egresso de
+  rede.** Conferido antes de qualquer outra coisa, como o ciclo anterior mandou.
+  A política desta sessão libera **só o GitHub**: `api.github.com` responde 200 e
+  `raw.githubusercontent.com` responde 301, e todo o resto morre no CONNECT com
+  403. Testados e negados um a um: `google.com`, `search.google.com`,
+  `rdstation.com.br`, `meetime.com.br`, `agendor.com.br`, `pt.wikipedia.org`,
+  `gartner.com`, `hbr.org`, `sebrae.com.br`. O `WebFetch` devolve
+  `EGRESS_BLOCKED` por host. Não é lista de bloqueio, é lista de liberação com um
+  item só, então não existe fonte alternativa a testar. O próprio proxy registra
+  cada negativa como `connect_rejected` com "policy denial" e o manual dele diz
+  para reportar, não para contornar. A aritmética da rubrica segue a mesma: sem
+  abrir fonte, o critério de 20 pontos reprova por definição ("qualquer número
+  sem fonte, sem negociação"); sem abrir os 3 primeiros orgânicos, o de 12 pontos
+  não tem como ser medido. Teto de 68 contra corte de 85. **A correção é liberar
+  o egresso em Network access, no menu do ambiente, em Edit.**
+- **Achado de método, e é o mais importante deste ciclo: a busca `site:` dá falso
+  negativo neste ambiente, e o loop vinha medindo indexação com um instrumento
+  quebrado.** `site:nexxusagencia.com.br` devolve **zero** resultado do domínio e
+  cai num resultado de outras marcas "Nexxus" (xampu da Unilever, Nexx Brasil,
+  Nexxus Capital). Parecia deindexação geral. Não é. Controle que fecha o
+  diagnóstico: `site:agendor.com.br/blog/terceirizacao-de-vendas` devolve
+  exatamente aquela página e só resultados do próprio domínio, ou seja, o
+  operador funciona, e o problema é com este domínio nesta ferramenta, que é
+  um índice americano e não o `google.com.br`. **A sonda que funciona é o título
+  exato entre aspas mais "Nexxus".** Com ela, a home e
+  `quanto-custa-terceirizar-time-de-vendas` aparecem; com `site:`, nenhuma das
+  duas aparece. Conclusão prática: **nunca mais concluir indexação por `site:`
+  sozinho neste ambiente.** Registrado na seção 6.
+- **Indexação: seguem as mesmas 2 de 14 URLs, home e
+  `quanto-custa-terceirizar-time-de-vendas`.** Medido com a sonda de título exato
+  em 8 consultas separadas, uma por post. Em todas as 8, as únicas URLs do
+  domínio que aparecem são essas duas; nenhum dos outros 8 posts apareceu nem
+  buscando o próprio título entre aspas. Sem mudança desde 24/09, agora com uma
+  semana de estabilidade. **Não houve página saindo do índice**, então a condição
+  de escalar 4 não está acionada: a leitura de "0 indexadas" do `site:` era
+  artefato da ferramenta, não queda.
+- **Confirmação independente de que o rastreador recebe o corpo.** O resumo da
+  busca para o post de custo citou texto real do corpo (o multiplicador de 1,65 a
+  1,85, a desoneração do Simples Nacional, a faixa de R$ 4.950 a R$ 5.550 para um
+  salário de R$ 3.000). Só é possível lendo o HTML servido, o que valida a
+  correção de 17/09 por um ângulo novo, independente do `curl`. HTML cru do
+  `gh-pages` reconferido: o post de custo com 22 KB e 21 links, o de reunião
+  qualificada com 26 KB e 20 links. `tendencias-mercado-comercial-b2b` segue o
+  mais fraco, com 11 KB e 12 links, cerca de metade dos demais.
+- **O relatório de indexação do pós-deploy não existe ainda, e por isso a seção
+  4b não está valendo.** A execução mais recente do workflow (run 4, de 29/09) deu
+  "success" enganoso: as quatro etapas de conteúdo rodaram no mesmo segundo e o
+  log mostra as três pulando por falta de secret. "Cloudflare: **pulado**, faltam
+  os secrets `CLOUDFLARE_API_TOKEN` e `CLOUDFLARE_ZONE_ID`"; "Sitemap:
+  **pulado**, falta o secret `GSC_SERVICE_ACCOUNT_JSON`"; "Relatorio de
+  indexacao: **pulado**, falta o secret `GSC_SERVICE_ACCOUNT_JSON`". Ou seja, os
+  secrets nunca foram cadastrados, o workflow não substitui a busca `site:` como
+  fonte de estado, e **os itens a) e b) da checklist do Gabriel continuam
+  manuais**. Setup em `docs/pos-deploy.md`.
+- **A execução agendada de hoje não apareceu.** O cron é `17 9 * * 2,4`, hoje é
+  quinta, e às 10:06 UTC (07:06 de Brasília) a execução mais recente do
+  repositório ainda era a de 29/09. Pode ser só atraso do agendador do GitHub,
+  que é conhecido e pode passar de uma hora, e enquanto os secrets não existirem
+  isso não muda nada na prática, porque todas as etapas pulam. Vale reconferir no
+  próximo ciclo antes de tratar como defeito.
+- **Posição 8 a 30 segue inauditável, e agora com a causa nomeada.** Não há
+  Search Console por nenhum caminho: o secret `GSC_SERVICE_ACCOUNT_JSON` não
+  existe no Actions e o Windsor.ai tem **só `facebook` e `instagram`
+  conectados**, sem o conector de Search Console que a seção 4b prevê. A
+  ferramenta de busca entrega cerca de 9 resultados, então ela não alcança a
+  faixa de 10 a 30 nem em tese, e é índice americano. Logicamente, só 1 post está
+  indexado, e um post não indexado não pode estar em posição 8 a 30, então não há
+  o que resgatar entre as páginas indexadas. O que **não** se pode afirmar é
+  posição: o "2º lugar orgânico" registrado em 29/09 saiu deste mesmo instrumento
+  e hoje o post não aparece no top 9 da mesma busca de cabeça. Não tratar como
+  queda, tratar como medição sem valor. **Posição só com Search Console.**
+- **Nada foi publicado e nada foi meio publicado.** A pauta decidida em 29/09,
+  reescrever `tendencias-mercado-comercial-b2b` com tabela, FAQ e fontes
+  abertas, **segue de pé e intocada**. Foi tentação deste ciclo entregar meia
+  reescrita (tabela e FAQ montadas só com o que já está no post, sem fonte nova):
+  não foi feito de propósito. Sem fonte aberta a tabela não teria dado, a
+  reescrita reprovaria na rubrica mesmo assim, e a condição de escalar 6 trata
+  rubrica reprovando duas vezes na mesma pauta como sinal de matar a pauta. Queimar
+  a pauta num ciclo sem egresso seria produzir exatamente esse falso sinal.
+- Build íntegro: 14 rotas pré-renderizadas, 14 com `canonical`, sitemap com 14
+  URLs batendo com os slugs reais. Passe 4 não se aplica, porque não houve
+  mudança de conteúdo nem capa nova para capturar.
+- Pendências herdadas seguem valendo, inclusive as 4 páginas de outra marca
+  (`/precificacao`, `/usual`, `/academy`, `/en`) e a assimetria do número próprio
+  registrada em 29/09.
+
+**Próximo ciclo:** a ordem não muda, e o gargalo também não. Conferir o egresso
+primeiro com um `curl` em `google.com`. Se estiver liberado, a pauta já está
+escolhida e é a reescrita de `tendencias-mercado-comercial-b2b`. Se continuar
+fechado, **não rodar o loop de conteúdo**: são quatro ciclos no mesmo bloqueio e
+o que falta é configuração de ambiente, não pauta. Nos dois casos, medir
+indexação pela sonda de título exato, nunca por `site:`.
+
+## 7b. Estado anterior (29/09/2026)
 
 - **Terceiro ciclo seguido sem artigo novo, e a causa continua sendo o egresso
   de rede.** A política desta sessão libera só GitHub. O `curl` devolve
@@ -513,7 +621,7 @@ já está escolhida: reescrever `tendencias-mercado-comercial-b2b` com tabela, F
 e fontes abertas. Se não foi, não adianta rodar o loop de conteúdo. São três
 ciclos parados na mesma configuração, e o gargalo não é de pauta.
 
-## 7b. Estado anterior (24/09/2026)
+## 7c. Estado anterior (24/09/2026)
 
 - **A correção chegou ao Google, e a home entrou no índice.** Esta é a novidade
   do ciclo e derruba a hipótese registrada em 22/09. O snippet que o Google
@@ -584,7 +692,7 @@ loop volta ao ritmo normal. Se continuarem fora até o começo de outubro, com o
 HTML correto desde 17/09 e com prova de rastreio recente, aí sim o problema é
 outro e vale escalar.
 
-## 7c. Estado anterior (22/09/2026)
+## 7d. Estado anterior (22/09/2026)
 
 - **Nada mudou na indexação, e a razão é que a correção nunca chegou ao
   Google.** As três ações pendentes com o Gabriel desde 17/09 (purge do
@@ -623,7 +731,7 @@ outro e vale escalar.
   estarem fora da pauta do loop. Decidir se entram no sitemap ou se recebem
   `noindex`.
 
-## 7d. Estado anterior (17/09/2026)
+## 7e. Estado anterior (17/09/2026)
 
 - 9 posts publicados. Presença confirmada na busca por
   `site:nexxusagencia.com.br/blog/<slug>`: apenas
