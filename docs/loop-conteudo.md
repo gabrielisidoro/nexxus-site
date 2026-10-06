@@ -454,10 +454,127 @@ Registradas porque já custaram tempo:
   naquela execução. Posição de SERP não se mede com esta ferramenta de jeito
   nenhum: ela devolve cerca de 9 resultados e de outro país, então a faixa de 8 a
   30 da seção 3b só sai do Search Console.
+- **A sonda de titulo exato tambem oscila, e indexacao e inauditavel sem Search
+  Console (achado de 06/10/2026).** A secao 6 ja registrava que `site:` da falso
+  negativo neste dominio e indicava a sonda de titulo exato como alternativa
+  confiavel. Ela nao e. Em 01/10 a sonda devolvia a home e
+  `quanto-custa-terceirizar-time-de-vendas`; em 06/10, com o site **sem um unico
+  commit de conteudo no meio**, devolveu zero para as 9 consultas e para a home,
+  com o controle de terceiro funcionando na mesma execucao e sem nenhuma causa
+  tecnica no `gh-pages` (`robots.txt` liberado, `index,follow`, canonical certa,
+  sitemap com os 14 slugs reais, HTML cru de 11 a 26 KB). Ou seja: **2 e 0 saem
+  do mesmo instrumento, na mesma semana, para o mesmo site.** Nao tratar queda
+  da sonda como deindexacao nem acionar a condicao de escalar 4 por ela: antes,
+  conferir `robots.txt`, `meta robots`, canonical e sitemap no `gh-pages`, e se
+  estiverem limpos, a conclusao e que a medicao nao vale, nao que a pagina caiu.
+  Indexacao com valor probatorio so vem do Search Console.
+- **A conclusao da etapa do Actions mente; so o texto do log conta (achado de
+  06/10/2026).** No run 6 do `pos-deploy.yml` a etapa "Relatorio de indexacao"
+  aparece com `conclusion: success` na API, e o ciclo quase registrou que o
+  secret do Search Console finalmente existia. O log da mesma etapa diz
+  "Relatorio de indexacao: **pulado**, falta o secret
+  `GSC_SERVICE_ACCOUNT_JSON`", e o bloco `env` imprime os tres secrets vazios. O
+  script sai com codigo 0 depois de avisar que pulou, e o GitHub chama isso de
+  sucesso. **Sempre ler o texto do log**, e conferir o bloco `env` para saber se
+  o secret existe.
+- **O host de log do Actions nao passa pelo egresso (achado de 06/10/2026).** O
+  `logs_url` que a API devolve aponta para
+  `productionresultssa15.blob.core.windows.net`, que a politica de rede nega
+  como qualquer outro host fora do GitHub, entao `curl` naquela URL falha. Ler
+  log de job pela propria ferramenta do GitHub, pedindo o conteudo, nunca por
+  download da URL assinada.
 
 ---
 
-## 7. Estado atual (01/10/2026)
+## 7. Estado atual (06/10/2026)
+
+- **Quinto ciclo seguido sem artigo novo, e o gargalo nao mudou: egresso de
+  rede.** Conferido antes de qualquer outra coisa, como a secao 7 anterior
+  mandou. A politica desta sessao libera **so o GitHub**: `api.github.com`
+  responde 200 e `raw.githubusercontent.com` responde 301. Negados um a um, com
+  403 no CONNECT: `google.com`, `www.google.com`, `search.google.com`,
+  `rdstation.com.br`, `meetime.com.br`, `agendor.com.br`, `pt.wikipedia.org`,
+  `sebrae.com.br`. O proprio proxy registra cada um como `connect_rejected` com
+  "policy denial". Continua sendo lista de liberacao com um item, nao lista de
+  bloqueio, entao nao existe fonte alternativa a testar. A aritmetica da rubrica
+  nao mudou: sem abrir fonte o critetio de 20 pontos reprova por definicao, sem
+  abrir os 3 primeiros organicos o de 12 nao se mede. Teto de 68 contra corte de
+  85. **O loop de conteudo nao foi rodado**, como a secao 7 anterior determinou.
+- **A pauta de 29/09, reescrever `tendencias-mercado-comercial-b2b`, segue de pe
+  e intocada.** Quinto ciclo. Nao foi queimada de proposito: meia reescrita sem
+  fonte reprovaria na rubrica igual e produziria o falso sinal da condicao de
+  escalar 6, que trata rubrica reprovando duas vezes na mesma pauta como sinal
+  de matar a pauta. Medido de novo, ele segue o ativo mais fraco: 11 KB de HTML
+  cru contra 19 a 26 KB dos outros oito, e 12 links contra 17 a 25.
+- **Conflito entre o prompt agendado e esta especificacao, e vale registrar.** O
+  prompt manda adicionar link interno apontando para os posts nao indexados. A
+  secao 6 proibe: a rede esta saturada, a contagem por post fica entre 12 e 25
+  `<a href>`, e adicionar link nao move indexacao e ja custou semanas ao loop.
+  **A especificacao vence o prompt**, como o proprio prompt determina. Nenhum
+  link foi adicionado. Os nove posts seguem entre 11 e 26 KB, todos muito acima
+  do limiar de 5 KB, ou seja, o rastreador recebe corpo.
+- **Achado de metodo, e corrige a leitura do ciclo anterior: o check verde do
+  pos-deploy mente.** A etapa "Relatorio de indexacao" do run 6 aparece na API
+  do GitHub com `conclusion: success`, nao "skipped", o que parecia indicar que
+  o secret finalmente existia. Nao existe. O texto do log diz "Relatorio de
+  indexacao: **pulado**, falta o secret `GSC_SERVICE_ACCOUNT_JSON`", e o bloco
+  `env` de toda etapa imprime `CLOUDFLARE_API_TOKEN:`, `CLOUDFLARE_ZONE_ID:` e
+  `GSC_SERVICE_ACCOUNT_JSON:` vazios. Conclusao de etapa nao serve de prova;
+  so o texto do log serve. **A secao 4b continua nao valendo e os itens a) e b)
+  da checklist do Gabriel continuam manuais.**
+- **A execucao agendada de 01/10 existiu, com 7 horas de atraso.** O run 6 e
+  `event: schedule`, criado 16:28 UTC contra o cron de 09:17. Ou seja, o "nao
+  apareceu" do ciclo anterior era atraso do agendador do GitHub, como aquela
+  nota suspeitou, e nao defeito. A execucao de hoje (terca, 09:17 UTC) ainda
+  nao havia aparecido as 10:15 UTC, mesmo padrao de atraso, e enquanto os
+  secrets nao existirem isso nao muda nada na pratica.
+- **A sonda de indexacao foi a ZERO, e a leitura certa nao e deindexacao.**
+  Nenhum dos 9 posts e nem a home aparecem pela sonda de titulo exato mais
+  "Nexxus", quando em 01/10 a home e `quanto-custa-terceirizar-time-de-vendas`
+  apareciam. O controle de terceiro fecha que o operador funcionou nesta
+  execucao: `site:agendor.com.br/blog/terceirizacao-de-vendas` devolve
+  exatamente aquela pagina. Mas **nao existe causa tecnica**, e isso foi
+  conferido item por item no `gh-pages`: o `robots.txt` tem `Allow: /` e so
+  bloqueia `/obrigado` e `/lp`; toda pagina conferida traz
+  `<meta name="robots" content="index,follow">` e a canonical correta; os posts
+  trazem `og:type=article`; o sitemap tem 14 URLs batendo com os slugs reais; o
+  HTML cru tem 11 a 26 KB com 12 a 25 links. E o site nao mudou desde 01/10, o
+  ultimo commit e o proprio commit de documentacao daquele ciclo. **Site
+  inalterado e tecnicamente limpo, com a sonda saindo de 2 para 0, e a sonda que
+  se moveu, nao o indice.** A condicao de escalar 4 **nao** esta acionada. O que
+  isto prova e outra coisa, e e pior: indexacao e inauditavel neste ambiente.
+  Zero e dois sao resultados compativeis com o mesmo instrumento na mesma semana,
+  entao **nenhum numero de indexacao deste relatorio, nem dos anteriores, tem
+  valor probatorio.** So o Search Console decide.
+- **Windsor.ai reconferido: so `facebook` e `instagram`.** Nenhum conector de
+  Search Console, que e o que a secao 4b previa como fonte de desempenho. Com o
+  secret `GSC_SERVICE_ACCOUNT_JSON` tambem ausente, a faixa de 8 a 30 da secao
+  3b segue inauditavel pelo quinto ciclo, e nao por falta de tentativa: nao ha
+  caminho.
+- Build integro: `npm ci` e `npm run build` sem erro, 14 rotas pre-renderizadas,
+  14 com `canonical`, sitemap com 14 URLs batendo com os slugs reais. Passe 4
+  nao se aplica, porque nao houve mudanca de conteudo nem capa nova para
+  capturar.
+- **Nada foi publicado e nada foi meio publicado.** Pendencias herdadas seguem
+  valendo, inclusive as 4 paginas de outra marca (`/precificacao`, `/usual`,
+  `/academy`, `/en`) e a assimetria do numero proprio registrada em 29/09.
+
+**Proximo ciclo:** o gargalo nao e pauta e nao se resolve dentro do loop. Sao
+duas mudancas de configuracao, as duas do Gabriel, em ordem de impacto:
+
+1. **Network access, no menu do ambiente, em Edit.** Sem egresso a rubrica tem
+   teto de 68 contra corte de 85 e nenhum artigo passa, por aritmetica. Com
+   egresso aberto, a pauta ja esta escolhida: a reescrita de
+   `tendencias-mercado-comercial-b2b`.
+2. **Secret `GSC_SERVICE_ACCOUNT_JSON` no Actions** (e os dois do Cloudflare).
+   E o unico caminho para medir indexacao e a faixa de 8 a 30. Enquanto nao
+   existir, o passe 3 mede com instrumento que oscila de 2 para 0 sem o site
+   mudar, e a secao 4b e letra morta.
+
+Nos dois casos, nunca medir indexacao por `site:` sozinho, e nunca por
+conclusao de etapa do Actions: so pelo texto do log.
+
+## 7b. Estado anterior (01/10/2026)
 
 - **Quarto ciclo seguido sem artigo novo, e a causa continua sendo o egresso de
   rede.** Conferido antes de qualquer outra coisa, como o ciclo anterior mandou.
@@ -552,7 +669,7 @@ fechado, **não rodar o loop de conteúdo**: são quatro ciclos no mesmo bloquei
 o que falta é configuração de ambiente, não pauta. Nos dois casos, medir
 indexação pela sonda de título exato, nunca por `site:`.
 
-## 7b. Estado anterior (29/09/2026)
+## 7c. Estado anterior (29/09/2026)
 
 - **Terceiro ciclo seguido sem artigo novo, e a causa continua sendo o egresso
   de rede.** A política desta sessão libera só GitHub. O `curl` devolve
@@ -621,7 +738,7 @@ já está escolhida: reescrever `tendencias-mercado-comercial-b2b` com tabela, F
 e fontes abertas. Se não foi, não adianta rodar o loop de conteúdo. São três
 ciclos parados na mesma configuração, e o gargalo não é de pauta.
 
-## 7c. Estado anterior (24/09/2026)
+## 7d. Estado anterior (24/09/2026)
 
 - **A correção chegou ao Google, e a home entrou no índice.** Esta é a novidade
   do ciclo e derruba a hipótese registrada em 22/09. O snippet que o Google
@@ -692,7 +809,7 @@ loop volta ao ritmo normal. Se continuarem fora até o começo de outubro, com o
 HTML correto desde 17/09 e com prova de rastreio recente, aí sim o problema é
 outro e vale escalar.
 
-## 7d. Estado anterior (22/09/2026)
+## 7e. Estado anterior (22/09/2026)
 
 - **Nada mudou na indexação, e a razão é que a correção nunca chegou ao
   Google.** As três ações pendentes com o Gabriel desde 17/09 (purge do
@@ -730,23 +847,3 @@ outro e vale escalar.
   travessão no texto e fora do sitemap. Não foram tocadas neste ciclo por
   estarem fora da pauta do loop. Decidir se entram no sitemap ou se recebem
   `noindex`.
-
-## 7e. Estado anterior (17/09/2026)
-
-- 9 posts publicados. Presença confirmada na busca por
-  `site:nexxusagencia.com.br/blog/<slug>`: apenas
-  `quanto-custa-terceirizar-time-de-vendas`. Os outros 8 não aparecem.
-- Causa identificada neste ciclo e corrigida: o HTML cru não tinha corpo nem
-  links (ver seção 6). Cada post passou de 4,3 KB e zero link para cerca de
-  22 KB com texto, tabelas, FAQ e a rede de links interna inteira.
-- Sitemap: 14 URLs (9 posts e 5 páginas), gerado no build, sem divergência.
-- Pendente com o Gabriel, nesta ordem: purge do Cloudflare, reenvio do sitemap
-  no Search Console e solicitação de indexação dos 8 posts, do mais recente
-  para o mais antigo, respeitando a cota diária.
-- **Próximo ciclo:** repetir as buscas `site:` antes de qualquer outra coisa. Se
-  os posts entrarem no índice, a correção pegou e o loop volta a publicar pauta
-  nova. Se continuarem fora depois de 2 a 3 semanas com o HTML já correto, o
-  problema é outro e vale escalar em vez de seguir publicando.
-- Ferramenta nova de QA: `carrossel/check-tabelas.mjs <url> <prefixo>`, que
-  enquadra cada tabela em desktop e mobile e compara `scrollWidth` com
-  `clientWidth` para provar que a página não rola na horizontal.
