@@ -475,8 +475,14 @@ Registradas porque já custaram tempo:
   "Relatorio de indexacao: **pulado**, falta o secret
   `GSC_SERVICE_ACCOUNT_JSON`", e o bloco `env` imprime os tres secrets vazios. O
   script sai com codigo 0 depois de avisar que pulou, e o GitHub chama isso de
-  sucesso. **Sempre ler o texto do log**, e conferir o bloco `env` para saber se
-  o secret existe.
+  sucesso. **E pior no run 7, do mesmo dia: as quatro etapas de conteudo
+  ("Esperar o Pages", "Purgar cache do Cloudflare", "Reenviar sitemap" e
+  "Relatorio de indexacao") aparecem TODAS como `success`**, onde no run 6 duas
+  delas ainda apareciam como "skipped". A execucao le verde de ponta a ponta sem
+  ter purgado nada nem reenviado nada, e as quatro terminam no mesmo segundo,
+  que e a assinatura do pulo. **Sempre ler o texto do log**, e conferir o bloco
+  `env` para saber se o secret existe. Nunca concluir que a secao 4b passou a
+  valer por causa da cor da execucao.
 - **O host de log do Actions nao passa pelo egresso (achado de 06/10/2026).** O
   `logs_url` que a API devolve aponta para
   `productionresultssa15.blob.core.windows.net`, que a politica de rede nega
@@ -520,8 +526,11 @@ Registradas porque já custaram tempo:
   indexacao: **pulado**, falta o secret `GSC_SERVICE_ACCOUNT_JSON`", e o bloco
   `env` de toda etapa imprime `CLOUDFLARE_API_TOKEN:`, `CLOUDFLARE_ZONE_ID:` e
   `GSC_SERVICE_ACCOUNT_JSON:` vazios. Conclusao de etapa nao serve de prova;
-  so o texto do log serve. **A secao 4b continua nao valendo e os itens a) e b)
-  da checklist do Gabriel continuam manuais.**
+  so o texto do log serve. Conferido de novo no run 7, disparado pelo push deste
+  ciclo, e la e ainda mais enganoso: as quatro etapas de conteudo aparecem todas
+  como `success`, as quatro no mesmo segundo, e o log segue dizendo "Sitemap:
+  **pulado**" e "Relatorio de indexacao: **pulado**". **A secao 4b continua nao
+  valendo e os itens a) e b) da checklist do Gabriel continuam manuais.**
 - **A execucao agendada de 01/10 existiu, com 7 horas de atraso.** O run 6 e
   `event: schedule`, criado 16:28 UTC contra o cron de 09:17. Ou seja, o "nao
   apareceu" do ciclo anterior era atraso do agendador do GitHub, como aquela
