@@ -494,6 +494,18 @@ Registradas porque já custaram tempo:
   seja, a mesma condicao produziu run 6 com duas skipped, run 7 com quatro
   success e run 9 com tres skipped. A cor varia sozinha e nao carrega
   informacao: o texto do log e o bloco `env` sao a unica leitura.
+- **O `gh-pages` nao recebe commit novo quando o commit nao muda o `dist`, e a
+  data velha dele nao e deploy quebrado (achado de 08/10/2026).** O head do
+  `gh-pages` esta em "deploy: 10a437b..." datado de 22/09/2026, cinco commits de
+  `main` atras, enquanto os deploys 104 a 107 todos deram success. Nao e defeito
+  e nao e deploy perdido: desde 10a437b nenhum commit tocou `src/`, `public/` ou
+  `index.html`, so `carrossel/`, `docs/`, `scripts/`, `.gitignore` e
+  `.github/workflows`. O `dist` sai byte a byte igual e a action nao tem o que
+  commitar. **A prova e o hash do bundle, nao a data:** o `dist/assets/index-*.js`
+  gerado localmente e o que o `gh-pages` serve no `index.html` precisam ser o
+  mesmo arquivo (conferido em 08/10: `index-DkF33cln.js` nos dois). Confirmar
+  deploy pela data do `gh-pages` depois de um ciclo que so mexeu em documentacao
+  leva a concluir que o site parou de publicar, e nao parou.
 - **O host de log do Actions nao passa pelo egresso (achado de 06/10/2026).** O
   `logs_url` que a API devolve aponta para
   `productionresultssa15.blob.core.windows.net`, que a politica de rede nega
