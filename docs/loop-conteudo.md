@@ -552,6 +552,13 @@ Registradas porque já custaram tempo:
   manuais.** A execucao agendada de hoje (quinta, cron 06:17 UTC) ainda nao
   havia aparecido as 10:10 UTC, o mesmo atraso de agendador ja registrado, e
   enquanto os secrets nao existirem isso nao muda nada na pratica.
+  **Conferido tambem o run 10, disparado pelo push deste ciclo, como a secao 4b
+  manda: a cor voltou a ser verde nas quatro etapas de conteudo**, tres delas
+  terminando no mesmo segundo (10:14:14), e o log diz "Sitemap: **pulado**" e
+  "Relatorio de indexacao: **pulado**" com os tres secrets vazios. A serie de
+  cores e agora run 6 com duas skipped, run 7 com quatro success, run 9 com tres
+  skipped e run 10 com quatro success, sempre com a mesma configuracao e sempre
+  sem purgar nem reenviar nada. Os itens a) e b) da checklist seguem manuais.
 - **A sonda de indexacao deu zero pela segunda vez seguida, e isso endurece a
   conclusao de 06/10 em vez de mudar a leitura.** As 9 consultas de titulo exato
   mais "Nexxus" deram zero, e `site:nexxusagencia.com.br` caiu em outras marcas
