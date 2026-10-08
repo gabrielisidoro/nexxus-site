@@ -467,7 +467,12 @@ Registradas porque já custaram tempo:
   da sonda como deindexacao nem acionar a condicao de escalar 4 por ela: antes,
   conferir `robots.txt`, `meta robots`, canonical e sitemap no `gh-pages`, e se
   estiverem limpos, a conclusao e que a medicao nao vale, nao que a pagina caiu.
-  Indexacao com valor probatorio so vem do Search Console.
+  Indexacao com valor probatorio so vem do Search Console. **Confirmado em
+  08/10/2026, e agora a serie e 2, 0 e 0 em oito dias sem um commit de conteudo
+  no meio**, com o site tecnicamente limpo nas tres medicoes e o controle de
+  terceiro funcionando nas tres. Dois zeros seguidos nao sao deindexacao
+  progressiva: sao a leitura estavel de um instrumento quebrado. Nao usar o "2"
+  de 01/10 como linha de base de nada.
 - **A conclusao da etapa do Actions mente; so o texto do log conta (achado de
   06/10/2026).** No run 6 do `pos-deploy.yml` a etapa "Relatorio de indexacao"
   aparece com `conclusion: success` na API, e o ciclo quase registrou que o
@@ -482,7 +487,13 @@ Registradas porque já custaram tempo:
   ter purgado nada nem reenviado nada, e as quatro terminam no mesmo segundo,
   que e a assinatura do pulo. **Sempre ler o texto do log**, e conferir o bloco
   `env` para saber se o secret existe. Nunca concluir que a secao 4b passou a
-  valer por causa da cor da execucao.
+  valer por causa da cor da execucao. **E a cor nao e nem estavel entre
+  execucoes (achado de 08/10/2026):** no run 9, com a mesma configuracao e os
+  mesmos secrets ausentes do run 7, tres das quatro etapas de conteudo voltaram
+  a aparecer como "skipped" e so "Relatorio de indexacao" ficou `success`. Ou
+  seja, a mesma condicao produziu run 6 com duas skipped, run 7 com quatro
+  success e run 9 com tres skipped. A cor varia sozinha e nao carrega
+  informacao: o texto do log e o bloco `env` sao a unica leitura.
 - **O host de log do Actions nao passa pelo egresso (achado de 06/10/2026).** O
   `logs_url` que a API devolve aponta para
   `productionresultssa15.blob.core.windows.net`, que a politica de rede nega
@@ -492,7 +503,114 @@ Registradas porque já custaram tempo:
 
 ---
 
-## 7. Estado atual (06/10/2026)
+## 7. Estado atual (08/10/2026)
+
+- **Sexto ciclo seguido sem artigo novo, e o gargalo nao mudou: egresso de
+  rede.** Conferido antes de qualquer outra coisa, como a secao 7 anterior
+  mandou. Respondem so os hosts do GitHub: `api.github.com` 200,
+  `raw.githubusercontent.com` 301, `github.com` 400, `codeload.github.com` 400,
+  `objects.githubusercontent.com` 404. **Este ciclo ampliou a sonda de 9 para 23
+  hosts**, de proposito em categorias que poderiam servir de fonte alternativa, e
+  todos os 23 falharam no CONNECT: buscadores alternativos (`duckduckgo.com`,
+  `www.bing.com`), estatistica oficial brasileira (`ibge.gov.br`, `www.gov.br`,
+  `dados.gov.br`), referencia (`en.wikipedia.org`, `statista.com`), imprensa de
+  negocios (`exame.com`, `valor.globo.com`), institucional
+  (`sebrae.com.br`, `abstartups.com.br`), consultoria (`hbr.org`,
+  `www.gartner.com`), concorrentes (`rdstation.com.br`, `meetime.com.br`,
+  `agendor.com.br`, `blog.hubspot.com`) e `linkedin.com`. **Isso fecha a questao
+  da fonte alternativa: nao existe nenhuma, nem orgao oficial de estatistica.**
+  A aritmetica da rubrica nao mudou: sem abrir fonte o critetio de 20 pontos
+  reprova por definicao, sem abrir os 3 primeiros organicos o de 12 nao se mede.
+  Teto de 68 contra corte de 85. **O loop de conteudo nao foi rodado**, como a
+  secao 7 anterior determinou.
+- **A busca web funciona e nao substitui o egresso, e vale registrar por que.**
+  O `WebSearch` responde normalmente e devolve titulo, URL e um resumo. O resumo
+  chega a citar numero com fonte nomeada (por exemplo o Bridge Group, SDR
+  Metrics 2024, em 12 a 15 reunioes por mes, citado de segunda mao por um blog
+  de fornecedor). **Isso nao serve para publicar.** O resumo e parafrase de um
+  modelo sobre um trecho, nao a pagina: nao da para conferir se o numero esta
+  ali, em que contexto, nem de que ano. Publicar numero assim e exatamente o que
+  o critetio de 20 pontos proibe. E para o critetio de 12, o resumo nao lista o
+  que os 3 primeiros organicos cobrem de forma exaustiva, entao superacao de
+  SERP continua nao se medindo. Buscar sem poder abrir a pagina nao e fonte.
+- **A pauta de 29/09, reescrever `tendencias-mercado-comercial-b2b`, segue de pe
+  e intocada.** Sexto ciclo. Medido de novo, ele segue o ativo mais fraco do
+  blog: 11.095 bytes de HTML cru contra 19.740 a 25.948 dos outros oito, e 12
+  links contra 17 a 25. Nao foi queimada de proposito: meia reescrita sem fonte
+  reprovaria na rubrica igual e produziria o falso sinal da condicao de escalar
+  6, que trata rubrica reprovando duas vezes na mesma pauta como sinal de matar
+  a pauta.
+- **A cor da etapa do Actions nao e nem estavel entre execucoes, o que encerra o
+  assunto.** O run 9 (`schedule`, 06/10 15:58 UTC) traz as etapas "Esperar o
+  Pages", "Purgar cache do Cloudflare" e "Reenviar sitemap" como **skipped** e
+  "Relatorio de indexacao" como **success**, onde o run 7 trazia as quatro como
+  `success`. Mesma configuracao, mesmos secrets ausentes, cores diferentes. O
+  texto do log do run 9 diz "Relatorio de indexacao: **pulado**, falta o secret
+  `GSC_SERVICE_ACCOUNT_JSON`" e o bloco `env` imprime `CLOUDFLARE_API_TOKEN`,
+  `CLOUDFLARE_ZONE_ID` e `GSC_SERVICE_ACCOUNT_JSON` vazios. **A secao 4b
+  continua nao valendo e os itens a) e b) da checklist do Gabriel continuam
+  manuais.** A execucao agendada de hoje (quinta, cron 06:17 UTC) ainda nao
+  havia aparecido as 10:10 UTC, o mesmo atraso de agendador ja registrado, e
+  enquanto os secrets nao existirem isso nao muda nada na pratica.
+- **A sonda de indexacao deu zero pela segunda vez seguida, e isso endurece a
+  conclusao de 06/10 em vez de mudar a leitura.** As 9 consultas de titulo exato
+  mais "Nexxus" deram zero, e `site:nexxusagencia.com.br` caiu em outras marcas
+  Nexxus (cosmetico, private equity, Nexx Brasil, Nexxera), exatamente como a
+  armadilha preve. O controle de terceiro funcionou nesta execucao:
+  `site:agendor.com.br/blog/terceirizacao-de-vendas` devolve aquela pagina
+  exata. A serie agora e **2 em 01/10, 0 em 06/10, 0 em 08/10, sem um unico
+  commit de conteudo no meio**. Conferido item por item no `gh-pages` e nao
+  existe causa tecnica: `robots.txt` com `Allow: /` bloqueando so `/obrigado` e
+  `/lp`; os 9 posts com `index,follow` e canonical correta; home com canonical e
+  `index,follow`; sitemap com 14 URLs batendo com os slugs reais; HTML cru de
+  11.095 a 25.948 bytes com 12 a 25 links. **Dois zeros seguidos num site limpo
+  e inalterado nao sao deindexacao progressiva, sao a leitura estavel de um
+  instrumento quebrado**, e tiram o que restava de tentacao de usar o "2" de
+  01/10 como linha de base. A condicao de escalar 4 **nao** esta acionada.
+  Indexacao com valor probatorio so vem do Search Console.
+- **Banco de fotos nao e gargalo, e vale dizer porque economiza um pedido.**
+  `node carrossel/checar-fotos.mjs` roda sem erro e nenhuma foto passou do
+  limite. Sobram 4 livres, e duas delas ja tem recorte aprovado em
+  `proximos_posts`: `equipe-banner.webp` a 44% e `sala-reuniao-tijolo.webp` a
+  38%. Ou seja, **os dois proximos posts tem capa pronta sem pedir foto nova**.
+  O ambiente "sala da equipe (banner e neon)" segue sem capa nenhuma. A regra de
+  4c continua valendo a partir do terceiro post novo.
+- **As 4 paginas de outra marca seguem no ar, e uma delas pede indexacao.**
+  `/precificacao` (20.886 B), `/usual` (55.954 B), `/academy` (80.781 B) e `/en`
+  (49.802 B) respondem 200 no `gh-pages`. Nenhuma esta no sitemap e nenhuma esta
+  no `Disallow` do `robots.txt`, e **`/academy` traz
+  `<meta name="robots" content="index, follow">` explicito**. Continua pendencia
+  do Gabriel, agora com o detalhe de que uma delas se oferece ao indice no
+  dominio da Nexxus.
+- Build integro: `npm ci` e `npm run build` sem erro, 14 rotas pre-renderizadas,
+  14 com `canonical`, sitemap com 14 URLs batendo com os slugs reais. Arvore de
+  trabalho limpa depois do build. Passe 4 nao se aplica, porque nao houve
+  mudanca de conteudo nem capa nova para capturar.
+- **Nada foi publicado e nada foi meio publicado.** A proibicao da secao 6 de
+  adicionar link interno para mover indexacao foi respeitada de novo: a rede
+  segue saturada entre 12 e 25 links por post e nenhum link foi adicionado,
+  ainda que o prompt agendado peca.
+
+**Proximo ciclo:** o gargalo nao e pauta, nao e foto e nao se resolve dentro do
+loop. Sao duas mudancas de configuracao, as duas do Gabriel, em ordem de
+impacto:
+
+1. **Network access, no menu do ambiente, em Edit.** Sem egresso a rubrica tem
+   teto de 68 contra corte de 85 e nenhum artigo passa, por aritmetica. Com 23
+   hosts negados em 6 categorias, incluindo orgao oficial de estatistica, esta
+   descartado que exista fonte alternativa a testar dentro do loop. Com egresso
+   aberto, a pauta ja esta escolhida e a capa ja esta recortada: a reescrita de
+   `tendencias-mercado-comercial-b2b`.
+2. **Secret `GSC_SERVICE_ACCOUNT_JSON` no Actions** (e os dois do Cloudflare).
+   E o unico caminho para medir indexacao e a faixa de 8 a 30. Enquanto nao
+   existir, o passe 3 mede com instrumento que deu 2, 0 e 0 em oito dias sem o
+   site mudar, e a secao 4b e letra morta.
+
+Nos dois casos, nunca medir indexacao por `site:` sozinho, nunca pela sonda de
+titulo sozinha, e nunca por cor de etapa do Actions: so pelo texto do log e pelo
+Search Console.
+
+## 7b. Estado anterior (06/10/2026)
 
 - **Quinto ciclo seguido sem artigo novo, e o gargalo nao mudou: egresso de
   rede.** Conferido antes de qualquer outra coisa, como a secao 7 anterior
@@ -583,7 +701,7 @@ duas mudancas de configuracao, as duas do Gabriel, em ordem de impacto:
 Nos dois casos, nunca medir indexacao por `site:` sozinho, e nunca por
 conclusao de etapa do Actions: so pelo texto do log.
 
-## 7b. Estado anterior (01/10/2026)
+## 7c. Estado anterior (01/10/2026)
 
 - **Quarto ciclo seguido sem artigo novo, e a causa continua sendo o egresso de
   rede.** Conferido antes de qualquer outra coisa, como o ciclo anterior mandou.
@@ -678,7 +796,7 @@ fechado, **não rodar o loop de conteúdo**: são quatro ciclos no mesmo bloquei
 o que falta é configuração de ambiente, não pauta. Nos dois casos, medir
 indexação pela sonda de título exato, nunca por `site:`.
 
-## 7c. Estado anterior (29/09/2026)
+## 7d. Estado anterior (29/09/2026)
 
 - **Terceiro ciclo seguido sem artigo novo, e a causa continua sendo o egresso
   de rede.** A política desta sessão libera só GitHub. O `curl` devolve
@@ -747,7 +865,7 @@ já está escolhida: reescrever `tendencias-mercado-comercial-b2b` com tabela, F
 e fontes abertas. Se não foi, não adianta rodar o loop de conteúdo. São três
 ciclos parados na mesma configuração, e o gargalo não é de pauta.
 
-## 7d. Estado anterior (24/09/2026)
+## 7e. Estado anterior (24/09/2026)
 
 - **A correção chegou ao Google, e a home entrou no índice.** Esta é a novidade
   do ciclo e derruba a hipótese registrada em 22/09. O snippet que o Google
@@ -818,7 +936,7 @@ loop volta ao ritmo normal. Se continuarem fora até o começo de outubro, com o
 HTML correto desde 17/09 e com prova de rastreio recente, aí sim o problema é
 outro e vale escalar.
 
-## 7e. Estado anterior (22/09/2026)
+## 7f. Estado anterior (22/09/2026)
 
 - **Nada mudou na indexação, e a razão é que a correção nunca chegou ao
   Google.** As três ações pendentes com o Gabriel desde 17/09 (purge do
