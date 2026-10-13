@@ -525,6 +525,18 @@ Registradas porque já custaram tempo:
   `WebSearch` responde mas so com resumo parafraseado por um modelo, que o
   criterio de 20 pontos proibe como fonte. Nao gastar ciclo testando isso de
   novo: so a mudanca de Network access abre.
+- **A sessao do loop comeca em detached HEAD, e o push rejeitado nao e divergencia
+  (achado de 13/10/2026).** O container clona o repo e deixa o HEAD solto no
+  commit clonado, enquanto o branch local `main` fica parado num commit antigo
+  (neste ciclo, cinco atras). Commitar funciona normalmente, mas
+  `git push -u origin main` empurra o **branch local**, nao o HEAD, entao o
+  GitHub responde "non-fast-forward: pushed branch tip is behind its remote
+  counterpart" e parece que o remoto andou e o ciclo precisa de `git pull`. Nao
+  precisa: o remoto estava exatamente no pai do commit novo. A leitura certa e
+  `git status -sb`, que imprime `## HEAD (no branch)`, e a correcao e apontar o
+  branch para o commit antes de empurrar: conferir com
+  `git merge-base --is-ancestor main HEAD` e entao `git checkout -B main <sha>`.
+  Nunca resolver isso com `git pull` as cegas nem com force-push.
 ---
 
 ## 7. Estado atual (13/10/2026)
