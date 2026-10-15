@@ -507,6 +507,14 @@ Registradas porque já custaram tempo:
   seja, a mesma condicao produziu run 6 com duas skipped, run 7 com quatro
   success e run 9 com tres skipped. A cor varia sozinha e nao carrega
   informacao: o texto do log e o bloco `env` sao a unica leitura.
+  **E a oscilacao acontece dentro do mesmo dia, nao so entre ciclos (achado de
+  15/10/2026):** o run 16 (agendado) trouxe tres etapas de conteudo skipped e o
+  run 17 (disparado pelo push do mesmo ciclo, cerca de uma hora depois) trouxe
+  as quatro `success`, sem nenhum commit tocando o workflow nem os secrets entre
+  os dois, e com o log dos dois dizendo "pulado" e o `env` dos dois imprimindo
+  os tres secrets vazios. Esse par e o contraexemplo mais curto possivel: nao
+  sobra leitura em que a cor signifique algo. Quem for conferir a secao 4b num
+  ciclo futuro deve ir direto ao texto do log e nem abrir a lista de etapas.
 - **O `gh-pages` nao recebe commit novo quando o commit nao muda o `dist`, e a
   data velha dele nao e deploy quebrado (achado de 08/10/2026).** O head do
   `gh-pages` esta em "deploy: 10a437b..." datado de 22/09/2026, cinco commits de
@@ -602,6 +610,22 @@ Registradas porque já custaram tempo:
   success, run 13 com tres skipped e run 16 com tres skipped, sempre com a mesma
   configuracao e sempre sem purgar nem reenviar nada. **A secao 4b continua nao
   valendo e os itens a) e b) da checklist do Gabriel continuam manuais.**
+- **E o run 17, disparado pelo push deste ciclo, fecha o assunto da cor de uma
+  vez: as quatro etapas de conteudo vieram `success`**, contra as tres skipped
+  do run 16. Mesmo dia, mesma configuracao, mesmos secrets ausentes, e as quatro
+  terminando em 3 segundos, que e a assinatura do pulo. O texto do log diz as
+  tres linhas: "- Cloudflare: **pulado**, faltam os secrets
+  `CLOUDFLARE_API_TOKEN` e `CLOUDFLARE_ZONE_ID`", "- Sitemap: **pulado**, falta
+  o secret `GSC_SERVICE_ACCOUNT_JSON`" e "- Relatorio de indexacao: **pulado**,
+  falta o secret `GSC_SERVICE_ACCOUNT_JSON`", com os tres secrets vazios no
+  bloco `env`. Ate aqui a oscilacao da cor estava documentada **entre** ciclos,
+  o que ainda deixava a desculpa de alguma mudanca no meio; agora ela esta
+  documentada **dentro do mesmo ciclo**, em duas execucoes a uma hora de
+  distancia, sem um unico commit alterando o workflow ou os secrets entre elas.
+  A serie completa de cores e run 6 duas skipped, run 7 quatro success, run 9
+  tres skipped, run 10 quatro success, run 13 tres skipped, run 16 tres skipped
+  e run 17 quatro success. **A cor nao carrega informacao nenhuma, e o par
+  16/17 e a prova mais curta disso.**
 - **A sonda de indexacao deu zero pela quarta vez seguida, e a serie e 2, 0, 0,
   0 e 0 em catorze dias.** O controle de terceiro funcionou nesta execucao:
   `site:agendor.com.br/blog/terceirizacao-de-vendas` devolve aquela pagina exata
