@@ -663,7 +663,14 @@ Registradas porque já custaram tempo:
   porque custa uma chamada e nao produz nada que o Gabriel veja. Mantido como
   etapa final do ciclo por uma razao so, somar leituras, e nunca mais descrito
   como "o pedido chegando ao Gabriel". Vale para qualquer prompt de aprovacao,
-  `request_credential` incluido.
+  `request_credential` incluido. **E a recusa trouxe o remedio, que nenhum ciclo
+  tinha:** a propria mensagem de refusa diz que a chamada foi recusada porque
+  ninguem estava presente e que um humano pode autorizar **iniciando esta rotina
+  por "Run now" e respondendo o pedido dentro daquela execucao**, ou mudando a
+  configuracao no menu do ambiente. Existe portanto um caminho em que o prompt
+  alcanca o Gabriel, e nao e a execucao agendada: e uma execucao que ele mesmo
+  dispara e acompanha. Entra na lista de impacto como alternativa ao menu, e e a
+  unica forma de a liberacao chegar sem ele navegar em Settings.
 - **A busca por alavancas dentro do loop esta encerrada, e o resto da lista de
   impacto e externo por natureza (achado de 10/11/2026).** A secao 7 do ciclo 12
   mandou perguntar que outras linhas da lista de impacto estavam escritas como
@@ -714,8 +721,12 @@ Registradas porque já custaram tempo:
   `update_environment` e canal pior que a prosa, porque a mensagem de commit, o
   relatorio e a notificacao por push persistem e o prompt nao. Registrado na
   secao 6. A chamada continua sendo feita no fim do ciclo, para somar leituras, e
-  foi feita de novo hoje, mas deixa de ser apresentada como o pedido alcancando o
-  Gabriel.
+  foi feita de novo hoje. O retorno de hoje fecha a questao e entrega o remedio: a
+  chamada foi **recusada automaticamente por nao haver pessoa presente**, e a
+  mensagem de refusa diz como contornar, iniciando a rotina por "Run now" e
+  respondendo o pedido dentro daquela execucao. Ou seja a liberacao pode entrar
+  por prompt, desde que a execucao seja disparada e acompanhada pelo Gabriel, e
+  nunca pela execucao agendada das 10:00 UTC.
 
 - **A pergunta que a secao 7 anterior mandou fazer foi respondida, e o saldo e
   zero.** A pergunta era que outras linhas da lista de impacto estavam escritas
@@ -840,8 +851,11 @@ ordem de impacto:
    `www.ibge.gov.br`, com apex e `www` nos dois casos porque curinga nao e aceito
    e o conteudo dos concorrentes vive no `www`. O pedido por
    `update_environment` continua sendo enviado no fim de cada ciclo, mas a secao
-   6 agora registra que ele nao alcanca uma execucao desacompanhada: **o caminho
-   que funciona e este, pelo menu, fora da sessao.** Com egresso aberto, a pauta
+   6 agora registra que ele nao alcanca uma execucao desacompanhada, porque e
+   recusado automaticamente por falta de pessoa presente. **Sao dois os caminhos
+   que funcionam:** mudar pelo menu do ambiente, fora da sessao; ou iniciar esta
+   rotina por "Run now" e aprovar o pedido dentro dessa execucao, que e a opcao
+   sem navegar em Settings. Com egresso aberto, a pauta
    ja esta escolhida e a capa ja esta recortada: a reescrita de
    `tendencias-mercado-comercial-b2b`.
 2. **Autorizar o conector `searchconsole` do Windsor.ai**, pelo link de OAuth
