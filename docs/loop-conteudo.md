@@ -671,6 +671,20 @@ Registradas porque já custaram tempo:
   alcanca o Gabriel, e nao e a execucao agendada: e uma execucao que ele mesmo
   dispara e acompanha. Entra na lista de impacto como alternativa ao menu, e e a
   unica forma de a liberacao chegar sem ele navegar em Settings.
+  **E a recusa e deterministica, entao a chamada deixa de ser etapa fixa (achado
+  de 12/11/2026).** O ciclo 13 manteve o `update_environment` no fim do ciclo
+  "por uma razao so, somar leituras". O ciclo 14 somou a segunda leitura e ela
+  veio identica: mesma recusa automatica por nao haver pessoa presente, mesmo
+  texto e mesmo remedio nomeado, alem de uma instrucao explicita no retorno para
+  nao reinsistir nem procurar outro caminho. Duas leituras iguais sobre um canal
+  cuja natureza ja esta entendida nao somam informacao nenhuma. **Entao a chamada
+  sai das etapas fixas do ciclo:** o que precisa acontecer toda execucao e
+  entregar os onze hosts e os dois caminhos (menu do ambiente, ou "Run now" com
+  aprovacao dentro da execucao) pelos canais que persistem, que sao a mensagem de
+  commit, o relatorio e a notificacao por push. Um ciclo futuro so volta a chamar
+  se algo mudar na natureza do canal, por exemplo se a rotina passar a rodar
+  acompanhada. Isso nao e conclusao sobre a vontade do Gabriel, que segue sem ter
+  sido perguntado por este caminho.
 - **A busca por alavancas dentro do loop esta encerrada, e o resto da lista de
   impacto e externo por natureza (achado de 10/11/2026).** A secao 7 do ciclo 12
   mandou perguntar que outras linhas da lista de impacto estavam escritas como
@@ -808,6 +822,17 @@ Registradas porque já custaram tempo:
   semanais sem egresso nao tem: quatorze ciclos consumiram execucao completa para
   produzir, cada um, um commit de documentacao e nenhum artigo. Nada foi alterado
   no agendamento, porque mexer nele sem ordem do Gabriel seria decidir por ele.
+
+- **O pedido por `update_environment` foi enviado no fim do ciclo e recusado
+  automaticamente de novo, e esta e a segunda leitura identica.** Mesma recusa
+  por nao haver pessoa presente, mesmo texto, mesmo remedio nomeado ("Run now" e
+  aprovar dentro da execucao, ou mudar no menu do ambiente), e o retorno manda
+  explicitamente nao reinsistir. O ciclo 13 manteve a chamada "por uma razao so,
+  somar leituras"; somada, a segunda leitura nao trouxe nada, entao **a chamada
+  sai das etapas fixas do ciclo** e fica registrado na secao 6 por que. O pedido
+  continua a sair pelos canais que persistem, commit, relatorio e notificacao.
+  Nao se le como recusa do Gabriel, que segue sem ter sido perguntado por este
+  caminho.
 
 **Proximo ciclo:** o gargalo de publicacao nao e pauta, nao e foto, nao e metodo
 e nao se resolve dentro do loop, e desde o ciclo 13 isso esta provado por
