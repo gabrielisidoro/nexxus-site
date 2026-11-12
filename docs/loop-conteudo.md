@@ -691,7 +691,164 @@ Registradas porque já custaram tempo:
   nenhuma. Nao reabrir essa busca em ciclo futuro.
 ---
 
-## 7. Estado atual (10/11/2026)
+## 7. Estado atual (12/11/2026)
+
+- **Decimo quarto ciclo seguido sem artigo novo, e o gargalo nao mudou: egresso
+  de rede.** Conferido antes de qualquer outra coisa, como a secao 7 anterior
+  mandou. Respondem so os hosts do GitHub: `api.github.com` 200 e
+  `raw.githubusercontent.com` 301. Os onze hosts da lista de impacto caem todos
+  com codigo 000 no `curl`, e o proprio proxy registra cada um como
+  `connect_rejected` com o detalhe "gateway answered 403 to CONNECT (policy
+  denial or other refusal)". O status segue com `selective: false`, e
+  `get_environment` devolve o mesmo ambiente `Default` com `network.type:
+  limited` e `allowed_hosts: []`. A aritmetica da rubrica nao mudou: sem abrir
+  fonte o criterio de 20 pontos reprova por definicao, sem abrir os 3 primeiros
+  organicos o de 12 nao se mede. Soma 32 de 100, teto de 68 contra corte de 85.
+  **O loop de conteudo nao foi rodado**, como as secoes 7 anteriores
+  determinaram. As tres vias de leitura seguem fechadas e nenhuma foi reaberta,
+  e a busca por alavancas dentro do loop segue encerrada, como a secao 6 manda.
+
+- **A sessao comecou limpa no branch, e sem o "ahead" enganoso.** `git status
+  -sb` imprimiu `## main...origin/main` e `HEAD`, `main` e `origin/main`
+  estavam todos em d7c15ca, ou seja o remedio do `git checkout -B main <sha>`
+  nao foi aplicado porque o sintoma nao apareceu, exatamente como a secao 6
+  manda. Com 15/10, 03/11 e hoje limpos e 13/10, 05/11 e 10/11 em detached, a
+  intermitencia esta em seis leituras e empatada em tres a tres, o que reforca
+  a ordem de ler `git status -sb` primeiro em vez de aplicar o remedio as
+  cegas. O "ahead" enganoso que 05/11 e 10/11 registraram tambem nao apareceu,
+  e nenhum `git fetch` foi necessario: os tres refs ja estavam no mesmo commit.
+
+- **Os tres secrets seguem vazios, por leitura do proprio dia.** O
+  `workflow_dispatch` foi disparado pelo proprio loop as 10:07:53 UTC (run 36) e
+  o bloco `env` de toda etapa imprime `CLOUDFLARE_API_TOKEN`,
+  `CLOUDFLARE_ZONE_ID` e `GSC_SERVICE_ACCOUNT_JSON` vazios, com o texto do log
+  dizendo as tres linhas: "- Cloudflare: **pulado**, faltam os secrets", "-
+  Sitemap: **pulado**, falta o secret `GSC_SERVICE_ACCOUNT_JSON`" e "-
+  Relatorio de indexacao: **pulado**, falta o secret
+  `GSC_SERVICE_ACCOUNT_JSON`". **A secao 4b continua nao valendo e os itens a) e
+  b) da checklist do Gabriel continuam manuais.** A cor oscilou pela decima
+  segunda leitura: as quatro etapas de conteudo vieram `success` e as quatro
+  terminaram no mesmo segundo (10:08:25), que e a assinatura do pulo. O atraso
+  do agendador se confirma de novo: a execucao agendada de 10/11 (run 35) saiu
+  as 17:05 UTC, 7h48 depois do `cron` de 09:17, segundo maior atraso depois do
+  recorde de 8h09 de 05/11, e a agendada de hoje ainda nao existia as 10:08.
+  Disparar e ler o run proprio segue sendo a unica leitura do dia.
+
+- **O conector `searchconsole` do Windsor.ai nao foi autorizado.**
+  `get_connectors` devolve so `facebook` (tres contas) e `instagram` (duas),
+  pelo decimo quarto ciclo, nenhuma conta de Search Console. Segue sendo o item
+  mais barato dos tres, um clique, e o quinto ciclo pendente. O link de OAuth e
+  gerado na hora com `get_connector_connect_info` e entregue no relatorio e na
+  notificacao: **nao entra neste arquivo porque o repositorio e publico e a URL
+  carrega token de conta**.
+
+- **A sonda de indexacao deu zero pela decima vez, serie 2 e dez zeros.**
+  Amostra de duas consultas, como os ciclos anteriores fixaram, as duas em zero.
+  Uma nuance nova, e que fecha ainda mais a questao: na consulta de custo a
+  sonda nao caiu nem em outra marca "Nexxus" desta vez, devolveu dominios
+  inteiramente alheios ao termo (`yav.com.br`, `tabnews.com.br`, `uds.com.br`).
+  Ou seja o instrumento nao esta apenas ambiguo entre marcas homonimas, ele nao
+  carrega sinal nenhum sobre este dominio. **O controle de terceiro nao foi
+  rodado, de proposito:** a secao 6 registrou que degradou monotonicamente em
+  tres leituras e nao vale mais como prova de nada. Nao e deindexacao, e o site
+  segue tecnicamente limpo no `gh-pages`, reconferido neste ciclo: `robots.txt`
+  com `Allow: /` bloqueando so `/obrigado` e `/lp`, os 9 posts com
+  `index,follow` e canonical correta apontando para o proprio slug, sitemap com
+  14 URLs batendo com os slugs reais e HTML cru de 11.095 a 25.948 bytes com 12
+  a 25 links. A condicao de escalar 4 **nao** esta acionada. Indexacao com valor
+  probatorio so vem do Search Console. Posicao de SERP nao se mede com esta
+  ferramenta, entao o passo 3 do passe 3 do prompt agendado, achar consulta
+  entre a 8a e a 30a posicao, continua sem instrumento e nao pode trocar a
+  pauta.
+
+- **As 4 paginas de outra marca seguem no ar e seguem indexaveis, sem mudanca.**
+  Reconferido o `<meta name="robots">`: `/academy` (80.780 B) por declaracao
+  explicita `index, follow`, e `/precificacao` (20.885 B), `/usual` (55.953 B) e
+  `/en` (49.801 B) **por omissao**. As internas da Nexxus que nao devem indexar
+  seguem corretas: `/calculadora` (16.080 B) e `/diagnostico` (32.050 B) com
+  `noindex`. Continua pendencia do Gabriel.
+
+- **Deploy conferido pelo hash do bundle, nao pela data, como a secao 6 manda.**
+  O `dist/assets/index-DkF33cln.js` gerado localmente e o mesmo arquivo que o
+  `gh-pages` referencia no `index.html`. O site publicado e o build atual. O run
+  36 reporta o `gh-pages` em 9f837fc e o Pages publicado.
+
+- **Banco de fotos nao e gargalo.** `node carrossel/checar-fotos.mjs` roda sem
+  erro e nenhuma foto passou do limite. Sobram 4 livres e duas delas ja tem
+  recorte aprovado em `proximos_posts`: `equipe-banner.webp` a 44% e
+  `sala-reuniao-tijolo.webp` a 38%. O ambiente "sala da equipe (banner e neon)"
+  segue sem capa.
+
+- **A pauta de 29/09, reescrever `tendencias-mercado-comercial-b2b`, segue de pe
+  e intocada.** Decimo quarto ciclo. Medido de novo, ele segue o ativo mais
+  fraco do blog: 11.095 bytes de HTML cru contra 19.740 a 25.948 dos outros oito,
+  e 12 links contra 17 a 25. Nao foi queimada de proposito: meia reescrita sem
+  fonte reprovaria na rubrica igual e produziria o falso sinal da condicao de
+  escalar 6.
+
+- Build integro: `npm ci` e `npm run build` sem erro, 14 rotas da Nexxus
+  pre-renderizadas com `canonical` e sitemap com 14 URLs batendo com os slugs
+  reais.
+
+- **Nada foi publicado e nada foi meio publicado.** A proibicao da secao 6 de
+  adicionar link interno para mover indexacao foi respeitada de novo: a rede
+  segue saturada entre 12 e 25 links por post e nenhum link foi adicionado, ainda
+  que o prompt agendado peca no passo 2 do passe 3. Passe 4 nao se aplica, porque
+  nao houve mudanca de conteudo nem capa nova para capturar.
+
+- **Condicao de escalar 7 acionada pelo setimo ciclo seguido, e a recomendacao de
+  espacar segue de pe, sem resposta.** O agendamento continua ativo e nao pausado:
+  `cron` em `0 10 * * 2,4`, `enabled: true`, proxima execucao em 17/11/2026, e o
+  `updated_at` do agendamento segue em 26/07/2026, ou seja nenhum bloco de
+  configuracao foi tocado desde a criacao. Nao houve commit do Gabriel no
+  periodo: o ultimo commit do repositorio e o proprio commit de documentacao do
+  ciclo 13. A recomendacao segue a mesma, **espacar para quinzenal**, porque um
+  ciclo quinzenal de manutencao ainda tem valor (mede indexacao, confere deploy
+  pelo hash, reconfere o `gh-pages` e dispara o `pos-deploy`) e duas execucoes
+  semanais sem egresso nao tem: quatorze ciclos consumiram execucao completa para
+  produzir, cada um, um commit de documentacao e nenhum artigo. Nada foi alterado
+  no agendamento, porque mexer nele sem ordem do Gabriel seria decidir por ele.
+
+**Proximo ciclo:** o gargalo de publicacao nao e pauta, nao e foto, nao e metodo
+e nao se resolve dentro do loop, e desde o ciclo 13 isso esta provado por
+enumeracao, nao por suposicao. Sao mudancas de configuracao, todas do Gabriel, em
+ordem de impacto:
+
+1. **Network access no ambiente `Default`.** Sem egresso a rubrica tem teto de 68
+   contra corte de 85 e nenhum artigo passa, por aritmetica. E o unico item que
+   destrava **publicar**. O caminho e
+   https://code.claude.com/docs/en/cloud-environments#network-access, no ambiente
+   `Default`, que e onde as execucoes agendadas rodam. Os onze hosts minimos que a
+   rubrica exige: `www.google.com`, `agendor.com.br`, `www.agendor.com.br`,
+   `rdstation.com.br`, `www.rdstation.com.br`, `meetime.com.br`,
+   `www.meetime.com.br`, `sebrae.com.br`, `www.sebrae.com.br`, `ibge.gov.br` e
+   `www.ibge.gov.br`, com apex e `www` nos dois casos porque curinga nao e aceito
+   e o conteudo dos concorrentes vive no `www`. **Sao dois os caminhos que
+   funcionam:** mudar pelo menu do ambiente, fora da sessao; ou iniciar esta
+   rotina por "Run now" e aprovar o pedido dentro dessa execucao, que e a opcao
+   sem navegar em Settings. Com egresso aberto, a pauta ja esta escolhida e a
+   capa ja esta recortada: a reescrita de `tendencias-mercado-comercial-b2b`.
+2. **Autorizar o conector `searchconsole` do Windsor.ai**, pelo link de OAuth
+   entregue no relatorio e na notificacao de cada ciclo. Destrava **medir**: a
+   faixa de 8 a 30 e o estado de indexacao com valor probatorio, que hoje saem de
+   um instrumento com serie 2 e dez zeros e com o controle morto. E o item mais
+   barato da lista, um clique, e nao depende do item 1 nem do 3. Quinto ciclo
+   pendente.
+3. **Secret `GSC_SERVICE_ACCOUNT_JSON` no Actions** (e os dois do Cloudflare).
+   Continua sendo o que faz a secao 4b valer e o que tira os itens a) e b) da
+   checklist do Gabriel. Com o item 2 feito, deixa de ser o unico caminho para
+   medir indexacao e passa a ser so automacao de purge e sitemap.
+
+E, antes das tres, a decisao de **espacar o agendamento para quinzenal** enquanto
+nenhuma delas acontecer, pela condicao de escalar 7 acima, agora no setimo ciclo
+seguido.
+
+Nos tres casos, nunca medir indexacao por `site:` sozinho, nunca pela sonda de
+titulo sozinha, e nunca por cor de etapa do Actions: so pelo texto do log e pelo
+Search Console. E, no passe 3, disparar o `pos-deploy.yml` por
+`workflow_dispatch` e ler o run disparado, que e etapa fixa.
+
+## 7b. Estado anterior (10/11/2026)
 
 - **Decimo terceiro ciclo seguido sem artigo novo, e o gargalo nao mudou:
   egresso de rede.** Conferido antes de qualquer outra coisa, como a secao 7
@@ -878,7 +1035,7 @@ titulo sozinha, e nunca por cor de etapa do Actions: so pelo texto do log e pelo
 Search Console. E, no passe 3, disparar o `pos-deploy.yml` por
 `workflow_dispatch` e ler o run disparado, que agora e etapa fixa.
 
-## 7b. Estado anterior (05/11/2026)
+## 7c. Estado anterior (05/11/2026)
 
 - **Decimo segundo ciclo seguido sem artigo novo, e o gargalo nao mudou:
   egresso de rede.** Conferido antes de qualquer outra coisa, como a secao 7
@@ -1060,7 +1217,7 @@ titulo sozinha, e nunca por cor de etapa do Actions: so pelo texto do log e pelo
 Search Console. E, no passe 3, disparar o `pos-deploy.yml` por
 `workflow_dispatch` e ler o run disparado, que agora e etapa fixa.
 
-## 7c. Estado anterior (03/11/2026)
+## 7d. Estado anterior (03/11/2026)
 
 - **Decimo primeiro ciclo seguido sem artigo novo, e o gargalo nao mudou:
   egresso de rede.** Conferido antes de qualquer outra coisa, como a secao 7
@@ -1226,162 +1383,3 @@ Nos tres casos, nunca medir indexacao por `site:` sozinho, nunca pela sonda de
 titulo sozinha, e nunca por cor de etapa do Actions: so pelo texto do log e pelo
 Search Console. E, no passe 3, disparar o `pos-deploy.yml` por
 `workflow_dispatch` e ler o run disparado, que agora e etapa fixa.
-
-## 7d. Estado anterior (29/10/2026)
-
-- **Decimo ciclo seguido sem artigo novo, e o gargalo nao mudou: egresso de
-  rede.** Conferido antes de qualquer outra coisa, como a secao 7 anterior
-  mandou. Respondem so os hosts do GitHub: `api.github.com` 200 e
-  `raw.githubusercontent.com` 301. Negados no CONNECT com 403, cada um
-  registrado pelo proprio proxy como `connect_rejected` com "gateway answered
-  403 to CONNECT (policy denial or upstream failure)": `www.google.com`,
-  `agendor.com.br`, `rdstation.com.br`, `meetime.com.br`, `sebrae.com.br` e
-  `ibge.gov.br`. A aritmetica da rubrica nao mudou: sem abrir fonte o criterio
-  de 20 pontos reprova por definicao, sem abrir os 3 primeiros organicos o de 12
-  nao se mede. Soma 32 de 100, teto de 68 contra corte de 85. **O loop de
-  conteudo nao foi rodado**, como a secao 7 anterior determinou. As tres vias de
-  leitura seguem fechadas e nenhuma foi reaberta, como aquela secao mandou.
-
-- **Achado deste ciclo, e e o unico com valor de acao: existe um terceiro
-  caminho para medir a faixa de 8 a 30, mais barato que o secret, e ele e um
-  clique.** Nove ciclos trataram o `GSC_SERVICE_ACCOUNT_JSON` como caminho unico
-  para o Search Console, e a secao 4b depende dele. Mas o `searchconsole` esta
-  no catalogo de conectores do Windsor.ai, que ja e um MCP conectado a esta
-  sessao, e a propria secao 4b sempre previu essa via ("Desempenho vem pelo
-  conector de Search Console do Windsor.ai, quando estiver conectado"). O que
-  faltava nao era a via, era o link: `get_connector_connect_info` devolve uma
-  URL de OAuth pronta para o Gabriel autorizar, `auth_type: oauth`, sem campo de
-  credencial para preencher e sem service account para criar. **A URL nao entra
-  neste arquivo porque o repositorio e publico e ela carrega token de conta**,
-  entao ela foi entregue no relatorio do ciclo; para gerar de novo, chamar
-  `get_connector_connect_info` com `searchconsole`. Dois cuidados que o proprio
-  conector avisa: logar na conta Windsor.ai a que o assistente esta conectado, e
-  escolher na tela do Google a conta que tem acesso a propriedade, marcando a
-  permissao de Search Console e selecionando o site antes de concluir. Isso
-  destrava **medicao**, ou seja, a faixa de 8 a 30 e o estado de indexacao com
-  valor probatorio, e nao destrava o egresso: a rubrica continua com teto de 68
-  sem o Network access. Sao problemas separados e a ordem de impacto nao muda.
-
-- **A sonda de indexacao deu zero pela sexta vez, serie 2, 0, 0, 0, 0, 0 e 0, e
-  o controle de terceiro degradou mais, agora de forma progressiva.** Amostra de
-  duas consultas de proposito, como o ciclo anterior fixou. As duas em zero, e a
-  sonda segue caindo em outra marca (Nexxus Mobile Intelligence nas duas). A
-  novidade esta no controle: em 06/10 e 15/10 ele devolvia a pagina certa e **so
-  resultados do proprio dominio**; em 27/10 vazou tres dominios de terceiros; e
-  nesta execucao devolveu a pagina certa em primeiro lugar mas vazou **cerca de
-  dez** (`gazetadopovo.com.br`, `repositorio.itl.org.br`, `academiaassai.com.br`,
-  `acionista.com.br`, `empresaqui.com.br`, `b2bstack.com.br`, `startupi.com.br`,
-  `bemparana.com.br`, `pordentrodeminas.com.br`, `meioemensagem.com.br`). Ou
-  seja, a degradacao do controle nao foi episodio de uma execucao: ela piorou
-  monotonicamente nas tres ultimas leituras. Isso **reforca** a conclusao em
-  vigor em vez de mudar: nao e deindexacao, e o site segue tecnicamente limpo no
-  `gh-pages`, reconferido neste ciclo com `robots.txt` em `Allow: /` bloqueando
-  so `/obrigado` e `/lp`, os 9 posts com `index,follow` e canonical correta
-  apontando para o proprio slug, sitemap com 14 URLs batendo com os slugs reais
-  e HTML cru de 11.095 a 25.948 bytes com 12 a 25 links. A condicao de escalar 4
-  **nao** esta acionada. Indexacao com valor probatorio so vem do Search
-  Console, e agora ha um caminho de um clique para ele.
-
-- **O atraso do agendador se confirma pela quinta execucao seguida.** O run 23
-  (`schedule`) saiu em 27/10 as 15:23 UTC contra o `cron` de 09:17, ou seja
-  6h06 depois, e a execucao agendada de hoje ainda nao existia as 10:08 UTC,
-  mesmo padrao das anteriores. A serie de atrasos e agora run 16 com 7h41, run
-  19 com 4h55, run 20 com 5h03, run 21 com 5h15 e run 23 com 6h06. Nada a
-  corrigir por horario, pelo motivo ja registrado na secao 6: o atraso e
-  variavel, e a correcao e disparar o workflow por `workflow_dispatch` e ler o
-  run que o proprio loop disparou, no ciclo em que o secret existir.
-
-- **A cor da etapa do Actions oscilou pela oitava leitura, e os tres secrets
-  seguem vazios.** O run 23 traz "Esperar o GitHub Pages publicar", "Purgar
-  cache do Cloudflare" e "Reenviar sitemap no Search Console" como **skipped** e
-  "Relatorio de indexacao" como `success`, o mesmo arranjo dos runs 16 e 21.
-  Lido o texto do log, como a secao 6 manda: "- Relatorio de indexacao:
-  **pulado**, falta o secret `GSC_SERVICE_ACCOUNT_JSON`", e o bloco `env`
-  imprime `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ZONE_ID` e
-  `GSC_SERVICE_ACCOUNT_JSON` vazios. **A secao 4b continua nao valendo e os
-  itens a) e b) da checklist do Gabriel continuam manuais.**
-
-- **As 4 paginas de outra marca seguem no ar e seguem indexaveis, sem mudanca.**
-  Reconferido o `<meta name="robots">`: `/academy` (80.780 B) por declaracao
-  explicita `index, follow`, e `/precificacao` (20.885 B), `/usual` (55.953 B) e
-  `/en` (49.801 B) **por omissao**. As internas da Nexxus que nao devem indexar
-  seguem corretas: `/calculadora` e `/diagnostico` com `noindex`. Continua
-  pendencia do Gabriel.
-
-- **Deploy conferido pelo hash do bundle, nao pela data, como a secao 6 manda.**
-  O `dist/assets/index-DkF33cln.js` gerado localmente e o mesmo arquivo que o
-  `gh-pages` referencia no `index.html`. O site publicado e o build atual.
-
-- **Windsor.ai reconferido pelo decimo ciclo: as contas conectadas seguem so
-  `facebook` e `instagram`.** Nenhuma conta de Search Console conectada, e e
-  isso que o achado de acao acima ataca: o conector existe e o link de
-  autorizacao existe, falta o Gabriel autorizar.
-
-- **Banco de fotos nao e gargalo.** `node carrossel/checar-fotos.mjs` roda sem
-  erro e nenhuma foto passou do limite. Sobram 4 livres e duas delas ja tem
-  recorte aprovado em `proximos_posts`: `equipe-banner.webp` a 44% e
-  `sala-reuniao-tijolo.webp` a 38%. O ambiente "sala da equipe (banner e neon)"
-  segue sem capa.
-
-- **A pauta de 29/09, reescrever `tendencias-mercado-comercial-b2b`, segue de pe
-  e intocada.** Decimo ciclo. Medido de novo, ele segue o ativo mais fraco do
-  blog: 11.095 bytes de HTML cru contra 19.740 a 25.948 dos outros oito, e 12
-  links contra 17 a 25. Nao foi queimada de proposito: meia reescrita sem fonte
-  reprovaria na rubrica igual e produziria o falso sinal da condicao de escalar
-  6.
-
-- Build integro: `npm ci` e `npm run build` sem erro, 14 rotas da Nexxus
-  pre-renderizadas com `canonical` e sitemap com 14 URLs batendo com os slugs
-  reais.
-
-- **Nada foi publicado e nada foi meio publicado.** A proibicao da secao 6 de
-  adicionar link interno para mover indexacao foi respeitada de novo: a rede
-  segue saturada entre 12 e 25 links por post e nenhum link foi adicionado,
-  ainda que o prompt agendado peca no passo 2 do passe 3. Passe 4 nao se aplica,
-  porque nao houve mudanca de conteudo nem capa nova para capturar. A sessao
-  comecou limpa no branch (`## main...origin/main`, com `HEAD`, `main` e
-  `origin/main` todos em 8886c04), entao o remedio de detached HEAD da secao 6
-  nao foi aplicado.
-
-- **Condicao de escalar 7 acionada pelo terceiro ciclo seguido, e a
-  recomendacao segue sem resposta pela segunda vez.** O agendamento continua
-  ativo e nao pausado: `cron` em `0 10 * * 2,4`, `enabled: true`, proxima
-  execucao em 03/11/2026 as 10:05 UTC. Nenhum dos dois blocos de configuracao
-  mudou e nao houve commit do Gabriel no periodo: o ultimo commit do
-  repositorio e o proprio commit de documentacao do ciclo anterior. Dez ciclos
-  agendados consumiram execucao completa para produzir, cada um, um commit de
-  documentacao e nenhum artigo. **A recomendacao continua a mesma e segue sendo
-  decisao do Gabriel: pausar o agendamento ate liberar o Network access**, e
-  religar junto com a liberacao. Nada foi pausado, porque mexer no agendamento
-  sem ordem dele seria decidir por ele.
-
-**Proximo ciclo:** o gargalo de publicacao nao e pauta, nao e foto, nao e metodo
-e nao se resolve dentro do loop. Sao mudancas de configuracao, todas do Gabriel,
-em ordem de impacto:
-
-1. **Network access, no menu do ambiente, em Edit.** Sem egresso a rubrica tem
-   teto de 68 contra corte de 85 e nenhum artigo passa, por aritmetica. E o
-   unico item que destrava **publicar**. Os passos estao em
-   https://code.claude.com/docs/en/cloud-environments#network-access e bastam os
-   dominios das fontes e dos tres concorrentes sob "Allowed domains", com a
-   caixa de gerenciadores de pacote marcada. Com egresso aberto, a pauta ja esta
-   escolhida e a capa ja esta recortada: a reescrita de
-   `tendencias-mercado-comercial-b2b`.
-2. **Autorizar o conector `searchconsole` do Windsor.ai**, pelo link de OAuth
-   entregue no relatorio deste ciclo. Destrava **medir**: a faixa de 8 a 30 e o
-   estado de indexacao com valor probatorio, que hoje saem de um instrumento com
-   serie 2, 0, 0, 0, 0, 0 e 0 e com o controle degradando. E o item mais barato
-   da lista, um clique, e nao depende do item 1 nem do 3.
-3. **Secret `GSC_SERVICE_ACCOUNT_JSON` no Actions** (e os dois do Cloudflare).
-   Continua sendo o que faz a secao 4b valer e o que tira os itens a) e b) da
-   checklist do Gabriel. Com o item 2 feito, deixa de ser o unico caminho para
-   medir indexacao e passa a ser so automacao de purge e sitemap.
-
-E, antes das tres, a decisao de **pausar ou nao o agendamento** enquanto nenhuma
-delas acontecer, pela condicao de escalar 7 acima, agora no terceiro ciclo
-seguido.
-
-Nos tres casos, nunca medir indexacao por `site:` sozinho, nunca pela sonda de
-titulo sozinha, e nunca por cor de etapa do Actions: so pelo texto do log e pelo
-Search Console.
-
